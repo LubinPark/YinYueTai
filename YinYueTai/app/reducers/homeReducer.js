@@ -1,14 +1,16 @@
 import * as types from '../actions/actionTypes'
 
 const initialState = {
-  name: 'bin'
+  loop: [],
+  button:[]
 }
 
-let home = (state = initialState, action={}) => {
+let Home = (state = initialState, action={}) => {
   switch (action.type) {
     case types.REQUEST_HOME:
-      var name = 'lu'
-      return Object.assign({}, state,{name:name})
+      var loop = action.homeData[0].data
+      var button = action.homeData[1].data
+      return Object.assign({}, state,{loop:loop,button:button})
       break;
 
     default:
@@ -16,4 +18,4 @@ let home = (state = initialState, action={}) => {
   }
 }
 
-export default home
+export default Home

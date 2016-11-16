@@ -1,4 +1,4 @@
-import * as HomeAction from './HomeActions'
+import * as HomeAction from './homeAction'
 
 const allActions = {
   ...HomeAction,
