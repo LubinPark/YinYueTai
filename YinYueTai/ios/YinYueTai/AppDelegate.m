@@ -17,6 +17,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
+  //状态栏白色
   [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
   
 

@@ -1,18 +1,15 @@
 import React,{Component} from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
 import Swiper from 'react-native-swiper'
 import _ from 'underscore'
 
-const {width,height} = Dimensions.get('window')
+var Device = require('../../utils/device')
+var {width,height,alpha0} = Device
 
 import {
-  StyleSheet,
   Text,
   View,
   Image,
-  Dimensions,
-  InteractionManager
+  StyleSheet
 } from 'react-native'
 
  export default class Loop extends Component {
@@ -25,9 +22,10 @@ import {
       )
     } else {
       return (
-        <Swiper style={styles.container}
-                autoplay={true}
-                autoplayTimeout = {1.8}
+        <Swiper autoplay={true}
+                autoplayTimeout = {2}
+                height={viewHeight}
+                showsPagination = {false}
         >
         {
           _.map(this.props.data,(item,index) => {
@@ -58,13 +56,11 @@ import {
       )
     }
   }
+
 }
 
+const viewHeight = width * 0.5554
 const styles = StyleSheet.create({
-  container: {
-    height: 210,
-    backgroundColor:'#ffffff'
-  },
   image:{
     width: width,
     resizeMode:'cover'
@@ -72,19 +68,19 @@ const styles = StyleSheet.create({
   bottom: {
     width:width,
     height: 40,
-    marginTop: 170,
-    marginLeft: 10,
-    flexDirection:'row'
+    marginTop: viewHeight - 40,
+    flexDirection:'row',
+    backgroundColor:'rgba(0,0,0,0.2)'
   },
   left:{
-    width:width / 3 * 2 - 10,
+    width:width / 3 * 2,
     height: 40
   },
   artistNameView:{
-    width: width / 3 * 2 - 10,
+    width: width / 3 * 2,
     height: 15,
     flexDirection:'row',
-    backgroundColor:'rgba(0,0,0,0)'
+    backgroundColor:alpha0
   },
   loopView: {
     width:width / 3,
@@ -93,15 +89,17 @@ const styles = StyleSheet.create({
   },
   title: {
     height: 16,
+    marginLeft: 10,
     marginBottom: 5,
     fontSize: 15,
-    width: width / 3 * 2 - 10,
+    width: width / 3 * 2,
     color: '#ffffff',
-    backgroundColor:'rgba(0,0,0,0)'
+    backgroundColor:alpha0
   },
   artistName: {
-    color:'green',
+    color:'#00CD66',
     fontSize: 13,
+    marginLeft: 10,
     flexDirection:'row',
   },
   pageTotal: {
@@ -109,6 +107,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     color: '#ffffff',
     alignItems:'flex-end',
-    backgroundColor:'rgba(0,0,0,0)'
+    backgroundColor:alpha0
   }
 })

@@ -4,13 +4,12 @@ import {
   Text,
   View,
   Image,
-  ListView,
   StyleSheet,
-  Dimensions,
   TouchableOpacity
 } from 'react-native'
 
-const {width,height} = Dimensions.get('window')
+var Device = require('../../utils/device')
+var {itemHeight,width,height,gray,alpha0} = Device
 
 export default class SelectButton extends Component {
 
@@ -23,7 +22,7 @@ export default class SelectButton extends Component {
       )
     } else {
       return (
-        <View style={[styles.view]}>
+        <View style={styles.view}>
         {
           _.map(data, (item, index) => {
             return (
@@ -40,30 +39,32 @@ export default class SelectButton extends Component {
       )
     }
   }
+  
 }
 
 const styles = StyleSheet.create({
   view: {
     width: width,
-    height: width / 3,
+    height: width / 3 - 2,
     flexDirection: 'row',
     backgroundColor:'#ffffff'
   },
   item: {
-    alignItems:'center',
     width:width / 3,
     height:width / 3,
+    alignItems:'center'
   },
   button: {
     marginTop: 20,
-    width:width / 8,
-    height:width / 8,
-    flexWrap: 'wrap',
+    width:width / 7,
+    height:width / 7,
+    flexWrap: 'wrap'
   },
   title: {
-    color:'gray',
-    fontSize: 12,
-    marginTop: 10,
-    alignItems:'center'
+    color: gray,
+    fontSize: 11,
+    marginTop: 5,
+    alignItems: 'center',
+    backgroundColor: alpha0
   }
 })

@@ -1,6 +1,5 @@
 import Octopus from '../utils/urlOctpus'
 import {URL} from '../utils/url'
-
 import * as types from './actionTypes'
 
 function fetchHome(params) {
@@ -9,7 +8,6 @@ function fetchHome(params) {
     Octopus._fetch({url:url})
     .then(response => response.json())
     .then(responseData => {
-      console.log(responseData)
       if (responseData.msg == 'SUCCESS') {
         return dispatch(requestHome(responseData))
       }

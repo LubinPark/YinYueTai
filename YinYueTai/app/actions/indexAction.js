@@ -1,7 +1,7 @@
 import * as HomeAction from './homeAction'
 
 const allActions = {
-  ...HomeAction,
+  ...HomeAction
 }
 
 export default allActions
