@@ -8,7 +8,7 @@ if (width == 320) {
    var widthOS = 140
    itemHeight = widthOS
 } else if (width == 375) {
-  var widthOS = 155
+  var widthOS = 157
   itemHeight = widthOS
 }
 

@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {
+  View,
   StyleSheet,
   ScrollView,
   Dimensions,
@@ -34,20 +35,23 @@ class Home extends Component {
   render() {
     var data = this.props.data
     return (
-      <ScrollView style={styles.scrollView}>
+       <View>
         <TopView />
-        <Loop data={data.loop} />
-        <SelectButton data={data.button} />
-        <MVFirst data={data.mvFirst} />
-        <Pop data={data.pops} />
-        <Fans data={data.fans} />
-        <Anthor data={data.anthor} />
-        <Panorama data={data.panorama} />
-        <Musicer data={data.musicer} />
-        <Guess data={data.guess} />
-      </ScrollView>
+        <ScrollView style={styles.scrollView}>
+          <Loop data={data.loop} />
+          <SelectButton data={data.button} />
+          <MVFirst data={data.mvFirst} />
+          <Pop data={data.pops} />
+          <Fans data={data.fans} />
+          <Anthor data={data.anthor} />
+          <Panorama data={data.panorama} />
+          <Musicer data={data.musicer} />
+          <Guess data={data.guess} />
+        </ScrollView>
+      </View>
     )
   }
+  
 }
 
 const styles = StyleSheet.create({

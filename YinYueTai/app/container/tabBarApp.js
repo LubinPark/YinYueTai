@@ -10,7 +10,7 @@ export default class TabBarApp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: 'home',
+      selectedTab: 'Home',
     }
   }
   // renderIcon={() => <Image source={require("./img/0.png")} />}
@@ -21,35 +21,43 @@ export default class TabBarApp extends Component {
       <TabNavigator barTintColor="white">
         <TabNavigator.Item
           title='首页'
-          selected={this.state.selectedTab == 'home'}
-          onPress={() => this.setState({selectedTab: 'home'})}
+          selected={this.state.selectedTab == 'Home'}
+          onPress={() => this.setState({selectedTab: 'Home'})}
           selectedTitleStyle={{color: 'gray'}}
         >
-          {this._renderRootContent('home')}
+          {this._renderRootContent('Home')}
         </TabNavigator.Item>
         <TabNavigator.Item
-          title='电影'
-          selected={this.state.selectedTab == 'movie'}
-          onPress={() => this.setState({selectedTab: 'movie'})}
+          title='导航'
+          selected={this.state.selectedTab == 'Navigate'}
+          onPress={() => this.setState({selectedTab: 'Navigate'})}
           selectedTitleStyle={{color: 'gray'}}
         >
-          {this._renderRootContent('movie_detail')}
+          {this._renderRootContent('Navigate')}
         </TabNavigator.Item>
         <TabNavigator.Item
-          title='视频'
-          selected={this.state.selectedTab == 'other'}
-          onPress={() => this.setState({selectedTab: 'other'})}
+          title='V榜'
+          selected={this.state.selectedTab == 'VList'}
+          onPress={() => this.setState({selectedTab: 'VList'})}
           selectedTitleStyle={{color: 'gray'}}
         >
-          {this._renderRootContent('other')}
+          {this._renderRootContent('VList')}
         </TabNavigator.Item>
         <TabNavigator.Item
-          title='设置'
-          selected={this.state.selectedTab == 'setting'}
-          onPress={() => this.setState({selectedTab: 'setting'})}
+          title='订阅'
+          selected={this.state.selectedTab == 'Subscribe'}
+          onPress={() => this.setState({selectedTab: 'Subscribe'})}
           selectedTitleStyle={{color: 'gray'}}
         >
-          {this._renderRootContent('setting')}
+          {this._renderRootContent('Subscribe')}
+        </TabNavigator.Item>
+        <TabNavigator.Item
+          title='我的'
+          selected={this.state.selectedTab == 'My'}
+          onPress={() => this.setState({selectedTab: 'My'})}
+          selectedTitleStyle={{color: 'gray'}}
+        >
+          {this._renderRootContent('My')}
         </TabNavigator.Item>
       </TabNavigator>
     )
@@ -57,13 +65,13 @@ export default class TabBarApp extends Component {
 
   _renderRootContent(name) {
     switch (name) {
-      case 'home':
+      case 'Home':
         return <Home />
         break;
       default:
         return (
           <View style={styles.view}>
-            <Text>未找到该页面</Text>
+            <Text>未找到该页面{name}</Text>
           </View>
         )
     }

@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import _ from 'underscore'
 import {
   Text,
   View,
@@ -13,15 +14,33 @@ export default class CommonItem extends Component {
 
   render () {
     var data = this.props.data
-    return (
-      <View style={styles.item}>
-        <Image source={{uri: data.posterPic}} style={styles.img} />
-          <View style={styles.info}>
-            <Text style={styles.title} numberOfLines={1}>{data.title}</Text>
-            <Text style={styles.name}>姓名</Text>
-            <Text style={styles.num}>播放数量:{data.totalView}</Text>
-          </View>
-      </View>
+    if (_.isEmpty(data)) {
+      return (
+        <View>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.item}>
+          <Image source={{uri: data.posterPic}} style={styles.img} />
+            <View style={styles.info}>
+              <Text style={styles.title} numberOfLines={1}>{data.title}</Text>
+              {this._showName(data)}
+              <Text style={styles.num}>播放数量:{data.totalView}</Text>
+            </View>
+        </View>
+      )
+    }
+  }
+
+  _showName(data){
+    let name = ''
+    _.map(data.artists,(item, index) => {
+      var tempName = item.artistName
+      name = name + tempName
+    })
+    return(
+      <Text style={styles.name}>{name}</Text>
     )
   }
 
@@ -36,7 +55,7 @@ const styles = StyleSheet.create({
   },
   img: {
     height:imageWidth,
-    borderRadius: 3,
+    borderRadius: 4,
     marginBottom: 10
   },
   info: {

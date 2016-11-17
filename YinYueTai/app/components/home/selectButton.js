@@ -28,8 +28,8 @@ export default class SelectButton extends Component {
             return (
               <TouchableOpacity  key={item.icon}>
                 <View style={styles.item}>
-                <Image source={{uri:item.icon}} style={styles.button} />
-                <Text style={styles.title}>{item.title}</Text>
+                  <Image source={{uri:item.icon}} style={styles.button} />
+                  <Text style={styles.title}>{item.title}</Text>
                 </View>
               </TouchableOpacity>
             )
@@ -39,7 +39,7 @@ export default class SelectButton extends Component {
       )
     }
   }
-  
+
 }
 
 const styles = StyleSheet.create({
@@ -52,10 +52,10 @@ const styles = StyleSheet.create({
   item: {
     width:width / 3,
     height:width / 3,
-    alignItems:'center'
+    alignItems:'center',
+    justifyContent:'center'
   },
   button: {
-    marginTop: 20,
     width:width / 7,
     height:width / 7,
     flexWrap: 'wrap'
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   title: {
     color: gray,
     fontSize: 11,
-    marginTop: 5,
+    marginTop: 10,
     alignItems: 'center',
     backgroundColor: alpha0
   }

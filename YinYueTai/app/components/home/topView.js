@@ -38,7 +38,7 @@ export default class TopView extends Component {
       </View>
     )
   }
-  
+
 }
 
 const styles = StyleSheet.create({
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     height: 35,
     fontSize: 12,
     color: gray,
+    marginTop: -1,
     width: width / 4 * 3 - 30
   },
   historyView: {
