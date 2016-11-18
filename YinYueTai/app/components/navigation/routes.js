@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
-import {Text, View} from 'react-native'
+import {Text, View, Navigator} from 'react-native'
 
 import TabBarApp from '../../container/tabBarApp'
 import ContextWrapper from './contextWrapper'
+
+import PlayerMV from '../player/playerMV'
 
 export default class Routes {
 
@@ -23,8 +25,14 @@ export default class Routes {
     switch (route.id) {
       case 'TabBarApp':
         return <ContextWrapper {...contextProps}><TabBarApp {...viewProps} /></ContextWrapper>
+      case 'PlayerMV':
+        return <ContextWrapper {...contextProps}><PlayerMV {...viewProps} /></ContextWrapper>
     }
     return <View style={{top: 100}}><Text>{route.id} page is not found.</Text></View>
+  }
+
+  static configureScene(route) {
+    return Navigator.SceneConfigs.FloatFromRight
   }
 
 }

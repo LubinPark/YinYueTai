@@ -17,7 +17,7 @@ export default class AppIndex extends Component {
         initialRoute={initialRoute}
         configureScene={Routes.configureScene}
         renderScene={(route, navigator) => Routes.renderScene(route, navigator, pageContext, this.props)}
-      />
+        />
     )
   }
 

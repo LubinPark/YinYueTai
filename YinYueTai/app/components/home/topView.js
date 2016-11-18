@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var {itemHeight,width,height,gray,black} = Device
+var {itemHeight,width,height,black} = Device
 
 export default class TopView extends Component {
 
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   search_text: {
     height: 35,
     fontSize: 12,
-    color: gray,
+    color: black,
     marginTop: -1,
     width: width / 4 * 3 - 30
   },

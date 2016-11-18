@@ -20,7 +20,6 @@
   //状态栏白色
   [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
   
-
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];

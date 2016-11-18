@@ -5,7 +5,7 @@ const itemHeight = 0
 
 //首页每个模块的item按照比例不同在不同机型比例有差，单独赋值
 if (width == 320) {
-   var widthOS = 140
+   var widthOS = 141
    itemHeight = widthOS
 } else if (width == 375) {
   var widthOS = 157
