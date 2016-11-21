@@ -1,35 +1,80 @@
 import React,{Component} from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import _ from 'underscore'
 import {
   View,
+  Image,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  InteractionManager
 } from 'react-native'
 
+import * as PlayerAction from '../../actions/playerAction'
+import Line from '../commonfile/line'
 import AuthorInfo from './authorInfo'
+import MostWatch from './mostWatch'
+import AuthorListMV from './authorListMV'
+import RelatedPlayList from './relatedPlayList'
+import GuestLike from './guestLike'
 
 var Device = require('../../utils/device')
-var {itemHeight,width,height,alpha0,lightGray} = Device
+var {width,height,purpure} = Device
 
-export default class PlayerMV extends Component {
+class PlayerMV extends Component {
 
   static contextTypes = {
     app: React.PropTypes.object
   }
 
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.props.actions.fetchPlayerIfNeeded({type: 'authorInfo', videoId:this.props.videoId})
+    })
+  }
+
   render () {
 
-    const leftButtonConfig = {title: '返回', handler:()=>this.context.app.navigator.pop()}
+    // const leftButtonConfig = {title: '返回', handler:()=>this.context.app.navigator.pop()}
 
-    return (
-      <View style={styles.view}>
-        <View style={styles.video}>
+    var videoId = this.props.videoId
+    var data = this.props.data
+
+    console.log(data);
+
+    if (_.isEmpty(this.props.data)) {
+      return(
+        <View style={styles.loadingView}>
+          <Image style={styles.loading} source={require('../../img/loading.gif')} />
         </View>
-        <ScrollView styles={styles.scrollView}>
-          <AuthorInfo />
-        </ScrollView>
-      </View>
-    )
+      )
+    } else {
+
+      var authorInfo = data
+      var artistOtherVideos = data.artistOtherVideos
+      var relatedVideos = data.relatedVideos
+      var relatedPlayList = data.relatedPlayList
+
+      return (
+        <View style={styles.view}>
+          <View style={styles.video}>
+          </View>
+          <Image style={styles.backgroundColor} source={require('../../img/background.png')} resizeMode='stretch' >
+            <ScrollView styles={styles.scrollView}>
+              <AuthorInfo data={authorInfo}/>
+              <Line />
+              <MostWatch videoId={videoId}/>
+              <Line />
+              <AuthorListMV data={artistOtherVideos}/>
+              <Line />
+              <RelatedPlayList data={relatedPlayList}/>
+              <Line />
+              <GuestLike data={relatedVideos}/>
+            </ScrollView>
+          </Image>
+        </View>
+      )
+    }
   }
 
 }
@@ -37,8 +82,7 @@ export default class PlayerMV extends Component {
 const styles = StyleSheet.create({
   view: {
     width: width,
-    height: height,
-    backgroundColor: '#ffffff'
+    height: height
   },
   video: {
     width: width,
@@ -48,6 +92,28 @@ const styles = StyleSheet.create({
   scrollView: {
     width:width,
     height: height - (width / 16 * 9),
-    backgroundColor: lightGray
+  },
+  backgroundColor:{
+    width:width,
+    height: height - (width / 16 * 9)
+  },
+  loadingView: {
+    width: width,
+    height: height,
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor: purpure
+  },
+  loading:{
+    width: 100,
+    height: 100
   }
 })
+
+export default connect(state => ({
+  data: state.PlayerReducer.authorInfo
+  }),
+  (dispatch) => ({
+    actions: bindActionCreators(PlayerAction, dispatch)
+  })
+)(PlayerMV)

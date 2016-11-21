@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux'
 import HomeReducer from './homeReducer'
+import PlayerReducer from './playerReducer'
 
 const rootReducer = combineReducers({
-  HomeReducer
+  HomeReducer,
+  PlayerReducer
 })
 
 export default rootReducer

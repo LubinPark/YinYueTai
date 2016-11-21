@@ -1,8 +1,10 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import _ from 'underscore'
 import {
   View,
+  Image,
   StyleSheet,
   ScrollView,
   Dimensions,
@@ -22,7 +24,7 @@ import Guess from './guess'
 import * as HomeAction from '../../actions/homeAction'
 
 var Device = require('../../utils/device')
-var {width,height,lightGray} = Device
+var {width,height,purpure} = Device
 
 class Home extends Component {
 
@@ -33,32 +35,52 @@ class Home extends Component {
   }
 
   render() {
+
     var data = this.props.data
-    return (
-       <View>
-        <TopView />
-        <ScrollView style={styles.scrollView}>
-          <Loop data={data.loop} />
-          <SelectButton data={data.button} />
-          <MVFirst data={data.mvFirst} />
-          <Pop data={data.pops} />
-          <Fans data={data.fans} />
-          <Anthor data={data.anthor} />
-          <Panorama data={data.panorama} />
-          <Musicer data={data.musicer} />
-          <Guess data={data.guess} />
-        </ScrollView>
-      </View>
-    )
+
+    if (_.isEmpty(data.loop&&data.button&&data.pops&&data.fans&&data.anthor&&data.panorama&&data.musicer&&data.guess)) {
+      return (
+        <View style={styles.loadingView}>
+          <Image style={styles.loading} source={require('../../img/loading.gif')} />
+        </View>
+      )
+    } else {
+      return (
+         <View>
+          <TopView />
+          <ScrollView style={styles.scrollView}>
+            <Loop data={data.loop} />
+            <SelectButton data={data.button} />
+            <MVFirst data={data.mvFirst} />
+            <Pop data={data.pops} />
+            <Fans data={data.fans} />
+            <Anthor data={data.anthor} />
+            <Panorama data={data.panorama} />
+            <Musicer data={data.musicer} />
+            <Guess data={data.guess} />
+          </ScrollView>
+        </View>
+      )
+    }
   }
-  
+
 }
 
 const styles = StyleSheet.create({
   scrollView: {
     width: width,
     height: height - 64 - 49,
-    backgroundColor: lightGray
+  },
+  loadingView: {
+    width: width,
+    height: height - 49,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: purpure
+  },
+  loading:{
+    width: 100,
+    height: 100
   }
 })
 

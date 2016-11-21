@@ -5,8 +5,8 @@ import {
   StyleSheet
 } from 'react-native'
 
-import CommonItem from './commonItem'
-import MVItemTop from './mvItemTop'
+import CommonItem from '../commonfile/commonItem'
+import MVItemTop from '../commonfile/mvItemTop'
 
 var Device = require('../../utils/device')
 var {itemHeight,width,height} = Device
@@ -14,7 +14,9 @@ var {itemHeight,width,height} = Device
 export default class Anthor extends Component {
 
   render () {
+
     var data = this.props.data
+
     if (_.isEmpty(data)) {
       return (
         <View>
@@ -28,7 +30,7 @@ export default class Anthor extends Component {
           {
             _.map(data.data, (item, index) => {
               return (
-                <CommonItem  data={item} key={item.videoId}/>
+                <CommonItem data={item} key={item.videoId+item.title}/>
               )
             })
           }

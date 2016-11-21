@@ -1,21 +1,29 @@
 import React,{Component} from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import _ from 'underscore'
 import {
   View,
-  StyleSheet
+  StyleSheet,
+  ScrollView,
+  InteractionManager
 } from 'react-native'
 
+import * as PlayerAction from '../../actions/playerAction'
+import CommonTitle from '../commonfile/commonTitle'
 import CommonItem from '../commonfile/commonItem'
-import MVItemTop from '../commonfile/mvItemTop'
 
 var Device = require('../../utils/device')
-var {itemHeight,width,height} = Device
+var {itemHeight, width,height} = Device
 
-export default class Musicer extends Component {
+export default class AuthorListMV extends Component {
+
+  static contextTypes = {
+    app: React.PropTypes.object
+  }
 
   render () {
 
-    var musicer = 'musicer'
     var data = this.props.data
 
     if (_.isEmpty(data)) {
@@ -24,14 +32,15 @@ export default class Musicer extends Component {
         </View>
       )
     } else {
+      var title='同艺人其他MV:'
       return (
         <View style={styles.view}>
-          <MVItemTop title={data.title} enTitle={data.enTitle}/>
+          <CommonTitle title={title} />
           <View style={styles.itemView}>
           {
-            _.map(data.data, (item, index) => {
+            _.map(data, (item, index) => {
               return (
-                <CommonItem  data={item} key={item.videoId + musicer}/>
+                <CommonItem data={item} key={item.videoId+item.title} mostWatch={1}/>
               )
             })
           }
@@ -45,15 +54,11 @@ export default class Musicer extends Component {
 
 const styles = StyleSheet.create({
   view: {
-    flex:1,
-    width:width,
-    marginTop:1,
-    marginBottom:1,
-    backgroundColor:'#ffffff'
+    width: width
   },
-  itemView :{
+  itemView: {
     marginLeft: 10,
-    height: itemHeight * 3 + 40,
+    height: itemHeight * 2 + 40,
     width: width - 10,
     flexWrap: 'wrap'
   }
