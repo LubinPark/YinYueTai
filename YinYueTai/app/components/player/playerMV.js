@@ -39,11 +39,9 @@ class PlayerMV extends Component {
 
   render () {
 
-    // const leftButtonConfig = {title: '返回', handler:()=>this.context.app.navigator.pop()}
-
     var videoId = this.props.videoId
     var data = this.props.data
-    
+
     if (_.isEmpty(this.props.data)) {
       return(
         <View style={styles.loadingView}>
@@ -59,7 +57,8 @@ class PlayerMV extends Component {
 
       return (
         <View style={styles.view}>
-          <VideoPage url={authorInfo.url}/>
+          <View style={styles.statusBar}></View>
+          <VideoPage url={authorInfo.url} title={authorInfo.title}/>
           <Image style={styles.backgroundColor} source={require('../../img/background.png')} resizeMode='stretch' >
             <ScrollView styles={styles.scrollView}>
               <AuthorInfo data={authorInfo}/>
@@ -85,6 +84,11 @@ const styles = StyleSheet.create({
     width: width,
     height: height
   },
+  statusBar: {
+    width: width,
+    height: 20,
+    backgroundColor: 'black'
+  },
   video: {
     width: width,
     height: width / 16 * 9,
@@ -92,11 +96,11 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     width:width,
-    height: height - (width / 16 * 9),
+    height: height - (width / 16 * 9) - 20,
   },
   backgroundColor:{
     width:width,
-    height: height - (width / 16 * 9)
+    height: height - (width / 16 * 9) - 20
   },
   loadingView: {
     width: width,
