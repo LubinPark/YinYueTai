@@ -37,7 +37,7 @@ export default class AuthorInfo extends Component {
     } else {
 
       var creator = data.creator
-      var artistAvatar = data.artists[0].artistAvatar
+      let artistAvatar = data.artists[0].artistAvatar
 
       return (
         <View style={styles.view}>

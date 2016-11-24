@@ -43,8 +43,7 @@ export default class VideoPage extends Component {
                onProgress={this.setTime}      // Callback every ~250ms with currentTime
                onEnd={this.onEnd}             // Callback when playback finishes
                onError={this.videoError}      // Callback when video cannot be loaded
-               style={styles.video}
-        />
+               style={styles.video} />
         {/* 播放器上部的按钮*/}
         <View style={styles.buttonUpView}>
           <TouchableOpacity onPress={()=>this._backToHome()}>

@@ -60,7 +60,7 @@ class PlayerMV extends Component {
         <View style={styles.view}>
           <View style={styles.statusBar}></View>
           <VideoPage url={authorInfo.url} title={authorInfo.title}/>
-          <Image style={styles.backgroundColor} source={require('../../img/background/background_2.png')} resizeMode='stretch' >
+          <Image style={styles.backgroundColor} source={require('../../img/background/background_0.png')} resizeMode='stretch' >
             <ScrollView styles={styles.scrollView}>
               <AuthorInfo data={authorInfo}/>
               <Line />
