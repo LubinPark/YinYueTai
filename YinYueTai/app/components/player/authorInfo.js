@@ -37,12 +37,13 @@ export default class AuthorInfo extends Component {
     } else {
 
       var creator = data.creator
+      var artistAvatar = data.artists[0].artistAvatar
 
       return (
         <View style={styles.view}>
           {/* 顶部照片和名字*/}
           <View style={[styles.center,styles.marginBottom]}>
-            <Image style={styles.authorImg} source={{uri: data.artists[0].artistAvatar}} />
+            <Image style={styles.authorImg} source={{uri: artistAvatar}} />
             <Text style={styles.authorNmme}>{data.artistName}</Text>
           </View>
           {/* 播放次数和5张图片*/}

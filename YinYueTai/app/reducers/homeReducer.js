@@ -15,6 +15,7 @@ const initialState = {
 let Home = (state = initialState, action={}) => {
   switch (action.type) {
     case types.REQUEST_HOME:
+      //主页的几个分区的每个数据
       var loop = action.homeData[0].data
       var button = action.homeData[1].data
       var mvFirst = action.homeData[2]

@@ -11,7 +11,7 @@ import {
 
 import * as PlayerAction from '../../actions/playerAction'
 import CommonTitle from '../commonfile/commonTitle'
-import CommonItem from '../commonfile/commonItem'
+import PlayerMVCllectionItem from '../commonfile/playerMVCllectionItem'
 
 var Device = require('../../utils/device')
 var {itemHeight, width,height} = Device
@@ -40,7 +40,7 @@ export default class RelatedPlayList extends Component {
           {
             _.map(data, (item, index) => {
               return (
-                <CommonItem data={item} key={item.videoId+item.title} mostWatch={1} RelatedPlayList={1}/>
+                <PlayerMVCllectionItem data={item} key={item.videoId+item.title} />
               )
             })
           }
@@ -54,12 +54,13 @@ export default class RelatedPlayList extends Component {
 
 const styles = StyleSheet.create({
   view: {
-    width: width
+    width: width,
+    height: 220,
   },
   itemView: {
     marginLeft: 10,
-    height: itemHeight * 2 + 40,
+    height: 200,
     width: width - 10,
-    flexWrap: 'wrap'
+    flexDirection: 'row'
   }
 })

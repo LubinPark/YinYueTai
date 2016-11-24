@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 
 import * as PlayerAction from '../../actions/playerAction'
+import VideoPage from './videoPage'
 import Line from '../commonfile/line'
 import AuthorInfo from './authorInfo'
 import MostWatch from './mostWatch'
@@ -28,6 +29,9 @@ class PlayerMV extends Component {
   }
 
   componentDidMount() {
+    //清空data
+    this.props.actions.fetchPlayerIfNeeded({type: 'null'})
+    //请求新数据
     InteractionManager.runAfterInteractions(() => {
       this.props.actions.fetchPlayerIfNeeded({type: 'authorInfo', videoId:this.props.videoId})
     })
@@ -39,9 +43,7 @@ class PlayerMV extends Component {
 
     var videoId = this.props.videoId
     var data = this.props.data
-
-    console.log(data);
-
+    
     if (_.isEmpty(this.props.data)) {
       return(
         <View style={styles.loadingView}>
@@ -57,8 +59,7 @@ class PlayerMV extends Component {
 
       return (
         <View style={styles.view}>
-          <View style={styles.video}>
-          </View>
+          <VideoPage url={authorInfo.url}/>
           <Image style={styles.backgroundColor} source={require('../../img/background.png')} resizeMode='stretch' >
             <ScrollView styles={styles.scrollView}>
               <AuthorInfo data={authorInfo}/>

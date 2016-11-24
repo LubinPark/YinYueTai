@@ -12,6 +12,8 @@
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 
+#import <AVFoundation/AVFoundation.h>  // react-native-video 引入的必要的package
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -20,6 +22,9 @@
   //状态栏白色
   [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
   
+  //react-native-video allow
+  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];

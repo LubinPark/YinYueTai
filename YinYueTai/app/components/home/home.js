@@ -37,8 +37,9 @@ class Home extends Component {
   render() {
 
     var data = this.props.data
+    var isEmptyData = data.loop&&data.button&&data.pops&&data.fans&&data.anthor&&data.panorama&&data.musicer&&data.guess
 
-    if (_.isEmpty(data.loop&&data.button&&data.pops&&data.fans&&data.anthor&&data.panorama&&data.musicer&&data.guess)) {
+    if (_.isEmpty(isEmptyData)) {
       return (
         <View style={styles.loadingView}>
           <Image style={styles.loading} source={require('../../img/loading.gif')} />

@@ -48,12 +48,20 @@ function requestMostWatch(responseData) {
   }
 }
 
+function responsePlayerDataNull(params) {
+  return {
+    type: types.RESPONSE_PLAYER_DATA_NULL
+  }
+}
+
 export function fetchPlayerIfNeeded(params = {}) {
   return(dispatch, getState) => {
     if (params.type == 'authorInfo') {
       return dispatch(fetchAuthorInfo(params))
     } else if (params.type == 'mostWatch') {
       return dispatch(fetchMostWatch(params))
+    } else if (params.type == 'null') {
+      return dispatch(responsePlayerDataNull(params))
     }
   }
 }

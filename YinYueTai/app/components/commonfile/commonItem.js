@@ -67,17 +67,10 @@ export default class CommonItem extends Component {
 
   _showName(data) {
     let name = ''
-
-    //根据不同的页面，一般显示是artistName，在RelatedPlayList显示是reactor.nickName里面的数据
-    var RelatedPlayList = this.props.RelatedPlayList
-    if (RelatedPlayList == 1) {
-      name = data.creator.nickName
-    } else {
-      _.map(data.artists,(item, index) => {
-        var tempName = item.artistName
-        name = name + tempName
-      })
-    }
+    _.map(data.artists,(item, index) => {
+      var tempName = item.artistName
+      name = name + tempName
+    })
 
     return(
       <View style={{flexDirection:'row'}}>
