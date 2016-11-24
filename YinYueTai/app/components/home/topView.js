@@ -14,7 +14,7 @@ export default class TopView extends Component {
 
   constructor(props) {
     super(props)
-    this.state ={
+    this.state = {
       text: '输入艺人、MV或者悦单名称'
     }
   }

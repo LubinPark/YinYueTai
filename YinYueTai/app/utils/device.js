@@ -24,5 +24,7 @@ module.exports = {
   green: 'rgb(44,179,147)',
   alpha0:'rgba(0,0,0,0)',
   lightGray: '#E8E8E8',
-  purpure: 'rgb(59,46,69)'
+  purpure: 'rgb(59,46,69)',
+  darkGreen: 'rgb(8,39,51)'
+
 }

@@ -7,10 +7,10 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  Dimensions,
   InteractionManager
 } from 'react-native'
 
+import Loading from '../commonfile/loading'
 import TopView from './topView'
 import Loop from './loop'
 import SelectButton from './selectButton'
@@ -36,14 +36,13 @@ class Home extends Component {
 
   render() {
 
+    var num = _.random(0, 2)
     var data = this.props.data
     var isEmptyData = data.loop&&data.button&&data.pops&&data.fans&&data.anthor&&data.panorama&&data.musicer&&data.guess
 
     if (_.isEmpty(isEmptyData)) {
       return (
-        <View style={styles.loadingView}>
-          <Image style={styles.loading} source={require('../../img/loading.gif')} />
-        </View>
+        <Loading num={num}/>
       )
     } else {
       return (
@@ -70,18 +69,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
   scrollView: {
     width: width,
-    height: height - 64 - 49,
-  },
-  loadingView: {
-    width: width,
-    height: height - 49,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: purpure
-  },
-  loading:{
-    width: 100,
-    height: 100
+    height: height - 64 - 49
   }
 })
 

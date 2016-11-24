@@ -20,10 +20,6 @@ export default class VideoPage extends Component {
     app: React.PropTypes.object
   }
 
-  componentDidMount() {
-
-  }
-
   render () {
 
     var url = this.props.url

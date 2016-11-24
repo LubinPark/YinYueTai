@@ -11,8 +11,9 @@ import {
 } from 'react-native'
 
 import * as PlayerAction from '../../actions/playerAction'
-import VideoPage from './videoPage'
+import Loading from '../commonfile/loading'
 import Line from '../commonfile/line'
+import VideoPage from './videoPage'
 import AuthorInfo from './authorInfo'
 import MostWatch from './mostWatch'
 import AuthorListMV from './authorListMV'
@@ -41,12 +42,11 @@ class PlayerMV extends Component {
 
     var videoId = this.props.videoId
     var data = this.props.data
+    var num = _.random(0, 2)
 
     if (_.isEmpty(this.props.data)) {
       return(
-        <View style={styles.loadingView}>
-          <Image style={styles.loading} source={require('../../img/loading.gif')} />
-        </View>
+        <Loading num={num}/>
       )
     } else {
 
@@ -54,12 +54,13 @@ class PlayerMV extends Component {
       var artistOtherVideos = data.artistOtherVideos
       var relatedVideos = data.relatedVideos
       var relatedPlayList = data.relatedPlayList
+      var num = _.random(0, 2)
 
       return (
         <View style={styles.view}>
           <View style={styles.statusBar}></View>
           <VideoPage url={authorInfo.url} title={authorInfo.title}/>
-          <Image style={styles.backgroundColor} source={require('../../img/background.png')} resizeMode='stretch' >
+          <Image style={styles.backgroundColor} source={require('../../img/background/background_2.png')} resizeMode='stretch' >
             <ScrollView styles={styles.scrollView}>
               <AuthorInfo data={authorInfo}/>
               <Line />
