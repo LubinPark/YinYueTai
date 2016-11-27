@@ -24,6 +24,7 @@ export default class VideoPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      url: this.props.url,
       paused: false,
       currentTime: '--:--',    //当前时间
       durationTime: '--:--',   //总时长
@@ -39,13 +40,11 @@ export default class VideoPage extends Component {
       // LANDSCAPE 横屏
       // PORTRAIT 竖屏
       console.log(`竖屏`);
-      //do stuff
     } else {
       console.log(`横屏`);
-      //do other stuff
     }
     // 只允许竖屏
-    Orientation.lockToPortrait()
+    // Orientation.lockToPortrait()
     //只允许横屏
     // Orientation.lockToLandscape()
   }
@@ -57,63 +56,71 @@ export default class VideoPage extends Component {
 
   componentWillUnmount() {
     Orientation.getOrientation((err,orientation) => {
-      console.log("Current Device Orientation: ", orientation);
+      // console.log("Current Device Orientation: ", orientation);
     })
     Orientation.removeOrientationListener(this._orientationDidChange);
   }
 
   render () {
 
-    var url = this.props.url
     var title = this.props.title
+    var url = this.props.url
 
-    return (
-      <View style={styles.video}>
-        {/* 播放器*/}
-        <Video source={{uri:url}}                              // Can be a URL or a local file.
-               rate={1.0}                                      // 0 is paused, 1 is normal.
-               volume={1.0}                                    // 0 is muted, 1 is normal.
-               muted={false}                                   // Mutes the audio entirely.
-               paused={this.state.paused}                      // Pauses playback entirely.
-               resizeMode="cover"                              // Fill the whole screen at aspect ratio.
-               repeat={true}                                   // Repeat forever.
-               playInBackground={false}                        // Audio continues to play when app entering background.
-               playWhenInactive={false}                        // [iOS] Video continues to play when control or notification center are shown.
-               progressUpdateInterval={250.0}                  // [iOS] Interval to fire onProgress (default to ~250ms)
-               onLoadStart={this.loadStart}                    // Callback when video starts to load
-               onLoad={(value)=>this._showDuration(value)}     // Callback when video loads
-               onProgress={(value)=>this._showCurrent(value)}  // Callback every ~250ms with currentTime
-               onEnd={this.onEnd}                              // Callback when playback finishes
-               onError={this.videoError}                       // Callback when video cannot be loaded
-               style={styles.video} />
-        {/* 播放器上部的按钮*/}
-        <View style={styles.buttonUpView}>
-          <TouchableOpacity onPress={()=>this._backToHome()}>
-            <Image style={styles.back} source={require('../../img/back.png')} />
-          </TouchableOpacity>
-          <View style={styles.titleView}>
-            <Text style={styles.title} numberOfLines={1}>{title}</Text>
-          </View>
+
+    if (_.isEmpty(url,title)) {
+      return (
+        <View>
         </View>
-        {/* 播放器底部的按钮*/}
-        <View style={styles.buttonBottomView}>
-          <View style={styles.bottomLeftView}>
-            {this._showPlayBtn(this.state.paused)}
-            <Slider style={styles.slider}
-                    minimumTrackTintColor={green}
-                    thumbImage={require('../../img/slider.png')}
-                    value={this.state.current}
-                    maximumValue={this.state.duration} />
-            <View style={styles.timeView}>
-              <Text style={styles.time}>{this.state.currentTime} / {this.state.durationTime}</Text>
+      )
+    } else {
+      return (
+        <View style={styles.video}>
+          {/* 播放器*/}
+          <Video source={{uri: url}}                             // Can be a URL or a local file.
+                 rate={1.0}                                      // 0 is paused, 1 is normal.
+                 volume={1.0}                                    // 0 is muted, 1 is normal.
+                 muted={false}                                   // Mutes the audio entirely.
+                 paused={this.state.paused}                      // Pauses playback entirely.
+                 resizeMode="contain"                            // Fill the whole screen at aspect ratio.
+                 repeat={true}                                   // Repeat forever.
+                 playInBackground={false}                        // Audio continues to play when app entering background.
+                 playWhenInactive={false}                        // [iOS] Video continues to play when control or notification center are shown.
+                 progressUpdateInterval={250.0}                  // [iOS] Interval to fire onProgress (default to ~250ms)
+                 onLoadStart={this.loadStart}                    // Callback when video starts to load
+                 onLoad={(value)=>this._showDuration(value)}     // Callback when video loads
+                 onProgress={(value)=>this._showCurrent(value)}  // Callback every ~250ms with currentTime
+                 onEnd={this.onEnd}                              // Callback when playback finishes
+                 onError={this.videoError}                       // Callback when video cannot be loaded
+                 style={styles.video} />
+          {/* 播放器上部的按钮*/}
+          <View style={styles.buttonUpView}>
+            <TouchableOpacity onPress={()=>this._backToHome()}>
+              <Image style={styles.back} source={require('../../img/back.png')} />
+            </TouchableOpacity>
+            <View style={styles.titleView}>
+              <Text style={styles.title} numberOfLines={1}>{title}</Text>
             </View>
           </View>
-          <View style={styles.bottomRigtView}>
-            <Image style={styles.playbutton} source={require('../../img/full_screen.png')} />
+          {/* 播放器底部的按钮*/}
+          <View style={styles.buttonBottomView}>
+            <View style={styles.bottomLeftView}>
+              {this._showPlayBtn(this.state.paused)}
+              <Slider style={styles.slider}
+                      minimumTrackTintColor={green}
+                      thumbImage={require('../../img/slider.png')}
+                      value={this.state.current}
+                      maximumValue={this.state.duration} />
+              <View style={styles.timeView}>
+                <Text style={styles.time}>{this.state.currentTime} / {this.state.durationTime}</Text>
+              </View>
+            </View>
+            <View style={styles.bottomRigtView}>
+              <Image style={styles.playbutton} source={require('../../img/full_screen.png')} />
+            </View>
           </View>
         </View>
-      </View>
-    )
+      )
+    }
   }
 
   _backToHome() {
@@ -148,11 +155,11 @@ export default class VideoPage extends Component {
     var durationMin = parseInt(duration / 60)
     var durationSecond = duration - durationMin * 60
 
-    if (durationMin <= 9) {
-      durationMin = '0' + durationMin
+    if (durationSecond <= 9) {
+      durationSecond = '0' + durationMin
     }
 
-    var durationTime = durationMin+':'+ durationSecond
+    var durationTime = durationMin+':'+durationSecond
 
     this.setState({
       durationTime: durationTime,

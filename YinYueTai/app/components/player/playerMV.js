@@ -31,8 +31,6 @@ class PlayerMV extends Component {
   }
 
   componentDidMount() {
-    //清空data
-    this.props.actions.fetchPlayerIfNeeded({type: 'null'})
     //请求新数据
     InteractionManager.runAfterInteractions(() => {
       this.props.actions.fetchPlayerIfNeeded({type: 'authorInfo', videoId:this.props.videoId})

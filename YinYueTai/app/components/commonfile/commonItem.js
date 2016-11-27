@@ -17,32 +17,18 @@ export default class CommonItem extends Component {
     app: React.PropTypes.object
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: this.props.data,
+      mostWatch: this.props.mostWatch,
+      mostWatch_item: this.props.mostWatch_item
+    }
+  }
+
   render () {
 
-    var data = this.props.data
-    var mostWatch = this.props.mostWatch
-    var mostWatch_item = this.props.mostWatch_item
-
-    var titleWhitestyle
-    var backgroundColor
-    var items
-
-    //判断，改变背景和标题颜色
-    if (mostWatch === 1) {
-      backgroundColor = {backgroundColor: alpha0},
-      titleWhitestyle  = {color: '#ffffff'}
-    } else {
-      backgroundColor = {backgroundColor: '#ffffff'}
-    }
-
-    //判断更改item的宽度
-    if (mostWatch_item ===1) {
-      items = {
-        width:itemWidth + 15,
-        marginRight: 10,
-        marginBottom: 10,
-      }
-    }
+    var data = this.state.data
 
     if (_.isEmpty(data)) {
       return (
@@ -50,6 +36,31 @@ export default class CommonItem extends Component {
         </View>
       )
     } else {
+
+      var mostWatch = this.state.mostWatch
+      var mostWatch_item = this.state.mostWatch_item
+
+      var titleWhitestyle
+      var backgroundColor
+      var items
+
+      //判断，改变背景和标题颜色
+      if (mostWatch === 1) {
+        backgroundColor = {backgroundColor: alpha0},
+        titleWhitestyle  = {color: '#ffffff'}
+      } else {
+        backgroundColor = {backgroundColor: '#ffffff'}
+      }
+
+      //判断更改item的宽度
+      if (mostWatch_item ===1) {
+        items = {
+          width:itemWidth + 15,
+          marginRight: 10,
+          marginBottom: 10,
+        }
+      }
+
       return (
           <View style={[styles.items,backgroundColor,items]}>
             <TouchableOpacity onPress={()=>this._goToPlayer(data.videoId)}>

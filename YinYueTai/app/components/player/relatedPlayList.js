@@ -40,7 +40,7 @@ export default class RelatedPlayList extends Component {
           {
             _.map(data, (item, index) => {
               return (
-                <PlayerMVCllectionItem data={item} key={item.videoId+item.title} />
+                <PlayerMVCllectionItem data={item} key={item.playListId+item.title+index} />
               )
             })
           }

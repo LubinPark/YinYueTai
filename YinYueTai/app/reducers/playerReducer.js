@@ -19,13 +19,6 @@ let Player = (state = initialState, action={}) => {
       return Object.assign({}, state,{mostWatch: mostWatch})
       break;
 
-    case types.RESPONSE_PLAYER_DATA_NULL:
-      //进入播放页面，清空当前的数据，使进来先loading，然后加载新数据
-      var authorInfo = {}
-      var mostWatch = []
-      return Object.assign({}, {state:null} )
-      break;
-
     default:
       return state
   }
