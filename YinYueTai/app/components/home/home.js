@@ -5,6 +5,7 @@ import _ from 'underscore'
 import {
   View,
   Image,
+  StatusBar,
   StyleSheet,
   ScrollView,
   InteractionManager
@@ -47,6 +48,7 @@ class Home extends Component {
     } else {
       return (
          <View>
+         <StatusBar barStyle="light-content"/>
           <TopView />
           <ScrollView style={styles.scrollView}>
             <Loop data={data.loop} />

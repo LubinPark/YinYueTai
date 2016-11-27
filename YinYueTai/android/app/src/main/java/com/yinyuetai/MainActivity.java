@@ -1,6 +1,7 @@
 package com.yinyuetai;
 
 import com.facebook.react.ReactActivity;
+import com.github.yamill.orientation.OrientationPackage;
 import com.brentvatne.react.ReactVideoPackage;
 
 public class MainActivity extends ReactActivity {

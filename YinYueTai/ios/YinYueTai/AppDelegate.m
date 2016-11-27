@@ -8,9 +8,9 @@
  */
 
 #import "AppDelegate.h"
-
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
+#import "Orientation.h"
 
 #import <AVFoundation/AVFoundation.h>  // react-native-video 引入的必要的package
 
@@ -43,7 +43,14 @@
   return YES;
 }
 
+//状态栏白色
 -(UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;
 }
+
+//react-native-orientation 支持旋转 添加
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  return [Orientation getOrientation];
+}
+
 @end

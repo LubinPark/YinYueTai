@@ -5,6 +5,7 @@ import _ from 'underscore'
 import {
   View,
   Image,
+  StatusBar,
   StyleSheet,
   ScrollView,
   InteractionManager
@@ -58,7 +59,7 @@ class PlayerMV extends Component {
 
       return (
         <View style={styles.view}>
-          <View style={styles.statusBar}></View>
+          <StatusBar hidden={true} />
           <VideoPage url={authorInfo.url} title={authorInfo.title}/>
           <Image style={styles.backgroundColor} source={require('../../img/background/background_0.png')} resizeMode='stretch' >
             <ScrollView styles={styles.scrollView}>
@@ -97,11 +98,11 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     width:width,
-    height: height - (width / 16 * 9) - 20,
+    height: height - (width / 16 * 9)
   },
   backgroundColor:{
     width:width,
-    height: height - (width / 16 * 9) - 20
+    height: height - (width / 16 * 9)
   },
   loadingView: {
     width: width,
