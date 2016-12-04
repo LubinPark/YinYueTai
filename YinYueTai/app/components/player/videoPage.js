@@ -29,34 +29,17 @@ export default class VideoPage extends Component {
       currentTime: '--:--',    //当前时间
       durationTime: '--:--',   //总时长
       current: 0,              //进度条的值
-      duration: 0              //进度条的最大值
+      duration: 0,             //进度条的最大值
     }
-  }
-
-  componentWillMount() {
-    // 判断横竖屏幕
-    var initial = Orientation.getInitialOrientation();
-    if (initial === 'LANDSCAPE') {
-      // LANDSCAPE 横屏
-      // PORTRAIT 竖屏
-      console.log(`竖屏`);
-    } else {
-      console.log(`横屏`);
-    }
-    // 只允许竖屏
-    // Orientation.lockToPortrait()
-    //只允许横屏
-    // Orientation.lockToLandscape()
   }
 
   componentDidMount() {
-    Orientation.lockToPortrait()
     Orientation.addOrientationListener(this._orientationDidChange)
   }
 
   componentWillUnmount() {
     Orientation.getOrientation((err,orientation) => {
-      // console.log("Current Device Orientation: ", orientation);
+     console.log("Current Device Orientation: ", orientation);
     })
     Orientation.removeOrientationListener(this._orientationDidChange);
   }
@@ -65,62 +48,64 @@ export default class VideoPage extends Component {
 
     var title = this.props.title
     var url = this.props.url
+    var full_screen = {
+      width: width,
+      height: width / 16 * 9,
+      backgroundColor: 'black'
+    }
 
-
-    if (_.isEmpty(url,title)) {
-      return (
-        <View>
+    return (
+      <View>
+        {/* 播放器*/}
+        <Video source={{uri: url}}                             // Can be a URL or a local file.
+               rate={1.0}                                      // 0 is paused, 1 is normal.
+               volume={1.0}                                    // 0 is muted, 1 is normal.
+               muted={false}                                   // Mutes the audio entirely.
+               paused={this.state.paused}                      // Pauses playback entirely.
+               resizeMode="contain"                            // Fill the whole screen at aspect ratio.
+               repeat={true}                                   // Repeat forever.
+               playInBackground={false}                        // Audio continues to play when app entering background.
+               playWhenInactive={false}                        // [iOS] Video continues to play when control or notification center are shown.
+               progressUpdateInterval={250.0}                  // [iOS] Interval to fire onProgress (default to ~250ms)
+               onLoadStart={this.loadStart}                    // Callback when video starts to load
+               onLoad={(value)=>this._showDuration(value)}     // Callback when video loads
+               onProgress={(value)=>this._showCurrent(value)}  // Callback every ~250ms with currentTime
+               onEnd={this.onEnd}                              // Callback when playback finishes
+               onError={this.videoError}                       // Callback when video cannot be loaded
+               style={full_screen} />
+        {/* 播放器上部的按钮*/}
+        <View style={styles.buttonUpView}>
+          <TouchableOpacity onPress={()=>this._backToHome()}>
+            <Image style={styles.back} source={require('../../img/back.png')} />
+          </TouchableOpacity>
+          <View style={styles.titleView}>
+            <Text style={styles.title} numberOfLines={1}>{title}</Text>
+          </View>
         </View>
-      )
-    } else {
-      return (
-        <View style={styles.video}>
-          {/* 播放器*/}
-          <Video source={{uri: url}}                             // Can be a URL or a local file.
-                 rate={1.0}                                      // 0 is paused, 1 is normal.
-                 volume={1.0}                                    // 0 is muted, 1 is normal.
-                 muted={false}                                   // Mutes the audio entirely.
-                 paused={this.state.paused}                      // Pauses playback entirely.
-                 resizeMode="contain"                            // Fill the whole screen at aspect ratio.
-                 repeat={true}                                   // Repeat forever.
-                 playInBackground={false}                        // Audio continues to play when app entering background.
-                 playWhenInactive={false}                        // [iOS] Video continues to play when control or notification center are shown.
-                 progressUpdateInterval={250.0}                  // [iOS] Interval to fire onProgress (default to ~250ms)
-                 onLoadStart={this.loadStart}                    // Callback when video starts to load
-                 onLoad={(value)=>this._showDuration(value)}     // Callback when video loads
-                 onProgress={(value)=>this._showCurrent(value)}  // Callback every ~250ms with currentTime
-                 onEnd={this.onEnd}                              // Callback when playback finishes
-                 onError={this.videoError}                       // Callback when video cannot be loaded
-                 style={styles.video} />
-          {/* 播放器上部的按钮*/}
-          <View style={styles.buttonUpView}>
-            <TouchableOpacity onPress={()=>this._backToHome()}>
-              <Image style={styles.back} source={require('../../img/back.png')} />
-            </TouchableOpacity>
-            <View style={styles.titleView}>
-              <Text style={styles.title} numberOfLines={1}>{title}</Text>
+        {/* 播放器底部的按钮*/}
+        <View style={styles.buttonBottomView}>
+          <View style={styles.bottomLeftView}>
+            {this._showPlayBtn(this.state.paused)}
+            <Slider style={styles.slider}
+                    minimumTrackTintColor={green}
+                    thumbImage={require('../../img/slider.png')}
+                    value={this.state.current}
+                    onValueChange={(value)=>this._showCurrent(value)}
+                    maximumValue={this.state.duration}
+             />
+            <View style={styles.timeView}>
+              <Text style={styles.time}>{this.state.currentTime} / {this.state.durationTime}</Text>
             </View>
           </View>
-          {/* 播放器底部的按钮*/}
-          <View style={styles.buttonBottomView}>
-            <View style={styles.bottomLeftView}>
-              {this._showPlayBtn(this.state.paused)}
-              <Slider style={styles.slider}
-                      minimumTrackTintColor={green}
-                      thumbImage={require('../../img/slider.png')}
-                      value={this.state.current}
-                      maximumValue={this.state.duration} />
-              <View style={styles.timeView}>
-                <Text style={styles.time}>{this.state.currentTime} / {this.state.durationTime}</Text>
-              </View>
-            </View>
+          <TouchableOpacity onPress={()=>this._orientationDidChange()}>
             <View style={styles.bottomRigtView}>
               <Image style={styles.playbutton} source={require('../../img/full_screen.png')} />
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
-      )
-    }
+      </View>
+    )
+
   }
 
   _backToHome() {
@@ -140,6 +125,20 @@ export default class VideoPage extends Component {
           <Image style={styles.playbutton} source={require('../../img/play_play.png')} />
         </TouchableOpacity>
       )
+    }
+  }
+
+  _orientationDidChange() {
+    var initial = Orientation.getInitialOrientation()
+    // LANDSCAPE 横屏  PORTRAIT 竖屏
+    if (initial === 'LANDSCAPE') {
+      console.log(`横屏`);
+      // 只允许竖屏
+      // Orientation.lockToPortrait()
+    } else if (initial === 'PORTRAIT') {
+      console.log(`竖屏`);
+      //只允许横屏
+      // Orientation.lockToLandscape()
     }
   }
 
@@ -203,13 +202,14 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     marginTop: 7,
+    marginLeft: 5,
     alignItems:'center'
   },
   titleView: {
     alignItems:'center',
     justifyContent:'center',
-    width : width / 3 * 2,
-    marginLeft: 30,
+    width : width / 4 * 3,
+    marginLeft: 10,
     backgroundColor: alpha0
   },
   title: {

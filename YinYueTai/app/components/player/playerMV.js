@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
   },
   video: {
     width: width,
-    height: width / 16 * 9,
     backgroundColor: 'black'
   },
   scrollView: {
