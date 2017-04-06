@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import {Navigator} from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { Navigator } from 'react-native'
 import Routes from '../components/navigation/routes'
 
 export default class AppIndex extends Component {

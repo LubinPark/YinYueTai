@@ -1,6 +1,6 @@
-import React,{Component} from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import _ from 'underscore'
 import {
   View,
@@ -14,7 +14,7 @@ import CommonTitle from '../commonfile/commonTitle'
 import CommonItem from '../commonfile/commonItem'
 
 var Device = require('../../utils/device')
-var {itemHeight, width,height} = Device
+var { itemHeight, width, height } = Device
 
 export default class GuestLike extends Component {
 

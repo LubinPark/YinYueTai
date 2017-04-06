@@ -1,11 +1,11 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import {
   View,
   StyleSheet
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var {width,height,gray} = Device
+var { width, height, gray } = Device
 
 export default class Line extends Component {
 

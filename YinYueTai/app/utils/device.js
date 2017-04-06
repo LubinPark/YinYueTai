@@ -1,6 +1,6 @@
-import {Dimensions} from 'react-native'
+import { Dimensions } from 'react-native'
 
-const {width,height} = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 const itemHeight = 0
 
 //首页每个模块的item按照比例不同在不同机型比例有差，单独赋值

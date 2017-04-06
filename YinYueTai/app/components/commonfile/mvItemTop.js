@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import {
   Text,
   View,
@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var {width,height,gray,black} = Device
+var { width, height, gray, black } = Device
 
 export default class MVItemTop extends Component {
 

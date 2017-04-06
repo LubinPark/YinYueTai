@@ -1,9 +1,15 @@
-import React, {Component} from 'react'
-import {View, Image, Text, Dimensions, StyleSheet} from 'react-native'
+import React, { Component } from 'react'
 import TabNavigator from 'react-native-tab-navigator'
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  StyleSheet
+} from 'react-native'
 
 import Home from '../components/home/home'
-const {width, height} = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 export default class TabBarApp extends Component {
 

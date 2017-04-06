@@ -1,5 +1,5 @@
 import Octopus from '../utils/urlOctpus'
-import {URL} from '../utils/url'
+import { URL } from '../utils/url'
 import * as types from './actionTypes'
 
 function fetchAuthorInfo(params) {

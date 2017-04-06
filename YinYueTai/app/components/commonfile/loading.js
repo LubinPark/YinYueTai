@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import _ from 'underscore'
 import {
   View,
@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var {width,height,purpure,darkGreen} = Device
+var { width, height, purpure, darkGreen } = Device
 
 export default class Home extends Component {
 

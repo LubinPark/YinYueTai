@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import _ from 'underscore'
 import {
   Text,
@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var {itemWidth,width,height,black,gray,green,alpha0,imageWidth} = Device
+var { itemWidth, width, height, black, gray, green, alpha0, imageWidth } = Device
 
 export default class CommonItem extends Component {
 

@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {Text, View, Navigator} from 'react-native'
+import React, { Component } from 'react'
+import { Text, View, Navigator } from 'react-native'
 
 import TabBarApp from '../../container/tabBarApp'
 import ContextWrapper from './contextWrapper'

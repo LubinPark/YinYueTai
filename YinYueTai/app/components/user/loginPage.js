@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var {itemHeight,width,height} = Device
+var { itemHeight, width, height } = Device
 
 export default class Anthor extends Component {
 

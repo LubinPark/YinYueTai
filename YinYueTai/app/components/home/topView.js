@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import {
   View,
   Image,
@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var {itemHeight,width,height,black} = Device
+var { itemHeight, width, height, black } = Device
 
 export default class TopView extends Component {
 

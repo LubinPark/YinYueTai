@@ -1,6 +1,6 @@
-import React,{Component} from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import _ from 'underscore'
 import {
   View,
@@ -15,7 +15,7 @@ import CommonItem from '../commonfile/commonItem'
 
 var itemCount
 var Device = require('../../utils/device')
-var {itemHeight, width,height} = Device
+var { itemHeight, width,height } = Device
 
 class MostWatch extends Component {
 

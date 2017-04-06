@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import _ from 'underscore'
 import {
   View,
@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var {width,height,gray,lightGray,alpha0} = Device
+var { width, height, gray, lightGray, alpha0 } = Device
 
 export default class AuthorInfo extends Component {
 

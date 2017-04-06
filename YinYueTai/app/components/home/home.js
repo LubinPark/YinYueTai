@@ -1,6 +1,6 @@
-import React,{Component} from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import _ from 'underscore'
 import {
   View,
@@ -25,7 +25,7 @@ import Guess from './guess'
 import * as HomeAction from '../../actions/homeAction'
 
 var Device = require('../../utils/device')
-var {width,height,purpure} = Device
+var { width, height, purpure } = Device
 
 class Home extends Component {
 

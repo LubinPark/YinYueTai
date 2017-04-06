@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import {
   Text,
   View,
@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var {width,height,gray,black,alpha0} = Device
+var { width, height, gray, black, alpha0 } = Device
 
 export default class CommomTitle extends Component {
 

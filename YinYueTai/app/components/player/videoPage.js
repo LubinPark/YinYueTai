@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import _ from 'underscore'
 import Video from 'react-native-video'
 import Orientation from 'react-native-orientation'
@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var {width,height,alpha0,green} = Device
+var { width, height, alpha0, green } = Device
 
 export default class VideoPage extends Component {
 

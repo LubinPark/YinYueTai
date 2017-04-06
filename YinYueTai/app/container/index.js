@@ -1,5 +1,5 @@
-import {Provider} from 'react-redux'
-import React, {Component} from 'react'
+import { Provider } from 'react-redux'
+import React, { Component } from 'react'
 
 import store from '../store/store'
 import ConnectApp from './connectApp'

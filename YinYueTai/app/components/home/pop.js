@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import _ from 'underscore'
 import {
   View,
@@ -9,7 +9,7 @@ import CommonItem from '../commonfile/commonItem'
 import MVItemTop from '../commonfile/mvItemTop'
 
 var Device = require('../../utils/device')
-var {itemHeight,width,height} = Device
+var { itemHeight, width, height } = Device
 
 export default class Pop extends Component {
 

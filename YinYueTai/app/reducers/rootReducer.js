@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux'
+import { combineReducers } from 'redux'
 import HomeReducer from './homeReducer'
 import PlayerReducer from './playerReducer'
 

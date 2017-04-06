@@ -1,9 +1,9 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import Swiper from 'react-native-swiper'
 import _ from 'underscore'
 
 var Device = require('../../utils/device')
-var {width,height,alpha0} = Device
+var { width, height, alpha0 } = Device
 
 import {
   Text,

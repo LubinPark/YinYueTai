@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import _ from 'underscore'
 import {
   Text,
@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var {itemHeight,width,height,gray,alpha0} = Device
+var { itemHeight, width, height, gray, alpha0 } = Device
 
 export default class SelectButton extends Component {
 
