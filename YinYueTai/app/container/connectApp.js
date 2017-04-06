@@ -8,7 +8,7 @@ export default class AppIndex extends Component {
 
   render() {
 
-    var initialRoute = {id: 'TabBarApp'}
+    var initialRoute = {id: 'LoginPage'}
     var pageContext = {rootNavigator: this.props.rootNavigator}
 
     return (

@@ -5,6 +5,7 @@ import TabBarApp from '../../container/tabBarApp'
 import ContextWrapper from './contextWrapper'
 
 import PlayerMV from '../player/playerMV'
+import LoginPage from '../user/loginPage'
 
 export default class Routes {
 
@@ -27,6 +28,8 @@ export default class Routes {
         return <ContextWrapper {...contextProps}><TabBarApp {...viewProps} /></ContextWrapper>
       case 'PlayerMV':
         return <ContextWrapper {...contextProps}><PlayerMV {...viewProps} /></ContextWrapper>
+      case 'LoginPage':
+        return <ContextWrapper {...contextProps}><LoginPage {...viewProps} /></ContextWrapper>
     }
     return <View style={{top: 100}}><Text>{route.id} page is not found.</Text></View>
   }
