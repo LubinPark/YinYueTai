@@ -7,7 +7,8 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  InteractionManager
 } from 'react-native'
 
 import * as UserAction from '../../actions/userAction'
@@ -15,7 +16,7 @@ import * as UserAction from '../../actions/userAction'
 var Device = require('../../utils/device')
 var { itemHeight, width, height } = Device
 
-class LoginPage extends Component {
+class RegisterPage extends Component {
 
   static contextTypes = {
     app: React.PropTypes.object
@@ -24,6 +25,7 @@ class LoginPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      name: '',
       account : '',
       password : ''
     }
@@ -40,27 +42,35 @@ class LoginPage extends Component {
                    onChange={(value) => this._account(value)}/>
         <TextInput style={styles.TextInputSty}
                    ref='password'
+                   placeholder='姓名'
+                   numberOfLines={1}
+                   underlineColorAndroid="transparent"
+                   onChange={(value) => this._userName(value)}/>
+        <TextInput style={styles.TextInputSty}
+                   ref='password'
                    placeholder='密码'
                    secureTextEntry={true}
                    numberOfLines={1}
                    underlineColorAndroid="transparent"
                    onChange={(value) => this._password(value)}/>
-        <View style={styles.center}>
-          <TouchableOpacity style={styles.button} onPress={() => this._submit()}>
-            <Text style={[styles.text,styles.login]}>登录</Text>
-          </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => this._register()}>
-            <Text style={[styles.text,styles.register]}>注册</Text>
+            <Text style={[styles.text,styles.login]}>确定</Text>
           </TouchableOpacity>
+          { (this.props.data.registerState === 'FAILED') ?
+            <View style={styles.errorView}>
+              <Text style={styles.info}>{this.props.data.registerErrorInfo}</Text>
+            </View>
+            : <Text/>
+          }
         </View>
-        { (this.props.data.loginState === 'FAILED') ?
-          <View style={styles.errorView}>
-            <Text style={styles.info}>{this.props.data.loginErrorInfo}</Text>
-          </View>
-          : <Text/>
-        }
-      </View>
     )
+  }
+
+  _userName(value) {
+    var name = value.nativeEvent.text
+    this.setState({
+      name: name
+    })
   }
 
   _account(value) {
@@ -77,19 +87,13 @@ class LoginPage extends Component {
     })
   }
 
-  _submit() {
+  _register() {
     this.props.actions.UserAction({
-      type      : 'login',
+      type      : 'register',
       name      : this.state.name,
       account   : this.state.account,
       password  : this.state.password,
       navigator : this.context.app.navigator
-    })
-  }
-
-  _register() {
-    this.context.app.navigator.push({
-      id:'RegisterPage'
     })
   }
 
@@ -132,18 +136,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     padding: 5,
     textAlign: 'center'
-  },
-  errorView: {
-    position: 'absolute',
-    bottom: 30,
-    width: width,
-    height: 50,
-    justifyContent:'center',
-    alignItems:'center'
-  },
-  info: {
-    height: 50,
-    textAlign: 'center'
   }
 })
 
@@ -153,4 +145,4 @@ export default connect(state => ({
   (dispatch) => ({
     actions: bindActionCreators(UserAction, dispatch)
   })
-)(LoginPage)
+)(RegisterPage)

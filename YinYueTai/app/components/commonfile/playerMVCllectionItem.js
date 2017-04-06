@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var { itemHeight, width, height, black, gray, green, alpha0, imageWidth } = Device
+var { itemHeight, width, height, black, gray, green, alpha0 } = Device
 
 export default class CommonItem extends Component {
 

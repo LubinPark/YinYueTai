@@ -16,8 +16,7 @@ module.exports = {
   width:width,
   height:height,
   itemHeight: itemHeight,
-  imageWidth: (width - 30 ) / 2 * 0.58,
-  itemWidth: ((width - 10) - 20 ) / 2,
+  itemWidth: (width - 30) / 2,
 
   black: '#525252',
   gray: 'rgb(182,182,182)',

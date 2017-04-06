@@ -9,7 +9,7 @@ import CommonItem from '../commonfile/commonItem'
 import MVItemTop from '../commonfile/mvItemTop'
 
 var Device = require('../../utils/device')
-var { itemHeight, width, height } = Device
+var { itemWidth, width, height } = Device
 
 export default class Pop extends Component {
 
@@ -44,16 +44,13 @@ export default class Pop extends Component {
 
 const styles = StyleSheet.create({
   view: {
-    flex:1,
     width:width,
-    marginTop:1,
-    marginBottom:1,
-    backgroundColor:'#ffffff'
+    backgroundColor:'red'
   },
   itemView :{
-    marginLeft: 10,
-    height: itemHeight * 3 + 40,
-    width: width - 10,
-    flexWrap: 'wrap'
+    width: width,
+    height: itemWidth * 3,
+    flexWrap: 'wrap',
+    flexDirection: 'row'
   }
 })
