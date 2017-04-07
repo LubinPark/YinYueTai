@@ -14,7 +14,7 @@ import CommonTitle from '../commonfile/commonTitle'
 import CommonItem from '../commonfile/commonItem'
 
 var Device = require('../../utils/device')
-var { itemHeight, width, height } = Device
+const { itemHeight, width, height, gray } = Device
 
 export default class AuthorListMV extends Component {
 
@@ -24,7 +24,7 @@ export default class AuthorListMV extends Component {
 
   render () {
 
-    var data = this.props.data
+    let data = this.props.data
 
     if (_.isEmpty(data)) {
       return (
@@ -32,7 +32,7 @@ export default class AuthorListMV extends Component {
         </View>
       )
     } else {
-      var title='同艺人其他MV:'
+      let title='同艺人其他MV:'
       return (
         <View style={styles.view}>
           <CommonTitle title={title} />
@@ -54,12 +54,13 @@ export default class AuthorListMV extends Component {
 
 const styles = StyleSheet.create({
   view: {
-    width: width
+    width: width,
+    borderBottomColor: gray,
+    borderBottomWidth: StyleSheet.hairlineWidth / 2
   },
   itemView: {
-    marginLeft: 10,
-    height: itemHeight * 2 + 40,
-    width: width - 10,
-    flexWrap: 'wrap'
+    width: width,
+    flexWrap: 'wrap',
+    flexDirection:'row'
   }
 })

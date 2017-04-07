@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var { width, height, gray, lightGray, alpha0 } = Device
+const { width, height, gray, lightGray, alpha0 } = Device
 
 export default class AuthorInfo extends Component {
 
@@ -27,7 +27,7 @@ export default class AuthorInfo extends Component {
 
   render () {
 
-    var data = this.props.data
+    let data = this.props.data
 
     if (_.isEmpty(data)) {
       return (
@@ -36,8 +36,8 @@ export default class AuthorInfo extends Component {
       )
     } else {
 
-      var creator = data.creator
-      var artist = _.first(data.artists)
+      let creator = data.creator
+      let artist = _.first(data.artists)
 
       return (
         <View style={styles.view}>
@@ -68,7 +68,7 @@ export default class AuthorInfo extends Component {
             </View>
           </TouchableOpacity>
           {/* 最下面的一行上传的信息*/}
-          <View style={styles.center}>
+          <View style={[styles.center,{marginBottom: 10}]}>
             <View style={styles.bottomLeft}>
               <Image style={styles.loading} source={{uri: creator.smallAvatar}} />
               <Text style={styles.loading_and_time}>上传者:</Text>
@@ -98,7 +98,7 @@ export default class AuthorInfo extends Component {
   }
 
   _showMoreBtn() {
-    if (this.state.numberOfLines == 2) {
+    if (!this.state.numberOfLines == 2) {
       return (
         <Image style={styles.moreInfoBtn} source={require('../../img/moreInfo_left.png')} />
       )
@@ -114,7 +114,9 @@ export default class AuthorInfo extends Component {
 const styles = StyleSheet.create({
   view: {
     width: width,
-    backgroundColor: alpha0
+    backgroundColor: alpha0,
+    borderBottomColor: gray,
+    borderBottomWidth: StyleSheet.hairlineWidth / 2
   },
   center: {
     flexDirection:'row',
@@ -160,6 +162,7 @@ const styles = StyleSheet.create({
   },
   descMoreInfoView: {
     flex: 1,
+    marginBottom: 10,
     alignItems:'flex-end',
   },
   moreInfoBtn: {

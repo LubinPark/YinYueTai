@@ -44,7 +44,7 @@ function userLogin(params) {
       }
     }, (error) => {
       return dispatch(loginFailed(error.message))
-    });
+    })
   }
 }
 

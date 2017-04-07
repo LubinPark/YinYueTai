@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var { itemHeight, width, height, black, gray, green, alpha0 } = Device
+const { itemHeight, width, height, gray, green } = Device
 
 export default class CommonItem extends Component {
 
@@ -53,15 +53,16 @@ export default class CommonItem extends Component {
 
 }
 
+const widthImg = (width - 40) / 3
 const styles = StyleSheet.create({
   items: {
-    width: (width - 40) / 3,
-    height: itemHeight,
-    marginRight: 10
+    width: widthImg,
+    marginRight: 10,
+    marginBottom: 10
   },
   img: {
-    width: (width - 40) / 3,
-    height: (width - 40) / 3,
+    width: widthImg,
+    height: widthImg,
     borderRadius: 4,
     marginBottom: 10
   },
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   author: {
-    width: (width - 40) / 3 - 20,
+    width: widthImg - 20,
     fontSize: 11,
     color: green,
     marginBottom: 5,

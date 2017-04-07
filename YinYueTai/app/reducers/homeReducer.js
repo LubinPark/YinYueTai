@@ -3,37 +3,29 @@ import * as types from '../actions/actionTypes'
 const initialState = {
   loop: [],
   button:[],
-  mvFirst:{},
-  pops:{},
-  fans:{},
-  anthor:{},
-  panorama:{},
-  musicer:{},
-  guess:{}
+  data: []
 }
 
 let Home = (state = initialState, action={}) => {
   switch (action.type) {
     case types.REQUEST_HOME:
       //主页的几个分区的每个数据
-      var loop = action.homeData[0].data
-      var button = action.homeData[1].data
-      var mvFirst = action.homeData[2]
-      var pops = action.homeData[3]
-      var fans = action.homeData[4]
-      var anthor = action.homeData[5]
-      var panorama = action.homeData[6]
-      var musicer = action.homeData[7]
-      var guess = action.homeData[8]
+      let loop = action.homeData[0].data
+      let button = action.homeData[1].data
+
+      let mvFirst = action.homeData[2]
+      let pops = action.homeData[3]
+      let fans = action.homeData[4]
+      let anthor = action.homeData[5]
+      let panorama = action.homeData[6]
+      let musicer = action.homeData[7]
+      let guess = action.homeData[8]
+
+      let data = []
+      data.push(mvFirst, pops, fans, anthor, panorama, musicer, guess)
       return Object.assign({}, state,{loop:loop,
                                       button:button,
-                                      mvFirst:mvFirst,
-                                      pops:pops,
-                                      fans:fans,
-                                      anthor:anthor,
-                                      panorama:panorama,
-                                      musicer:musicer,
-                                      guess:guess})
+                                      data: data})
       break;
 
     default:

@@ -48,6 +48,12 @@ function requestMostWatch(responseData) {
   }
 }
 
+function cleanPLayData() {
+  return {
+    type: types.CLEAN_PLAY_DATA
+  }
+}
+
 export function fetchPlayerIfNeeded(params = {}) {
   return(dispatch, getState) => {
     if (params.type == 'authorInfo') {
@@ -56,6 +62,8 @@ export function fetchPlayerIfNeeded(params = {}) {
       return dispatch(fetchMostWatch(params))
     } else if (params.type == 'null') {
       return dispatch(responsePlayerDataNull(params))
+    } else if (params.type == 'cleanPLayData') {
+      return dispatch(cleanPLayData())
     }
   }
 }

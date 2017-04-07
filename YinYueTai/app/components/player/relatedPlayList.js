@@ -14,7 +14,7 @@ import CommonTitle from '../commonfile/commonTitle'
 import PlayerMVCllectionItem from '../commonfile/playerMVCllectionItem'
 
 var Device = require('../../utils/device')
-var { itemHeight, width, height } = Device
+const { width, height, gray } = Device
 
 export default class RelatedPlayList extends Component {
 
@@ -24,7 +24,7 @@ export default class RelatedPlayList extends Component {
 
   render () {
 
-    var data = this.props.data
+    let data = this.props.data
 
     if (_.isEmpty(data)) {
       return (
@@ -32,7 +32,7 @@ export default class RelatedPlayList extends Component {
         </View>
       )
     } else {
-      var title='收录该MV的悦单:'
+      let title='收录该MV的悦单:'
       return (
         <View style={styles.view}>
           <CommonTitle title={title} />
@@ -55,11 +55,11 @@ export default class RelatedPlayList extends Component {
 const styles = StyleSheet.create({
   view: {
     width: width,
-    height: 220,
+    borderBottomColor: gray,
+    borderBottomWidth: StyleSheet.hairlineWidth / 2
   },
   itemView: {
     marginLeft: 10,
-    height: 200,
     width: width - 10,
     flexDirection: 'row'
   }

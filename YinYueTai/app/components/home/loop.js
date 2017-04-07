@@ -59,7 +59,7 @@ import {
 
 }
 
-const viewHeight = width * 0.5554
+const viewHeight = width * 0.5555
 const styles = StyleSheet.create({
   image:{
     width: width,

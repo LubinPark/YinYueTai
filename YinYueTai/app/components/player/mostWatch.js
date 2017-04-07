@@ -15,7 +15,7 @@ import CommonItem from '../commonfile/commonItem'
 
 var itemCount
 var Device = require('../../utils/device')
-var { itemHeight, width,height } = Device
+const { width, height, itemWidth, gray } = Device
 
 class MostWatch extends Component {
 
@@ -31,7 +31,7 @@ class MostWatch extends Component {
 
   render () {
 
-    var data = this.props.data
+    let data = this.props.data
 
     if (_.isEmpty(data)) {
       return (
@@ -40,7 +40,7 @@ class MostWatch extends Component {
       )
     } else {
       itemCount = data.length
-      var title='大部分人还看了:'
+      let title='大部分人还看了:'
       return (
         <View style={styles.view}>
           <CommonTitle title={title} />
@@ -60,14 +60,16 @@ class MostWatch extends Component {
 
 }
 
+const itemWidthNew = itemWidth + 35
 const styles = StyleSheet.create({
   view: {
-    width: width
+    width: width,
+    borderBottomColor: gray,
+    borderBottomWidth: StyleSheet.hairlineWidth / 2
   },
   scrollView: {
-    width: width / 2 * itemCount,
-    height: 175,
-    marginLeft: 10,
+    width: itemWidthNew * itemCount,
+    height: ((width - 30 ) / 2 * 0.6) + 80,
     flexWrap: 'wrap'
   }
 })

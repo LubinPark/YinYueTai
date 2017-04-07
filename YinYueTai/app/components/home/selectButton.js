@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var { itemHeight, width, height, gray, alpha0 } = Device
+const { itemHeight, width, height, lightGray, alpha0 } = Device
 
 export default class SelectButton extends Component {
 
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap'
   },
   title: {
-    color: gray,
+    color: lightGray,
     fontSize: 11,
     marginTop: 10,
     alignItems: 'center',

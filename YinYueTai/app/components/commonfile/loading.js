@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var { width, height, purpure, darkGreen } = Device
+const { width, height, purpure, darkGreen } = Device
 
 export default class Home extends Component {
 

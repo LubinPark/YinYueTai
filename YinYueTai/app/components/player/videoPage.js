@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var { width, height, alpha0, green } = Device
+const { width, height, alpha0, green } = Device
 
 export default class VideoPage extends Component {
 
@@ -46,9 +46,9 @@ export default class VideoPage extends Component {
 
   render () {
 
-    var title = this.props.title
-    var url = this.props.url
-    var full_screen = {
+    var url = this.state.url
+    let title = this.props.title
+    let full_screen = {
       width: width,
       height: width / 16 * 9,
       backgroundColor: 'black'
@@ -75,7 +75,7 @@ export default class VideoPage extends Component {
                style={full_screen} />
         {/* 播放器上部的按钮*/}
         <View style={styles.buttonUpView}>
-          <TouchableOpacity onPress={()=>this._backToHome()}>
+          <TouchableOpacity style={{justifyContent:'center'}} onPress={()=>this._backToHome()}>
             <Image style={styles.back} source={require('../../img/back.png')} />
           </TouchableOpacity>
           <View style={styles.titleView}>
@@ -150,15 +150,15 @@ export default class VideoPage extends Component {
 
   _showDuration(time) {
     //总时长时间
-    var duration = parseInt(time.duration)
-    var durationMin = parseInt(duration / 60)
-    var durationSecond = duration - durationMin * 60
+    let duration = parseInt(time.duration)
+    let durationMin = parseInt(duration / 60)
+    let durationSecond = duration - durationMin * 60
 
     if (durationSecond <= 9) {
       durationSecond = '0' + durationMin
     }
 
-    var durationTime = durationMin+':'+durationSecond
+    let durationTime = durationMin+':'+durationSecond
 
     this.setState({
       durationTime: durationTime,
@@ -168,15 +168,15 @@ export default class VideoPage extends Component {
 
   _showCurrent(time) {
     //当前时间
-    var current = parseInt(time.currentTime)
-    var currentTimeMin = parseInt(current / 60)
-    var currentTimeSecond = current - currentTimeMin * 60
+    let current = parseInt(time.currentTime)
+    let currentTimeMin = parseInt(current / 60)
+    let currentTimeSecond = current - currentTimeMin * 60
 
     if (currentTimeSecond <= 9) {
       currentTimeSecond = '0' + currentTimeSecond
     }
 
-    var currentTime = currentTimeMin+':'+currentTimeSecond
+    let currentTime = currentTimeMin+':'+currentTimeSecond
 
     this.setState({
       currentTime: currentTime,
@@ -194,16 +194,14 @@ const styles = StyleSheet.create({
   },
   buttonUpView: {
     width: width,
-    height: 40,
+    height: 64,
     flexDirection: 'row',
     marginTop: -(width / 16 * 9)
   },
   back: {
-    width: 25,
-    height: 25,
-    marginTop: 7,
-    marginLeft: 5,
-    alignItems:'center'
+    width: 30,
+    height: 30,
+    marginLeft: 5
   },
   titleView: {
     alignItems:'center',
@@ -219,7 +217,7 @@ const styles = StyleSheet.create({
   buttonBottomView: {
     width: width,
     height: 40,
-    marginTop: (width / 16 * 9) - 80,
+    marginTop: (width / 16 * 9) - 104,
     alignItems: 'center',
     flexDirection: 'row',
   },
@@ -233,14 +231,14 @@ const styles = StyleSheet.create({
   playbutton: {
     width: 25,
     height: 25,
-    marginTop: 5,
+    marginTop: 8,
     marginLeft: 5,
     marginRight: 10
   },
   slider: {
     width: width / 2,
     height: 30,
-    marginTop: 3,
+    marginTop: 5,
     marginRight: 10
   },
   timeView: {

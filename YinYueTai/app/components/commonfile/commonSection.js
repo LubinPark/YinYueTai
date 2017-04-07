@@ -2,22 +2,19 @@ import React, { Component } from 'react'
 import _ from 'underscore'
 import {
   View,
-  StyleSheet
+  StyleSheet,
 } from 'react-native'
 
 import CommonItem from '../commonfile/commonItem'
 import MVItemTop from '../commonfile/mvItemTop'
 
 var Device = require('../../utils/device')
-var { itemHeight, width, height } = Device
+const { itemWidth, width, height, gray } = Device
 
-export default class Musicer extends Component {
+export default class Pop extends Component {
 
   render () {
-
-    var musicer = 'musicer'
     var data = this.props.data
-
     if (_.isEmpty(data)) {
       return (
         <View>
@@ -31,7 +28,7 @@ export default class Musicer extends Component {
           {
             _.map(data.data, (item, index) => {
               return (
-                <CommonItem  data={item} key={item.videoId + musicer}/>
+                <CommonItem data={item} key={item.videoId + index}/>
               )
             })
           }
@@ -45,16 +42,13 @@ export default class Musicer extends Component {
 
 const styles = StyleSheet.create({
   view: {
-    flex:1,
     width:width,
-    marginTop:1,
-    marginBottom:1,
+    marginTop: 10,
     backgroundColor:'#ffffff'
   },
-  itemView :{
-    marginLeft: 10,
-    height: itemHeight * 3 + 40,
-    width: width - 10,
-    flexWrap: 'wrap'
+  itemView: {
+    width: width,
+    flexWrap: 'wrap',
+    flexDirection: 'row'
   }
 })

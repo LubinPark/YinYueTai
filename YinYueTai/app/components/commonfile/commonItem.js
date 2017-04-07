@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var { itemWidth, width, height, black, gray, green, alpha0 } = Device
+const { itemWidth, width, height, black, gray, green, alpha0 } = Device
 
 export default class CommonItem extends Component {
 
@@ -37,12 +37,12 @@ export default class CommonItem extends Component {
       )
     } else {
 
-      var mostWatch = this.state.mostWatch
-      var mostWatch_item = this.state.mostWatch_item
+      let mostWatch = this.state.mostWatch
+      let mostWatch_item = this.state.mostWatch_item
 
       var titleWhitestyle
       var backgroundColor
-      var items
+      var items = { width:itemWidth }
 
       //判断，改变背景和标题颜色
       if (mostWatch === 1) {
@@ -53,19 +53,15 @@ export default class CommonItem extends Component {
       }
 
       //判断更改item的宽度
-      if (mostWatch_item ===1) {
-        items = {
-          width:itemWidth + 15,
-          marginRight: 10,
-          marginBottom: 10,
-        }
+      if (mostWatch_item === 1) {
+        items = { width:itemWidth + 35 }
       }
 
       return (
           <View style={[styles.items,backgroundColor,items]}>
             <TouchableOpacity onPress={()=>this._goToPlayer(data.videoId)}>
-              <Image source={{uri: data.posterPic}} style={styles.img} />
-              <View style={styles.info}>
+              <Image source={{uri: data.posterPic}} style={[styles.img,items]} />
+              <View>
                 <Text style={[styles.title,titleWhitestyle]} numberOfLines={1}>{data.title}</Text>
                 {this._showName(data)}
                 <Text style={styles.num}>播放数量:{data.totalView}</Text>
@@ -87,18 +83,9 @@ export default class CommonItem extends Component {
       <View style={{flexDirection:'row'}}>
         <Text style={styles.name} numberOfLines={1}>{name}</Text>
         <View style={styles.moreView}>
-        {this._showMoreBtn()}
         </View>
       </View>
     )
-  }
-
-  _showMoreBtn() {
-    if (this.props.mostWatch == 1) {
-      return (
-        <Text style={styles.more}>° ° °</Text>
-      )
-    }
   }
 
   _goToPlayer(videoId){
@@ -114,7 +101,7 @@ export default class CommonItem extends Component {
 
 const styles = StyleSheet.create({
   items: {
-    width:itemWidth,
+    height: itemWidth * 0.6 + 40 + 30,
     marginLeft: 10,
     marginBottom: 10,
   },
@@ -122,10 +109,7 @@ const styles = StyleSheet.create({
     width:itemWidth,
     height:itemWidth * 0.6,
     borderRadius: 4,
-    marginBottom: 10
-  },
-  info: {
-    marginLeft: 10
+    marginBottom: 15
   },
   title:{
     fontSize: 12,
@@ -133,20 +117,15 @@ const styles = StyleSheet.create({
     color: black,
   },
   name: {
-    width: itemWidth - 20,
+    width: itemWidth - 30,
     fontSize: 11,
-    color: green,
+    fontWeight: '500',
+    color: gray,
     marginBottom: 5,
   },
   num: {
     fontSize:10,
-    marginBottom: 5,
-    color: gray
-  },
-  moreView: {
-    alignItems:'flex-end'
-  },
-  more: {
+    marginBottom: 10,
     color: gray
   }
 })

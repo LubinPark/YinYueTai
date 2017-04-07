@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var { width, height, gray, black, alpha0 } = Device
+const { width, height, gray, alpha0 } = Device
 
 export default class CommomTitle extends Component {
 
@@ -29,7 +29,7 @@ export default class CommomTitle extends Component {
 const styles = StyleSheet.create({
   view: {
     width:width,
-    height:40,
+    height: 50,
     marginLeft: 10,
     flexDirection:'row'
   },

@@ -13,7 +13,6 @@ import {
 
 import * as PlayerAction from '../../actions/playerAction'
 import Loading from '../commonfile/loading'
-import Line from '../commonfile/line'
 import VideoPage from './videoPage'
 import AuthorInfo from './authorInfo'
 import MostWatch from './mostWatch'
@@ -22,12 +21,16 @@ import RelatedPlayList from './relatedPlayList'
 import GuestLike from './guestLike'
 
 var Device = require('../../utils/device')
-var { width, height, purpure } = Device
+const { width, height, purpure } = Device
 
 class PlayerMV extends Component {
 
   static contextTypes = {
     app: React.PropTypes.object
+  }
+
+  componentWillMount() {
+    this.props.actions.fetchPlayerIfNeeded({type: 'cleanPLayData'})
   }
 
   componentDidMount() {
@@ -39,21 +42,20 @@ class PlayerMV extends Component {
 
   render () {
 
-    var videoId = this.props.videoId
-    var data = this.props.data
     var num = _.random(0, 2)
+    let videoId = this.props.videoId
+    let data = this.props.data
 
-    if (_.isEmpty(this.props.data)) {
+    if (_.isEmpty(data && data.artistOtherVideos && data.relatedVideos && data.relatedPlayList)) {
       return(
         <Loading num={num}/>
       )
     } else {
 
-      var authorInfo = data
-      var artistOtherVideos = data.artistOtherVideos
-      var relatedVideos = data.relatedVideos
-      var relatedPlayList = data.relatedPlayList
-      var num = _.random(0, 2)
+      let authorInfo = data
+      let artistOtherVideos = data.artistOtherVideos
+      let relatedVideos = data.relatedVideos
+      let relatedPlayList = data.relatedPlayList
 
       return (
         <View style={styles.view}>
@@ -62,13 +64,9 @@ class PlayerMV extends Component {
           <Image style={styles.backgroundColor} source={require('../../img/background/background_0.png')} resizeMode='stretch' >
             <ScrollView styles={styles.scrollView}>
               <AuthorInfo data={authorInfo}/>
-              <Line />
               <MostWatch videoId={videoId}/>
-              <Line />
               <AuthorListMV data={artistOtherVideos}/>
-              <Line />
               <RelatedPlayList data={relatedPlayList}/>
-              <Line />
               <GuestLike data={relatedVideos}/>
             </ScrollView>
           </Image>

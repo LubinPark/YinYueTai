@@ -6,13 +6,15 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-var { width, height, gray, black } = Device
+const { width, height, gray, black } = Device
 
 export default class MVItemTop extends Component {
 
   render () {
-    var title = this.props.title
-    var enTitle = this.props.enTitle
+    
+    let title = this.props.title
+    let enTitle = this.props.enTitle
+
     return (
       <View style={styles.view}>
         <View style={styles.titleView}>
@@ -31,7 +33,7 @@ export default class MVItemTop extends Component {
 const styles = StyleSheet.create({
   view: {
     width:width - 20,
-    height:40,
+    height:60,
     marginLeft: 10,
     flexDirection:'row'
   },
@@ -49,7 +51,6 @@ const styles = StyleSheet.create({
   },
   moreView: {
     flex: 1,
-    marginRight: 10,
     alignItems:'flex-end',
     justifyContent: 'center'
   },

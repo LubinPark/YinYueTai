@@ -14,7 +14,7 @@ import {
 import * as UserAction from '../../actions/userAction'
 
 var Device = require('../../utils/device')
-var { itemHeight, width, height } = Device
+const { itemHeight, width, height } = Device
 
 class RegisterPage extends Component {
 
@@ -67,14 +67,14 @@ class RegisterPage extends Component {
   }
 
   _userName(value) {
-    var name = value.nativeEvent.text
+    let name = value.nativeEvent.text
     this.setState({
       name: name
     })
   }
 
   _account(value) {
-    var account = value.nativeEvent.text
+    let account = value.nativeEvent.text
     this.setState({
       account: account
     })

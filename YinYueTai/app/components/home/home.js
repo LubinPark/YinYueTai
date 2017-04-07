@@ -11,21 +11,16 @@ import {
   InteractionManager
 } from 'react-native'
 
+import * as HomeAction from '../../actions/homeAction'
+
 import Loading from '../commonfile/loading'
 import TopView from './topView'
 import Loop from './loop'
 import SelectButton from './selectButton'
-import MVFirst from './mvFirst'
-import Pop from './pop'
-import Fans from './fans'
-import Anthor from './anthor'
-import Panorama from './panorama'
-import Musicer from './musicer'
-import Guess from './guess'
-import * as HomeAction from '../../actions/homeAction'
+import CommonSection from '../commonfile/commonSection'
 
 var Device = require('../../utils/device')
-var { width, height, purpure } = Device
+const { width, height, fadeGray } = Device
 
 class Home extends Component {
 
@@ -38,8 +33,8 @@ class Home extends Component {
   render() {
 
     var num = _.random(0, 2)
-    var data = this.props.data
-    var isEmptyData = data.loop&&data.button&&data.pops&&data.fans&&data.anthor&&data.panorama&&data.musicer&&data.guess
+    let data = this.props.data
+    let isEmptyData = data.loop&&data.button&&data.data
 
     if (_.isEmpty(isEmptyData)) {
       return (
@@ -53,13 +48,13 @@ class Home extends Component {
           <ScrollView style={styles.scrollView}>
             <Loop data={data.loop} />
             <SelectButton data={data.button} />
-            <MVFirst data={data.mvFirst} />
-            <Pop data={data.pops} />
-            <Fans data={data.fans} />
-            <Anthor data={data.anthor} />
-            <Panorama data={data.panorama} />
-            <Musicer data={data.musicer} />
-            <Guess data={data.guess} />
+            {
+              _.map(data.data, (item, index) => {
+                return (
+                  <CommonSection data ={item} key={index}/>
+                )
+              })
+            }
           </ScrollView>
         </View>
       )
@@ -71,7 +66,8 @@ class Home extends Component {
 const styles = StyleSheet.create({
   scrollView: {
     width: width,
-    height: height - 64 - 49
+    height: height - 64 - 49,
+    backgroundColor: fadeGray
   }
 })
 

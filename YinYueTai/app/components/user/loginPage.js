@@ -13,7 +13,7 @@ import {
 import * as UserAction from '../../actions/userAction'
 
 var Device = require('../../utils/device')
-var { itemHeight, width, height } = Device
+const { itemHeight, width, height } = Device
 
 class LoginPage extends Component {
 
@@ -64,14 +64,14 @@ class LoginPage extends Component {
   }
 
   _account(value) {
-    var account = value.nativeEvent.text
+    let account = value.nativeEvent.text
     this.setState({
       account: account
     })
   }
 
   _password(value) {
-    var password = value.nativeEvent.text
+    let password = value.nativeEvent.text
     this.setState({
       password: password
     })
