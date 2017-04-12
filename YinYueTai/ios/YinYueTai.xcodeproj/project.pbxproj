@@ -358,7 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				146834041AC3E56700842450 /* libReact.a */,
-				59548CBA1DDCA83B00E391AA /* libReact-tvOS.a */,
+				59548CBA1DDCA83B00E391AA /* libReact.a */,
 				59BEEDA51E9DCBEF001C5913 /* libyoga.a */,
 				59BEEDA71E9DCBEF001C5913 /* libyoga.a */,
 				59BEEDA91E9DCBEF001C5913 /* libcxxreact.a */,
@@ -488,7 +488,6 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = F94JLEPMT3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -664,7 +663,7 @@
 			remoteRef = 59548CB51DDCA83B00E391AA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		59548CBA1DDCA83B00E391AA /* libReact-tvOS.a */ = {
+		59548CBA1DDCA83B00E391AA /* libReact.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libReact.a;
@@ -858,7 +857,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = F94JLEPMT3;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -889,7 +888,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F94JLEPMT3;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
