@@ -6,7 +6,6 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "leancloud-realtime": "^3.4.1",
     "leancloud-storage": "^2.1.4",
     "react": "16.0.0-alpha.6",
     "react-native": "^0.43.3",
@@ -19,8 +18,5 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "underscore": "^1.8.3"
-  },
-  "devDependencies": {
-    "eslint": "^3.19.0"
   }
 }
