@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import NavigationBar from 'react-native-navbar'
 import _ from 'underscore'
 import {
   View,
@@ -30,8 +31,12 @@ class LoginPage extends Component {
   }
 
   render () {
+
+    let titleConfig = { title: '登录' }
+
     return (
       <View style={styles.container}>
+        <NavigationBar title ={titleConfig} />
         <TextInput style={[styles.TextInputSty,{marginTop: height / 2}]}
                    ref='account'
                    placeholder='账号'
