@@ -24,30 +24,61 @@ class SettingPage extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      account : '',
-      password : ''
-    }
+  }
+
+  componentWillMount() {
+    this.props.actions.fetchUserAction({type:'currentUser'})
   }
 
   render () {
 
     let titleConfig = { title: '我的' }
-
+    let { loginState, userInfo }  = this.props.data
     return (
       <View style={styles.container}>
         <NavigationBar title ={titleConfig} />
-        <View style={styles.logOutView}>
-          <TouchableOpacity onPress={() => this._logOut()}>
-            <Text>退出</Text>
-          </TouchableOpacity>
-        </View>
+        {this._userInfoView(userInfo)}
       </View>
     )
   }
 
+  _userInfoView(userInfo) {
+    if (!_.isEmpty(userInfo)) {
+      let { username, email } = userInfo.attributes
+      return (
+        <View style={styles.userInfoView}>
+          <Text>{username}</Text>
+          <Text>{email}</Text>
+            <View style={styles.logOutView}>
+              <TouchableOpacity onPress={() => this._logOut()}>
+                <Text>退出</Text>
+              </TouchableOpacity>
+            </View>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.userInfoView}>
+        <TouchableOpacity onPress={() => this._login()}>
+          <Text>登录</Text>
+        </TouchableOpacity>
+        </View>
+      )
+    }
+  }
+
   _logOut() {
-    this.props.actions.UserAction({type: 'logOut'})
+    this.props.actions.fetchUserAction({
+      type: 'logOut',
+      app: this.context.app.navigator
+    })
+  }
+
+  _login() {
+    this.props.actions.fetchUserAction({
+      type: 'pushLoginPage',
+      app: this.context.app.navigator
+    })
   }
 
 }
@@ -59,19 +90,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   logOutView: {
+    position: 'absolute',
+    left: 50,
+    bottom: 70,
     width: width  - 100,
     height: 40,
-    marginLeft: 50,
     borderRadius: 5,
     borderColor: gray,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: StyleSheet.hairlineWidth
+  },
+  userInfoView: {
+    flex: 1,
+    width: width,
+    alignItems: 'center',
+    backgroundColor:'#fff'
   }
 })
 
 export default connect(state => ({
-  data: state
+  data: state.UserReducer
   }),
   (dispatch) => ({
     actions: bindActionCreators(UserAction, dispatch)

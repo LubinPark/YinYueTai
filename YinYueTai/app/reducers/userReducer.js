@@ -14,12 +14,11 @@ let User = (state = initialState, action={}) => {
 
     case types.SAVE_USER_INFO:
       //成功注册和登录后保存用户的基本信息
-      let userState = action.userState
-      let userInfo = action.userInfo
+      let { userState, userInfo } = action
       if (userState == 'login') {
-        return Object.assign({}, state, {userInfo: authorInfo, loginState: 'SUCCESS'})
+        return Object.assign({}, state, {userInfo: userInfo, loginState: 'SUCCESS'})
       } else {
-        return Object.assign({}, state, {userInfo: authorInfo, registerState: 'SUCCESS'})
+        return Object.assign({}, state, {userInfo: userInfo, registerState: 'SUCCESS'})
       }
       break;
 
@@ -33,6 +32,10 @@ let User = (state = initialState, action={}) => {
       //当用户登录失败
       let loginErrorInfo = action.loginErrorInfo
       return Object.assign({}, state, {loginErrorInfo: loginErrorInfo, loginState: 'FAILED'})
+      break;
+
+    case types.USER_LOGOUT:
+      return Object.assign({}, initialState, { loginState: 'LOGOUT'})
       break;
 
     default:

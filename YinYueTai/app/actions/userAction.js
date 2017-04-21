@@ -1,5 +1,5 @@
-import * as types from './actionTypes'
 import AV from './AV'
+import * as types from './actionTypes'
 
 function userRegister(params) {
   return (dispatch) => {
@@ -48,25 +48,54 @@ function userLogin(params) {
   }
 }
 
-function loginFailed(responseData) {
-  return {
-    type: 'LOGIN_FAILED',
-    loginErrorInfo: responseData
+function userlogOut(params) {
+  return (dispatch) => {
+    AV.User.logOut()
+    params.app.replace({
+      id:'LoginPage'
+    })
+    return dispatch(loginOut())
   }
 }
 
-function userlogOut() {
-  AV.User.logOut()
+function loginOut() {
+  return {
+    type: 'USER_LOGOUT'
+  }
 }
 
-export function UserAction(params = {}) {
+function currentUserIsExsit() {
+  return (dispatch) => {
+    AV.User.currentAsync().then((currentUser) => {
+      if (!!currentUser) {
+        return dispatch(saveUserInfo(currentUser, 'login'))
+      }
+    }, (err) => {
+      return dispatch(loginFailed(error.message))
+    })
+  }
+}
+
+function pushLoginPage(params) {
+  return (dispatch) => {
+    params.app.push({
+      id: 'LoginPage'
+    })
+  }
+}
+
+export function fetchUserAction(params = {}) {
   return(dispatch, getState) => {
     if (params.type === 'register') {
       return dispatch(userRegister(params))
     } else if (params.type ==='login') {
       return dispatch(userLogin(params))
     } else if (params.type === 'logOut') {
-      return userlogOut()
+      return dispatch(userlogOut(params))
+    } else if (params.type === 'currentUser') {
+      return dispatch(currentUserIsExsit())
+    } else if (params.type === 'pushLoginPage') {
+      return dispatch(pushLoginPage(params))
     } else {
       console.log(`NO SELECT FUNCTION`);
     }

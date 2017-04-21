@@ -39,7 +39,7 @@ export default class VideoPage extends Component {
 
   componentWillUnmount() {
     Orientation.getOrientation((err,orientation) => {
-     console.log("Current Device Orientation: ", orientation);
+    //  console.log("Current Device Orientation: ", orientation);
     })
     Orientation.removeOrientationListener(this._orientationDidChange);
   }

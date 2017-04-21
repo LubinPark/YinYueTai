@@ -1,34 +1,45 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { Navigator } from 'react-native'
-import Routes from '../components/navigation/routes'
-import AV from '../actions/AV'
+import { bindActionCreators } from 'redux'
 
-export default class AppIndex extends Component {
+import Routes from '../components/navigation/routes'
+import * as TabBarAction from '../actions/tabBarAction'
+
+class AppIndex extends Component {
 
   static contextTypes = {
     app: React.PropTypes.object
   }
 
+  componentWillMount() {
+    this.props.actions.fetchTabBarIfNeeded({type: 'initialRoute'})
+  }
+
   render() {
-
-    var initialRoute
-    var pageContext = {rootNavigator: this.props.rootNavigator}
-    var currentUser = AV.User.currentAsync()
-
-    if (currentUser) {
-      initialRoute = { id: 'TabBarApp' }
+    let route = this.props.data.route
+    if (route !== '') {
+      let pageContext  = {rootNavigator: this.props.rootNavigator}
+      let initialRoute = {id: route}
+      return (
+        <Navigator
+          ref={v => this.hostNavigator = v}
+          initialRoute={initialRoute}
+          configureScene={Routes.configureScene}
+          renderScene={(route, navigator) => Routes.renderScene(route, navigator, pageContext, this.props)}
+        />
+      )
     } else {
-      initialRoute = { id: 'LoginPage' }
+      return null
     }
-
-    return (
-      <Navigator
-        ref={v => this.hostNavigator = v}
-        initialRoute={initialRoute}
-        configureScene={Routes.configureScene}
-        renderScene={(route, navigator) => Routes.renderScene(route, navigator, pageContext, this.props)}
-      />
-    )
   }
 
 }
+
+export default connect(state => ({
+  data: state.TabBarReducer
+  }),
+  (dispatch) => ({
+    actions: bindActionCreators(TabBarAction, dispatch)
+  })
+)(AppIndex)

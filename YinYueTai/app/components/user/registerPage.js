@@ -88,7 +88,7 @@ class RegisterPage extends Component {
   }
 
   _register() {
-    this.props.actions.UserAction({
+    this.props.actions.fetchUserAction({
       type      : 'register',
       name      : this.state.name,
       account   : this.state.account,

@@ -1,3 +1,6 @@
+//tarBar的数据 tabBarReducer
+export const TABBAR_INITIAL_ROUTE = 'TABBAR_INITIAL_ROUTE'
+
 //主页的数据 homeReducer
 export const REQUEST_HOME = 'REQUEST_HOME'
 
@@ -10,3 +13,4 @@ export const CLEAN_PLAY_DATA = 'CLEAN_PLAY_DATA'
 export const SAVE_USER_INFO = 'SAVE_USER_INFO'
 export const FAILED_REGISTER = 'FAILED_REGISTER'
 export const LOGIN_FAILED = 'LOGIN_FAILED'
+export const USER_LOGOUT = 'USER_LOGOUT'

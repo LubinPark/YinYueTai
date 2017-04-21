@@ -83,7 +83,7 @@ class LoginPage extends Component {
   }
 
   _submit() {
-    this.props.actions.UserAction({
+    this.props.actions.fetchUserAction({
       type      : 'login',
       name      : this.state.name,
       account   : this.state.account,
