@@ -28,7 +28,7 @@ export default class Pop extends Component {
           {
             _.map(data.data, (item, index) => {
               return (
-                <CommonItem data={item} key={item.videoId + index}/>
+                <CommonItem data={item} key={item.videoId + index + item.regdate}/>
               )
             })
           }

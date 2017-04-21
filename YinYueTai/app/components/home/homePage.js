@@ -22,7 +22,7 @@ import CommonSection from '../commonfile/commonSection'
 var Device = require('../../utils/device')
 const { width, height, fadeGray } = Device
 
-class Home extends Component {
+class HomePage extends Component {
 
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
@@ -77,4 +77,4 @@ export default connect(state => ({
   (dispatch) => ({
     actions: bindActionCreators(HomeAction, dispatch)
   })
-)(Home)
+)(HomePage)

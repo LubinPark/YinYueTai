@@ -8,7 +8,9 @@ import {
   StyleSheet
 } from 'react-native'
 
-import Home from '../components/home/home'
+import HomePage from '../components/home/homePage'
+import SettingPage from '../components/setting/settingPage'
+
 const { width, height } = Dimensions.get('window')
 
 export default class TabBarApp extends Component {
@@ -59,11 +61,11 @@ export default class TabBarApp extends Component {
         </TabNavigator.Item>
         <TabNavigator.Item
           title='我的'
-          selected={this.state.selectedTab == 'My'}
-          onPress={() => this.setState({selectedTab: 'My'})}
+          selected={this.state.selectedTab == 'Setting'}
+          onPress={() => this.setState({selectedTab: 'Setting'})}
           selectedTitleStyle={{color: 'gray'}}
         >
-          {this._renderRootContent('My')}
+          {this._renderRootContent('Setting')}
         </TabNavigator.Item>
       </TabNavigator>
     )
@@ -72,7 +74,11 @@ export default class TabBarApp extends Component {
   _renderRootContent(name) {
     switch (name) {
       case 'Home':
-        return <Home />
+        return <HomePage />
+        break;
+      case 'Setting':
+      return <SettingPage />
+
         break;
       default:
         return (

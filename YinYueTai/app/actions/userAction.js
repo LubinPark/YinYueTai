@@ -55,12 +55,20 @@ function loginFailed(responseData) {
   }
 }
 
+function userlogOut() {
+  AV.User.logOut()
+}
+
 export function UserAction(params = {}) {
   return(dispatch, getState) => {
     if (params.type === 'register') {
       return dispatch(userRegister(params))
     } else if (params.type ==='login') {
       return dispatch(userLogin(params))
+    } else if (params.type === 'logOut') {
+      return userlogOut()
+    } else {
+      console.log(`NO SELECT FUNCTION`);
     }
   }
 }

@@ -14,7 +14,7 @@ import {
 import * as UserAction from '../../actions/userAction'
 
 var Device = require('../../utils/device')
-const { itemHeight, width, height } = Device
+const { width, height, lightGray } = Device
 
 class LoginPage extends Component {
 
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     height: 40,
     fontSize: 13,
-    color: '#666',
+    color: lightGray,
     borderRadius: 5,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: '#ccc',
@@ -125,10 +125,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   login: {
-    color: '#666'
+    color: lightGray
   },
   register: {
-    color: '#666'
+    color: lightGray
   },
   button: {
     borderRadius: 5
