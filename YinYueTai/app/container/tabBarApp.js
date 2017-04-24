@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 
 import HomePage from '../components/home/homePage'
+import ChatPage from '../components/chat/chatPage'
 import SettingPage from '../components/setting/settingPage'
 
 const { width, height } = Dimensions.get('window')
@@ -36,14 +37,6 @@ export default class TabBarApp extends Component {
           {this._renderRootContent('Home')}
         </TabNavigator.Item>
         <TabNavigator.Item
-          title='导航'
-          selected={this.state.selectedTab == 'Navigate'}
-          onPress={() => this.setState({selectedTab: 'Navigate'})}
-          selectedTitleStyle={{color: 'gray'}}
-        >
-          {this._renderRootContent('Navigate')}
-        </TabNavigator.Item>
-        <TabNavigator.Item
           title='V榜'
           selected={this.state.selectedTab == 'VList'}
           onPress={() => this.setState({selectedTab: 'VList'})}
@@ -52,12 +45,12 @@ export default class TabBarApp extends Component {
           {this._renderRootContent('VList')}
         </TabNavigator.Item>
         <TabNavigator.Item
-          title='订阅'
-          selected={this.state.selectedTab == 'Subscribe'}
-          onPress={() => this.setState({selectedTab: 'Subscribe'})}
+          title='消息'
+          selected={this.state.selectedTab == 'Chat'}
+          onPress={() => this.setState({selectedTab: 'Chat'})}
           selectedTitleStyle={{color: 'gray'}}
         >
-          {this._renderRootContent('Subscribe')}
+          {this._renderRootContent('Chat')}
         </TabNavigator.Item>
         <TabNavigator.Item
           title='我的'
@@ -76,8 +69,14 @@ export default class TabBarApp extends Component {
       case 'Home':
         return <HomePage />
         break;
+
       case 'Setting':
-      return <SettingPage />
+        return <SettingPage />
+        break;
+
+      case  'Chat':
+        return <ChatPage />
+        break;
 
         break;
       default:

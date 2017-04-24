@@ -23,7 +23,7 @@ import GuestLike from './guestLike'
 var Device = require('../../utils/device')
 const { width, height, purpure } = Device
 
-class PlayerMV extends Component {
+class PlayerMVPage extends Component {
 
   static contextTypes = {
     app: React.PropTypes.object
@@ -118,4 +118,4 @@ export default connect(state => ({
   (dispatch) => ({
     actions: bindActionCreators(PlayerAction, dispatch)
   })
-)(PlayerMV)
+)(PlayerMVPage)

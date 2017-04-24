@@ -59,9 +59,9 @@ class SettingPage extends Component {
     } else {
       return (
         <View style={styles.userInfoView}>
-        <TouchableOpacity onPress={() => this._login()}>
-          <Text>登录</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => this._login()}>
+            <Text>登录</Text>
+          </TouchableOpacity>
         </View>
       )
     }

@@ -43,7 +43,7 @@ class HomePage extends Component {
     } else {
       return (
          <View>
-         <StatusBar barStyle="light-content"/>
+          <StatusBar barStyle="light-content"/>
           <TopView />
           <ScrollView style={styles.scrollView}>
             <Loop data={data.loop} />

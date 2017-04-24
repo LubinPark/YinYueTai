@@ -58,16 +58,16 @@ export default class CommonItem extends Component {
       }
 
       return (
-          <View style={[styles.items,backgroundColor,items]}>
-            <TouchableOpacity onPress={()=>this._goToPlayer(data.videoId)}>
-              <Image source={{uri: data.posterPic}} style={[styles.img,items]} />
-              <View>
-                <Text style={[styles.title,titleWhitestyle]} numberOfLines={1}>{data.title}</Text>
-                {this._showName(data)}
-                <Text style={styles.num}>播放数量:{data.totalView}</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+        <View style={[styles.items,backgroundColor,items]}>
+          <TouchableOpacity onPress={()=>this._goToPlayer(data.videoId)}>
+            <Image source={{uri: data.posterPic}} style={[styles.img,items]} />
+            <View>
+              <Text style={[styles.title,titleWhitestyle]} numberOfLines={1}>{data.title}</Text>
+              {this._showName(data)}
+              <Text style={styles.num}>播放数量:{data.totalView}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       )
     }
   }
@@ -90,7 +90,7 @@ export default class CommonItem extends Component {
 
   _goToPlayer(videoId){
     this.context.app.navigator.push({
-      id:'PlayerMV',
+      id:'PlayerMVPage',
       data: {
         videoId: videoId
       }

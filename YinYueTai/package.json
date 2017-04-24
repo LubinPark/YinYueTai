@@ -6,6 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "leancloud-realtime": "^3.4.1",
+    "leancloud-realtime-plugin-typed-messages": "^1.0.0",
     "leancloud-storage": "^2.1.4",
     "react": "16.0.0-alpha.6",
     "react-native": "^0.43.4",

@@ -4,7 +4,7 @@ import { Text, View, Navigator } from 'react-native'
 import TabBarApp from '../../container/tabBarApp'
 import ContextWrapper from './contextWrapper'
 
-import PlayerMV from '../player/playerMV'
+import PlayerMVPage from '../player/playerMVPage'
 import LoginPage from '../user/loginPage'
 import RegisterPage from '../user/registerPage'
 
@@ -27,8 +27,8 @@ export default class Routes {
     switch (route.id) {
       case 'TabBarApp':
         return <ContextWrapper {...contextProps}><TabBarApp {...viewProps} /></ContextWrapper>
-      case 'PlayerMV':
-        return <ContextWrapper {...contextProps}><PlayerMV {...viewProps} /></ContextWrapper>
+      case 'PlayerMVPage':
+        return <ContextWrapper {...contextProps}><PlayerMVPage {...viewProps} /></ContextWrapper>
       case 'LoginPage':
         return <ContextWrapper {...contextProps}><LoginPage {...viewProps} /></ContextWrapper>
       case 'RegisterPage':
