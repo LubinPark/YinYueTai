@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Text, View, Navigator } from 'react-native'
+import { Text, View, StyleSheet, Navigator } from 'react-native'
 
 import TabBarApp from '../../container/tabBarApp'
 import ContextWrapper from './contextWrapper'
 
-import PlayerMVPage from '../player/playerMVPage'
 import LoginPage from '../user/loginPage'
 import RegisterPage from '../user/registerPage'
+import PlayerMVPage from '../player/playerMVPage'
+import MessagePage from '../message/messagePage'
 
 export default class Routes {
 
@@ -33,12 +34,22 @@ export default class Routes {
         return <ContextWrapper {...contextProps}><LoginPage {...viewProps} /></ContextWrapper>
       case 'RegisterPage':
         return <ContextWrapper {...contextProps}><RegisterPage {...viewProps} /></ContextWrapper>
+      case 'MessagePage':
+        return <ContextWrapper {...contextProps}><MessagePage {...viewProps} /></ContextWrapper>
     }
-    return <View style={{top: 100}}><Text>{route.id} page is not found.</Text></View>
+    return <View style={styles.errorView}><Text>{route.id} page is not found.</Text></View>
   }
 
   static configureScene(route) {
-    return Navigator.SceneConfigs.FloatFromRight
+    return Navigator.SceneConfigs.PushFromRight
   }
 
 }
+
+const styles = StyleSheet.create({
+  errorView: {
+    top: 100,
+    alignItems: 'center',
+    justifyContent:'center'
+  }
+})

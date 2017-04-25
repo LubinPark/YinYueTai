@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   View,
   Image,
+  StatusBar,
   TextInput,
   StyleSheet,
   TouchableOpacity
@@ -22,6 +23,7 @@ export default class TopView extends Component {
   render () {
     return (
       <View style={styles.topView}>
+        <StatusBar barStyle="light-content" animated={true}/>
         <View style={styles.searchButton}>
           <Image source={require('../../img/search.png')} style={styles.search_icon} />
           <TextInput style={styles.search_text}

@@ -19,7 +19,7 @@ export default class TabBarApp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: 'Home',
+      selectedTab: 'Chat',
     }
   }
   // renderIcon={() => <Image source={require("./img/0.png")} />}
