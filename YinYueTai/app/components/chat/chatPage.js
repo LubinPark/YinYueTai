@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 import NavigationBar from 'react-native-navbar'
 
 import * as ChatAction from '../../actions/chatAction'
-import CommonStatusBar from '../commonfile/commonStatusBar'
 
 import {
   View,
@@ -35,11 +34,13 @@ class ChatPage extends Component {
   }
 
   render() {
-    let titleConfig = <Text style={styles.title}>消息</Text>
+    let titleConfig = { title: '消息', tintColor: '#fff' }
     return (
       <View style={styles.loadingView}>
-        <CommonStatusBar />
-        <NavigationBar title ={titleConfig} tintColor={'black'} />
+        <NavigationBar
+          title ={titleConfig}
+          tintColor={'black'}
+          statusBar={{style: 'light-content'}}/>
         <View style={styles.ListView}>
           {this._chatList()}
         </View>
@@ -98,10 +99,6 @@ const styles = StyleSheet.create({
   border: {
     borderBottomColor: gray,
     borderBottomWidth: StyleSheet.hairlineWidth
-  },
-  text: {
-    color: lightGray,
-    fontSize: 12
   }
 })
 

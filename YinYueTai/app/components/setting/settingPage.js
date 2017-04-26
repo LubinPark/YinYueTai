@@ -32,11 +32,15 @@ class SettingPage extends Component {
 
   render () {
 
-    let titleConfig = { title: '我的' }
+    let titleConfig = { title: '我的', tintColor: '#fff' }
     let { loginState, userInfo }  = this.props.data
     return (
       <View style={styles.container}>
-        <NavigationBar title ={titleConfig} />
+        <NavigationBar
+          title ={titleConfig}
+          tintColor={'black'}
+          statusBar={{style: 'light-content'}}
+        />
         {this._userInfoView(userInfo)}
       </View>
     )

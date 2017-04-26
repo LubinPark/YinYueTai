@@ -3,10 +3,20 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import NavigationBar from 'react-native-navbar'
-import { GiftedChat } from 'react-native-gifted-chat'
+
+import {
+  Send,
+  Bubble,
+  Composer,
+  Message,
+  GiftedChat,
+  GiftedAvatar,
+  LoadEarlier,
+  InputToolbar,
+  MessageContainer
+ } from 'react-native-gifted-chat'
 
 import Loading from '../commonfile/loading'
-import CommonStatusBar from '../commonfile/commonStatusBar'
 
 import {
   View,
@@ -17,7 +27,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-const { width, height, fadeGray } = Device
+const { width, height, fadeGray, backView, gray, lightGray, border } = Device
 
 export default class MessagePage extends Component {
 
@@ -37,8 +47,8 @@ export default class MessagePage extends Component {
       messages: [
         {
           _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
+          text: 'Hello',
+          createdAt: new Date(Date.UTC(2017, 4, 26, 0, 11, 5)),
           user: {
             _id: 2,
             name: 'React Native',
@@ -49,28 +59,28 @@ export default class MessagePage extends Component {
     })
   }
 
-  onSend(messages = []) {
-    this.setState((previousState) => {
-      return {
-        messages: GiftedChat.append(previousState.messages, messages)
-      }
-    })
-  }
-
   render() {
 
-    let titleConfig = <Text style={styles.title}>消息</Text>
+    let titleConfig = { title: 'Park', tintColor: '#fff' }
     let leftButtonConfig = <TouchableWithoutFeedback onPress={()=>this._back()}>
-                            <Image source={require('../../img/back.png')} style={styles.backView}/>
+                            <Image source={require('../../img/back.png')} style={backView}/>
                            </TouchableWithoutFeedback>
 
     return (
       <View style={styles.container}>
-        <CommonStatusBar />
-        <NavigationBar title={titleConfig} leftButton={leftButtonConfig} tintColor={'black'}/>
+        <NavigationBar
+          title={titleConfig}
+          tintColor={'black'}
+          leftButton={leftButtonConfig}
+          statusBar={{style: 'light-content'}} />
         <GiftedChat
           messages={this.state.messages}
-          user={{ _id: 1 }}
+          user = {{
+              _id: 1,
+              name: 'Park',
+              avatar: 'http://www.qqjay.com/uploads/allimg/160306/1_0PP4Q19.jpg'
+            }}
+          locale={'zh-cn'}
           isAnimated={true}
           loadEarlier={true}
           renderAvatarOnTop={true}
@@ -79,33 +89,52 @@ export default class MessagePage extends Component {
           keyboardShouldPersistTaps={'never'}
 
           onSend={(e)=>this.onSend(e)}
-        //renderLoading={()=>this._renderLoading()}
           onLoadEarlier={()=>this._onLoadEarlier()}
-        //renderAvatar={()=>this._renderAvatar()}
-        //renderLoadEarlier={()=>this._renderLoadEarlier()}
+          renderLoading={()=>this._renderLoading()}
+          renderAvatar={()=>this._renderAvatar()}
+          renderLoadEarlier={()=>this._renderLoadEarlier()}
 
-          onPressAvatar={(e)=>this._onPressAvatar(e)}
-          onLongPress={(e)=>this._onLongPress(e)}
-          imageProps={this.state.messages}
+        //renderDay={()=>this._renderDay()}
+        //enderTime={()=>this._renderTime()}
+        //renderFooter={()=>this._renderFooter()}
 
         //renderBubble={()=>this._renderBubble()}
-        //renderMessage={()=>this._renderMessage()}
+        renderMessage={()=>this._renderMessage()}
         //renderMessageText={()=>this._renderMessageText()}
         //renderMessageImage={()=>this._renderMessageImage()}
         //renderCustomView={()=>this._renderCustomView()}
-        //renderDay={()=>this._renderDay()}
-        //renderTime={()=>this._renderTime()}
-        //renderFooter={()=>this._renderFooter()}
 
         //renderInputToolbar={()=>this._renderInputToolbar()}
         //renderActions={()=>this._renderActions()}
-        //renderSend={()=>this._renderSend()}
         //renderAccessory={()=>this._renderAccessory()}
         //onPressActionButton={()=>this._onPressActionButton()}
-        onInputTextChanged={(text)=>this._onInputTextChanged(text)}
+
+        renderComposer={()=>this._renderComposer()}
+        renderSend={(e)=>this._renderSend(e)}
         />
       </View>
     )
+  }
+
+  onSend() {
+
+    var num = _.random(10, 100000)
+   var messages = {
+      _id: num,
+      text: 'copy',
+      createdAt: new Date(Date.UTC(2017, 4, 26, 0, 11, 5)),
+      user: {
+        _id: 1,
+        name: 'React Native',
+        avatar: 'https://facebook.github.io/react/img/logo_og.png'
+      }
+    }
+
+    this.setState((previousState) => {
+      return {
+        messages: GiftedChat.append(previousState.messages, messages)
+      }
+    })
   }
 
   _renderLoading() {
@@ -119,70 +148,98 @@ export default class MessagePage extends Component {
   _renderLoadEarlier() {
     //自定义加载更多buttom的
     return (
-      <View style={styles.loadingMoreBtn}>
-      </View>
+      <LoadEarlier
+        label={'加载更多'}
+        onLoadEarlier={()=>this._onLoadEarlier()}
+        wrapperStyle={{backgroundColor: fadeGray}}
+        textStyle={{color: lightGray}}
+      />
     )
   }
 
   _onLoadEarlier() {
     //loadEarlier={true} 显示加载历史信息，后调用此函数
-    console.log(`加载更多`);
+    console.log(`加载`);
   }
 
   _renderAvatar() {
     //聊天对象的头像
     return (
-      <View style={styles.avatarView}>
-      </View>
+      <GiftedAvatar
+        onPress={()=>this._onPressAvatar()}
+        user={{_id: 2, name: '123', avatar: 'http://www.qqjay.com/uploads/allimg/160306/1_0PP4Q19.jpg'}}
+        textStyle={{color: 'red',width: 100,height: 30}}
+        avatarStyle={{borderRadius: 5,backgroundColor:'red'}}
+      />
     )
   }
 
   _onPressAvatar() {
     console.log(`点击头像`);
-    return (
-      <View style={styles.avatarView}>
-      </View>
-    )
   }
 
   _renderBubble() {
     //自定义发送消息(包括文本等，时间，发送时间等)
     return (
-      <View style={styles.bubbleView}>
-        <Text>消息</Text>
-      </View>
+      <Bubble
+        wrapperStyle={{
+          left: { backgroundColor:'red' }
+        }}
+        {...this.props}
+       />
     )
-  }
-
-  _onLongPress(e) {
-    //此方法无效
-    console.log(e);
   }
 
   _renderMessage() {
     //自定义消息 关闭后才可以使用自定义消息
     //自定义全部消息
+
+    var messages = [{
+      _id: 10,
+      text: 'copy',
+      createdAt: new Date(Date.UTC(2017, 4, 26, 0, 11, 5)),
+      user: {
+        _id: 1,
+        name: 'React Native',
+        avatar: 'https://facebook.github.io/react/img/logo_og.png'
+      },
+      img: 'http://www.qqjay.com/uploads/allimg/160306/1_0PP4Q19.jpg'
+    }
+  ]
+
+    var user = {
+      _id: 1,
+      name: '111',
+      avatar: 'http://www.qqjay.com/uploads/allimg/160306/1_0PP4Q19.jpg'
+    }
+
     return (
-      <View style={styles.renderMessageView}>
-      </View>
+      <MessageContainer
+        messages={messages}
+        user = {user}
+      />
     )
   }
 
   _renderMessageText() {
     //自定义消息文本
+    var user = {
+        _id: 2,
+        name: '111',
+        avatar: 'http://www.qqjay.com/uploads/allimg/160306/1_0PP4Q19.jpg'
+    }
     return (
-      <View style={styles.renderMessageText}>
-        <Text>消息</Text>
-      </View>
+      <Message user={user}
+        enderAvatar={''}
+        position= 'left'
+
+      />
     )
   }
 
   _renderMessageImage() {
-    //此方法无效
     return (
       <View style={styles.Test}>
-      <Text>123123
-      </Text>
       </View>
     )
   }
@@ -225,32 +282,42 @@ export default class MessagePage extends Component {
   _renderInputToolbar() {
     //自定义下方发送消息
     return (
-      <View style={styles.renderInputToolbarView}>
-        <Text>自定义下方发送消息</Text>
+      <InputToolbar
+        containerStyle={{backgroundColor:'red'}}
+      />
+    )
+  }
+
+  _renderComposer() {
+    return (
+      <View style={[styles.composerView,border]}>
+        <Composer
+          placeholder={'请输入'}
+          onTextChanged={(e)=>this._onTextChanged(e)}
+        />
       </View>
     )
   }
 
-  _renderActions() {
-    //自定义下方发送消息的左边
-    return (
-      <View style={styles.renderActionsView}>
-        <Text>+</Text>
-      </View>
-    )
+  _onTextChanged(e) {
+    console.log(e);
   }
 
   _renderSend() {
-    //自定义下方发送消息的右边
+    //自定义下方发送按钮
     return (
-      <View style={styles.renderSendView}>
-        <Text>+</Text>
-      </View>
+      <Send
+        text='---' //是传到控件的字符串，如果不为空显示发送按钮，
+        containerStyle={styles.sendView}
+        label='发送'
+        textStyle={styles.sendText}
+        onSend={(e)=>this.onSend(e)}
+      />
     )
   }
 
   _renderAccessory() {
-    //在发送下面添加自定义控件 和发送消息一样大
+    //在发送下面添加自定义控件
     return (
       <View style={styles.renderAccessoryView}>
         <Text>自定义</Text>
@@ -260,7 +327,7 @@ export default class MessagePage extends Component {
 
   _onPressActionButton() {
     //发送消息的左边，会取消自定义的 renderActions
-    return true
+    return false
   }
 
   _onInputTextChanged(text) {
@@ -279,71 +346,39 @@ const styles = StyleSheet.create({
     height:height,
     backgroundColor:'#fff'
   },
-  title: {
-    color: '#fff'
-  },
-  backView: {
-    marginTop: 8,
-    marginLeft: 5,
-    tintColor: '#fff',
-    width: 30,
-    height: 30
-  },
-  avatarView: {
-    width:44,
-    height: 44,
-    backgroundColor:'red',
-    borderRadius: 22
-  },
-  loadingMoreBtn: {
-    width:width - 100,
-    height: 20,
-    marginLeft: 50,
-    alignItems:'center',
-    justifyContent:'center',
-    backgroundColor:'red'
-  },
-  renderMessageView: {
-    padding: 5,
-    backgroundColor:'red'
-  },
-  renderMessageText: {
-    paddingTop: 10,
-    paddingLeft: 10
-  },
-  bubbleView: {
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: fadeGray
-  },
   renderDay: {
     alignItems:'center'
   },
-  renderInputToolbarView: {
-    width: width
+  composerView: {
+    flex: 1,
+    height: 40,
+    marginLeft: 5,
+    marginBottom: 5,
+    borderRadius: 5,
+    backgroundColor:'#fff'
   },
-  renderActionsView: {
+  sendView: {
+    backgroundColor:'#fff',
     height: 49,
-    paddingLeft: 10,
-    justifyContent: 'center'
+    alignItems:'center',
+    justifyContent:'center',
   },
-  renderSendView: {
-    height: 49,
-    paddingRight: 10,
-    justifyContent: 'center'
+  sendText: {
+    color: lightGray,
+    margin: 10,
+    fontSize: 13,
+    fontWeight: '600',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    backgroundColor: gray
   },
   renderAccessoryView: {
     width: width,
     backgroundColor:'#fff'
   },
-  actionButton: {
-    width: width,
-    height: 100,
-    backgroundColor:'red'
-  },
   Test: {
     width: 100,
     height: 100,
-    backgroundColor:'blue'
+    backgroundColor:'red'
   }
 })

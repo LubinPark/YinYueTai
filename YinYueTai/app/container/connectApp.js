@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Navigator } from 'react-native'
+import { View,StatusBar, Navigator } from 'react-native'
 import { bindActionCreators } from 'redux'
 
 import Routes from '../components/navigation/routes'
@@ -22,12 +22,15 @@ class AppIndex extends Component {
       let pageContext  = {rootNavigator: this.props.rootNavigator}
       let initialRoute = {id: route}
       return (
-        <Navigator
-          ref={v => this.hostNavigator = v}
-          initialRoute={initialRoute}
-          configureScene={Routes.configureScene}
-          renderScene={(route, navigator) => Routes.renderScene(route, navigator, pageContext, this.props)}
-        />
+        <View style={{flex: 1}}>
+          <StatusBar barStyle="light-content" animated={true}/>
+          <Navigator
+            ref={v => this.hostNavigator = v}
+            initialRoute={initialRoute}
+            configureScene={Routes.configureScene}
+            renderScene={(route, navigator) => Routes.renderScene(route, navigator, pageContext, this.props)}
+          />
+        </View>
       )
     } else {
       return null

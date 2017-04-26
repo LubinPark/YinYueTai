@@ -37,14 +37,6 @@ export default class TabBarApp extends Component {
           {this._renderRootContent('Home')}
         </TabNavigator.Item>
         <TabNavigator.Item
-          title='V榜'
-          selected={this.state.selectedTab == 'VList'}
-          onPress={() => this.setState({selectedTab: 'VList'})}
-          selectedTitleStyle={{color: 'gray'}}
-        >
-          {this._renderRootContent('VList')}
-        </TabNavigator.Item>
-        <TabNavigator.Item
           title='消息'
           selected={this.state.selectedTab == 'Chat'}
           onPress={() => this.setState({selectedTab: 'Chat'})}
