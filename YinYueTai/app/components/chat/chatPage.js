@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import NavigationBar from 'react-native-navbar'
 
+import ChatItem from './chatItem'
 import * as ChatAction from '../../actions/chatAction'
 
 import {
@@ -25,12 +26,24 @@ class ChatPage extends Component {
     app: React.PropTypes.object
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: [
+        {name:'Park',lastMessage:'你好'},
+        {name:'Park2',lastMessage:'Hello'},
+        {name:'Park3',lastMessage:'你好1'},
+        {name:'Park4',lastMessage:'你好2'}
+      ]
+    }
+  }
+
   componentWillMount() {
     // this.props.actions.fetchChatActionIfNeeded({type:'send'})
   }
 
   componentDidMount() {
-    this.props.actions.fetchChatActionIfNeeded({type:'received'})
+    // this.props.actions.fetchChatActionIfNeeded({type:'received'})
   }
 
   render() {
@@ -49,12 +62,11 @@ class ChatPage extends Component {
   }
 
   _chatList() {
-    var dataSource = [1,2,3,4,5,6,7,8,9,10]
     return (
       <ListView
         style={styles.listView}
         initialListSize={10}
-        dataSource={ds.cloneWithRows(dataSource)}
+        dataSource={ds.cloneWithRows(this.state.data)}
         renderRow={(rowData)=>this._renderRow(rowData)}
       />
     )
@@ -62,15 +74,18 @@ class ChatPage extends Component {
 
   _renderRow(rowData) {
     return (
-      <TouchableOpacity style={[styles.rowDataView, styles.border]} onPress={() => {this._toMessage()}}>
-        <Text style={styles.text}>Message{rowData}</Text>
+      <TouchableOpacity style={[styles.rowDataView, styles.border]} onPress={() => {this._toMessage(rowData)}}>
+        <ChatItem data={rowData} />
       </TouchableOpacity>
     )
   }
 
-  _toMessage() {
+  _toMessage(rowData) {
     this.context.app.navigator.push({
-      id:'MessagePage'
+      id:'MessagePageNew',
+      data: {
+        user: rowData
+      }
     })
   }
 
