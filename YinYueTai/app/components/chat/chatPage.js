@@ -28,26 +28,21 @@ class ChatPage extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      data: [
-        {name:'Park',lastMessage:'你好'},
-        {name:'Park2',lastMessage:'Hello'},
-        {name:'Park3',lastMessage:'你好1'},
-        {name:'Park4',lastMessage:'你好2'}
-      ]
-    }
   }
 
   componentWillMount() {
-    // this.props.actions.fetchChatActionIfNeeded({type:'send'})
+    this.props.actions.fetchChatActionIfNeeded({type:'send'})
   }
 
   componentDidMount() {
-    // this.props.actions.fetchChatActionIfNeeded({type:'received'})
+    this.props.actions.fetchChatActionIfNeeded({type:'received'})
   }
 
   render() {
+
+    let chatList = this.props.data.chatList
     let titleConfig = { title: '消息', tintColor: '#fff' }
+
     return (
       <View style={styles.loadingView}>
         <NavigationBar
@@ -55,26 +50,28 @@ class ChatPage extends Component {
           tintColor={'black'}
           statusBar={{style: 'light-content'}}/>
         <View style={styles.ListView}>
-          {this._chatList()}
+          {this._chatList(chatList)}
         </View>
       </View>
     )
   }
 
-  _chatList() {
-    return (
-      <ListView
-        style={styles.listView}
-        initialListSize={10}
-        dataSource={ds.cloneWithRows(this.state.data)}
-        renderRow={(rowData)=>this._renderRow(rowData)}
-      />
-    )
+  _chatList(chatList) {
+    if (!_.isEmpty(chatList)) {
+      return (
+        <ListView
+          style={styles.listView}
+          initialListSize={10}
+          dataSource={ds.cloneWithRows(chatList)}
+          renderRow={(rowData)=>this._renderRow(rowData)}
+        />
+      )
+    }
   }
 
   _renderRow(rowData) {
     return (
-      <TouchableOpacity style={[styles.rowDataView, styles.border]} onPress={() => {this._toMessage(rowData)}}>
+      <TouchableOpacity style={styles.rowDataView} onPress={() => {this._toMessage(rowData)}}>
         <ChatItem data={rowData} />
       </TouchableOpacity>
     )
@@ -110,10 +107,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff'
-  },
-  border: {
-    borderBottomColor: gray,
-    borderBottomWidth: StyleSheet.hairlineWidth
   }
 })
 

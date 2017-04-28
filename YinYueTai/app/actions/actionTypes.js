@@ -15,5 +15,8 @@ export const FAILED_REGISTER = 'FAILED_REGISTER'
 export const LOGIN_FAILED = 'LOGIN_FAILED'
 export const USER_LOGOUT = 'USER_LOGOUT'
 
+//聊天页面信息 chatReducer
+export const CHAT_SAVE_CONVERSATION = 'CHAT_SAVE_CONVERSATION'
+
 //消息的数据 MessageReducer
 export const MESSSAGE_SAVE = 'MESSSAGE_SAVE'

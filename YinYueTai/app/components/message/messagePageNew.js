@@ -11,21 +11,19 @@ import Loading from '../commonfile/loading'
 import MessageInput from './messageInput'
 import MessageItem from './messageItem'
 
-var ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
-
 import {
   View,
   Text,
   Image,
-  ScrollView,
-  TextInput,
   ListView,
   StyleSheet,
+  ScrollView,
   TouchableWithoutFeedback
 } from 'react-native'
 
 var Device = require('../../utils/device')
-const { width, height, fadeGray, backView, gray, lightGray, border } = Device
+var ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
+const { width, height, backView } = Device
 
 class MessagePageNew extends Component {
 
@@ -33,15 +31,9 @@ class MessagePageNew extends Component {
     app: React.PropTypes.object
   }
 
-  constructor(props) {
-    super(props)
-  }
-
-  componentDidMount() {
-
-  }
-
   render() {
+
+    console.log(this.props);
 
     let message = this.props.data.message
     let user = this.props.user
@@ -50,18 +42,24 @@ class MessagePageNew extends Component {
                             <Image source={require('../../img/back.png')} style={backView}/>
                            </TouchableWithoutFeedback>
 
-
     return (
       <View style={styles.container}>
         <NavigationBar
           title={titleConfig}
           tintColor={'black'}
           leftButton={leftButtonConfig}
-          statusBar={{style: 'light-content'}}
-        />
-        <Image style={styles.backgroundImg} source={require('../../img/background/background_2.png')}>
-        {this._messageList(message)}
-        {this._InputView()}
+          statusBar={{style: 'light-content'}} />
+        <Image style={styles.backgroundImg} source={require('../../img/background/background_0.png')}>
+          <ScrollView
+            bounces={false}
+            ref='scrollView'
+            keyboardDismissMode="interactive"
+            keyboardShouldPersistTaps='handled'
+            contentContainerStyle={styles.crollView}
+          >
+          {this._messageList(message)}
+          {this._InputView()}
+          </ScrollView>
         </Image>
       </View>
     )
@@ -71,9 +69,9 @@ class MessagePageNew extends Component {
     return (
       <ListView
         style={styles.messageListView}
-        renderScrollComponent={props => <InvertibleScrollView {...props} inverted />}
         dataSource={ds.cloneWithRows(message)}
         renderRow={(rowData)=>this._renderRow(rowData)}
+        renderScrollComponent={props => <InvertibleScrollView {...props} inverted />}
       />
     )
   }
@@ -86,8 +84,16 @@ class MessagePageNew extends Component {
 
   _InputView() {
     return (
-      <MessageInput  {...this.props} />
+      <MessageInput  {...this.props} onFocus={(e)=>this._onFocus(e)} onBlur={(e)=>this._onBlur(e)} />
     )
+  }
+
+  _onFocus(e) {
+    this.refs[`scrollView`].scrollTo({x:0, y: 215, animated: true})
+  }
+
+  _onBlur(e) {
+    this.refs[`scrollView`].scrollTo({x:0, y: 0, animated: true})
   }
 
   _back() {
@@ -102,24 +108,21 @@ const styles = StyleSheet.create({
     height:height,
     backgroundColor:'#fff'
   },
+  scrollView: {
+    width: width,
+    height: height - 64
+  },
   backgroundImg: {
+    position: 'absolute',
+    top: 64,
     width: width,
     height: height - 64,
     backgroundColor:'transparent'
   },
   messageListView: {
     width: width,
+    height: height - 64 - 49,
     backgroundColor:'transparent'
-  },
-  otherView: {
-    width: 32,
-    height: 32,
-    marginLeft: 10,
-    marginRight: 10,
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent:'center',
-    backgroundColor:'#fff'
   }
 })
 

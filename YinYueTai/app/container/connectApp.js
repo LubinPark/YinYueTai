@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { View,StatusBar, Navigator } from 'react-native'
+import { View, StatusBar, Navigator } from 'react-native'
 import { bindActionCreators } from 'redux'
 
 import Routes from '../components/navigation/routes'

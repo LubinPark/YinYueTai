@@ -37,6 +37,7 @@ module.exports = {
   purpure: 'rgb(59,46,69)',
   green: 'rgb(44,179,147)',
   darkGreen: 'rgb(8,39,51)',
+  fadeGreen: 'rgb(176,229,110)',
 
   darkGray: '#ccc',
   gray: 'rgb(182,182,182)',

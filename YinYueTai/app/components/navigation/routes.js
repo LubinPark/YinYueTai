@@ -10,7 +10,6 @@ import PlayerMVPage from '../player/playerMVPage'
 import MessagePage from '../message/messagePage'
 import MessagePageNew from '../message/messagePageNew'
 
-
 export default class Routes {
 
   static renderScene(route, navigator, context, props ={}) {

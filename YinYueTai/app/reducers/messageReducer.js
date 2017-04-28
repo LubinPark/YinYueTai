@@ -2,6 +2,8 @@ import * as types from '../actions/actionTypes'
 
 const initialState = {
   message: [
+    {position:'right',uri:'https://facebook.github.io/react/img/logo_og.png',text:'666'},
+    {position:'left',uri: 'http://www.qqjay.com/uploads/allimg/160306/1_0PP4Q19.jpg',text:'555'},
     {position:'right',uri:'https://facebook.github.io/react/img/logo_og.png',text:'444'},
     {position:'left',uri: 'http://www.qqjay.com/uploads/allimg/160306/1_0PP4Q19.jpg',text:'333'},
     {position:'right',uri:'https://facebook.github.io/react/img/logo_og.png',text:'2222'},

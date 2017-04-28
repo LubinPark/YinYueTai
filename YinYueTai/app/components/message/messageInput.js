@@ -15,7 +15,7 @@ import {
 import * as MessageAction from '../../actions/messageAction'
 
 var Device = require('../../utils/device')
-const { width, height, fadeGray, backView, gray, lightGray, border } = Device
+const { width, height, fadeGray, gray, border } = Device
 
 class MessageInput extends Component {
 
@@ -31,31 +31,35 @@ class MessageInput extends Component {
   }
 
   render() {
-
-
     return (
-        <View style={styles.inputContainerView}>
-          <TextInput
-            placeholder=''
-            multiline={true}
-            placeholderTextColor={gray}
-            style={[styles.inputView,border]}
-            onChange={(e) => this._onChange(e)}
-            onChangeText={text => this._onChangeText(text)}
-            enablesReturnKeyAutomatically={true}
-            underlineColorAndroid="transparent"
-          />
-          <View style={[styles.otherView,border]}>
-            <TouchableOpacity onPress={()=>this._sendMessage()}>
-              <Text style={{fontSize: 14,textAlign:'center'}}>发送</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-    )
-  }
+      <View style={styles.inputContainerView}>
+        <TextInput
+          autoFocus={false}
+          multiline={true}
+          autoCorrect={false}
+          clearTextOnFocus={true}
 
-  _onChange(e) {
-    const contentSize = e.nativeEvent.contentSize;
+          placeholder=''
+          returnKeyType='default'
+          ref='messageTextInput'
+          keyboardAppearance='dark'
+          placeholderTextColor={gray}
+          style={[styles.inputView,border]}
+
+          onBlur={(e)=>this.props.onBlur(e)}
+          onFocus={(e)=>this.props.onFocus(e)}
+          onChangeText={text => this._onChangeText(text)}
+          enablesReturnKeyAutomatically={true}
+          underlineColorAndroid="transparent"
+          onSubmitEditing={()=>this._sendMessage()}
+        />
+        <View style={[styles.otherView,border]}>
+          <TouchableOpacity onPress={()=>this._sendMessage()}>
+            <Text style={{fontSize: 14,textAlign:'center'}}>发送</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    )
   }
 
   _onChangeText(text) {
@@ -65,11 +69,14 @@ class MessageInput extends Component {
   }
 
   _sendMessage() {
-    let message = this.state.text
-    this.props.actions.fetchMessageActionIfNeeded({type:'sendMessage', message:message})
-    this.setState({
-      text: ''
-    })
+    let message = this.state.text.trim()
+    if (!_.isEmpty(message)) {
+      this.props.actions.fetchMessageActionIfNeeded({type:'sendMessage', message:message.trim()})
+      this.setState({
+        text: ''
+      })
+      this.refs['messageTextInput'].clear()
+    }
   }
 }
 
@@ -87,7 +94,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 33,
     margin: 8,
-    paddingTop: 4,
+    fontSize: 14,
     paddingLeft: 5,
     borderRadius: 3,
     backgroundColor:'#fff'

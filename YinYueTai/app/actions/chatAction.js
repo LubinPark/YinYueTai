@@ -10,15 +10,15 @@ var realtime = new Realtime({
 
 function sendToChat() {
   return (dispatch) => {
-    realtime.createIMClient('58e5f959ac502e4957ac450d').then((send) => {
+    realtime.createIMClient('58fdae0fa22b9d0065a88f0a').then((send) => {
       // 创建与聊天人之间的对话
       return send.createConversation({
-        members: ['58fdae0fa22b9d0065a88f0a'],
-        name: 'test2',
+        members: ['58e5f959ac502e4957ac450d'],
+        name: 'test',
       })
     }).then((conversation) => {
       // 发送消息
-      return conversation.send(new TextMessage('消息'))
+      return conversation.send(new TextMessage('test----->lubin'))
     }).then((message)=> {
       // console.log('发送成功！')
     }).catch((err) => {
@@ -29,14 +29,30 @@ function sendToChat() {
 
 function reseivedToChat() {
   return (dispatch) => {
-    realtime.createIMClient('58fdae0fa22b9d0065a88f0a').then((received) => {
+    realtime.createIMClient('58e5f959ac502e4957ac450d').then((received) => {
       received.on('message', (message, conversation) => {
         //message.text 当前聊天的消息
         //conversation 当前聊天的人的信息
+        // if (!!conversation) {
+        //   conversation.queryMessages({
+        //     limit: 10, // limit 取值范围 1~1000，默认 20
+        //   }).then(function(messages) {
+        //     // 最新的十条消息，按时间增序排列
+        //     console.log(messages);
+        //   }).catch(console.error.bind(console));
+        // }
+        return dispatch(saveUserToChat(conversation))
       })
     }).catch((err) => {
       console.log(err);
     })
+  }
+}
+
+function saveUserToChat(conversation) {
+  return {
+    type: 'CHAT_SAVE_CONVERSATION',
+    data: conversation
   }
 }
 
