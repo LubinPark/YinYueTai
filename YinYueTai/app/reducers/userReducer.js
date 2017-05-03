@@ -35,6 +35,7 @@ let User = (state = initialState, action={}) => {
       break;
 
     case types.USER_LOGOUT:
+      //用户退出
       return Object.assign({}, initialState, { loginState: 'LOGOUT'})
       break;
 

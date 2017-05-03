@@ -8,7 +8,6 @@ import LoginPage from '../user/loginPage'
 import RegisterPage from '../user/registerPage'
 import PlayerMVPage from '../player/playerMVPage'
 import MessagePage from '../message/messagePage'
-import MessagePageNew from '../message/messagePageNew'
 
 export default class Routes {
 
@@ -37,8 +36,6 @@ export default class Routes {
         return <ContextWrapper {...contextProps}><RegisterPage {...viewProps} /></ContextWrapper>
       case 'MessagePage':
         return <ContextWrapper {...contextProps}><MessagePage {...viewProps} /></ContextWrapper>
-      case 'MessagePageNew':
-        return <ContextWrapper {...contextProps}><MessagePageNew {...viewProps} /></ContextWrapper>
     }
     return <View style={styles.errorView}><Text>{route.id} page is not found.</Text></View>
   }

@@ -6,18 +6,20 @@ const initialState = {
 
 let Chat = (state = initialState, action={}) => {
   switch (action.type) {
+    //请求对话列表
     case types.CHAT_SAVE_CONVERSATION:
-      let chatList = state.chatList
-      let data= action.data
-      let chat = {
-        creator: data.creator,
-        numbers: data.members,
-        name: data.get('name'),
-        uri: data.uri ? data.uri : 'http://www.qqjay.com/uploads/allimg/160306/1_0PP4Q19.jpg',
-        lastMessage: data.lastMessage._lctext
+      let chatLists = []
+      let users = action.users
+      let conversations = action.conversations
+      for (var i = 0; i < users.length; i++) {
+        let chatList = {
+          user: users[i],
+          conversation: conversations[i],
+          lastMessage: conversations[i].lastMessage._lctext
+        }
+        chatLists.push(chatList)
       }
-      chatList.push(chat)
-      return Object.assign({}, state, {chatList: chatList})
+      return Object.assign({}, state, {chatList: chatLists})
         break
 
     default:

@@ -13,7 +13,8 @@ import {
   ListView,
   StatusBar,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  InteractionManager
 } from 'react-native'
 
 var Device = require('../../utils/device')
@@ -31,11 +32,13 @@ class ChatPage extends Component {
   }
 
   componentWillMount() {
-    this.props.actions.fetchChatActionIfNeeded({type:'send'})
-  }
-
-  componentDidMount() {
-    this.props.actions.fetchChatActionIfNeeded({type:'received'})
+    InteractionManager.runAfterInteractions(() => {
+      this.props.actions.fetchChatActionIfNeeded({
+        type:'received',
+        limit: 10,
+        skip: 0
+      })
+    })
   }
 
   render() {
@@ -72,20 +75,18 @@ class ChatPage extends Component {
   _renderRow(rowData) {
     return (
       <TouchableOpacity style={styles.rowDataView} onPress={() => {this._toMessage(rowData)}}>
-        <ChatItem data={rowData} />
+        <ChatItem data={rowData.user} lastMessage={rowData.lastMessage}/>
       </TouchableOpacity>
     )
   }
 
   _toMessage(rowData) {
-    this.context.app.navigator.push({
-      id:'MessagePageNew',
-      data: {
-        user: rowData
-      }
+    this.props.actions.fetchChatActionIfNeeded({
+      data: rowData,
+      type: 'pushMessagePage',
+      navigator: this.context.app.navigator
     })
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -111,7 +112,8 @@ const styles = StyleSheet.create({
 })
 
 export default connect(state => ({
-  data: state.ChatReducer
+  data: state.ChatReducer,
+  user: state.UserReducer
   }),
   (dispatch) => ({
     actions: bindActionCreators(ChatAction, dispatch)

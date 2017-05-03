@@ -6,6 +6,7 @@ import _ from 'underscore'
 import {
   View,
   Text,
+  Image,
   TextInput,
   StyleSheet,
   TouchableOpacity
@@ -34,6 +35,7 @@ class SettingPage extends Component {
 
     let titleConfig = { title: '我的', tintColor: '#fff' }
     let { loginState, userInfo }  = this.props.data
+
     return (
       <View style={styles.container}>
         <NavigationBar
@@ -48,16 +50,22 @@ class SettingPage extends Component {
 
   _userInfoView(userInfo) {
     if (!_.isEmpty(userInfo)) {
+      
       let { username, email } = userInfo.attributes
+      let img = userInfo.get('userPic') ? userInfo.get('userPic').get('url') : ''
+
       return (
-        <View style={styles.userInfoView}>
-          <Text>{username}</Text>
-          <Text>{email}</Text>
-            <View style={styles.logOutView}>
-              <TouchableOpacity onPress={() => this._logOut()}>
-                <Text>退出</Text>
-              </TouchableOpacity>
-            </View>
+        <View style={[styles.userInfoView,styles.center]}>
+          <Image source={{uri:img}} style={styles.userPic}/>
+          <View style={styles.rightView}>
+            <Text style={styles.nameText}>{username}</Text>
+            <Text>{email}</Text>
+          </View>
+          <View style={styles.logOutView}>
+            <TouchableOpacity onPress={() => this._logOut()}>
+              <Text>退出</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )
     } else {
@@ -93,6 +101,9 @@ const styles = StyleSheet.create({
     height: height,
     backgroundColor: '#fff'
   },
+  center: {
+    flexDirection: 'row',
+  },
   logOutView: {
     position: 'absolute',
     left: 50,
@@ -108,8 +119,26 @@ const styles = StyleSheet.create({
   userInfoView: {
     flex: 1,
     width: width,
-    alignItems: 'center',
+    marginTop: 20,
     backgroundColor:'#fff'
+  },
+  userPic: {
+    width: 75,
+    height: 75,
+    marginLeft: 20,
+    borderRadius: 5,
+    backgroundColor: 'red'
+  },
+  rightView: {
+    flex: 1,
+    height: 75,
+    marginLeft: 20,
+    marginRight: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  nameText: {
+    marginBottom: 10
   }
 })
 

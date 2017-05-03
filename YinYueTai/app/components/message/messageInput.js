@@ -54,7 +54,7 @@ class MessageInput extends Component {
           onSubmitEditing={()=>this._sendMessage()}
         />
         <View style={[styles.otherView,border]}>
-          <TouchableOpacity onPress={()=>this._sendMessage()}>
+          <TouchableOpacity onPress={()=>this._sendMessage(this.props.currentUser, this.props.senderUser, this.props.conversation)}>
             <Text style={{fontSize: 14,textAlign:'center'}}>发送</Text>
           </TouchableOpacity>
         </View>
@@ -68,10 +68,16 @@ class MessageInput extends Component {
     })
   }
 
-  _sendMessage() {
+  _sendMessage(currentUser, senderUser, conversation) {
     let message = this.state.text.trim()
     if (!_.isEmpty(message)) {
-      this.props.actions.fetchMessageActionIfNeeded({type:'sendMessage', message:message.trim()})
+      this.props.actions.fetchMessageActionIfNeeded({
+        type:'sendToMessage',
+        message:message.trim(),
+        currentUser: currentUser,
+        senderUser: senderUser,
+        conversation: conversation
+      })
       this.setState({
         text: ''
       })

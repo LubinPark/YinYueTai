@@ -8,19 +8,22 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-const { width, height, lightGray, gray, fadeGray } = Device
+const { width, height, lightGray, gray, fadeGray, border } = Device
 
 export default class ChatItem extends Component {
 
   render() {
+
     let data = this.props.data
+    let img = data.get('userPic') ? data.get('userPic').get('url') : ''
+
     return (
-      <View style={[styles.userView,styles.border]}>
+      <View style={[styles.userView,border]}>
         <Image style={styles.userHeaderImg}
-               source={{uri:'https://facebook.github.io/react/img/logo_og.png'}}/>
+               source={{uri:img}}/>
         <View style={styles.infoView}>
-          <Text allowFontScaling={false} numberOfLines={1} style={styles.name}>{data.name}</Text>
-          <Text allowFontScaling={false} numberOfLines={1} style={styles.lastMessage}>{data.lastMessage}</Text>
+          <Text allowFontScaling={false} numberOfLines={1} style={styles.name}>{data.get('username')}</Text>
+          <Text allowFontScaling={false} numberOfLines={1} style={styles.lastMessage}>{this.props.lastMessage}</Text>
         </View>
       </View>
     )
@@ -38,11 +41,8 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     marginLeft: 10,
-    borderRadius: 4
-  },
-  border: {
-    borderBottomColor: gray,
-    borderBottomWidth: StyleSheet.hairlineWidth
+    borderRadius: 4,
+    backgroundColor: '#fff'
   },
   infoView: {
     padding: 10

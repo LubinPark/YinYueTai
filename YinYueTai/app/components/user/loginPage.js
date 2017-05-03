@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import NavigationBar from 'react-native-navbar'
 import _ from 'underscore'
+
 import {
   View,
   Text,
@@ -84,11 +85,11 @@ class LoginPage extends Component {
 
   _submit() {
     this.props.actions.fetchUserAction({
-      type      : 'login',
-      name      : this.state.name,
-      account   : this.state.account,
-      password  : this.state.password,
-      navigator : this.context.app.navigator
+      type: 'login',
+      name: this.state.name,
+      account: this.state.account,
+      password: this.state.password,
+      navigator: this.context.app.navigator
     })
   }
 

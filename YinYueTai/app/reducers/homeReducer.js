@@ -23,10 +23,8 @@ let Home = (state = initialState, action={}) => {
 
       let data = []
       data.push(mvFirst, pops, fans, anthor, panorama, musicer, guess)
-      return Object.assign({}, state,{loop:loop,
-                                      button:button,
-                                      data: data})
-      break;
+      return Object.assign({}, state,{loop:loop, button:button, data: data})
+      break
 
     default:
       return state

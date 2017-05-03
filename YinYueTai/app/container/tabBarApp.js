@@ -60,23 +60,23 @@ export default class TabBarApp extends Component {
     switch (name) {
       case 'Home':
         return <HomePage />
-        break;
+        break
 
       case 'Setting':
         return <SettingPage />
-        break;
+        break
 
-      case  'Chat':
+      case 'Chat':
         return <ChatPage />
-        break;
+        break
 
-        break;
       default:
         return (
           <View style={styles.view}>
             <Text>未找到该页面{name}</Text>
           </View>
         )
+        break
     }
   }
 }
