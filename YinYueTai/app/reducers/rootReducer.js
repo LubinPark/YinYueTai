@@ -5,6 +5,7 @@ import PlayerReducer from './playerReducer'
 import UserReducer from './userReducer'
 import ChatReducer from './chatReducer'
 import MessageReducer from './messageReducer'
+import AdressBookReducer from './adressBookReducer'
 
 const rootReducer = combineReducers({
   TabBarReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   PlayerReducer,
   UserReducer,
   ChatReducer,
-  MessageReducer
+  MessageReducer,
+  AdressBookReducer
 })
 
 export default rootReducer

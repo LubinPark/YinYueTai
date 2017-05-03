@@ -40,17 +40,13 @@ class MessagePage extends Component {
     })
   }
 
-  componentWillUnMount() {
-    InteractionManager.runAfterInteractions(() => {
-      this.props.actions.clearMessage({type: 'clearMessage'})
-    })
-  }
-
   render() {
 
     let messages = this.props.data.messages
     let currentUser = this.props.currentUser
-    let titleConfig = { title: currentUser.get('username'), tintColor: '#fff' }
+    let senderUser = this.props.senderUser
+
+    let titleConfig = { title: senderUser.get('username'), tintColor: '#fff' }
     let leftButtonConfig = <TouchableWithoutFeedback onPress={()=>this._back()}>
                             <Image source={require('../../img/back.png')} style={backView}/>
                            </TouchableWithoutFeedback>
@@ -71,7 +67,7 @@ class MessagePage extends Component {
             contentContainerStyle={styles.crollView}
           >
           {this._messageList(messages)}
-          {this._InputView(currentUser, this.props.senderUser, this.props.conversation)}
+          {this._inputView(currentUser, this.props.senderUser, this.props.data.conversation)}
           </ScrollView>
         </Image>
       </View>
@@ -96,9 +92,12 @@ class MessagePage extends Component {
     )
   }
 
-  _InputView() {
+  _inputView(currentUser, senderUser, conversation) {
     return (
-      <MessageInput  {...this.props}
+      <MessageInput
+        currentUser={currentUser}
+        senderUser={senderUser}
+        conversation={conversation}
         onFocus={(e)=>this._onFocus(e)}
         onBlur={(e)=>this._onBlur(e)}
       />
@@ -115,6 +114,7 @@ class MessagePage extends Component {
 
   _back() {
     this.context.app.navigator.pop()
+    this.props.actions.fetchMessageActionIfNeeded({type: 'clearMessage'})
   }
 
 }

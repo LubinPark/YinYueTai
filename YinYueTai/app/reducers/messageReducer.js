@@ -1,7 +1,8 @@
 import * as types from '../actions/actionTypes'
 
 const initialState = {
-  messages: []
+  messages: [],
+  conversation: undefined
 }
 
 let Message = (state = initialState, action={}) => {
@@ -21,7 +22,11 @@ let Message = (state = initialState, action={}) => {
       for (var i = 0; i < state.messages.length; i++) {
         newMessage.push(state.messages[i])
       }
-      return Object.assign({}, state, {messages: newMessage})
+      return Object.assign({}, state, {messages: newMessage, conversation: state.conversation})
+      break
+
+    case types.SAVE_CONVERSATION:
+      return Object.assign({}, state, {conversation: action.conversation, messages: state.messages})
       break
 
     case types.SAVE_SERVICE_MESSAGE:
@@ -30,17 +35,17 @@ let Message = (state = initialState, action={}) => {
       for (var i = action.messages.length - 1; i >= 0; i--) {
         let item = {
           position: (action.messages[i].from === action.currentUser.id) ? 'right' : 'left',
-          text: action.messages[i]._lctext,
+          text: action.messages[i]._lctext ? action.messages[i]._lctext : '',
           uri: (action.messages[i].from === action.currentUser.id) ? action.currentUser.get('userPic').get('url') : action.senderUser.get('userPic').get('url'),
         }
         messages.push(item)
       }
-      return Object.assign({}, state, {messages: messages})
+      return Object.assign({}, state, {messages: messages, conversation: state.conversation})
       break
 
     case types.CLEAR_MESSAGE:
       //当退出页面清空当前的数据
-      return Object.assign({}, state, {})
+      return Object.assign({}, initialState)
 
       break
     default:

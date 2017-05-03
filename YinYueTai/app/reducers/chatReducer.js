@@ -15,7 +15,7 @@ let Chat = (state = initialState, action={}) => {
         let chatList = {
           user: users[i],
           conversation: conversations[i],
-          lastMessage: conversations[i].lastMessage._lctext
+          lastMessage: conversations[i].lastMessage ? conversations[i].lastMessage._lctext : ''
         }
         chatLists.push(chatList)
       }

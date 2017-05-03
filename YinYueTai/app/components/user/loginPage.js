@@ -1,8 +1,9 @@
+import _ from 'underscore'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import NavigationBar from 'react-native-navbar'
-import _ from 'underscore'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import {
   View,
@@ -38,20 +39,22 @@ class LoginPage extends Component {
     return (
       <View style={styles.container}>
         <NavigationBar title ={titleConfig} />
-        <TextInput style={[styles.TextInputSty,{marginTop: height / 2}]}
-                   ref='account'
-                   placeholder='账号'
-                   numberOfLines={1}
-                   underlineColorAndroid="transparent"
-                   onChange={(value) => this._account(value)}/>
-        <TextInput style={styles.TextInputSty}
-                   ref='password'
-                   placeholder='密码'
-                   secureTextEntry={true}
-                   numberOfLines={1}
-                   underlineColorAndroid="transparent"
-                   onChange={(value) => this._password(value)}/>
-        <View style={styles.center}>
+        <KeyboardAwareScrollView>
+          <TextInput style={[styles.TextInputSty,{marginTop: height / 2}]}
+                     ref='account'
+                     placeholder='账号'
+                     numberOfLines={1}
+                     underlineColorAndroid="transparent"
+                     onChange={(value) => this._account(value)}/>
+          <TextInput style={styles.TextInputSty}
+                     ref='password'
+                     placeholder='密码'
+                     secureTextEntry={true}
+                     numberOfLines={1}
+                     underlineColorAndroid="transparent"
+                     onChange={(value) => this._password(value)}/>
+        </KeyboardAwareScrollView>
+        <View style={[styles.center,{height: 70}]}>
           <TouchableOpacity style={styles.button} onPress={() => this._submit()}>
             <Text style={[styles.text,styles.login]}>登录</Text>
           </TouchableOpacity>

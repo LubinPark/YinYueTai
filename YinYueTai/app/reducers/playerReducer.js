@@ -22,7 +22,7 @@ let Player = (state = initialState, action={}) => {
 
     case types.CLEAN_PLAY_DATA:
       //当退出时清空
-      return Object.assign({}, state, {})
+      return Object.assign({}, initialState, {})
       break;
 
     default:

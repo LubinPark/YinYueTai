@@ -21,12 +21,40 @@ function saveMessage(message, senderUser, currentUser) {
 
 function requestRecentMessage(params) {
   return (dispatch) => {
-    var messageIterator = params.conversation.createMessagesIterator({ limit: 100 });
-    messageIterator
-      .next()
-      .then((result) => {
-        return dispatch(saveServiceMessage(result.value, params.senderUser, params.currentUser))
-    })
+    if (params.conversation === undefined) {
+      realtime
+      .createIMClient(params.currentUser.id)
+      .then((received) => {
+        return received.createConversation({
+          members: [params.senderUser.id],
+          name: params.senderUser.get('username'),
+          unique: true
+        })
+      }).then((conversation) => {
+        dispatch(saveConversation(conversation))
+        var messageIterator = conversation.createMessagesIterator({ limit: 10 });
+        messageIterator
+          .next()
+          .then((result) => {
+            return dispatch(saveServiceMessage(result.value, params.senderUser, params.currentUser))
+        })
+      })
+    } else {
+      dispatch(saveConversation(params.conversation))
+      var messageIterator = params.conversation.createMessagesIterator({ limit: 100 });
+      messageIterator
+        .next()
+        .then((result) => {
+          return dispatch(saveServiceMessage(result.value, params.senderUser, params.currentUser))
+      })
+    }
+  }
+}
+
+function saveConversation(conversation) {
+  return {
+    type: 'SAVE_CONVERSATION',
+    conversation: conversation
   }
 }
 

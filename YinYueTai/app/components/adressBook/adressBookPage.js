@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import NavigationBar from 'react-native-navbar'
 
-import ChatItem from './chatItem'
-import * as ChatAction from '../../actions/chatAction'
+import * as AdressBookAction from '../../actions/adressBookAction'
+import AdressBookItem from './adressBookItem'
 
 import {
   View,
@@ -26,20 +26,16 @@ class ChatPage extends Component {
     app: React.PropTypes.object
   }
 
-  componentWillMount() {
+  componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
-      this.props.actions.fetchChatActionIfNeeded({
-        type:'received',
-        limit: 10,
-        skip: 0
-      })
+      this.props.actions.fetchAdressBookIfNeeded({type:'getAdressBook'})
     })
   }
 
   render() {
 
-    let chatList = this.props.data.chatList
-    let titleConfig = { title: '消息', tintColor: '#fff' }
+    let adressBook = this.props.data.adressBook
+    let titleConfig = { title: '通讯录', tintColor: '#fff' }
 
     return (
       <View style={styles.loadingView}>
@@ -48,19 +44,19 @@ class ChatPage extends Component {
           tintColor={'black'}
           statusBar={{style: 'light-content'}}/>
         <View style={styles.ListView}>
-          {this._chatList(chatList)}
+          {this._adressBook(adressBook)}
         </View>
       </View>
     )
   }
 
-  _chatList(chatList) {
-    if (!_.isEmpty(chatList)) {
+  _adressBook(adressBook) {
+    if (!_.isEmpty(adressBook)) {
       return (
         <ListView
           style={styles.listView}
           initialListSize={10}
-          dataSource={ds.cloneWithRows(chatList)}
+          dataSource={ds.cloneWithRows(adressBook)}
           renderRow={(rowData)=>this._renderRow(rowData)}
         />
       )
@@ -70,16 +66,16 @@ class ChatPage extends Component {
   _renderRow(rowData) {
     return (
       <TouchableOpacity style={styles.rowDataView} onPress={() => {this._toMessage(rowData)}}>
-        <ChatItem data={rowData.user} lastMessage={rowData.lastMessage}/>
+        <AdressBookItem data={rowData}/>
       </TouchableOpacity>
     )
   }
 
   _toMessage(rowData) {
-    this.props.actions.fetchChatActionIfNeeded({
-      data: rowData,
-      type: 'pushMessagePage',
-      navigator: this.context.app.navigator
+    this.props.actions.fetchAdressBookIfNeeded({
+      type: 'pushToMessage',
+      senderUser: rowData,
+      navigator:this.context.app.navigator
     })
   }
 }
@@ -100,6 +96,7 @@ const styles = StyleSheet.create({
   rowDataView: {
     width: width,
     height: 70,
+    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff'
@@ -107,10 +104,9 @@ const styles = StyleSheet.create({
 })
 
 export default connect(state => ({
-  data: state.ChatReducer,
-  user: state.UserReducer
+  data: state.AdressBookReducer,
   }),
   (dispatch) => ({
-    actions: bindActionCreators(ChatAction, dispatch)
+    actions: bindActionCreators(AdressBookAction, dispatch)
   })
 )(ChatPage)

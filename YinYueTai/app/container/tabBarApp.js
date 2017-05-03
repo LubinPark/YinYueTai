@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 
 import HomePage from '../components/home/homePage'
+import AdressBookPage from '../components/adressBook/adressBookPage'
 import ChatPage from '../components/chat/chatPage'
 import SettingPage from '../components/setting/settingPage'
 
@@ -19,7 +20,7 @@ export default class TabBarApp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: 'Chat',
+      selectedTab: 'AdressBook',
     }
   }
   // renderIcon={() => <Image source={require("./img/0.png")} />}
@@ -32,25 +33,32 @@ export default class TabBarApp extends Component {
           title='首页'
           selected={this.state.selectedTab == 'Home'}
           onPress={() => this.setState({selectedTab: 'Home'})}
-          selectedTitleStyle={{color: 'gray'}}
-        >
-          {this._renderRootContent('Home')}
+          selectedTitleStyle={{color: 'gray'}}>
+        {this._renderRootContent('Home')}
         </TabNavigator.Item>
+
+        <TabNavigator.Item
+          title='通讯录'
+          selected={this.state.selectedTab == 'AdressBook'}
+          onPress={() => this.setState({selectedTab: 'AdressBook'})}
+          selectedTitleStyle={{color: 'gray'}}>
+        {this._renderRootContent('AdressBook')}
+        </TabNavigator.Item>
+
         <TabNavigator.Item
           title='消息'
           selected={this.state.selectedTab == 'Chat'}
           onPress={() => this.setState({selectedTab: 'Chat'})}
-          selectedTitleStyle={{color: 'gray'}}
-        >
-          {this._renderRootContent('Chat')}
+          selectedTitleStyle={{color: 'gray'}}>
+        {this._renderRootContent('Chat')}
         </TabNavigator.Item>
+
         <TabNavigator.Item
           title='我的'
           selected={this.state.selectedTab == 'Setting'}
           onPress={() => this.setState({selectedTab: 'Setting'})}
-          selectedTitleStyle={{color: 'gray'}}
-        >
-          {this._renderRootContent('Setting')}
+          selectedTitleStyle={{color: 'gray'}}>
+        {this._renderRootContent('Setting')}
         </TabNavigator.Item>
       </TabNavigator>
     )
@@ -62,12 +70,16 @@ export default class TabBarApp extends Component {
         return <HomePage />
         break
 
-      case 'Setting':
-        return <SettingPage />
+      case 'AdressBook':
+        return <AdressBookPage />
         break
 
       case 'Chat':
         return <ChatPage />
+        break
+
+      case 'Setting':
+        return <SettingPage />
         break
 
       default:

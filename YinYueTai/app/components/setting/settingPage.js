@@ -50,27 +50,31 @@ class SettingPage extends Component {
 
   _userInfoView(userInfo) {
     if (!_.isEmpty(userInfo)) {
-      
+
       let { username, email } = userInfo.attributes
-      let img = userInfo.get('userPic') ? userInfo.get('userPic').get('url') : ''
+      let img = userInfo.get('userPic') ? {uri:userInfo.get('userPic').get('url')} : require('../../img/userhead.png')
 
       return (
         <View style={[styles.userInfoView,styles.center]}>
-          <Image source={{uri:img}} style={styles.userPic}/>
+          <Image source={img} style={styles.userPic}/>
           <View style={styles.rightView}>
-            <Text style={styles.nameText}>{username}</Text>
-            <Text>{email}</Text>
+            <Text style={styles.nameText} allowFontScaling={false} numberOfLines={1}>
+              {username}
+            </Text>
+            <Text allowFontScaling={false} numberOfLines={1}>
+              {email}
+            </Text>
           </View>
           <View style={styles.logOutView}>
             <TouchableOpacity onPress={() => this._logOut()}>
-              <Text>退出</Text>
+              <Text allowFontScaling={false} numberOfLines={1}>退出</Text>
             </TouchableOpacity>
           </View>
         </View>
       )
     } else {
       return (
-        <View style={styles.userInfoView}>
+        <View style={[styles.userInfoView,styles.center,{justifyContent:'center'}]}>
           <TouchableOpacity onPress={() => this._login()}>
             <Text>登录</Text>
           </TouchableOpacity>
@@ -127,7 +131,7 @@ const styles = StyleSheet.create({
     height: 75,
     marginLeft: 20,
     borderRadius: 5,
-    backgroundColor: 'red'
+    backgroundColor: '#fff'
   },
   rightView: {
     flex: 1,

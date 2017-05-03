@@ -1,7 +1,10 @@
+import _ from 'underscore'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import _ from 'underscore'
+import NavigationBar from 'react-native-navbar'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 import {
   View,
   Text,
@@ -32,37 +35,43 @@ class RegisterPage extends Component {
   }
 
   render () {
+
+    let titleConfig = { title: '注册' }
+
     return (
       <View style={styles.container}>
-        <TextInput style={[styles.TextInputSty,{marginTop: height / 2}]}
-                   ref='account'
-                   placeholder='账号'
-                   numberOfLines={1}
-                   underlineColorAndroid="transparent"
-                   onChange={(value) => this._account(value)}/>
-        <TextInput style={styles.TextInputSty}
-                   ref='password'
-                   placeholder='姓名'
-                   numberOfLines={1}
-                   underlineColorAndroid="transparent"
-                   onChange={(value) => this._userName(value)}/>
-        <TextInput style={styles.TextInputSty}
-                   ref='password'
-                   placeholder='密码'
-                   secureTextEntry={true}
-                   numberOfLines={1}
-                   underlineColorAndroid="transparent"
-                   onChange={(value) => this._password(value)}/>
-          <TouchableOpacity style={styles.button} onPress={() => this._register()}>
-            <Text style={[styles.text,styles.login]}>确定</Text>
-          </TouchableOpacity>
-          { (this.props.data.registerState === 'FAILED') ?
-            <View style={styles.errorView}>
-              <Text style={styles.info}>{this.props.data.registerErrorInfo}</Text>
-            </View>
-            : <Text/>
-          }
-        </View>
+        <NavigationBar title ={titleConfig} />
+        <KeyboardAwareScrollView>
+          <TextInput style={[styles.TextInputSty,{marginTop: height / 3}]}
+                     ref='account'
+                     placeholder='账号'
+                     numberOfLines={1}
+                     underlineColorAndroid="transparent"
+                     onChange={(value) => this._account(value)}/>
+          <TextInput style={styles.TextInputSty}
+                     ref='password'
+                     placeholder='姓名'
+                     numberOfLines={1}
+                     underlineColorAndroid="transparent"
+                     onChange={(value) => this._userName(value)}/>
+          <TextInput style={styles.TextInputSty}
+                     ref='password'
+                     placeholder='密码'
+                     secureTextEntry={true}
+                     numberOfLines={1}
+                     underlineColorAndroid="transparent"
+                     onChange={(value) => this._password(value)}/>
+        </KeyboardAwareScrollView>
+        <TouchableOpacity style={styles.button} onPress={() => this._register()}>
+          <Text style={[styles.text,styles.login]}>确定</Text>
+        </TouchableOpacity>
+        { (this.props.data.registerState === 'FAILED') ?
+          <View style={styles.errorView}>
+            <Text style={styles.info}>{this.props.data.registerErrorInfo}</Text>
+          </View>
+          : <Text/>
+        }
+      </View>
     )
   }
 
@@ -130,7 +139,8 @@ const styles = StyleSheet.create({
     color: lightGray
   },
   button: {
-    borderRadius: 5
+    borderRadius: 5,
+    marginBottom: 60
   },
   text: {
     fontSize: 14,
