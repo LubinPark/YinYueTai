@@ -32,13 +32,12 @@ export default class ChatItem extends Component {
 const styles = StyleSheet.create({
   userView: {
     width: width,
-    height: 70,
     alignItems:'center',
     flexDirection:'row'
   },
   userHeaderImg: {
-    width: 50,
-    height: 50,
+    width: 44,
+    height: 44,
     marginLeft: 10,
     marginRight: 10,
     borderRadius: 4,

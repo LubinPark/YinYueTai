@@ -110,6 +110,7 @@ export default class VideoPage extends Component {
 
   _backToHome() {
     this.context.app.navigator.popToTop()
+    this.props.cleanPLayData()
   }
 
   _showPlayBtn(status) {

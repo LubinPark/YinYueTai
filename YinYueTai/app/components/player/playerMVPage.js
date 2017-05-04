@@ -29,10 +29,6 @@ class PlayerMVPage extends Component {
     app: React.PropTypes.object
   }
 
-  componentWillMount() {
-    this.props.actions.fetchPlayerIfNeeded({type: 'cleanPLayData'})
-  }
-
   componentDidMount() {
     //请求新数据
     InteractionManager.runAfterInteractions(() => {
@@ -60,7 +56,7 @@ class PlayerMVPage extends Component {
       return (
         <View style={styles.view}>
           <StatusBar hidden={true} />
-          <VideoPage url={authorInfo.url} title={authorInfo.title}/>
+          <VideoPage url={authorInfo.url} title={authorInfo.title} cleanPLayData={()=>this.cleanPLayData()}/>
           <Image style={styles.backgroundColor} source={require('../../img/background/background_0.png')} resizeMode='stretch' >
             <ScrollView styles={styles.scrollView}>
               <AuthorInfo data={authorInfo}/>
@@ -73,6 +69,10 @@ class PlayerMVPage extends Component {
         </View>
       )
     }
+  }
+
+  cleanPLayData() {
+    this.props.actions.fetchPlayerIfNeeded({type: 'cleanPLayData'})
   }
 
 }

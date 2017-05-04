@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
   },
   rowDataView: {
     width: width,
-    height: 70,
+    height: 60,
+    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff'

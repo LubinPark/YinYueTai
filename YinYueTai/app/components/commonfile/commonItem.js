@@ -88,7 +88,7 @@ export default class CommonItem extends Component {
     )
   }
 
-  _goToPlayer(videoId){
+  _goToPlayer(videoId) {
     this.context.app.navigator.push({
       id:'PlayerMVPage',
       data: {

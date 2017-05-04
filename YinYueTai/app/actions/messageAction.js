@@ -1,5 +1,6 @@
 import AV from './AV'
 import { realtime, TextMessage } from './realTime'
+import { InteractionManager } from 'react-native'
 
 function sendToMessage(params) {
   return (dispatch) => {
@@ -32,20 +33,24 @@ function requestRecentMessage(params) {
         })
       }).then((conversation) => {
         dispatch(saveConversation(conversation))
-        var messageIterator = conversation.createMessagesIterator({ limit: 10 });
+        InteractionManager.runAfterInteractions(() => {
+          var messageIterator = conversation.createMessagesIterator({ limit: 10 });
+          messageIterator
+            .next()
+            .then((result) => {
+              return dispatch(saveServiceMessage(result.value, params.senderUser, params.currentUser))
+          })
+        })
+      })
+    } else {
+      dispatch(saveConversation(params.conversation))
+      InteractionManager.runAfterInteractions(() => {
+        var messageIterator = params.conversation.createMessagesIterator({ limit: 100 });
         messageIterator
           .next()
           .then((result) => {
             return dispatch(saveServiceMessage(result.value, params.senderUser, params.currentUser))
         })
-      })
-    } else {
-      dispatch(saveConversation(params.conversation))
-      var messageIterator = params.conversation.createMessagesIterator({ limit: 100 });
-      messageIterator
-        .next()
-        .then((result) => {
-          return dispatch(saveServiceMessage(result.value, params.senderUser, params.currentUser))
       })
     }
   }

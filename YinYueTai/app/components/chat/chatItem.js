@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-const { width, height, border } = Device
+const { width, height } = Device
 
 export default class ChatItem extends Component {
 
@@ -18,7 +18,7 @@ export default class ChatItem extends Component {
     let img = data.get('userPic') ? {uri:data.get('userPic').get('url')} : require('../../img/userhead.png')
 
     return (
-      <View style={[styles.userView,border]}>
+      <View style={styles.userView}>
         <Image style={styles.userHeaderImg}
                source={img}/>
         <View style={styles.infoView}>
@@ -37,13 +37,12 @@ export default class ChatItem extends Component {
 const styles = StyleSheet.create({
   userView: {
     width: width,
-    height: 70,
     alignItems:'center',
     flexDirection:'row'
   },
   userHeaderImg: {
-    width: 50,
-    height: 50,
+    width: 44,
+    height: 44,
     marginLeft: 10,
     borderRadius: 4,
     backgroundColor: '#fff'
@@ -54,10 +53,11 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 15,
     color: 'black',
-    marginBottom: 8,
+    marginBottom: 4,
   },
   lastMessage: {
-    fontSize: 13,
+    fontSize: 14,
+    width: width / 3 * 2,
     color: 'gray'
   }
 })
