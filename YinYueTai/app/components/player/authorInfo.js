@@ -44,12 +44,12 @@ export default class AuthorInfo extends Component {
           {/* 顶部照片和名字*/}
           <View style={[styles.center,styles.marginBottom]}>
             <Image style={styles.authorImg} source={{uri: artist.artistAvatar}} />
-            <Text style={styles.authorNmme}>{data.artistName}</Text>
+            <Text style={styles.authorNmme} allowFontScaling={false} numberOfLines={1}>{data.artistName}</Text>
           </View>
           {/* 播放次数和5张图片*/}
           <View style={[styles.center,styles.marginBottom]}>
             <View style={styles.numView}>
-              <Text style={[styles.center,styles.number]}>播放次数:{data.totalView}</Text>
+              <Text style={[styles.center,styles.number]} allowFontScaling={false} numberOfLines={1}>播放次数:{data.totalView}</Text>
             </View>
             <Image style={styles.button} source={require('../../img/message.png')} />
             <Image style={styles.button} source={require('../../img/collection.png')} />
@@ -59,7 +59,7 @@ export default class AuthorInfo extends Component {
           </View>
           {/* 描述*/}
           <View style={styles.descTextView}>
-            <Text style={styles.desc} numberOfLines={this.state.numberOfLines}>{data.desc}</Text>
+            <Text style={styles.desc} numberOfLines={this.state.numberOfLines} allowFontScaling={false}>{data.desc}</Text>
           </View>
           {/* 点击按钮*/}
           <TouchableOpacity onPress={() => this._showMoreDesc()}>
@@ -71,13 +71,13 @@ export default class AuthorInfo extends Component {
           <View style={[styles.center,{marginBottom: 10}]}>
             <View style={styles.bottomLeft}>
               <Image style={styles.loading} source={{uri: creator.smallAvatar}} />
-              <Text style={styles.loading_and_time}>上传者:</Text>
-              <Text style={styles.vipName}>{creator.nickName}</Text>
+              <Text style={styles.loading_and_time} allowFontScaling={false} numberOfLines={1}>上传者:</Text>
+              <Text style={styles.vipName} allowFontScaling={false} numberOfLines={1}>{creator.nickName}</Text>
               <Image style={styles.level} source={{uri: creator.vipImg}} />
             </View>
             <View style={styles.bottomRight}>
               <Image style={styles.timeImg} source={require('../../img/time.png')} />
-              <Text style={styles.loading_and_time}>{data.regdate}</Text>
+              <Text style={styles.loading_and_time} allowFontScaling={false} numberOfLines={1}>{data.regdate}</Text>
             </View>
           </View>
         </View>

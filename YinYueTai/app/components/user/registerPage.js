@@ -63,11 +63,11 @@ class RegisterPage extends Component {
                      onChange={(value) => this._password(value)}/>
         </KeyboardAwareScrollView>
         <TouchableOpacity style={styles.button} onPress={() => this._register()}>
-          <Text style={[styles.text,styles.login]}>确定</Text>
+          <Text style={[styles.text,styles.login]} allowFontScaling={false} numberOfLines={1}>确定</Text>
         </TouchableOpacity>
         { (this.props.data.registerState === 'FAILED') ?
           <View style={styles.errorView}>
-            <Text style={styles.info}>{this.props.data.registerErrorInfo}</Text>
+            <Text style={styles.info} allowFontScaling={false} numberOfLines={1}>{this.props.data.registerErrorInfo}</Text>
           </View>
           : <Text/>
         }

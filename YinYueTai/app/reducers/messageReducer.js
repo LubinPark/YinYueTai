@@ -45,7 +45,7 @@ let Message = (state = initialState, action={}) => {
 
     case types.CLEAR_MESSAGE:
       //当退出页面清空当前的数据
-      return Object.assign({}, initialState)
+      return Object.assign({}, state, {messages: [], conversation: undefined})
 
       break
     default:

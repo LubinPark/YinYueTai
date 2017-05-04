@@ -62,9 +62,9 @@ export default class CommonItem extends Component {
           <TouchableOpacity onPress={()=>this._goToPlayer(data.videoId)}>
             <Image source={{uri: data.posterPic}} style={[styles.img,items]} />
             <View>
-              <Text style={[styles.title,titleWhitestyle]} numberOfLines={1}>{data.title}</Text>
+              <Text style={[styles.title,titleWhitestyle]} allowFontScaling={false} numberOfLines={1}>{data.title}</Text>
               {this._showName(data)}
-              <Text style={styles.num}>播放数量:{data.totalView}</Text>
+              <Text style={styles.num} allowFontScaling={false} numberOfLines={1}>播放数量:{data.totalView}</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -81,9 +81,7 @@ export default class CommonItem extends Component {
 
     return(
       <View style={{flexDirection:'row'}}>
-        <Text style={styles.name} numberOfLines={1}>{name}</Text>
-        <View style={styles.moreView}>
-        </View>
+        <Text style={styles.name} allowFontScaling={false} numberOfLines={1}>{name}</Text>
       </View>
     )
   }

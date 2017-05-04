@@ -46,7 +46,7 @@ export default class VideoPage extends Component {
 
   render () {
 
-    var url = this.state.url
+    let url = this.state.url
     let title = this.props.title
     let full_screen = {
       width: width,
@@ -79,7 +79,7 @@ export default class VideoPage extends Component {
             <Image style={styles.back} source={require('../../img/back.png')} />
           </TouchableOpacity>
           <View style={styles.titleView}>
-            <Text style={styles.title} numberOfLines={1}>{title}</Text>
+            <Text style={styles.title} allowFontScaling={false} numberOfLines={1}>{title}</Text>
           </View>
         </View>
         {/* 播放器底部的按钮*/}
@@ -94,7 +94,7 @@ export default class VideoPage extends Component {
                     maximumValue={this.state.duration}
              />
             <View style={styles.timeView}>
-              <Text style={styles.time}>{this.state.currentTime} / {this.state.durationTime}</Text>
+              <Text style={styles.time} allowFontScaling={false} numberOfLines={1}>{this.state.currentTime} / {this.state.durationTime}</Text>
             </View>
           </View>
           <TouchableOpacity onPress={()=>this._orientationDidChange()}>
@@ -133,11 +133,11 @@ export default class VideoPage extends Component {
     var initial = Orientation.getInitialOrientation()
     // LANDSCAPE 横屏  PORTRAIT 竖屏
     if (initial === 'LANDSCAPE') {
-      console.log(`横屏`);
+      // console.log(`横屏`);
       // 只允许竖屏
       // Orientation.lockToPortrait()
     } else if (initial === 'PORTRAIT') {
-      console.log(`竖屏`);
+      // console.log(`竖屏`);
       //只允许横屏
       // Orientation.lockToLandscape()
     }

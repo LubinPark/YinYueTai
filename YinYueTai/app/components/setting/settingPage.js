@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import NavigationBar from 'react-native-navbar'
 import _ from 'underscore'
+
 import {
   View,
   Text,

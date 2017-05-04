@@ -33,19 +33,22 @@ import {
               <Image source={{uri:item.posterPic}} key={index} style={[styles.image,styles.container]}>
                 <View style={styles.bottom}>
                   <View style={styles.left}>
-                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.title} allowFontScaling={false} numberOfLines={1}>{item.title}</Text>
                     <View style={styles.artistNameView}>
                     {
                       _.map(item.artists, (i ,index) => {
                         return (
-                            <Text style={styles.artistName} key={i.artistId}>{i.artistName}</Text>
+                          <Text key={i.artistId} style={styles.artistName}
+                            allowFontScaling={false} numberOfLines={1}>
+                            {i.artistName}
+                          </Text>
                         )
                       })
                     }
                     </View>
                   </View>
                   <View style={styles.loopView}>
-                    <Text style={styles.pageTotal}>{index + 1}/10</Text>
+                    <Text style={styles.pageTotal} allowFontScaling={false} numberOfLines={1}>{index + 1}/10</Text>
                   </View>
                 </View>
               </Image>
@@ -77,7 +80,7 @@ const styles = StyleSheet.create({
     height: 40
   },
   artistNameView:{
-    width: width / 3 * 2,
+    width: width / 4 * 3,
     height: 15,
     flexDirection:'row',
     backgroundColor:alpha0

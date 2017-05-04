@@ -60,6 +60,7 @@ class ChatPage extends Component {
         <ListView
           style={styles.listView}
           initialListSize={10}
+          enableEmptySections={true}
           dataSource={ds.cloneWithRows(chatList)}
           renderRow={(rowData)=>this._renderRow(rowData)}
         />

@@ -33,26 +33,25 @@ function requestRecentMessage(params) {
         })
       }).then((conversation) => {
         dispatch(saveConversation(conversation))
-        InteractionManager.runAfterInteractions(() => {
-          var messageIterator = conversation.createMessagesIterator({ limit: 10 });
-          messageIterator
-            .next()
-            .then((result) => {
-              return dispatch(saveServiceMessage(result.value, params.senderUser, params.currentUser))
-          })
-        })
+        dispatch(messageIterator(conversation, params.senderUser, params.currentUser))
       })
     } else {
       dispatch(saveConversation(params.conversation))
-      InteractionManager.runAfterInteractions(() => {
-        var messageIterator = params.conversation.createMessagesIterator({ limit: 100 });
-        messageIterator
-          .next()
-          .then((result) => {
-            return dispatch(saveServiceMessage(result.value, params.senderUser, params.currentUser))
-        })
-      })
+      dispatch(messageIterator(params.conversation, params.senderUser, params.currentUser))
     }
+  }
+}
+
+function messageIterator(conversation, senderUser, currentUser) {
+  return (dispatch) => {
+    InteractionManager.runAfterInteractions(() => {
+      var messageIterator = conversation.createMessagesIterator({ limit: 10 })
+      messageIterator
+        .next()
+        .then((result) => {
+          return dispatch(saveServiceMessage(result.value, senderUser, currentUser))
+      })
+    })
   }
 }
 

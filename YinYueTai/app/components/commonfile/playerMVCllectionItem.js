@@ -32,9 +32,9 @@ export default class CommonItem extends Component {
             <TouchableOpacity onPress={()=>this._goToPlayer(data.videoId)}>
               <Image source={{uri: data.posterPic}} style={styles.img} />
               <View style={styles.info}>
-                <Text style={styles.title} numberOfLines={1}>{data.title}</Text>
-                <Text style={styles.author} numberOfLines={1}>{data.creator.nickName}</Text>
-                <Text style={styles.num}>播放数量:{data.totalView}</Text>
+                <Text style={styles.title} allowFontScaling={false} numberOfLines={1}>{data.title}</Text>
+                <Text style={styles.author} allowFontScaling={false} numberOfLines={1}>{data.creator.nickName}</Text>
+                <Text style={styles.num} allowFontScaling={false} numberOfLines={1}>播放数量:{data.totalView}</Text>
               </View>
             </TouchableOpacity>
           </View>

@@ -13,7 +13,7 @@ export default class Home extends Component {
 
   render() {
 
-    var num = this.props.num
+    let num = this.props.num
 
     if (num == 0) {
       var color = {backgroundColor: purpure}

@@ -50,7 +50,7 @@ export default class MessageItem extends Component {
                  source={require('../../img/messageright.png')} />
           <View style={[styles.infoView,{justifyContent:'flex-end'}]}>
             <View style={[styles.textStyle,styles.self]}>
-              <Text style={styles.messageText}>{messages}</Text>
+              <Text style={styles.messageText} allowFontScaling={false}>{messages}</Text>
             </View>
           </View>
           <View style={styles.writeView}></View>

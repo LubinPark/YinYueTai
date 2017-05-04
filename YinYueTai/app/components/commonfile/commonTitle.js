@@ -15,10 +15,10 @@ export default class CommomTitle extends Component {
     return (
       <View style={styles.view}>
         <View style={styles.titleView}>
-          <View><Text style={styles.title}>{title}</Text></View>
+          <View><Text style={styles.title} allowFontScaling={false} numberOfLines={1}>{title}</Text></View>
         </View>
         <View style={styles.moreView}>
-          <View><Text style={styles.more}>更多 》</Text></View>
+          <View><Text style={styles.more} allowFontScaling={false} numberOfLines={1}>更多 》</Text></View>
         </View>
       </View>
     )

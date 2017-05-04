@@ -29,7 +29,7 @@ export default class SelectButton extends Component {
               <TouchableOpacity  key={item.icon}>
                 <View style={styles.item}>
                   <Image source={{uri:item.icon}} style={styles.button} />
-                  <Text style={styles.title}>{item.title}</Text>
+                  <Text style={styles.title} allowFontScaling={false} numberOfLines={1}>{item.title}</Text>
                 </View>
               </TouchableOpacity>
             )

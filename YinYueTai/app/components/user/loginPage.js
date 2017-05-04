@@ -40,7 +40,7 @@ class LoginPage extends Component {
       <View style={styles.container}>
         <NavigationBar title ={titleConfig} />
         <KeyboardAwareScrollView>
-          <TextInput style={[styles.TextInputSty,{marginTop: height / 2}]}
+          <TextInput style={[styles.TextInputSty,{marginTop: height / 3}]}
                      ref='account'
                      placeholder='账号'
                      numberOfLines={1}
@@ -56,15 +56,15 @@ class LoginPage extends Component {
         </KeyboardAwareScrollView>
         <View style={[styles.center,{height: 70}]}>
           <TouchableOpacity style={styles.button} onPress={() => this._submit()}>
-            <Text style={[styles.text,styles.login]}>登录</Text>
+            <Text style={[styles.text,styles.login]} allowFontScaling={false} numberOfLines={1}>登录</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => this._register()}>
-            <Text style={[styles.text,styles.register]}>注册</Text>
+            <Text style={[styles.text,styles.register]} allowFontScaling={false} numberOfLines={1}>注册</Text>
           </TouchableOpacity>
         </View>
         { (this.props.data.loginState === 'FAILED') ?
           <View style={styles.errorView}>
-            <Text style={styles.info}>{this.props.data.loginErrorInfo}</Text>
+            <Text style={styles.info} allowFontScaling={false} numberOfLines={1}>{this.props.data.loginErrorInfo}</Text>
           </View>
           : <Text/>
         }
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     width: width - 100,
     paddingLeft: 15,
     marginLeft: 50,
-    marginBottom: 30,
+    marginTop: 30,
     height: 40,
     fontSize: 13,
     color: lightGray,
