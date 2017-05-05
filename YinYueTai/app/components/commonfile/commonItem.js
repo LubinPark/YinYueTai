@@ -59,7 +59,7 @@ export default class CommonItem extends Component {
 
       return (
         <View style={[styles.items,backgroundColor,items]}>
-          <TouchableOpacity onPress={()=>this._goToPlayer(data.videoId)}>
+          <TouchableOpacity onPress={()=>this._goToPlayer(data.videoId, data.posterPic)}>
             <Image source={{uri: data.posterPic}} style={[styles.img,items]} />
             <View>
               <Text style={[styles.title,titleWhitestyle]} allowFontScaling={false} numberOfLines={1}>{data.title}</Text>
@@ -86,11 +86,12 @@ export default class CommonItem extends Component {
     )
   }
 
-  _goToPlayer(videoId) {
+  _goToPlayer(videoId, posterPic) {
     this.context.app.navigator.push({
       id:'PlayerMVPage',
       data: {
-        videoId: videoId
+        videoId: videoId,
+        posterPic: posterPic
       }
     })
   }

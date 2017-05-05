@@ -57,8 +57,8 @@ class PlayerMVPage extends Component {
         <View style={styles.view}>
           <StatusBar hidden={true} />
           <VideoPage url={authorInfo.url} title={authorInfo.title} cleanPLayData={()=>this.cleanPLayData()}/>
-          <Image style={styles.backgroundColor} source={require('../../img/background/background_0.png')} resizeMode='stretch' >
-            <ScrollView styles={styles.scrollView}>
+          <Image style={styles.scrollView} source={require('../../img/background/background_0.png')} resizeMode='stretch' >
+            <ScrollView style={styles.scrollView}>
               <AuthorInfo data={authorInfo}/>
               <MostWatch videoId={videoId}/>
               <AuthorListMV data={artistOtherVideos}/>
@@ -82,33 +82,9 @@ const styles = StyleSheet.create({
     width: width,
     height: height
   },
-  statusBar: {
-    width: width,
-    height: 20,
-    backgroundColor: 'black'
-  },
-  video: {
-    width: width,
-    backgroundColor: 'black'
-  },
   scrollView: {
     width:width,
     height: height - (width / 16 * 9)
-  },
-  backgroundColor:{
-    width:width,
-    height: height - (width / 16 * 9)
-  },
-  loadingView: {
-    width: width,
-    height: height,
-    alignItems:'center',
-    justifyContent:'center',
-    backgroundColor: purpure
-  },
-  loading:{
-    width: 100,
-    height: 100
   }
 })
 

@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import NavigationBar from 'react-native-navbar'
 
 import ChatItem from './chatItem'
+import Loading from '../commonfile/loading'
 import * as ChatAction from '../../actions/chatAction'
 
 import {
@@ -12,6 +13,7 @@ import {
   Text,
   ListView,
   StyleSheet,
+  RefreshControl,
   TouchableOpacity,
   InteractionManager
 } from 'react-native'
@@ -28,11 +30,7 @@ class ChatPage extends Component {
 
   componentWillMount() {
     InteractionManager.runAfterInteractions(() => {
-      this.props.actions.fetchChatActionIfNeeded({
-        type:'received',
-        limit: 10,
-        skip: 0
-      })
+      this._refresh()
     })
   }
 
@@ -55,6 +53,7 @@ class ChatPage extends Component {
   }
 
   _chatList(chatList) {
+    let num = _.random(0, 2)
     if (!_.isEmpty(chatList)) {
       return (
         <ListView
@@ -63,9 +62,38 @@ class ChatPage extends Component {
           enableEmptySections={true}
           dataSource={ds.cloneWithRows(chatList)}
           renderRow={(rowData)=>this._renderRow(rowData)}
+          refreshControl={
+            <RefreshControl
+              tintColor={'#ccc'}
+              refreshing={this.props.data.refresh}
+              onRefresh={()=>this._refresh()}
+            />
+          }
         />
       )
+    } else {
+      if (this.props.data.noData === true) {
+        return (
+          <View style={styles.listView}>
+            <Text>没有消息</Text>
+          </View>
+        )
+      } else {
+        return (
+          <View style={styles.listView}>
+            <Loading num={num}/>
+          </View>
+        )
+      }
     }
+  }
+
+  _refresh() {
+    this.props.actions.fetchChatActionIfNeeded({
+      type:'received',
+      limit: 10,
+      skip: 0
+    })
   }
 
   _renderRow(rowData) {

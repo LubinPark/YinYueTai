@@ -10,6 +10,7 @@ let TabBar = (state = initialState, action={}) => {
     case types.TABBAR_INITIAL_ROUTE:
       let route = action.data
       return Object.assign({}, state, {route:route})
+      break
 
     default:
       return state

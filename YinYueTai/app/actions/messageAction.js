@@ -1,5 +1,7 @@
 import AV from './AV'
-import { realtime, TextMessage } from './realTime'
+import Message from '../api/message'
+import Notification from '../api/notification'
+import { realtime } from './realTime'
 import { InteractionManager } from 'react-native'
 
 function sendToMessage(params) {
@@ -7,7 +9,11 @@ function sendToMessage(params) {
     //保存消息到reducer
     dispatch(saveMessage(params.message, params.senderUser, params.currentUser))
     // 聊天人之间的对话
-    return params.conversation.send(new TextMessage(params.message))
+    Message.sendMessage(params,(message, err) => {
+      if (!!message) {
+        Notification.sendNotification(message, params.currentUser)
+      }
+    })
   }
 }
 
@@ -23,17 +29,11 @@ function saveMessage(message, senderUser, currentUser) {
 function requestRecentMessage(params) {
   return (dispatch) => {
     if (params.conversation === undefined) {
-      realtime
-      .createIMClient(params.currentUser.id)
-      .then((received) => {
-        return received.createConversation({
-          members: [params.senderUser.id],
-          name: params.senderUser.get('username'),
-          unique: true
-        })
-      }).then((conversation) => {
-        dispatch(saveConversation(conversation))
-        dispatch(messageIterator(conversation, params.senderUser, params.currentUser))
+      Message.createConversation(params, (conversation, err) => {
+        if (!!conversation) {
+          dispatch(saveConversation(conversation))
+          dispatch(messageIterator(conversation, params.senderUser, params.currentUser))
+        }
       })
     } else {
       dispatch(saveConversation(params.conversation))
@@ -46,10 +46,8 @@ function messageIterator(conversation, senderUser, currentUser) {
   return (dispatch) => {
     InteractionManager.runAfterInteractions(() => {
       var messageIterator = conversation.createMessagesIterator({ limit: 10 })
-      messageIterator
-        .next()
-        .then((result) => {
-          return dispatch(saveServiceMessage(result.value, senderUser, currentUser))
+      messageIterator.next().then((result) => {
+        return dispatch(saveServiceMessage(result.value, senderUser, currentUser))
       })
     })
   }

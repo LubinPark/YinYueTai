@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import NavigationBar from 'react-native-navbar'
 
 import * as AdressBookAction from '../../actions/adressBookAction'
+import Loading from '../commonfile/loading'
 import AdressBookItem from './adressBookItem'
 
 import {
@@ -12,6 +13,7 @@ import {
   Text,
   ListView,
   StyleSheet,
+  RefreshControl,
   TouchableOpacity,
   InteractionManager
 } from 'react-native'
@@ -28,7 +30,7 @@ class ChatPage extends Component {
 
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
-      this.props.actions.fetchAdressBookIfNeeded({type:'getAdressBook'})
+      this._refresh()
     })
   }
 
@@ -51,6 +53,7 @@ class ChatPage extends Component {
   }
 
   _adressBook(adressBook) {
+    let num = _.random(0, 2)
     if (!_.isEmpty(adressBook)) {
       return (
         <ListView
@@ -59,9 +62,34 @@ class ChatPage extends Component {
           enableEmptySections={true}
           dataSource={ds.cloneWithRows(adressBook)}
           renderRow={(rowData)=>this._renderRow(rowData)}
+          refreshControl={
+            <RefreshControl
+              tintColor={'#ccc'}
+              refreshing={this.props.data.refresh}
+              onRefresh={()=>this._refresh()}
+            />
+          }
         />
       )
+    } else {
+      if (this.props.data.noData === true) {
+        return (
+          <View style={styles.listView}>
+            <Text>没有联系人</Text>
+          </View>
+        )
+      } else {
+        return (
+          <View style={styles.listView}>
+            <Loading num={num}/>
+          </View>
+        )
+      }
     }
+  }
+
+  _refresh() {
+    this.props.actions.fetchAdressBookIfNeeded({type:'getAdressBook'})
   }
 
   _renderRow(rowData) {

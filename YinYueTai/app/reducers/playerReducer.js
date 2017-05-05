@@ -12,18 +12,18 @@ let Player = (state = initialState, action={}) => {
       //authorInfo 里面有同艺人其他mv列表，收录该mv的悦单，猜你喜欢等数据
       let authorInfo = action.authorInfo
       return Object.assign({}, state,{authorInfo: authorInfo})
-      break;
+      break
 
     case types.REQUEST_MOST_WATCH:
       //mostWatch 大部分还是看了的数据
       let mostWatch = action.mostWatch
       return Object.assign({}, state,{mostWatch: mostWatch})
-      break;
+      break
 
     case types.CLEAN_PLAY_DATA:
       //当退出时清空
       return Object.assign({}, state, {authorInfo: {}, mostWatch: []})
-      break;
+      break
 
     default:
       return state

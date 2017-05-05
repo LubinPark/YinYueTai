@@ -4,30 +4,15 @@ import { InteractionManager } from 'react-native'
 import AV from './AV'
 import User from '../api/user'
 import { realtime } from './realTime'
+import Message from '../api/message'
 
 function reseivedToChat(params) {
-  let listID = []
   return (dispatch) => {
     AV.User.currentAsync().then((currentUser) => {
-      realtime.createIMClient(currentUser.id).then((received) => {
-      received
-        .getQuery()
-        .descending('updatedAt')
-        .containsMembers([currentUser.id])
-        .withLastMessagesRefreshed(true)
-        .find()
-        .then((conversations)=> {
-          for (var i = 0; i < conversations.length; i++) {
-            let members = conversations[i].members
-            if (members[0] === currentUser.id) {
-              listID.push(members[1])
-            } else {
-              listID.push(members[0])
-            }
-          }
+      Message.requestConversation(currentUser, (listID, conversations, err) => {
+        if (!err) {
           return dispatch(searchUsersByIds(listID, conversations))
-        })
-        .catch(console.error.bind(console));
+        }
       })
     })
   }

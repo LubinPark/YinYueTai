@@ -8,6 +8,7 @@ import {
   StatusBar,
   StyleSheet,
   ScrollView,
+  RefreshControl,
   InteractionManager
 } from 'react-native'
 
@@ -44,7 +45,15 @@ class HomePage extends Component {
       return (
          <View>
           <TopView />
-          <ScrollView style={styles.scrollView}>
+          <ScrollView
+            style={styles.scrollView}
+            refreshControl={
+            <RefreshControl
+              tintColor={'#ccc'}
+              refreshing={this.props.data.refresh}
+              onRefresh={()=>this._refresh()}
+            />
+          }>
             <Loop data={data.loop} />
             <SelectButton data={data.button} />
             {
@@ -58,6 +67,10 @@ class HomePage extends Component {
         </View>
       )
     }
+  }
+
+  _refresh() {
+    this.props.actions.fetchHomeIfNeeded()
   }
 
 }

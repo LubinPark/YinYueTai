@@ -1,7 +1,9 @@
 import * as types from '../actions/actionTypes'
 
 const initialState = {
-  chatList: []
+  chatList: [],
+  refresh: true,
+  noData: false
 }
 
 let Chat = (state = initialState, action={}) => {
@@ -11,6 +13,7 @@ let Chat = (state = initialState, action={}) => {
       let chatLists = []
       let users = action.users
       let conversations = action.conversations
+      let noData = false
       for (var i = 0; i < users.length; i++) {
         let chatList = {
           user: users[i],
@@ -19,7 +22,8 @@ let Chat = (state = initialState, action={}) => {
         }
         chatLists.push(chatList)
       }
-      return Object.assign({}, state, {chatList: chatLists})
+      if (users.length === 0) noData = true
+      return Object.assign({}, state, {chatList: chatLists, refresh: false, noData: noData})
         break
 
     default:

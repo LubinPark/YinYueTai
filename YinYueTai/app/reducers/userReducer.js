@@ -20,24 +20,24 @@ let User = (state = initialState, action={}) => {
       } else {
         return Object.assign({}, state, {userInfo: userInfo, registerState: 'SUCCESS'})
       }
-      break;
+      break
 
     case types.FAILED_REGISTER:
       //当用户注册失败
       let registerErrorInfo = action.registerErrorInfo
       return Object.assign({}, state, {registerErrorInfo: registerErrorInfo, registerState: 'FAILED'})
-      break;
+      break
 
     case types.LOGIN_FAILED:
       //当用户登录失败
       let loginErrorInfo = action.loginErrorInfo
       return Object.assign({}, state, {loginErrorInfo: loginErrorInfo, loginState: 'FAILED'})
-      break;
+      break
 
     case types.USER_LOGOUT:
       //用户退出
-      return Object.assign({}, initialState, { loginState: 'LOGOUT'})
-      break;
+      return Object.assign({}, initialState, {loginState: 'LOGOUT'})
+      break
 
     default:
       return state
