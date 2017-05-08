@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import _ from 'underscore'
+import { BlurView } from 'react-native-blur'
 import {
   View,
   Image,
@@ -57,14 +58,16 @@ class PlayerMVPage extends Component {
         <View style={styles.view}>
           <StatusBar hidden={true} />
           <VideoPage url={authorInfo.url} title={authorInfo.title} cleanPLayData={()=>this.cleanPLayData()}/>
-          <Image style={styles.scrollView} source={require('../../img/background/background_0.png')} resizeMode='stretch' >
-            <ScrollView style={styles.scrollView}>
-              <AuthorInfo data={authorInfo}/>
-              <MostWatch videoId={videoId}/>
-              <AuthorListMV data={artistOtherVideos}/>
-              <RelatedPlayList data={relatedPlayList}/>
-              <GuestLike data={relatedVideos}/>
-            </ScrollView>
+          <Image style={styles.scrollView} source={{uri:this.props.posterPic}} resizeMode='stretch' >
+            <BlurView blurType='dark' style={styles.scrollView} blurAmount={30}>
+              <ScrollView style={styles.scrollView}>
+                <AuthorInfo data={authorInfo}/>
+                <MostWatch videoId={videoId}/>
+                <AuthorListMV data={artistOtherVideos}/>
+                <RelatedPlayList data={relatedPlayList}/>
+                <GuestLike data={relatedVideos}/>
+              </ScrollView>
+            </BlurView>
           </Image>
         </View>
       )
@@ -80,7 +83,8 @@ class PlayerMVPage extends Component {
 const styles = StyleSheet.create({
   view: {
     width: width,
-    height: height
+    height: height,
+    backgroundColor: '#fff'
   },
   scrollView: {
     width:width,
