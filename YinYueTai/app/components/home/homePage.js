@@ -1,7 +1,8 @@
+import _ from 'underscore'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import _ from 'underscore'
+
 import {
   View,
   Image,
@@ -13,7 +14,6 @@ import {
 } from 'react-native'
 
 import * as HomeAction from '../../actions/homeAction'
-
 import Loading from '../commonfile/loading'
 import TopView from './topView'
 import Loop from './loop'
@@ -52,8 +52,7 @@ class HomePage extends Component {
               tintColor={'#ccc'}
               refreshing={this.props.data.refresh}
               onRefresh={()=>this._refresh()}
-            />
-          }>
+          />}>
             <Loop data={data.loop} />
             <SelectButton data={data.button} />
             {

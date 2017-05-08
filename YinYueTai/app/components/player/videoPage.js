@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
 import _ from 'underscore'
+import React, { Component } from 'react'
 import Video from 'react-native-video'
-import Orientation from 'react-native-orientation'
 
 import {
   View,
@@ -31,17 +30,6 @@ export default class VideoPage extends Component {
       current: 0,              //进度条的值
       duration: 0,             //进度条的最大值
     }
-  }
-
-  componentDidMount() {
-    Orientation.addOrientationListener(this._orientationDidChange)
-  }
-
-  componentWillUnmount() {
-    Orientation.getOrientation((err,orientation) => {
-    //  console.log("Current Device Orientation: ", orientation);
-    })
-    Orientation.removeOrientationListener(this._orientationDidChange);
   }
 
   render () {
@@ -129,24 +117,14 @@ export default class VideoPage extends Component {
     }
   }
 
-  _orientationDidChange() {
-    var initial = Orientation.getInitialOrientation()
-    // LANDSCAPE 横屏  PORTRAIT 竖屏
-    if (initial === 'LANDSCAPE') {
-      // console.log(`横屏`);
-      // 只允许竖屏
-      // Orientation.lockToPortrait()
-    } else if (initial === 'PORTRAIT') {
-      // console.log(`竖屏`);
-      //只允许横屏
-      // Orientation.lockToLandscape()
-    }
-  }
-
   _playerButton(status) {
     this.setState({
       paused: !status
     })
+  }
+
+  _orientationDidChange() {
+    
   }
 
   _showDuration(time) {

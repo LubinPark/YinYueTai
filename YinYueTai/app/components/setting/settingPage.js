@@ -1,8 +1,8 @@
+import _ from 'underscore'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import NavigationBar from 'react-native-navbar'
-import _ from 'underscore'
 
 import {
   View,
@@ -16,7 +16,7 @@ import {
 import * as UserAction from '../../actions/userAction'
 
 var Device = require('../../utils/device')
-const { width, height, gray } = Device
+const { width, height, gray, isAndroid } = Device
 
 class SettingPage extends Component {
 
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   logOutView: {
     position: 'absolute',
     left: 50,
-    bottom: 70,
+    bottom: isAndroid ? 90 : 70,
     width: width  - 100,
     height: 40,
     borderRadius: 5,

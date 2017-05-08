@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
 import _ from 'underscore'
+import React, { Component } from 'react'
+
 import {
   Text,
   View,

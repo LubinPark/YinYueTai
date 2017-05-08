@@ -16,7 +16,7 @@ import {
 import * as UserAction from '../../actions/userAction'
 
 var Device = require('../../utils/device')
-const { width, height, lightGray } = Device
+const { width, height, lightGray, isAndroid } = Device
 
 class LoginPage extends Component {
 
@@ -54,7 +54,7 @@ class LoginPage extends Component {
                      underlineColorAndroid="transparent"
                      onChange={(value) => this._password(value)}/>
         </KeyboardAwareScrollView>
-        <View style={[styles.center,{height: 70}]}>
+        <View style={[styles.center,{height: isAndroid ? 90 : 70}]}>
           <TouchableOpacity style={styles.button} onPress={() => this._submit()}>
             <Text style={[styles.text,styles.login]} allowFontScaling={false} numberOfLines={1}>登录</Text>
           </TouchableOpacity>

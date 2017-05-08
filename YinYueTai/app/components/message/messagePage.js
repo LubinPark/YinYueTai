@@ -25,7 +25,7 @@ import {
 
 var Device = require('../../utils/device')
 var ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
-const { width, height, backView, fadeGray, gray, border } = Device
+const { width, height, backView, fadeGray, gray, border, isAndroid } = Device
 
 class MessagePage extends Component {
 
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   },
   backgroundImg: {
     position: 'absolute',
-    top: 64,
+    top: isAndroid ? 44 : 64,
     width: width,
     height: height - 64,
     backgroundColor:'transparent'
@@ -216,8 +216,9 @@ const styles = StyleSheet.create({
   },
   inputView: {
     flex: 1,
-    height: 33,
-    margin: 8,
+    height: isAndroid ? 36 : 33,
+    margin: isAndroid ? 4 : 8,
+    marginTop: isAndroid ? 2 : 8,
     fontSize: 14,
     paddingLeft: 5,
     borderRadius: 3,

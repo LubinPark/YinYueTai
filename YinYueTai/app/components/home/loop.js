@@ -1,9 +1,6 @@
+import _ from 'underscore'
 import React, { Component } from 'react'
 import Swiper from 'react-native-swiper'
-import _ from 'underscore'
-
-var Device = require('../../utils/device')
-var { width, height, alpha0 } = Device
 
 import {
   Text,
@@ -11,6 +8,9 @@ import {
   Image,
   StyleSheet
 } from 'react-native'
+
+var Device = require('../../utils/device')
+var { width, height, alpha0 } = Device
 
  export default class Loop extends Component {
 

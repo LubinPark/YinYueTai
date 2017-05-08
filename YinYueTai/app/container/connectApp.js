@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { View, StatusBar, Navigator } from 'react-native'
 import { bindActionCreators } from 'redux'
+import React, { Component, PropTypes } from 'react'
+import { View, StatusBar, Navigator } from 'react-native'
 
 import Routes from '../components/navigation/routes'
 import * as TabBarAction from '../actions/tabBarAction'

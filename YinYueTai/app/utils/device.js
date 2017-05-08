@@ -1,6 +1,8 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet, Platform } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
+
+const isAndroid = (Platform.OS === 'android')
 
 const backView = {
   marginTop: 5,
@@ -30,6 +32,8 @@ module.exports = {
   height:height,
   itemWidth: (width - 30) / 2,
 
+  isAndroid: isAndroid,
+
   black: '#525252',
   darkBlack: 'rgba(0,0,0,1)',
   alpha0:'rgba(0,0,0,0)',
@@ -48,5 +52,4 @@ module.exports = {
   borderTop: borderTop,
   borderBottom: borderBottom,
   border: border
-
 }

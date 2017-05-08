@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import TabNavigator from 'react-native-tab-navigator'
+
 import {
   View,
   Text,
@@ -20,7 +21,7 @@ export default class TabBarApp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: 'AdressBook',
+      selectedTab: 'Home',
     }
   }
   // renderIcon={() => <Image source={require("./img/0.png")} />}

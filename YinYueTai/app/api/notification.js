@@ -17,7 +17,7 @@ NotificationRequest.sendNotification = (message, currentUser, callback) => {
   //   user: currentUser.id,
   //   production: 'dev'
   // }
-  //数据弄好发送未实现
+  //数据弄好发送未实现,需要推送证书
   AV.Push.send({
     channels: [ 'public' ],
     data: {

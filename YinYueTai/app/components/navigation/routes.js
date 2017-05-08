@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Navigator } from 'react-native'
+
+import {
+  Text,
+  View,
+  Navigator,
+  StyleSheet
+} from 'react-native'
 
 import TabBarApp from '../../container/tabBarApp'
 import ContextWrapper from './contextWrapper'

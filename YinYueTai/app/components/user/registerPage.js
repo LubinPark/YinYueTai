@@ -17,7 +17,7 @@ import {
 import * as UserAction from '../../actions/userAction'
 
 var Device = require('../../utils/device')
-const { width, height, lightGray } = Device
+const { width, height, lightGray, isAndroid } = Device
 
 class RegisterPage extends Component {
 
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 5,
-    marginBottom: 60
+    marginBottom: isAndroid ? 90 : 70
   },
   text: {
     fontSize: 14,

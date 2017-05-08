@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import {
   View,
   Image,
@@ -8,7 +9,7 @@ import {
 } from 'react-native'
 
 var Device = require('../../utils/device')
-const { itemHeight, width, height, black } = Device
+const { itemHeight, width, height, black, isAndroid } = Device
 
 export default class TopView extends Component {
 
@@ -26,8 +27,10 @@ export default class TopView extends Component {
           <Image source={require('../../img/search.png')} style={styles.search_icon} />
           <TextInput style={styles.search_text}
                      numberOfLines={1}
+                     multiline={false}
                      placeholder={this.state.text}
                      clearButtonMode='while-editing'
+                     underlineColorAndroid="transparent"
           />
         </View>
         <View style={styles.historyView}>
@@ -44,13 +47,13 @@ export default class TopView extends Component {
 const styles = StyleSheet.create({
   topView: {
     width:width,
-    height: 64,
+    height: isAndroid ? 44 : 64,
     flexDirection:'row',
     backgroundColor: 'black'
   },
   searchButton: {
     height: 32,
-    marginTop: 23,
+    marginTop: isAndroid ? 4 : 23,
     marginLeft: 15,
     borderRadius: 16,
     width:width / 4 * 3,
@@ -78,6 +81,6 @@ const styles = StyleSheet.create({
   history: {
     width: 30,
     height: 30,
-    marginTop: 23
+    marginTop: isAndroid ? 4 : 23
   }
 })

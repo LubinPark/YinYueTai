@@ -1,8 +1,9 @@
+import _ from 'underscore'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import _ from 'underscore'
 import { BlurView } from 'react-native-blur'
+
 import {
   View,
   Image,
@@ -22,7 +23,7 @@ import RelatedPlayList from './relatedPlayList'
 import GuestLike from './guestLike'
 
 var Device = require('../../utils/device')
-const { width, height, purpure } = Device
+const { width, height, purpure, isAndroid } = Device
 
 class PlayerMVPage extends Component {
 
@@ -54,12 +55,12 @@ class PlayerMVPage extends Component {
       let relatedVideos = data.relatedVideos
       let relatedPlayList = data.relatedPlayList
 
-      return (
-        <View style={styles.view}>
-          <StatusBar hidden={true} />
-          <VideoPage url={authorInfo.url} title={authorInfo.title} cleanPLayData={()=>this.cleanPLayData()}/>
-          <Image style={styles.scrollView} source={{uri:this.props.posterPic}} resizeMode='stretch' >
-            <BlurView blurType='dark' style={styles.scrollView} blurAmount={30}>
+      if (isAndroid) {
+        return (
+          <View style={styles.view}>
+            <StatusBar hidden={true} />
+            <VideoPage url={authorInfo.url} title={authorInfo.title} cleanPLayData={()=>this.cleanPLayData()}/>
+            <Image style={styles.scrollView} source={require('../../img/background/background_0.png')} resizeMode='stretch' >
               <ScrollView style={styles.scrollView}>
                 <AuthorInfo data={authorInfo}/>
                 <MostWatch videoId={videoId}/>
@@ -67,10 +68,28 @@ class PlayerMVPage extends Component {
                 <RelatedPlayList data={relatedPlayList}/>
                 <GuestLike data={relatedVideos}/>
               </ScrollView>
-            </BlurView>
-          </Image>
-        </View>
-      )
+            </Image>
+          </View>
+        )
+      } else {
+        return (
+          <View style={styles.view}>
+            <StatusBar hidden={true} />
+            <VideoPage url={authorInfo.url} title={authorInfo.title} cleanPLayData={()=>this.cleanPLayData()}/>
+            <Image style={styles.scrollView} source={{uri:this.props.posterPic}} resizeMode='stretch' >
+              <BlurView blurType='dark' style={styles.scrollView} blurAmount={15}>
+                <ScrollView style={styles.scrollView}>
+                  <AuthorInfo data={authorInfo}/>
+                  <MostWatch videoId={videoId}/>
+                  <AuthorListMV data={artistOtherVideos}/>
+                  <RelatedPlayList data={relatedPlayList}/>
+                  <GuestLike data={relatedVideos}/>
+                </ScrollView>
+              </BlurView>
+            </Image>
+          </View>
+        )
+      }
     }
   }
 
