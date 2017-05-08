@@ -66,11 +66,9 @@ class SettingPage extends Component {
               {email}
             </Text>
           </View>
-          <View style={styles.logOutView}>
-            <TouchableOpacity onPress={() => this._logOut()}>
-              <Text allowFontScaling={false} numberOfLines={1}>退出</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity style={styles.logOutView} onPress={() => this._logOut()}>
+            <View><Text allowFontScaling={false} numberOfLines={1}>退出</Text></View>
+          </TouchableOpacity>
         </View>
       )
     } else {
@@ -111,9 +109,9 @@ const styles = StyleSheet.create({
   },
   logOutView: {
     position: 'absolute',
-    left: 50,
+    left: 20,
     bottom: isAndroid ? 90 : 70,
-    width: width  - 100,
+    width: width  - 40,
     height: 40,
     borderRadius: 5,
     borderColor: gray,

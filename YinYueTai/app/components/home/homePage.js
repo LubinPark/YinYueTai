@@ -47,6 +47,8 @@ class HomePage extends Component {
           <TopView />
           <ScrollView
             style={styles.scrollView}
+            keyboardDismissMode='on-drag'
+            keyboardShouldPersistTaps='never'
             refreshControl={
             <RefreshControl
               tintColor={'#ccc'}
