@@ -13,11 +13,11 @@ UserRequest.searchUsersByIds = (ids, callback) => {
   })
 }
 
+//在服务器写的‘searchUsers’
 UserRequest.searchUsers = (callback) => {
-  var query = new AV.Query('_User')
-  query.find().then((users) => {
+  AV.Cloud.rpc('searchUsers').then((users)=> {
     callback(users, null)
-  }).catch((err) => {
+  }, (err) => {
     callback(null, err)
   })
 }
