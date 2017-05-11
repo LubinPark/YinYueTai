@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var AV = require('leanengine');
 
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
-require('./cloudUrl');
+require('./index');
 
 //创建一个 Express 应用。express() 是一个由 express 模块导出的入口（top-level）函数。
 var app = express();
@@ -61,7 +61,6 @@ app.get('/', function(req, res) {
 });
 
 // 可以将一类的路由单独保存在一个文件中
-// app.use('/todos', require('./routes/todos'));
 app.use('/wechat', require('./routes/wechatBot'));
 
 app.use(function(req, res, next) {

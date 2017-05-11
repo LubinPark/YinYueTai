@@ -1,24 +1,20 @@
 var router = require('express').Router();
-// 引用 wechat 库，详细请查看 https://github.com/node-webot/wechat
 var wechat = require('wechat');
-var config = {
-  token: 'weixin',
-  appid: 'wx51ba8ca8236cce6c',
-  encodingAESKey: 'XIcwpIqvgdQzgg3C7l5VQXk93TPSTlqWMmLF7KYfgzd'
+var config = require('../config');
+var data = {
+  token: config.token,
+  appid: config.appId,
+  encodingAESKey: config.encodingAESKey
 };
 
-var WechatAPI = require('wechat-api');
-var api = new WechatAPI('wx51ba8ca8236cce6c',
-  'f018b64d5495265472cc2c6e03622920');
-
-router.use('/', wechat(config.token).text(function(message, req, res, next) {
+router.use('/', wechat(data.token).text(function(message, req, res, next) {
   // message为文本内容
   // FromUserName: 'oPKu7jgOibOA-De4u8J2RuNKpZRw',
   // CreateTime: '1359125035',
   // MsgType: 'text',
   // Content: 'http',
   // MsgId: '5837397576500011341' }
-  var keyArray = ['你好', '约吗', '骚骚'];
+  var keyArray = ['你好', '约吗'];
   var content = message.Content;
   var keyIndex = keyArray.indexOf(content);
   switch (keyIndex) {
@@ -40,19 +36,10 @@ router.use('/', wechat(config.token).text(function(message, req, res, next) {
 
       }
       break;
-      case 2:
-        {
-          res.reply({
-            type: "text",
-            content: '大傻x'
-          });
-
-        }
-        break;
     default:
       res.reply({
         type: "text",
-        content: '服务器挂掉了，你的要求暂时无法满足…… 哈哈，开玩笑，正在开发。。请稍后。。。'
+        content: ''
       });
       break;
   }
