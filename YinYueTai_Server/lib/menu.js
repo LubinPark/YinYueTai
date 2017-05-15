@@ -53,9 +53,9 @@ var menu =
 }
 
 // 创建菜单 创建一次就够，一只存在
-api.createMenu(menu, (data) =>{
+// api.createMenu(menu, (data) =>{
 //  console.log(data)
-});
+// });
 
 // 请求菜单
 // api.getMenu = ((data) => {

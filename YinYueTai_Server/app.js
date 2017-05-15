@@ -1,10 +1,10 @@
 'use strict';
 var express = require('express');
-var timeout = require('connect-timeout');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 var AV = require('leanengine');
+var path = require('path');
+var timeout = require('connect-timeout');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
 require('./index');
@@ -56,12 +56,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //加载缓存的插件
 app.use(cookieParser());
 
+//初始请求
 app.get('/', function(req, res) {
   res.render('index');
 });
 
 // 可以将一类的路由单独保存在一个文件中
-app.use('/wechat', require('./routes/wechatBot'));
+app.use('/', require('./routes/router'));
 
 app.use(function(req, res, next) {
   // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
@@ -74,6 +75,8 @@ app.use(function(req, res, next) {
 
 // error handlers， 错误处理
 app.use(function(err, req, res, next) {
+
+  console.log(err);
   if (req.timedout && req.headers.upgrade === 'websocket') {
     // 忽略 websocket 的超时
     return;
