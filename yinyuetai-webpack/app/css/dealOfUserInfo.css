@@ -1,0 +1,26 @@
+.dealUser {
+  background-color: #73e2ff;
+}
+
+.userheadImg {
+  float: left;
+  width: 32px;
+  height: 32px;
+  margin-top: 4px;
+  margin-left: 15px;
+  margin-right: 10px;
+  border-radius: 16px;
+  background-color: red;
+}
+
+.userinfo {
+  height: 40px;
+}
+
+.username {
+  font-size: 15px;
+}
+
+.occupation {
+  font-size: 14px;
+}

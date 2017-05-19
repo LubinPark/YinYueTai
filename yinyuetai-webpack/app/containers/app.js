@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 
-import Home from '../components/home'
+import Home from '../components/home/home'
 import styles from '../css/home.css'
 
-class App extends Component{
+export default class App extends Component{
   render() {
     return (
       <div className={styles.root}>
@@ -12,5 +12,3 @@ class App extends Component{
     )
   }
 }
-
-export default App

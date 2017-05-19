@@ -2,8 +2,11 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import styles from '../css/home.css'
-import * as actions from '../actions/userAction'
+import * as actions from '../../actions/userAction'
+
+import DealOfUserInfo from './dealOfUserInfo'
+import DealOfInfo from './dealOfInfo'
+import styles from '../../css/home.css'
 
 class Home extends Component{
 
@@ -13,8 +16,12 @@ class Home extends Component{
 
   render() {
     return (
-      <div className={styles.root}>
-        主页主页
+      <div className='root'>
+        <h1>主页主页</h1>
+        <div>
+          <DealOfUserInfo />
+          <DealOfInfo />
+        </div>
       </div>
     )
   }

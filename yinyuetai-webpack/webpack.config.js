@@ -37,7 +37,7 @@ module.exports = {
       mangle: true
     }),
     // ExtractTextPlugin：分离CSS和JS文件
-    new ExtractTextPlugin("style.css")
+    new ExtractTextPlugin("styles.css")
   ],
   //本地服务器
   devServer: {
