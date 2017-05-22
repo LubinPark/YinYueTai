@@ -1,0 +1,29 @@
+.dealInfo {
+  display: flex;
+  height: 20px;
+  padding-top: 4px;
+  background-color: #fff;
+}
+
+.dealOfImg {
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  margin-left: 15px;
+  margin-right: 4px;
+}
+
+.location {
+  color: #666;
+  font-size: 12px;
+}
+
+.locationValue {
+  color: black;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.commonInfoView {
+  display: flex;
+}

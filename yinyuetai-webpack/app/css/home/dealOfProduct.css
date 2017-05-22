@@ -1,0 +1,62 @@
+.productOfCell {
+  display: flex;
+  background-color: #fff;
+  border-top: 1px solid #ededed;
+}
+
+.productOfImg {
+  height: 70px;
+  margin-right: 8px;
+}
+
+.productOfInfo {
+  flex: 1;
+  height: 70px;
+  background-color: #fff;
+}
+
+.productTitle {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  color: #73e2ff;
+  font-size: 15px;
+}
+
+.down {
+  display: flex;
+}
+
+.left {
+ flex: 1;
+}
+
+.right {
+  width: 90px;
+}
+
+.quantityTitle {
+  color: #ccc;
+  margin-top: -3px;
+  font-size: 15px;
+}
+
+.quantityValue {
+  color: #73e2ff;
+  margin-left: 20px;
+  font-size: 15px;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+}
+
+.detailTitle {
+  color: #ccc;
+  font-size: 12px;
+}
+
+.detailValue {
+  color: #666;
+  font-size: 12px;
+}
