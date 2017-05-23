@@ -7,7 +7,7 @@ class DealOfInfo extends Component{
   constructor(props) {
     super(props)
     this.state = {
-      width: ((window.innerWidth) / 2)
+      width: ((window.innerWidth) / 2.5)
     }
   }
 

@@ -1,0 +1,45 @@
+.detailDealView {
+  margin-top: 10px;
+  background-color: #fff;
+}
+
+.detailDealTitle {
+  color: #666;
+  padding-top: 15px;
+  padding-left: 15px;
+  font-size: 15px;
+}
+
+.detailInfoCell {
+  display: flex;
+  margin-top: 5px;
+}
+
+.detailDealCell {
+  margin-top: 15px;
+}
+
+.dealInfoImg {
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  margin-right: 5px;
+}
+
+.dealInfoTitle {
+  font-size: 15px;
+  color: #666;
+  margin-left: 4px;
+}
+
+.dealInfoValue {
+  font-size: 15px;
+  color: #1b1b1b;
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+.detailDealSupply {
+  padding: 15px;
+  padding-top: 5px;
+}

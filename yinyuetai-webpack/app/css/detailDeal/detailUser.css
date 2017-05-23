@@ -1,0 +1,39 @@
+.detailUser {
+  display: flex;
+  padding: 15px;
+  align-items: center;
+  background-color: #fff;
+}
+
+.detailUserImg {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: #ededed;
+}
+
+.detailUserName {
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.detailUserView {
+  display: flex;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+
+.detailUserIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.detailUserTitle {
+  font-size: 15px;
+  margin-left: 10px;
+  color: #1b1b1b;
+}
+
+.detailUserInfo {
+  margin-bottom: 20px;
+}

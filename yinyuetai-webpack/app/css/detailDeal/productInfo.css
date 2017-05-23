@@ -1,0 +1,81 @@
+.product {
+  background-color: #fff;
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+}
+
+.productInfoTitle {
+  color: #666;
+  font-size: 15px;
+  padding: 15px;
+}
+
+.productInfo {
+  display: flex;
+}
+
+.productImg {
+  width: 70px;
+  height: 70px;
+  margin-left: 20px;
+}
+
+.productDetail {
+  margin-left: 40px;
+}
+
+.productBrand {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.productTitle {
+  color: #73e2ff;
+  font-size: 15px;
+}
+
+.netWeight {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.netWeightTitle {
+  color: #ccc;
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+.netWeightValue {
+  color: #666;
+  font-size: 13px;
+}
+
+.detailView {
+  display: flex;
+  margin-top: 10px;
+  flex: 1;
+  justify-content: center;
+}
+
+.detail {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.line {
+  width: 1px;
+  height: 40px;
+  border-right: 1px solid #ccc;
+}
+
+.prodDetailTitle {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.prodDetailValue {
+  color: #73e2ff;
+  font-size: 15px;
+  font-weight: 600;
+}

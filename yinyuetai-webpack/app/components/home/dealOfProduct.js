@@ -30,7 +30,7 @@ class DealOfProduct extends Component {
 class Detail extends Component {
   render () {
     return (
-      <div className='detail'>
+      <div className='homeDetail'>
         <div className='detailTitle'>{this.props.title}：</div>
         <div className='detailValue'>{this.props.value}</div>
       </div>

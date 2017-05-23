@@ -46,9 +46,8 @@
   font-size: 15px;
 }
 
-.detail {
+.homeDetail {
   display: flex;
-  align-items: center;
 }
 
 .detailTitle {
