@@ -28,7 +28,7 @@ class Home extends Component {
       {
         _.map(this.state.data, (item, index) => {
           return (
-            <Link to='/detailDeal' key={index}>
+            <Link to='/detailDeal' key={index} style={{textDecoration: 'blink'}}>
               <DealCell key={index} onClick={(e)=>this._clickDeal(e, item)}/>
             </Link>
           )
@@ -39,7 +39,7 @@ class Home extends Component {
   }
 
   _clickDeal(e, item) {
-    console.log(item);
+    // console.log(item);
   }
 
 }

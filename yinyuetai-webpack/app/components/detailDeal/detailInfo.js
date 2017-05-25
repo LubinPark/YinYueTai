@@ -44,7 +44,6 @@ class DetailInfoCell extends Component {
         <img className='dealInfoImg' src='../../img/userhead.png'/>
         <div className='dealInfoTitle'>{this.props.title}:</div>
         <div className='dealInfoValue' style={{width: this.state.width - 150}}>{this.props.value}</div>
-        <div></div>
       </div>
     )
   }
