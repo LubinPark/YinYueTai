@@ -4,20 +4,35 @@ import styles from '../../css/home/dealOfProduct.css'
 
 class DealOfProduct extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      width: ((window.innerWidth) - 100)
+    }
+  }
+
   render() {
+
+    let deal = this.props.deal.attributes
+    let pic = deal.products[0].attributes.thumbnail ? deal.products[0].attributes.thumbnail.attributes.url : '../../img/userhead.png'
+
     return (
       <div className='productOfCell'>
-        <img className='productOfImg' src='../../img/userhead.png' alt='picture' />
+        <img className='productOfImg' src={pic} alt='picture' />
         <div className='productOfInfo'>
-          <div className='productTitle'>标题标题标题标题标题</div>
+          <div className='productTitle' style={{width: this.state.width}}>{deal.searchable}</div>
           <div className='down'>
             <div className='left'>
-              <Detail title='产地' value='悉尼' />
-              <Detail title='分类' value='进口美食' />
+              <Detail title='产地' value={deal.product_origin} />
+              <Detail title='分类' value={deal.product_category} />
             </div>
-            <div className='right'>
-              <div className='quantityTitle'>起订量</div>
-              <div className='quantityValue'>1</div>
+            <div>
+              <div className='right'>
+                <div className='quantityTitle'>起订量</div>
+              </div>
+              <div className='right'>
+                <div className='quantityValue'>{deal.product_min_quantity}</div>
+              </div>
             </div>
           </div>
         </div>

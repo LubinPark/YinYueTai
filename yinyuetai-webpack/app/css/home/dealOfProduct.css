@@ -6,6 +6,7 @@
 
 .productOfImg {
   height: 70px;
+  width: 70px;
   margin-right: 8px;
 }
 
@@ -16,7 +17,11 @@
 }
 
 .productTitle {
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
   margin-top: 4px;
+  margin-right: 15px;
   margin-bottom: 4px;
   color: #73e2ff;
   font-size: 15px;
@@ -31,7 +36,10 @@
 }
 
 .right {
-  width: 90px;
+  display: flex;
+  width: 100px;
+  margin-right: 15px;
+  justify-content: center;
 }
 
 .quantityTitle {
@@ -42,7 +50,6 @@
 
 .quantityValue {
   color: #73e2ff;
-  margin-left: 20px;
   font-size: 15px;
 }
 

@@ -8,11 +8,12 @@ import styles from '../../css/home/home.css'
 class DealCell extends Component {
 
   render() {
+    let deal = this.props.deal
     return (
       <div onClick={(e)=>this._clickDeal(e)}>
-        <DealOfUserInfo />
-        <DealOfInfo />
-        <DealOfProduct />
+        <DealOfUserInfo deal={deal}/>
+        <DealOfInfo deal={deal}/>
+        <DealOfProduct deal={deal}/>
         <div className='cellSeparator'></div>
       </div>
     )

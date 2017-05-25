@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 
-import * as actions from '../../actions/userAction'
+import * as actions from '../../actions/dealAction'
 
 import styles from '../../css/home/home.css'
 import DealCell from './dealCell'
@@ -13,29 +13,38 @@ class Home extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      data: [1,2,3,4,5]
-    }
   }
 
   componentWillMount() {
-    // this.props.actions.fetchUserIfNeeded({type: 'userInfo'})
+    this.props.actions.fetchDealIfNeeded({type: 'getDeals'})
   }
 
   render() {
-    return (
-      <div>
-      {
-        _.map(this.state.data, (item, index) => {
-          return (
-            <Link to='/detailDeal' key={index} style={{textDecoration: 'blink'}}>
-              <DealCell key={index} onClick={(e)=>this._clickDeal(e, item)}/>
-            </Link>
-          )
-        })
-      }
-      </div>
-    )
+
+    let deals = this.props.data.deals
+
+    if (deals.length > 0) {
+      return (
+        <div>
+        {
+          _.map(deals, (item, index) => {
+            return (
+              <Link to='/detailDeal' key={index} style={{textDecoration: 'blink'}}>
+                <DealCell key={index} deal={item} onClick={(e)=>this._clickDeal(e, item)}/>
+              </Link>
+            )
+          })
+        }
+        </div>
+      )
+    } else {
+      return (
+        <div>
+        </div>
+      )
+    }
+
+
   }
 
   _clickDeal(e, item) {
@@ -45,7 +54,7 @@ class Home extends Component {
 }
 
 export default connect(state => ({
-  data: state.UserReducer,
+  data: state.DealReducer,
   }),
   (dispatch) => ({
     actions: bindActionCreators(actions, dispatch)
