@@ -6,8 +6,8 @@
 }
 
 .dealOfImg {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   margin-top: 1px;
   margin-left: 15px;
   margin-right: 4px;
@@ -15,12 +15,12 @@
 
 .location {
   color: #666;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .locationValue {
   color: black;
-  font-size: 12px;
+  font-size: 13px;
   margin-left: 4px;
 }
 

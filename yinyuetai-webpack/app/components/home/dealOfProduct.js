@@ -14,13 +14,15 @@ class DealOfProduct extends Component {
   render() {
 
     let deal = this.props.deal.attributes
-    let pic = deal.products[0].attributes.thumbnail ? deal.products[0].attributes.thumbnail.attributes.url : '../../img/userhead.png'
+    let product = deal.products[0].attributes
+    let color = (deal.dealType === '卖') ? '#51acf2' : '#f8c027'
+    let pic = product.thumbnail ? product.thumbnail.attributes.url : '../../img/userhead.png'
 
     return (
       <div className='productOfCell'>
         <img className='productOfImg' src={pic} alt='picture' />
         <div className='productOfInfo'>
-          <div className='productTitle' style={{width: this.state.width}}>{deal.searchable}</div>
+          <div className='productTitle' style={{width: this.state.width, color: color}}>{deal.searchable}</div>
           <div className='down'>
             <div className='left'>
               <Detail title='产地' value={deal.product_origin} />
@@ -31,7 +33,7 @@ class DealOfProduct extends Component {
                 <div className='quantityTitle'>起订量</div>
               </div>
               <div className='right'>
-                <div className='quantityValue'>{deal.product_min_quantity}</div>
+                <div className='quantityValue' style={{color: color}}>{deal.product_min_quantity}</div>
               </div>
             </div>
           </div>

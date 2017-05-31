@@ -1,4 +1,5 @@
 var AV = require('../../AVConfig')
+
 var UserRequest ={}
 
 UserRequest.searchUsers = (callback) => {

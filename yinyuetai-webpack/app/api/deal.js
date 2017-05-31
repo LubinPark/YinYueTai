@@ -11,4 +11,14 @@ DealRequest.getDeals = (callback) => {
   })
 }
 
+DealRequest.getDealById = (params, callback) => {
+  AV.Cloud.rpc('getDeals', params).then((deal) => {
+    console.log(deal);
+    callback(deal, null)
+  },(err) => {
+    console.log(err);
+    callback(null ,err)
+  })
+}
+
 module.exports = DealRequest;

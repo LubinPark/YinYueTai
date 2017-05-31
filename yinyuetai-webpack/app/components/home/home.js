@@ -1,7 +1,7 @@
 import _ from 'underscore'
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 
 import * as actions from '../../actions/dealAction'
@@ -10,10 +10,6 @@ import styles from '../../css/home/home.css'
 import DealCell from './dealCell'
 
 class Home extends Component {
-
-  constructor(props) {
-    super(props)
-  }
 
   componentWillMount() {
     this.props.actions.fetchDealIfNeeded({type: 'getDeals'})
@@ -43,12 +39,10 @@ class Home extends Component {
         </div>
       )
     }
-
-
   }
 
   _clickDeal(e, item) {
-    // console.log(item);
+    this.props.actions.fetchDealIfNeeded({type: 'saveDealDetail', dealDetail: item})
   }
 
 }

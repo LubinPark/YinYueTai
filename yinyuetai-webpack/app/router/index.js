@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, hashHistory } from 'react-router-dom'
 
 import App from '../containers/app'
 import DetailDeal from '../components/detailDeal/detailDeal'
 
-class Root extends Component{
+class Root extends Component {
   render() {
     return (
       <Router>

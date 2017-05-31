@@ -6,15 +6,24 @@
 }
 
 .detailUserImg {
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
   background-color: #ededed;
 }
 
 .detailUserName {
   font-size: 15px;
+  font-weight: 600;
   margin-left: 10px;
+}
+
+.detailUserValidImg {
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  margin-left: 5px;
+  background-color: #ededed;
 }
 
 .detailUserView {
@@ -24,14 +33,15 @@
 }
 
 .detailUserIcon {
-  width: 20px;
-  height: 20px;
+  margin-top: 3px;
+  width: 15px;
+  height: 15px;
 }
 
 .detailUserTitle {
+  color: #666;
   font-size: 15px;
   margin-left: 10px;
-  color: #1b1b1b;
 }
 
 .detailUserInfo {

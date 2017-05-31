@@ -8,8 +8,8 @@ class DealOfUserInfo extends Component{
 
     let deal = this.props.deal.attributes
     let user = deal.user.attributes
-    let pic = user.picture ? user.picture.attributes.url : '../../img/userhead.png'
     let verification = user.Verification > 0
+    let pic = user.picture ? user.picture.attributes.url : '../../img/userhead.png'
 
     let type = ''
     let color = ''
@@ -28,7 +28,7 @@ class DealOfUserInfo extends Component{
         <div className='userinfo'>
           <div className='nameAndImg'>
             <div className='username'>{user.name}</div>
-            { verification && <img className='validImage' src='../../img/userhead.png' alt='valid'/> }
+            { verification && <img className='validImage' src='../../img/valid.png' alt='valid'/> }
           </div>
           <div className='occupation'>{user.occupation}</div>
         </div>

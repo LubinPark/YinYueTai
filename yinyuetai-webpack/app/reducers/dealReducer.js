@@ -1,7 +1,8 @@
 import * as types from '../containers/actionType'
 
 var defaultState = {
-  deals: []
+  deals: [],
+  dealDetail: {}
 }
 
 function dealReducer(state = defaultState, action={}) {
@@ -9,6 +10,11 @@ function dealReducer(state = defaultState, action={}) {
     case types.SAVE_DEALS:
       let deals = action.deals
       return Object.assign({}, state, { deals: deals })
+      break
+
+    case types.SAVE_DEAL_DETAIL_SUCCESS:
+      let dealDetail = action.dealDetail
+      return Object.assign({}, state, { dealDetail: dealDetail })
       break
 
     default:
