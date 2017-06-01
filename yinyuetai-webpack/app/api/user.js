@@ -1,4 +1,4 @@
-var AV = require('../../AVConfig')
+var AV = require('../containers/AVConfig')
 
 var UserRequest ={}
 

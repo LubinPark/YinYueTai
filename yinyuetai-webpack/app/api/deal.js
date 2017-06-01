@@ -1,4 +1,4 @@
-import AV from '../../AVConfig'
+import AV from '../containers/AVConfig'
 
 var DealRequest = {}
 
