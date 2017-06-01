@@ -66,7 +66,6 @@ module.exports = {
     // UglifyJsPlugin：压缩JS代码；
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
-      // mangle: true,
       mangle: { except: ['$scope', '$'] },
       output: { comments: false }
     }),
@@ -78,9 +77,20 @@ module.exports = {
         imageminJpegRecompress({ quality: 'high', max: 60, min: 40 })
       ]
     }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: { screw_ie8: true,  keep_fnames: true },
+      compress: { screw_ie8: true },
+      comments: false
+    }),
     //拷贝文件到dist目录
     new CopyWebpackPlugin(
-    [{ from: './app/img', to: 'image' }],
-    { ignore: [ '.DS_Store', '.svn','*.svn-base' ]} )
+      [{ from: './app/img', to: 'image' }],
+      { ignore: [ '.DS_Store', '.svn','*.svn-base' ]
+    })
   ]
 }

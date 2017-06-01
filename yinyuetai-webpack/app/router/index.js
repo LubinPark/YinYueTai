@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, hashHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { matchPath } from 'react-router'
 
 import App from '../containers/app'
 import DetailDeal from '../components/detailDeal/detailDeal'
@@ -10,7 +11,6 @@ class Root extends Component {
       <Router>
         <div>
           <Route exact path="/" component={App}/>
-          <Route exact path="/home" component={App}/>
           <Route path="/detailDeal" component={DetailDeal}/>
         </div>
       </Router>
