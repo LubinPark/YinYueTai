@@ -3,7 +3,7 @@ import * as types from '../containers/actionType'
 
 function saveUserInfo(data) {
   return {
-    type: 'SAVE_USER_INFO',
+    type: `SAVE_USER_INFO`,
     userInfo: data
   }
 }
@@ -22,7 +22,7 @@ function requestGetDeals() {
 
 function saveDeals(deals) {
   return {
-    type: 'SAVE_DEALS',
+    type: `SAVE_DEALS`,
     deals: deals
   }
 }
@@ -42,18 +42,18 @@ function getDealDetail(params) {
 
 function _saveDealDetailSuccess(deal) {
   return {
-    type: 'SAVE_DEAL_DETAIL_SUCCESS',
+    type: `SAVE_DEAL_DETAIL_SUCCESS`,
     dealDetail: deal
   }
 }
 
 export function fetchDealIfNeeded(params={}) {
   return(dispatch, getState) => {
-    if (params.type === 'getDeals') {
+    if (params.type === `getDeals`) {
       return dispatch(requestGetDeals(params))
-    } else if (params.type === 'getDealDetail') {
-      // return dispatch(getDealDetail(params))
-    } else if (params.type === 'saveDealDetail') {
+    } else if (params.type === `getDealDetail`) {
+      return dispatch(getDealDetail(params))
+    } else if (params.type === `saveDealDetail`) {
       return dispatch(_saveDealDetailSuccess(params.dealDetail))
     }
   }

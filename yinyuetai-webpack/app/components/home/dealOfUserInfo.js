@@ -9,17 +9,16 @@ class DealOfUserInfo extends Component{
     let deal = this.props.deal.attributes
     let user = deal.user.attributes
     let verification = user.Verification > 0
-    let pic = user.picture ? user.picture.attributes.url : '../../img/userhead.png'
+    let pic = user.picture ? user.picture.attributes.url : `./img/userhead.png`
 
-    let type = ''
-    let color = ''
+    let type, color = ``
 
-    if (deal.dealType === '买') {
-      type = '收',
-      color = '#ffd149'
+    if (deal.dealType === `买`) {
+      type = `收`,
+      color = `#ffd149`
     } else {
-      type = '出',
-      color = '#73e2ff'
+      type = `出`,
+      color = `#73e2ff`
     }
 
     return (
@@ -28,7 +27,7 @@ class DealOfUserInfo extends Component{
         <div className='userinfo'>
           <div className='nameAndImg'>
             <div className='username'>{user.name}</div>
-            { verification && <img className='validImage' src='../../img/valid.png' alt='valid'/> }
+            { verification && <img className='validImage' src='./img/valid.png' alt='valid'/> }
           </div>
           <div className='occupation'>{user.occupation}</div>
         </div>

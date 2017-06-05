@@ -11,10 +11,10 @@ class DealCell extends Component {
     let deal = this.props.deal
     return (
       <div onClick={(e)=>this._clickDeal(e)}>
-        <DealOfUserInfo deal={deal}/>
-        <DealOfInfo deal={deal}/>
-        <DealOfProduct deal={deal}/>
-        <div className='cellSeparator'></div>
+        <DealOfUserInfo deal={deal} />
+        <DealOfInfo deal={deal} />
+        <DealOfProduct deal={deal} />
+        <div className='cellSeparator' />
       </div>
     )
   }

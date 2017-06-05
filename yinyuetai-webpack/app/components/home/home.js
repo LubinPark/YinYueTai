@@ -12,7 +12,7 @@ import DealCell from './dealCell'
 class Home extends Component {
 
   componentWillMount() {
-    this.props.actions.fetchDealIfNeeded({type: 'getDeals'})
+    this.props.actions.fetchDealIfNeeded({type: `getDeals`})
   }
 
   render() {
@@ -24,8 +24,9 @@ class Home extends Component {
         <div>
         {
           _.map(deals, (item, index) => {
+            let url = `/detailDeal?id:` + item.id
             return (
-              <Link to='/detailDeal' key={index} style={{textDecoration: 'blink'}}>
+              <Link to={url} key={index} style={{textDecoration: `blink`}}>
                 <DealCell key={index} deal={item} onClick={(e)=>this._clickDeal(e, item)}/>
               </Link>
             )
@@ -42,7 +43,7 @@ class Home extends Component {
   }
 
   _clickDeal(e, item) {
-    this.props.actions.fetchDealIfNeeded({type: 'saveDealDetail', dealDetail: item})
+    this.props.actions.fetchDealIfNeeded({type: `saveDealDetail`, dealDetail: item})
   }
 
 }

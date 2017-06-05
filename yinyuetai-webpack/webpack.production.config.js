@@ -12,18 +12,18 @@ module.exports = {
   devtool: 'eval-source-map', //配置生成Source Maps，选择合适的选项
   entry: __dirname + "/index.js", //唯一入口文件
   output: {
-    publicPath: './',
-    // path: __dirname + "/dist", //打包后的文件存放的地方
+    publicPath: '/dist',
     filename: "main/[name]-[hash].js", //打包后输出文件的文件名
     path: __dirname + '/dist', //打包后的文件存放的地方
     // chunkFilename: '[name]-[hash].bundle.js'
   },
   module: {
    loaders: [
-      { test: /\.json$/, loader: "json-loader" },
+      { test: /\.json$/, loader: 'json-loader' },
       { test: /\.css$/, loader: ExtractTextPlugin.extract({ use: 'css-loader' }) },
-      { test: /\.(png|jpg)$/, loader: "url?name=[path]-[name].[ext]&limit=8192" },
-      { test: /\.js$/,   loader: 'babel-loader',
+      { test: /\.(png|jpg)$/,
+        loader: "url-loader?name=/dist/img/[hash:8].[name].[ext]&limit=8192" },
+      { test: /\.js$/, loader: 'babel-loader',
         exclude: /node_modules/, query: { presets: ['es2015','react','stage-0'] } }
     ]
   },
@@ -40,12 +40,12 @@ module.exports = {
       filename: './index.html',
       template: __dirname + "/dist/index.html", //new 这个插件的实例，并传入相关的参数
       favicon: __dirname + '/app/img/userhead.png', //网页的图标
-      hash: true, //添加一个唯一的 webpack每次编译都在文件名中插入一个不同的哈希值
+      hash: false, //添加一个唯一的 webpack每次编译都在文件名中插入一个不同的哈希值
       showErrors: true, //错误信息会写入到 HTML
       inject: true, //要把script插入到标签里
     }),
     // 查找相等或近似的模块，避免在最终生成的文件中出现重复的模块
-    new webpack.optimize.DedupePlugin(),
+    // new webpack.optimize.DedupePlugin('common.js'),
     // 调用dll的内容
     // new webpack.DllReferencePlugin({
     //   context: __dirname,
@@ -89,7 +89,7 @@ module.exports = {
     }),
     //拷贝文件到dist目录
     new CopyWebpackPlugin(
-      [{ from: './app/img', to: 'image' }],
+      [{ from: './app/img', to: 'img' }],
       { ignore: [ '.DS_Store', '.svn','*.svn-base' ]
     })
   ]

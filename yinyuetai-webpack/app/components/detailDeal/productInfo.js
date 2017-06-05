@@ -11,14 +11,15 @@ class ProductOfInfo extends Component {
     let deal = this.props.deal.attributes
     let product = deal.products[0].attributes
     let createdAt = this.props.deal.createdAt
-    let productQuantity = deal.product_quantity ? deal.product_quantity : '未填写'
-    let pic = product.thumbnail ? product.thumbnail.attributes.url : '../../img/userhead.png'
+    let productQuantity = deal.product_quantity ? deal.product_quantity : `未填写`
+    let pic = product.thumbnail ? product.thumbnail.attributes.url : `./img/userhead.png`
     let dealType = deal.dealType
-    let color = (dealType === '卖') ? '#51acf2' : '#f8c027'
+    let title = `产品信息`
+    let color = (dealType === `卖`) ? `#51acf2` : `#f8c027`
 
     return (
       <div className='product'>
-        <div className='productInfoTitle'>产品信息</div>
+        <div className='productInfoTitle'>{title}</div>
         <div className='productInfo'>
           <img className='productImg' src={pic}/>
           <div className='productDetail'>
@@ -30,17 +31,17 @@ class ProductOfInfo extends Component {
             </div>
           </div>
         </div>
-        {(dealType === '卖') &&
+        {(dealType === `卖`) &&
           <div className='detailView'>
             <Detail title='起订量' value={deal.product_min_quantity} />
             <div className='line'></div>
             <Detail title='库存量' value={productQuantity} />
           </div> }
-        {(dealType === '卖') &&
+        {(dealType === `卖`) &&
           <div className='detailView' style={{marginBottom: '15px'}}>
             <Detail title='保质期至' value={Func.parseTime(createdAt)} />
           </div> }
-        {(dealType === '买') &&
+        {(dealType === `买`) &&
           <div className='detailView' style={{marginBottom: '15px'}}>
             <Detail title='采购量' value={deal.product_min_quantity} color={color}/>
           </div> }
@@ -62,6 +63,7 @@ class Detail extends Component {
   render() {
 
     let color = this.props.color
+
     return (
       <div style={{width: this.state.width}} className='detail'>
         <div>

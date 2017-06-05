@@ -15,8 +15,8 @@ class DealOfProduct extends Component {
 
     let deal = this.props.deal.attributes
     let product = deal.products[0].attributes
-    let color = (deal.dealType === '卖') ? '#51acf2' : '#f8c027'
-    let pic = product.thumbnail ? product.thumbnail.attributes.url : '../../img/userhead.png'
+    let color = (deal.dealType === `卖`) ? `#51acf2` : `#f8c027`
+    let pic = product.thumbnail ? product.thumbnail.attributes.url : `./img/userhead.png`
 
     return (
       <div className='productOfCell'>

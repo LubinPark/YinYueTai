@@ -1,3 +1,4 @@
+import _ from 'underscore'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
@@ -14,27 +15,35 @@ import DetailUser from './detailUser'
 class DetailDeal extends Component {
 
   componentDidMount() {
-    let dealId = this.props.data.dealDetail.id
-    this.props.actions.fetchDealIfNeeded({type: 'getDealDetail', dealId: dealId})
+    let idString = this.props.location.search
+    let id = idString.substring(4,idString.length)
+    let dealId = this.props.data.dealDetail.id ? this.props.data.dealDetail.id : id
+    // this.props.actions.fetchDealIfNeeded({type: `getDealDetail`, dealId: dealId})
   }
 
   render() {
 
     let deal = this.props.data.dealDetail
-    let color = (deal.attributes.dealType === '卖') ? '#73e2ff' : '#ffd149'
 
-    return (
-      <div className='detailInfo'>
-        <Link to='/' style={{textDecoration: 'blink'}}>
-          <Navigator title="采购详情" navBgcolor={color} backImgColor='write' titleColor='#fff'/>
-        </Link>
-        <div style={{'marginTop':10,'display':'flex'}}></div>
-        <ProductOfInfo deal={deal}/>
-        <DetailInfo deal={deal}/>
-        <DetailSupply deal={deal}/>
-        <DetailUser deal={deal}/>
-      </div>
-    )
+    if (_.isEmpty(deal)) {
+      return (
+        <div/>
+      )
+    } else {
+      let color = (deal.attributes.dealType === `卖`) ? `#73e2ff` : `#ffd149`
+      return (
+        <div className='detailInfo'>
+          <Link to='/' style={{textDecoration: `blink`}}>
+            <Navigator title="采购详情" navBgcolor={color} backImgColor='write' titleColor='#fff'/>
+          </Link>
+          <div style={{marginTop: 10, display: `flex`}}></div>
+          <ProductOfInfo deal={deal}/>
+          <DetailInfo deal={deal}/>
+          <DetailSupply deal={deal}/>
+          <DetailUser deal={deal}/>
+        </div>
+      )
+    }
   }
 
 }

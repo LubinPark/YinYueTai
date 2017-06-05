@@ -15,10 +15,10 @@ class DealOfInfo extends Component{
   render() {
 
     let deal = this.props.deal.attributes
-    if (deal.dealType === '卖') {
+    if (deal.dealType === `卖`) {
       return (
         <div style={{height: 50}}>
-          <div style={{'display': 'flex'}}>
+          <div style={{display: `flex`}}>
             <div style={{width: this.state.width}}>
               <CommonInfoView pic='location' title='发货地点' value={deal.location}/>
             </div>
@@ -42,7 +42,7 @@ class DealOfInfo extends Component{
 
 class CommonInfoView extends Component {
   render() {
-    let img = '../../img/'+ this.props.pic +'.png'
+    let img = `./img/`+ this.props.pic +`.png`
     return (
       <div className='dealInfo'>
         <img className='dealOfImg' src={img} />

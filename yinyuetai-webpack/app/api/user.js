@@ -3,7 +3,7 @@ var AV = require('../containers/AVConfig')
 var UserRequest ={}
 
 UserRequest.searchUsers = (callback) => {
-  AV.Cloud.rpc('searchUsers').then((users) => {
+  AV.Cloud.rpc(`searchUsers`).then((users) => {
     callback(users, null)
   }, (err) => {
     callback(null, err)
@@ -11,7 +11,7 @@ UserRequest.searchUsers = (callback) => {
 }
 
 UserRequest.getHomePage = (callback) => {
-  AV.Cloud.rpc('getHomePage').then((home) => {
+  AV.Cloud.rpc(`getHomePage`).then((home) => {
     callback(home, null)
   }, (err) => {
     callback(null, home)

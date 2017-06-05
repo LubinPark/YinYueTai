@@ -12,10 +12,10 @@ class Navigator extends Component {
 
     return (
       <div className='navigator' style={{backgroundColor:navBgcolor}}>
-        {(backImgColor === 'write') &&
-          <img className='backImg' src='../../img/back_write.png'/> }
-        {(backImgColor === 'black') &&
-          <img className='backImg' src='../../img/back_black.png'/> }
+        {(backImgColor === `write`) &&
+          <img className='backImg' src={`./img/back_write.png`}/> }
+        {(backImgColor === `black`) &&
+          <img className='backImg' src={`./img/back_black.png`}/> }
         <div className='navigatorTitle' style={{color: titleColor}}>{this.props.title}</div>
       </div>
     )

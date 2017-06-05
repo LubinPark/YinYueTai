@@ -1,10 +1,11 @@
 import AV from '../containers/AVConfig'
 
 var DealRequest = {}
+var Deal = AV.Object.extend('deal')
 
 DealRequest.getDeals = (callback) => {
-  let params = {location: '悉尼'}
-  AV.Cloud.rpc('getDeals', params).then((deals) => {
+  let params = {location: `悉尼`}
+  AV.Cloud.rpc(`getDeals`).then((deals) => {
     callback(deals, null)
   },(err) => {
     callback(null ,err)
@@ -12,13 +13,14 @@ DealRequest.getDeals = (callback) => {
 }
 
 DealRequest.getDealById = (params, callback) => {
-  AV.Cloud.rpc('getDeals', params).then((deal) => {
-    console.log(deal);
-    callback(deal, null)
-  },(err) => {
-    console.log(err);
-    callback(null ,err)
+  let query = new AV.Query(Deal)
+  query
+  .equalTo('objectId', params.id)
+  .find().then((deal) => {
+    callback(deal[0], null)
+  }).catch((err) => {
+    callback(null, err)
   })
 }
 
-module.exports = DealRequest;
+module.exports = DealRequest

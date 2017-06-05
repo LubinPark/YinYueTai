@@ -10,10 +10,11 @@ class DetailUser extends Component {
     let deal = this.props.deal.attributes
     let user = deal.user.attributes
     let img = user.picture ? user.picture.attributes.url : '../../img/userhead.png'
+    let title = `发布人信息`
 
     return (
       <div className='detailDealView'>
-        <div className='detailDealTitle'>发布人信息</div>
+        <div className='detailDealTitle'>{title}</div>
         <div className='detailUser'>
           <img className='detailUserImg' src={img}/>
           <div className='detailUserName'>{user.name}</div>
@@ -31,7 +32,7 @@ class DetailUser extends Component {
 
 class DetailUserView extends Component {
   render () {
-    let img = '../../img/'+ this.props.pic +'.png'
+    let img = './img/'+ this.props.pic +'.png'
     return (
       <div className='detailUserView'>
         <img className='detailUserIcon' src={img} />

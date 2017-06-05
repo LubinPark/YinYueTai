@@ -6,7 +6,7 @@ import styles from '../css/home/home.css'
 class App extends Component {
   render() {
     return (
-      <div className={styles.root}>
+      <div className='root'>
         <Home />
       </div>
     )

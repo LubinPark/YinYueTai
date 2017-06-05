@@ -13,7 +13,7 @@ class DetailInfo extends Component {
     let deal = this.props.deal.attributes
     let createdAt = this.props.deal.createdAt
     let hasAddress = (deal.address && deal.address.length > 0)
-    let addressText = hasAddress ? deal.address : '(未填写)'
+    let addressText = hasAddress ? deal.address : `(未填写)`
     let dealType = deal.dealType
 
     return (
@@ -23,7 +23,7 @@ class DetailInfo extends Component {
           <DetailInfoCell title='买卖城市' pic='location' value={deal.location}/>
           <DetailInfoCell title='备货时间' pic='time' value={deal.prepare_time}/>
         </div>
-        {(dealType === '卖') &&
+        {(dealType === `卖`) &&
           <div className='detailDealCell'>
             <DetailInfoCell title='交货方式' pic='cart' value={Func.arrayToString(deal.delivery)}/>
             <DetailInfoCell title='详细地址' pic='address' value={addressText}/>
@@ -48,7 +48,7 @@ class DetailInfoCell extends Component {
   }
 
   render() {
-    let img = '../../img/'+ this.props.pic +'.png'
+    let img = './img/'+ this.props.pic +'.png'
     return (
       <div className='detailInfoCell'>
         <img className='dealInfoImg' src={img} />

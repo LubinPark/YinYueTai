@@ -17,6 +17,7 @@ module.exports = {
    loaders: [
       { test: /\.json$/, loader: "json-loader" },
       { test: /\.css$/,  use: ExtractTextPlugin.extract({ use: 'css-loader' }) },
+      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]' },
       { test: /\.js$/,   loader: 'babel-loader',
         exclude: /node_modules/, query: { presets: ['es2015','react','stage-0'] } }
     ]

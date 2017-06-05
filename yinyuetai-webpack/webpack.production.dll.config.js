@@ -5,7 +5,7 @@ const ENV = process.env.NODE_ENV = process.env.ENV = 'production'
 
 module.exports = {
   entry: {
-    vendor: ['react', 'react-dom', 'react-router', 'react-redux']
+    vendor: ['react', 'react-dom', 'react-router-dom', 'react-redux']
   },
   output: {
     path: path.join(__dirname, 'dist'),
