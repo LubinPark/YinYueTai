@@ -21,11 +21,24 @@
   position:fixed;
 }
 
-.backImg {
+.backImgWrite {
   width: 30px;
   height: 30px;
-  padding: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+  background-size: contain;
   background-color: rgba(0, 0, 0, 0);
+  background-image: url('../../img/back_write.png');
+}
+
+.backImgBlack {
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+  margin-left: 5px;
+  background-size: contain;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url('../../img/back_black.png');
 }
 
 .navigatorTitle {

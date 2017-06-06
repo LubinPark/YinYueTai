@@ -27,8 +27,6 @@ module.exports = {
     new ExtractTextPlugin("[name]-[hash].css"),
     // Copyright
     new webpack.BannerPlugin("Copyright maimaiparty inc."), //在这个数组中new一个就可以了
-    // 查找相等或近似的模块，避免在最终生成的文件中出现重复的模块
-    new webpack.optimize.DedupePlugin(),
     // 生成最终的Html5文件,每次编译都在文件名中插入一个不同的哈希值
     new HtmlWebpackPlugin({
       template: __dirname + "/build/index.html", //new 这个插件的实例，并传入相关的参数

@@ -7,18 +7,20 @@ class DetailUser extends Component {
 
   render() {
 
+    let title = `发布人信息`
     let deal = this.props.deal.attributes
     let user = deal.user.attributes
-    let img = user.picture ? user.picture.attributes.url : '../../img/userhead.png'
-    let title = `发布人信息`
+    let verification = user.Verification > 0
+    let img = user.picture ? user.picture.attributes.url : false
 
     return (
       <div className='detailDealView'>
         <div className='detailDealTitle'>{title}</div>
         <div className='detailUser'>
-          <img className='detailUserImg' src={img}/>
+        { img ? <img className='detailUserImg' src={img}/>
+              : <img className='detailUserImgLocal' /> }
           <div className='detailUserName'>{user.name}</div>
-          <img className='detailUserValidImg' src='../../img/valid.png'/>
+          { verification && <img className='detailUserValidImg'/> }
         </div>
         <div className='detailUserInfo'>
           <DetailUserView pic='location' value={user.location} />

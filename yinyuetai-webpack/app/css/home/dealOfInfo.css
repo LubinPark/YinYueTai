@@ -8,9 +8,10 @@
 .dealOfImg {
   width: 15px;
   height: 15px;
-  margin-top: 1px;
+  margin-top: 2px;
   margin-left: 15px;
   margin-right: 4px;
+  background-size: contain;
 }
 
 .location {

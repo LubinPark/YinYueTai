@@ -42,7 +42,7 @@ class DealOfInfo extends Component{
 
 class CommonInfoView extends Component {
   render() {
-    let img = `./img/`+ this.props.pic +`.png`
+    let img = `../../img/`+ this.props.pic +`.png`
     return (
       <div className='dealInfo'>
         <img className='dealOfImg' src={img} />

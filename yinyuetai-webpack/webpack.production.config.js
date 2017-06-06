@@ -12,24 +12,30 @@ module.exports = {
   devtool: 'eval-source-map', //配置生成Source Maps，选择合适的选项
   entry: __dirname + "/index.js", //唯一入口文件
   output: {
-    publicPath: '/dist',
-    filename: "main/[name]-[hash].js", //打包后输出文件的文件名
-    path: __dirname + '/dist', //打包后的文件存放的地方
-    // chunkFilename: '[name]-[hash].bundle.js'
+    publicPath: './',
+    filename: "[name]-[hash].js", //打包后输出文件的文件名
+    path: path.join(__dirname, 'dist'), //打包后的文件存放的地方
+    chunkFilename: '[name]/[hash].bundle.js'
   },
   module: {
    loaders: [
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.css$/, loader: ExtractTextPlugin.extract({ use: 'css-loader' }) },
       { test: /\.(png|jpg)$/,
-        loader: "url-loader?name=/dist/img/[hash:8].[name].[ext]&limit=8192" },
+        loader: "file-loader?name=img/[name].[ext]&limit=8192" },
       { test: /\.js$/, loader: 'babel-loader',
         exclude: /node_modules/, query: { presets: ['es2015','react','stage-0'] } }
     ]
   },
+  resolve: {
+    extensions: ['.web.js','.js','.jsx', '.scss', 'css', 'png', 'jpg', 'jpeg'],
+    alias: { //模块别名定义，方便后续直接引用别名，无须多写长长的地址
+      'navigator': path.join(__dirname, '/app/components/common/navigator')
+    }
+  },
   plugins: [
     // ExtractTextPlugin：分离CSS和JS文件
-    new ExtractTextPlugin("[name]/[name]-[hash].css"),
+    new ExtractTextPlugin("[name]-[hash].css"),
     // Copyright
     new webpack.BannerPlugin("Copyright maimaiparty inc."), //在这个数组中new一个就可以了
     // 生成最终的Html文件
@@ -45,12 +51,12 @@ module.exports = {
       inject: true, //要把script插入到标签里
     }),
     // 查找相等或近似的模块，避免在最终生成的文件中出现重复的模块
-    // new webpack.optimize.DedupePlugin('common.js'),
+    new webpack.optimize.DedupePlugin('common.js'),
     // 调用dll的内容
     // new webpack.DllReferencePlugin({
-    //   context: __dirname,
-    //   //这里引入manifest文件
-    //   manifest: require('./dist/vendor-manifest.json')
+      // context: __dirname,
+      //这里引入manifest文件
+      // manifest: require('./dist/vendor-manifest.json')
     // }),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: '"production"' }
@@ -67,7 +73,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
       mangle: { except: ['$scope', '$'] },
-      output: { comments: false }
+      output: { comments: true }
     }),
     //图片压缩
     new ImageminPlugin({
@@ -78,19 +84,18 @@ module.exports = {
       ]
     }),
     new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: function () {
+          return [precss, autoprefixer]
+        },
+      },
       minimize: true,
       debug: false
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: { screw_ie8: true,  keep_fnames: true },
-      compress: { screw_ie8: true },
-      comments: false
-    }),
     //拷贝文件到dist目录
-    new CopyWebpackPlugin(
-      [{ from: './app/img', to: 'img' }],
-      { ignore: [ '.DS_Store', '.svn','*.svn-base' ]
-    })
+    // new CopyWebpackPlugin(
+    //   [{ from: './app/img', to: 'img' }],
+    //   { ignore: [ '.DS_Store', '.svn','*.svn-base' ]
+    // })
   ]
 }

@@ -8,6 +8,15 @@
   height: 70px;
   width: 70px;
   margin-right: 8px;
+  background-size: contain;
+}
+
+.productOfImgLocal {
+  height: 70px;
+  width: 70px;
+  margin-right: 8px;
+  background-size: contain;
+  background-image: url('../../img/userhead.png');
 }
 
 .productOfInfo {

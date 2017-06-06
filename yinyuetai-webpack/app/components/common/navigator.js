@@ -13,9 +13,9 @@ class Navigator extends Component {
     return (
       <div className='navigator' style={{backgroundColor:navBgcolor}}>
         {(backImgColor === `write`) &&
-          <img className='backImg' src={`./img/back_write.png`}/> }
+          <img className='backImgWrite' /> }
         {(backImgColor === `black`) &&
-          <img className='backImg' src={`./img/back_black.png`}/> }
+          <img className='backImgBlack' /> }
         <div className='navigatorTitle' style={{color: titleColor}}>{this.props.title}</div>
       </div>
     )

@@ -16,11 +16,12 @@ class DealOfProduct extends Component {
     let deal = this.props.deal.attributes
     let product = deal.products[0].attributes
     let color = (deal.dealType === `卖`) ? `#51acf2` : `#f8c027`
-    let pic = product.thumbnail ? product.thumbnail.attributes.url : `./img/userhead.png`
+    let pic = product.thumbnail ? product.thumbnail.attributes.url : false
 
     return (
       <div className='productOfCell'>
-        <img className='productOfImg' src={pic} alt='picture' />
+      {pic ? <img className='productOfImg' src={pic}/>
+           : <img className='productOfImgLocal' /> }
         <div className='productOfInfo'>
           <div className='productTitle' style={{width: this.state.width, color: color}}>{deal.searchable}</div>
           <div className='down'>
