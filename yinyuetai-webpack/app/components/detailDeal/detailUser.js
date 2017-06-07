@@ -18,14 +18,14 @@ class DetailUser extends Component {
         <div className='detailDealTitle'>{title}</div>
         <div className='detailUser'>
         { img ? <img className='detailUserImg' src={img}/>
-              : <img className='detailUserImgLocal' /> }
+              : <div className='detailUserImgLocal' /> }
           <div className='detailUserName'>{user.name}</div>
-          { verification && <img className='detailUserValidImg'/> }
+          { verification && <div className='detailUserValidImg'/> }
         </div>
         <div className='detailUserInfo'>
-          <DetailUserView pic='location' value={user.location} />
-          <DetailUserView pic='occupation' value={user.occupation} />
-          <DetailUserView pic='speciality' value={Func.arrayToString(user.category)}/>
+          <DetailUserView pic='locationImg' value={user.location} />
+          <DetailUserView pic='occupationImg' value={user.occupation} />
+          <DetailUserView pic='specialityImg' value={Func.arrayToString(user.category)}/>
         </div>
       </div>
     )
@@ -34,10 +34,10 @@ class DetailUser extends Component {
 
 class DetailUserView extends Component {
   render () {
-    let img = './img/'+ this.props.pic +'.png'
+    let iconStyle = 'detailUserIcon' + ' ' + this.props.pic
     return (
       <div className='detailUserView'>
-        <img className='detailUserIcon' src={img} />
+        <div className={iconStyle} />
         <div className='detailUserTitle'>{this.props.value}</div>
       </div>
     )

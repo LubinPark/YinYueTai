@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import styles from '../../css/home/dealOfUserInfo.css'
+import styles2 from '../../css/common/img.css'
 
 class DealOfUserInfo extends Component{
 
@@ -21,11 +22,11 @@ class DealOfUserInfo extends Component{
     return (
       <div className='dealUser' style={{backgroundColor:color}}>
       { pic ? <img className='userheadImg' src={pic}/>
-            : <img className='userheadImgLocal' /> }
+            : <div className='userheadImgLocal' /> }
         <div className='userinfo'>
           <div className='nameAndImg'>
             <div className='username'>{user.name}</div>
-            { verification && <img className='validImage'/> }
+            { verification && <div className='validImage'/> }
           </div>
           <div className='occupation'>{user.occupation}</div>
         </div>

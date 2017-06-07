@@ -21,7 +21,7 @@ class DealOfProduct extends Component {
     return (
       <div className='productOfCell'>
       {pic ? <img className='productOfImg' src={pic}/>
-           : <img className='productOfImgLocal' /> }
+           : <div className='productOfImgLocal' /> }
         <div className='productOfInfo'>
           <div className='productTitle' style={{width: this.state.width, color: color}}>{deal.searchable}</div>
           <div className='down'>

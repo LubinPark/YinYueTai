@@ -20,20 +20,20 @@ class DealOfInfo extends Component{
         <div style={{height: 50}}>
           <div style={{display: `flex`}}>
             <div style={{width: this.state.width}}>
-              <CommonInfoView pic='location' title='发货地点' value={deal.location}/>
+              <CommonInfoView pic='locationImg' title={`发货地点`} value={deal.location}/>
             </div>
-            <CommonInfoView pic='time' title='备货时间' value={deal.prepare_time}/>
+            <CommonInfoView pic='timeImg' title={`备货时间`} value={deal.prepare_time}/>
           </div>
-          <CommonInfoView pic='cart' title='交货方式' value={Func.arrayToString(deal.delivery)}/>
+          <CommonInfoView pic='cartImg' title={`交货方式`} value={Func.arrayToString(deal.delivery)}/>
         </div>
       )
     } else {
       return (
         <div className='commonInfoView'>
           <div style={{width: this.state.width}}>
-            <CommonInfoView pic='location' title='收货地点' value={deal.location}/>
+            <CommonInfoView pic='locationImg' title={`收货地点`} value={deal.location}/>
           </div>
-          <CommonInfoView pic='time' title='备货时间' value={deal.prepare_time}/>
+          <CommonInfoView pic='timeImg' title={`备货时间`} value={deal.prepare_time}/>
         </div>
       )
     }
@@ -42,10 +42,10 @@ class DealOfInfo extends Component{
 
 class CommonInfoView extends Component {
   render() {
-    let img = `../../img/`+ this.props.pic +`.png`
+     let iconStyle = 'dealInfoImg' + ' '+ this.props.pic
     return (
       <div className='dealInfo'>
-        <img className='dealOfImg' src={img} />
+        <div className={iconStyle}/>
         <div className='location'>{this.props.title}: </div>
         <div className='locationValue'>{this.props.value}</div>
       </div>

@@ -1,21 +1,19 @@
-var webpack = require('webpack')
 var path = require('path')
+var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var CopyWebpackPlugin = require('copy-webpack-plugin'); //复制文件
-var imageminPngquant = require('imagemin-pngquant');//png压缩
-var ImageminPlugin = require('imagemin-webpack-plugin').default;//图片压缩
-var imageminJpegRecompress = require('imagemin-jpeg-recompress');//jpg压缩
+var imageminPngquant = require('imagemin-pngquant') //png压缩
+var ImageminPlugin = require('imagemin-webpack-plugin').default //图片压缩
+var imageminJpegRecompress = require('imagemin-jpeg-recompress') //jpg压缩
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 process.env.NODE_ENV = 'production'
 
 module.exports = {
-  devtool: 'eval-source-map', //配置生成Source Maps，选择合适的选项
   entry: __dirname + "/index.js", //唯一入口文件
   output: {
     publicPath: './',
-    filename: "[name]-[hash].js", //打包后输出文件的文件名
-    path: path.join(__dirname, 'dist'), //打包后的文件存放的地方
-    chunkFilename: '[name]/[hash].bundle.js'
+    filename: "[name].[hash:6].js", //打包后输出文件的文件名
+    path: path.join(__dirname, 'react') //打包后的文件存放的地方
   },
   module: {
    loaders: [
@@ -28,74 +26,43 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.web.js','.js','.jsx', '.scss', 'css', 'png', 'jpg', 'jpeg'],
-    alias: { //模块别名定义，方便后续直接引用别名，无须多写长长的地址
+    extensions: ['.js','.jsx', 'css', 'png', 'jpg', 'jpeg'],
+      alias: { //模块别名定义，方便后续直接引用别名，无须多写长的地址
       'navigator': path.join(__dirname, '/app/components/common/navigator')
     }
   },
   plugins: [
     // ExtractTextPlugin：分离CSS和JS文件
-    new ExtractTextPlugin("[name]-[hash].css"),
-    // Copyright
-    new webpack.BannerPlugin("Copyright maimaiparty inc."), //在这个数组中new一个就可以了
+    new ExtractTextPlugin("[name].[hash:6].css"),
     // 生成最终的Html文件
     new HtmlWebpackPlugin({
       title: 'maimaiparty', //标题
-      keywords: '我的页面关键字',
-      description: '我的页面描述',
       filename: './index.html',
-      template: __dirname + "/dist/index.html", //new 这个插件的实例，并传入相关的参数
+      template: __dirname + "/react/index.html", //new 这个插件的实例，并传入相关的参数
       favicon: __dirname + '/app/img/userhead.png', //网页的图标
       hash: false, //添加一个唯一的 webpack每次编译都在文件名中插入一个不同的哈希值
       showErrors: true, //错误信息会写入到 HTML
       inject: true, //要把script插入到标签里
     }),
-    // 查找相等或近似的模块，避免在最终生成的文件中出现重复的模块
-    new webpack.optimize.DedupePlugin('common.js'),
-    // 调用dll的内容
-    // new webpack.DllReferencePlugin({
-      // context: __dirname,
-      //这里引入manifest文件
-      // manifest: require('./dist/vendor-manifest.json')
-    // }),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: '"production"' }
     }),
     //提取公共部分
     new webpack.optimize.CommonsChunkPlugin({
-       names: 'inline',
-       filename: 'inline.js',
+       names: 'common',
+       filename: 'common.js',
        minChunks: Infinity,
     }),
-    //热加载插件
-    new webpack.HotModuleReplacementPlugin(),
     // UglifyJsPlugin：压缩JS代码；
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
       mangle: { except: ['$scope', '$'] },
-      output: { comments: true }
-    }),
-    //图片压缩
-    new ImageminPlugin({
-      test: 'image/**',
-      plugins: [
-        imageminPngquant({ quality: '60', speed: 3 }),
-        imageminJpegRecompress({ quality: 'high', max: 60, min: 40 })
-      ]
+      output: { comments: false }
     }),
     new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: function () {
-          return [precss, autoprefixer]
-        },
-      },
+      options: { context: __dirname },
       minimize: true,
       debug: false
-    }),
-    //拷贝文件到dist目录
-    // new CopyWebpackPlugin(
-    //   [{ from: './app/img', to: 'img' }],
-    //   { ignore: [ '.DS_Store', '.svn','*.svn-base' ]
-    // })
+    })
   ]
 }

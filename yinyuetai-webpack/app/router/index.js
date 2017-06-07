@@ -13,7 +13,7 @@ class Root extends Component {
       <Router history={history}>
         <div>
           <Route exact path="/" component={App} />
-          <Route path="/dist" component={App} />
+          <Route path="/react" component={App} />
           <Route exact path="/detailDeal" component={DetailDeal} />
         </div>
       </Router>
