@@ -30,7 +30,7 @@ module.exports = {
     new webpack.BannerPlugin("Copyright maimaiparty inc."), //在这个数组中new一个就可以了
     // 生成最终的Html5文件,每次编译都在文件名中插入一个不同的哈希值
     new HtmlWebpackPlugin({
-      template: __dirname + "/test/index.html", //new 这个插件的实例，并传入相关的参数
+      template: __dirname + "/build/index.html", //new 这个插件的实例，并传入相关的参数
       favicon: __dirname + '/app/img/userhead.png', //网页的图标
       hash: true, //添加一个唯一的 webpack每次编译都在文件名中插入一个不同的哈希值
       showErrors: true, //错误信息会写入到 HTML

@@ -1,3 +1,23 @@
+html {
+  box-sizing: border-box;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul {
+  margin: 0;
+  padding: 0;
+}
+
 .root {
   background-color: #fff;
 }
@@ -12,7 +32,6 @@
 }
 
 .navigator {
-  padding-top: 20px;
   top: 0px;
   left:0px;
   right: 0px;
@@ -24,7 +43,7 @@
 .backImgWrite {
   width: 30px;
   height: 30px;
-  margin-top: 5px;
+  margin-top: 7px;
   margin-left: 5px;
   background-size: contain;
   background-color: rgba(0, 0, 0, 0);
@@ -34,7 +53,7 @@
 .backImgBlack {
   width: 30px;
   height: 30px;
-  margin-top: 5px;
+  margin-top: 7px;
   margin-left: 5px;
   background-size: contain;
   background-color: rgba(0, 0, 0, 0);

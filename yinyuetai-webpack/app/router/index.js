@@ -4,6 +4,7 @@ import createBrowserHistory from 'history/createBrowserHistory'
 
 import App from '../containers/app'
 import DetailDeal from '../components/detailDeal/detailDeal'
+import UserPage from '../components/user/userPage'
 
 const history = createBrowserHistory()
 
@@ -15,6 +16,7 @@ class Root extends Component {
           <Route exact path="/" component={App} />
           <Route path="/react" component={App} />
           <Route exact path="/detailDeal" component={DetailDeal} />
+          <Route exact path="/user" component={UserPage} />
         </div>
       </Router>
     )

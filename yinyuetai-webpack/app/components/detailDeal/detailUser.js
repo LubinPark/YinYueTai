@@ -8,8 +8,7 @@ class DetailUser extends Component {
   render() {
 
     let title = `发布人信息`
-    let deal = this.props.deal.attributes
-    let user = deal.user.attributes
+    let user = this.props.user.attributes
     let verification = user.Verification > 0
     let img = user.picture ? user.picture.attributes.url : false
 

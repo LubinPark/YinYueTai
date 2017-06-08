@@ -47,6 +47,13 @@ function _saveDealDetailSuccess(deal) {
   }
 }
 
+function saveUser(params) {
+  return {
+    type: `SAVE_USER`,
+    user: params.user
+  }
+}
+
 export function fetchDealIfNeeded(params={}) {
   return(dispatch, getState) => {
     if (params.type === `getDeals`) {
@@ -55,6 +62,8 @@ export function fetchDealIfNeeded(params={}) {
       return dispatch(getDealDetail(params))
     } else if (params.type === `saveDealDetail`) {
       return dispatch(_saveDealDetailSuccess(params.dealDetail))
+    } else if (params.type === `saveUser`) {
+      return dispatch(saveUser(params))
     }
   }
 }

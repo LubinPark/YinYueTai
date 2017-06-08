@@ -1,9 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var imageminPngquant = require('imagemin-pngquant') //png压缩
-var ImageminPlugin = require('imagemin-webpack-plugin').default //图片压缩
-var imageminJpegRecompress = require('imagemin-jpeg-recompress') //jpg压缩
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 process.env.NODE_ENV = 'production'

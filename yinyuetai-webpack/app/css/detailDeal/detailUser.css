@@ -23,6 +23,7 @@
 }
 
 .detailUserName {
+  color: #666;
   font-size: 15px;
   font-weight: 600;
   margin-left: 10px;
@@ -42,6 +43,7 @@
   display: flex;
   margin-left: 15px;
   margin-bottom: 5px;
+  background-color: #fff;
 }
 
 .detailUserIcon {
@@ -58,5 +60,5 @@
 }
 
 .detailUserInfo {
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }

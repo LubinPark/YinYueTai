@@ -15,16 +15,27 @@
 }
 
 .location {
+  display: flex;
   color: #666;
+  width: 60px;
+  height: 20px;
   font-size: 13px;
+  align-items: center;
+  white-space:nowrap;
 }
 
 .locationValue {
+  margin-top: 1px;
   color: black;
+  height: 20px;
   font-size: 13px;
-  margin-left: 4px;
+  margin-right: 5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .commonInfoView {
   display: flex;
+  flex-direction: row;
 }

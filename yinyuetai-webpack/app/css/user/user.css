@@ -1,0 +1,15 @@
+.userPage {
+  background-color: #ededed;
+  padding-top: 1px;
+}
+
+.userPagePublishText {
+  color: #666;
+  height: 30px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  justify-content: center;
+  background-color: #fff;
+}

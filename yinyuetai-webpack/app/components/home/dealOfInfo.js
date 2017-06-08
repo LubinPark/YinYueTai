@@ -8,7 +8,7 @@ class DealOfInfo extends Component{
   constructor(props) {
     super(props)
     this.state = {
-      width: ((window.innerWidth) / 2.5)
+      width: ((window.innerWidth) / 2)
     }
   }
 
@@ -30,7 +30,7 @@ class DealOfInfo extends Component{
     } else {
       return (
         <div className='commonInfoView'>
-          <div style={{width: this.state.width}}>
+          <div style={{width: this.state.width, height: 25}}>
             <CommonInfoView pic='locationImg' title={`收货地点`} value={deal.location}/>
           </div>
           <CommonInfoView pic='timeImg' title={`备货时间`} value={deal.prepare_time}/>

@@ -33,6 +33,7 @@ local.properties
 node_modules/
 build/
 dist/
+react/
 npm-debug.log
 
 # BUCK

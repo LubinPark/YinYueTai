@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 
 import Func from '../../unit'
 import styles from '../../css/detailDeal/productInfo.css'
+import * as actions from '../../actions/dealAction'
 
 class ProductOfInfo extends Component {
 
@@ -24,7 +25,7 @@ class ProductOfInfo extends Component {
           <img className='productImg' src={pic}/>
           <div className='productDetail'>
             <div className='productBrand'>{product.brand}</div>
-            <div className='productTitle' style={{color:color}}>{product.name}</div>
+            <div className='productOfTitle' style={{color:color}}>{product.name}</div>
             <div className='netWeight'>
               <div className='netWeightTitle'>规格</div>
               <div className='netWeightValue'>{product.net_weight}</div>

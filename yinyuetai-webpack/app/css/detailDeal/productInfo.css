@@ -2,13 +2,13 @@
   background-color: #fff;
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
-  margin-top: 64px;
 }
 
 .productInfoTitle {
   color: #666;
   font-size: 15px;
   padding: 15px;
+  background-color: #fff;
 }
 
 .productInfo {
@@ -19,24 +19,35 @@
 .productImg {
   width: 96px;
   height: 96px;
-  margin-left: 20px;
+  margin-left: 15px;
 }
 
 .productDetail {
-  margin-left: 40px;
+  margin-left: 15px;
   margin-top: 15px;
 }
 
 .productBrand {
+  display: flex;
+  align-items: center;
   color: #ccc;
+  height: 15px;
   font-size: 14px;
 }
 
-.productTitle {
+.productOfTitle {
+  display: flex;
+  width: 170px;
+  height: 30px;
   font-size: 15px;
+  align-items: center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .netWeight {
+  height: 20px;
   display: flex;
   margin-bottom: 10px;
 }
@@ -73,11 +84,17 @@
 
 .prodDetailTitle {
   color: #ccc;
+  display: flex;
+  height: 20px;
+  align-items: center;
   font-size: 14px;
 }
 
 .prodDetailValue {
   color: #51acf2;
+  display: flex;
+  height: 20px;
+  align-items: center;
   font-size: 15px;
   font-weight: 600;
 }

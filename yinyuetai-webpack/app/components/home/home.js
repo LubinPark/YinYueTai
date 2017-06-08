@@ -24,7 +24,7 @@ class Home extends Component {
         <div>
         {
           _.map(deals, (item, index) => {
-            let url = `/detailDeal?id:` + item.id
+            let url = `/detailDeal?dealId:` + item.id
             return (
               <Link to={url} key={index} style={{textDecoration: `blink`}}>
                 <DealCell key={index} deal={item} onClick={(e)=>this._clickDeal(e, item)}/>
