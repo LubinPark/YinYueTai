@@ -30,11 +30,11 @@ module.exports = {
     new webpack.BannerPlugin("Copyright maimaiparty inc."), //在这个数组中new一个就可以了
     // 生成最终的Html5文件,每次编译都在文件名中插入一个不同的哈希值
     new HtmlWebpackPlugin({
+      title: 'maiaimaiparty', //标题
       template: __dirname + "/build/index.html", //new 这个插件的实例，并传入相关的参数
-      favicon: __dirname + '/app/img/userhead.png', //网页的图标
+      favicon: __dirname + '/app/img/app.png', //网页的图标
       hash: true, //添加一个唯一的 webpack每次编译都在文件名中插入一个不同的哈希值
       showErrors: true, //错误信息会写入到 HTML
-      title: 'maiaimaiparty', //标题
     }),
     new webpack.HotModuleReplacementPlugin(),//热加载插件
     // UglifyJsPlugin：压缩JS代码；
@@ -51,19 +51,7 @@ module.exports = {
         imageminPngquant({ quality: '60', speed: 3 }),
         imageminJpegRecompress({ quality: 'high', max: 60, min: 40 })
       ]
-    }),
-    //清空发布目录
-    // new CleanWebpackPlugin(['dist'], {
-    //   root: '', // An absolute path for the root  of webpack.config.js
-    //   verbose: true,// Write logs to console.
-    //   dry: false // Do not delete anything, good for testing.
-    // }),
-    //拷贝文件到目录
-    // new CopyWebpackPlugin([{
-    //   from: './app/img',
-    //   to: 'image'
-    // }],
-    // { ignore: [ '.DS_Store', '.svn','*.svn-base' ]} )
+    })
   ],
   // 本地服务器
   devServer: {

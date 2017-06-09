@@ -19,13 +19,8 @@ class DetailDeal extends Component {
     let idString = this.props.location.search
     let id = idString.substring(idString.indexOf(':') + 1, idString.length)
     let dealId = this.props.data.dealDetail.id ? this.props.data.dealDetail.id : id
-    // this.props.actions.fetchDealIfNeeded({type: `getDealDetail`, dealId: dealId})
+    this.props.actions.fetchDealIfNeeded({type: `getDealDetail`, dealId: dealId})
   }
-
-  //去掉navigator
-  // <Link to='/' style={{textDecoration: `blink`}}>
-  //   <Navigator title="采购详情" navBgcolor={color} backImgColor='write' titleColor='#fff'/>
-  // </Link>
 
   render() {
 
@@ -42,22 +37,16 @@ class DetailDeal extends Component {
 
       return (
         <div className='detailInfo'>
-        <div style={{height:10}}/>
-          <ProductOfInfo deal={deal}/>
-          <DetailInfo deal={deal}/>
-          <DetailSupply deal={deal}/>
-          <div onClick={()=>this._clickUser(user)}>
-            <Link to={url} style={{textDecoration: `blink`}}>
-              <DetailUser user={user} />
-            </Link>
-          </div>
+        <div style={{height:10}} />
+          <ProductOfInfo deal={deal} />
+          <DetailInfo deal={deal} />
+          <DetailSupply deal={deal} />
+          <Link to={url} style={{textDecoration: `blink`}}>
+            <DetailUser user={user} />
+          </Link>
         </div>
       )
     }
-  }
-
-  _clickUser(user) {
-    this.props.actions.fetchDealIfNeeded({type: `saveUser`, user: user})
   }
 
 }

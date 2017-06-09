@@ -5,20 +5,25 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 
 import * as actions from '../../actions/userAction'
+
 import DealCell from '../home/dealCell'
 import styles from '../../css/user/user.css'
 import DetailUser from '../detailDeal/detailUser'
 
 class UserPage extends Component {
 
+  componentWillMount() {
+    this.props.actions.fetchUserIfNeeded({type: `cleanUser`})
+  }
+
   componentDidMount() {
-    let user = this.props.data.user
-    this.props.actions.fetchUserIfNeeded({type: `getDealsByUser`, user: user})
+    let idString = this.props.location.search
+    let userId = idString.substring(idString.indexOf(':') + 1, idString.length)
+    this.props.actions.fetchUserIfNeeded({type: `getUserByUserId`, userId: userId})
   }
 
   render() {
 
-    let color = `#73e2ff`
     let user = this.props.data.user
     let deals = this.props.data.deals
 
@@ -56,12 +61,9 @@ class UserPage extends Component {
     }
   }
 
-  _onClick() {
-    console.log(`onClick`);
-  }
+  _onClick() {}
 
 }
-
 
 export default connect(state => ({
   data: state.UserReducer

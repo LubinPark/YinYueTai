@@ -36,7 +36,7 @@ module.exports = {
       title: 'maimaiparty', //标题
       filename: './index.html',
       template: __dirname + "/react/index.html", //new 这个插件的实例，并传入相关的参数
-      favicon: __dirname + '/app/img/userhead.png', //网页的图标
+      favicon: __dirname + '/app/img/app.png', //网页的图标
       hash: false, //添加一个唯一的 webpack每次编译都在文件名中插入一个不同的哈希值
       showErrors: true, //错误信息会写入到 HTML
       inject: true, //要把script插入到标签里

@@ -1,24 +1,25 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, HashRouter } from 'react-router-dom'
+import { Route, HashRouter } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
 
 import App from '../containers/app'
 import DetailDeal from '../components/detailDeal/detailDeal'
 import UserPage from '../components/user/userPage'
+import styles from '../css/common/error.css'
 
 const history = createBrowserHistory()
 
 class Root extends Component {
   render() {
     return (
-      <Router history={history}>
+      <HashRouter history={history}>
         <div>
           <Route exact path="/" component={App} />
           <Route path="/react" component={App} />
-          <Route exact path="/detailDeal" component={DetailDeal} />
-          <Route exact path="/user" component={UserPage} />
+          <Route path="/detailDeal" component={DetailDeal} />
+          <Route path="/user" component={UserPage} />
         </div>
-      </Router>
+      </HashRouter>
     )
   }
 }

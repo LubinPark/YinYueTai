@@ -1,21 +1,36 @@
-import Deal from '../api/deal'
+import { Deal, User } from '../api'
 import * as types from '../containers/actionType'
 
-function requestgetDealsByUser (params) {
+function getUserByUserId (params) {
   return (dispatch) => {
-    Deal.getDealsByUser(params.user,{ limit: 10, skip:0 }, (deals, err) => {
+    let userId = { userId : params.userId }
+    User.getUser(userId, (user, err) => {
+      if (!!user) {
+        dispatch(saveUser(user))
+        dispatch(requestgetDealsByUser(user))
+      } else {
+        console.log(err);
+      }
+    })
+  }
+}
+
+function saveUser(user) {
+  return {
+    type: `SAVE_USER`,
+    user: user
+  }
+}
+
+function requestgetDealsByUser (user) {
+  return (dispatch) => {
+    Deal.getDealsByUser(user,{ limit: 10, skip:0 }, (deals, err) => {
       if (!!deals) {
         return dispatch(saveDeals(deals))
       } else {
         return dispatch(loadingError())
       }
     })
-  }
-}
-
-function loadingError () {
-  return {
-    type: `LOADING_ERROR`,
   }
 }
 
@@ -26,10 +41,24 @@ function saveDeals(deals) {
   }
 }
 
+function loadingError () {
+  return {
+    type: `LOADING_ERROR`,
+  }
+}
+
+function cleanUser () {
+  return {
+    type: `CLEAN_USER`
+  }
+}
+
 export function fetchUserIfNeeded(params={}) {
   return(dispatch, getState) => {
-    if (params.type === `getDealsByUser`) {
-      return dispatch(requestgetDealsByUser(params))
+    if (params.type === `getUserByUserId`) {
+      return dispatch(getUserByUserId(params))
+    } else if (params.type === `cleanUser`) {
+      return dispatch(cleanUser())
     }
   }
 }

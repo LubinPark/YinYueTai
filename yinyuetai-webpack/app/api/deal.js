@@ -3,8 +3,9 @@ import AV from '../containers/AVConfig'
 var DealRequest = {}
 var Deal = AV.Object.extend('deal')
 
+//请求deals
 DealRequest.getDeals = (callback) => {
-  let params = { limit: 100 }
+  let params = { limit: 50 }
   AV.Cloud.rpc(`getDeals`, params).then((deals) => {
     callback(deals, null)
   },(err) => {
@@ -12,10 +13,14 @@ DealRequest.getDeals = (callback) => {
   })
 }
 
+// 根据deal的id请求deal，不用登录
 DealRequest.getDealById = (params, callback) => {
   let query = new AV.Query(Deal)
   query
-  .equalTo('objectId', params.id)
+  .equalTo('objectId', params.dealId)
+  .include(['user', 'products'])
+  .equalTo('deleted', false)
+  .greaterThanOrEqualTo('validDate', new Date())
   .find().then((deal) => {
     callback(deal[0], null)
   }).catch((err) => {
@@ -23,6 +28,16 @@ DealRequest.getDealById = (params, callback) => {
   })
 }
 
+// 根据deal的id请求deal，包括是否收藏，登录下才可用
+DealRequest.getDealWithFav = (params, callback) => {
+  AV.Cloud.rpc('getDealWithFav', params).then((deal) => {
+    callback(deal, null)
+  },(err) => {
+    callback(null, err)
+  })
+}
+
+//  根据用户，请求用户发布的deals，可以包括 limit skip 参数
 DealRequest.getDealsByUser = (user, params, callback) => {
 
   let skip = params.skip ? params.skip : 0

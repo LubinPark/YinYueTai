@@ -77,4 +77,5 @@
   align-items: center;
   justify-content: center;
   transform: rotate(30deg);
+  margin-right: 5px;
 }

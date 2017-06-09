@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import styles from '../../css/home/dealOfProduct.css'
+import { orgionUrl, cdnUrl } from '../../containers/imgUrl'
 
 class DealOfProduct extends Component {
 
@@ -16,7 +17,7 @@ class DealOfProduct extends Component {
     let deal = this.props.deal.attributes
     let product = deal.products[0].attributes
     let color = (deal.dealType === `卖`) ? `#51acf2` : `#f8c027`
-    let pic = product.thumbnail ? product.thumbnail.attributes.url : false
+    let pic = product.thumbnail ? product.thumbnail.attributes.url.replace(orgionUrl, cdnUrl) : false
 
     return (
       <div className='productOfCell'>

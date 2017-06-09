@@ -21,6 +21,10 @@ function userReducer(state = defaultState, action={}) {
       return Object.assign({}, state, { deals: [] })
       break
 
+    case types.CLEAN_USER:
+      return Object.assign({}, state, { user: {}, deals: [] })
+      break
+
     default:
     return state
   }

@@ -2,19 +2,12 @@ var AV = require('../containers/AVConfig')
 
 var UserRequest ={}
 
-UserRequest.searchUsers = (callback) => {
-  AV.Cloud.rpc(`searchUsers`).then((users) => {
-    callback(users, null)
+//根据用户id 请求用户
+UserRequest.getUser = (params, callback) => {
+  AV.Cloud.rpc(`getUser`, params).then((user) => {
+    callback(user, null)
   }, (err) => {
     callback(null, err)
-  })
-}
-
-UserRequest.getHomePage = (callback) => {
-  AV.Cloud.rpc(`getHomePage`).then((home) => {
-    callback(home, null)
-  }, (err) => {
-    callback(null, home)
   })
 }
 

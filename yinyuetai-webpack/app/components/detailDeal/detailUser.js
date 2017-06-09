@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import Func from '../../unit'
 import styles from '../../css/detailDeal/detailUser.css'
+import { orgionUrl, cdnUrl } from '../../containers/imgUrl'
 
 class DetailUser extends Component {
 
@@ -10,7 +11,7 @@ class DetailUser extends Component {
     let title = `发布人信息`
     let user = this.props.user.attributes
     let verification = user.Verification > 0
-    let img = user.picture ? user.picture.attributes.url : false
+    let img = user.picture ? user.picture.attributes.url.replace(orgionUrl, cdnUrl) : false
 
     return (
       <div className='detailDealView'>
