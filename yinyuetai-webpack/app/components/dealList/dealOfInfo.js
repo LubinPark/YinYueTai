@@ -1,25 +1,20 @@
 import React, { Component } from 'react'
 
 import Func from '../../unit'
-import styles from '../../css/home/dealOfInfo.css'
+import styles from '../../css/dealList/dealOfInfo.css'
 
 class DealOfInfo extends Component{
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      width: ((window.innerWidth) / 2)
-    }
-  }
-
   render() {
 
+    let innerWidth = (window.innerWidth) / 2
     let deal = this.props.deal.attributes
+
     if (deal.dealType === `卖`) {
       return (
         <div style={{height: 50}}>
           <div style={{display: `flex`}}>
-            <div style={{width: this.state.width}}>
+            <div style={{width: innerWidth}}>
               <CommonInfoView pic='locationImg' title={`发货地点`} value={deal.location}/>
             </div>
             <CommonInfoView pic='timeImg' title={`备货时间`} value={deal.prepare_time}/>
@@ -30,7 +25,7 @@ class DealOfInfo extends Component{
     } else {
       return (
         <div className='commonInfoView'>
-          <div style={{width: this.state.width, height: 25}}>
+          <div style={{width: innerWidth, height: 25}}>
             <CommonInfoView pic='locationImg' title={`收货地点`} value={deal.location}/>
           </div>
           <CommonInfoView pic='timeImg' title={`备货时间`} value={deal.prepare_time}/>

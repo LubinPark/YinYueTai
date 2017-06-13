@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import styles from '../../css/home/dealOfUserInfo.css'
+import styles from '../../css/dealList/dealOfUserInfo.css'
 import styles2 from '../../css/common/img.css'
 import { orgionUrl, cdnUrl } from '../../containers/imgUrl'
 

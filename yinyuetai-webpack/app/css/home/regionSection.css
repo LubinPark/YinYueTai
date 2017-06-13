@@ -1,0 +1,34 @@
+.regionItem {
+  display: flex;
+  flex-direction: row;
+  padding-left: 24px;
+  padding-bottom: 12px;
+  background-color: #fff;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+
+.regionItemView {
+  background-color: #fff;
+}
+
+.regionItemViewImg {
+  width: 110px;
+  margin-bottom: 5px;
+  height: 1.5 * 110px;
+  background-color: #fff;
+}
+
+.regionItemViewLocation {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #474747;
+  font-size: 13px;
+  background-color: #fff;
+}
+
+.regionItemViewTotal {
+  color: #666;
+  font-size: 13px;
+  background-color: #fff;
+}

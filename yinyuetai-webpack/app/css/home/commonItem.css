@@ -1,0 +1,57 @@
+.commonItem {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.commonItemTitle {
+  display: flex;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  align-items: center;
+  background-color: #fff;
+}
+
+.commonItemTitleLeft {
+  width: 4px;
+  height: 18px;
+  background-color: #73e1fc;
+}
+
+.commonItemTitleValue {
+  color: #474747;
+  font-size: 18px;
+  font-weight: 400;
+  margin-left: 20px;
+}
+
+.commonItemView {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding-bottom: 12px;
+  background-color: #fff;
+}
+
+.commonItemSectionView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  margin-left: 12px;
+  background-color: #fff;
+}
+
+.commonItemSectionImg {
+  width: 32px;
+  height: 32px;
+  margin-top: 8px;
+  margin-bottom: 12px
+}
+
+.commonItemSectionName {
+  font-size: 13px;
+  height: 20px;
+  color: #666;
+  margin-bottom: 4px;
+}

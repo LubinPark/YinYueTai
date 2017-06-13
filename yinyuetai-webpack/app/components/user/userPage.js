@@ -5,9 +5,10 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 
 import * as actions from '../../actions/userAction'
-
-import DealCell from '../home/dealCell'
 import styles from '../../css/user/user.css'
+
+import Loading from '../common/loading'
+import DealCell from '../dealList/dealCell'
 import DetailUser from '../detailDeal/detailUser'
 
 class UserPage extends Component {
@@ -28,7 +29,11 @@ class UserPage extends Component {
     let deals = this.props.data.deals
 
     if (_.isEmpty(user)) {
-      return <div></div>
+      return (
+        <div className='center' style={{height: window.innerHeight}}>
+          <Loading />
+        </div>
+      )
     } else {
       return (
         <div className='userPage'>

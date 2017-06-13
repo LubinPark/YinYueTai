@@ -33,4 +33,14 @@ Func.arrayToString = (array) => {
   return text
 }
 
+Func.isValid = (time) => {
+  let currDate = new Date()
+  if (currDate - time > 0){
+    return false
+  } else {
+    return true
+  }
+
+}
+
 module.exports = Func

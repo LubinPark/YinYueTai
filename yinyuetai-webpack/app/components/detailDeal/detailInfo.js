@@ -40,21 +40,13 @@ class DetailInfo extends Component {
 }
 
 class DetailInfoCell extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      width: (window.innerWidth)
-    }
-  }
-
   render() {
     let iconStyle = 'dealInfoImg' + ' ' + this.props.pic
     return (
       <div className='detailInfoCell'>
         <div className={iconStyle}/>
         <div className='dealInfoTitle'>{this.props.title}:</div>
-        <div className='dealInfoValue' style={{width: this.state.width - 150}}>{this.props.value}</div>
+        <div className='dealInfoValue' style={{width: window.innerWidth - 150}}>{this.props.value}</div>
       </div>
     )
   }

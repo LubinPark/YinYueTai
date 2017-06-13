@@ -1,0 +1,62 @@
+.topView {
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  position:fixed;
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #73e2ff;
+  z-index:10;
+}
+
+.topViewLogo {
+  width: 28px;
+  height: 28px;
+  background-size: contain;
+  background-image: url('../../img/logo.png');
+}
+
+.topViewLogoIcon {
+  width: 28px;
+  height: 28px;
+  margin-left: 15px;
+}
+
+.topViewTitle {
+  color: #fff;
+  font-size: 20px;
+  margin-left: 10px;
+  white-space:nowrap;
+}
+
+.searchView {
+  display: flex;
+  flex: 1;
+  height: 25px;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 3px;
+  background-color: #fff;
+  align-items: center;
+}
+
+.searchViewImg {
+  width: 17px;
+  height: 17px;
+  margin-left: 5px;
+  margin-right: 2px;
+  background-size: contain;
+  background-image: url('../../img/search.png');
+}
+
+.searchViewText {
+  font-size: 14px;
+  margin-right: 5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  color: rgb(177,177,177);
+}

@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
 
-import styles from '../../css/home/dealOfProduct.css'
+import styles from '../../css/dealList/dealOfProduct.css'
 import { orgionUrl, cdnUrl } from '../../containers/imgUrl'
 
 class DealOfProduct extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      width: ((window.innerWidth) - 100)
-    }
-  }
 
   render() {
 
@@ -24,7 +17,7 @@ class DealOfProduct extends Component {
       {pic ? <img className='productOfImg' src={pic}/>
            : <div className='productOfImgLocal' /> }
         <div className='productOfInfo'>
-          <div className='productTitle' style={{width: this.state.width, color: color}}>{deal.searchable}</div>
+          <div className='productTitle' style={{width: window.innerWidth - 100, color: color}}>{deal.searchable}</div>
           <div className='down'>
             <div className='left'>
               <Detail title='产地' value={deal.product_origin} />

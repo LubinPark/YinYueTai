@@ -1,4 +1,7 @@
-//首页的deal
+//获取主页信息
+export const SAVE_HOME_DATA = `SAVE_HOME_DATA`
+
+//dealList的deal
 export const SAVE_DEALS = `SAVE_DEALS`
 
 //保存详情的数据
@@ -15,3 +18,6 @@ export const LOADING_ERROR = `LOADING_ERROR`
 
 //进入用户页面之前 清空用户
 export const CLEAN_USER = `CLEAN_USER`
+
+//detailDeal  退出清空deal详情
+export const DESTORY_DETAIL_DEAL = `DESTORY_DETAIL_DEAL`

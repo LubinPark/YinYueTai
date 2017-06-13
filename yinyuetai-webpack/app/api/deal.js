@@ -4,8 +4,8 @@ var DealRequest = {}
 var Deal = AV.Object.extend('deal')
 
 //请求deals
-DealRequest.getDeals = (callback) => {
-  let params = { limit: 50 }
+DealRequest.getDeals = (params, callback) => {
+  console.log(params);
   AV.Cloud.rpc(`getDeals`, params).then((deals) => {
     callback(deals, null)
   },(err) => {
@@ -20,7 +20,7 @@ DealRequest.getDealById = (params, callback) => {
   .equalTo('objectId', params.dealId)
   .include(['user', 'products'])
   .equalTo('deleted', false)
-  .greaterThanOrEqualTo('validDate', new Date())
+  // .greaterThanOrEqualTo('validDate', new Date())
   .find().then((deal) => {
     callback(deal[0], null)
   }).catch((err) => {

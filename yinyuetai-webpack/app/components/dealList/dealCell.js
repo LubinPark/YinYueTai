@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import DealOfUserInfo from './dealOfUserInfo'
 import DealOfInfo from './dealOfInfo'
 import DealOfProduct from './DealOfProduct'
-import styles from '../../css/home/home.css'
+import styles from '../../css/dealList/dealList.css'
 
 class DealCell extends Component {
 

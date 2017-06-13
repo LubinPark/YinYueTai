@@ -17,6 +17,9 @@ function dealReducer(state = defaultState, action={}) {
       return Object.assign({}, state, { dealDetail: dealDetail })
       break
 
+    case types.DESTORY_DETAIL_DEAL:
+    return Object.assign({}, state, { dealDetail: {} })
+
     default:
     return state
   }

@@ -1,0 +1,47 @@
+.dealInfoText {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  background-color: #fff;
+}
+
+.dealInfoTextImg {
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+  margin-left: 15px;
+  margin-right: -4px;
+}
+
+.dealInfoTextImgLocal {
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+  margin-left: 15px;
+  margin-right: 10px;
+  background-color: #fff;
+  background-size: contain;
+  background-image: url('../../img/userhead.png');
+}
+
+.dealInfoTextVerification {
+  width: 10px;
+  height: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  background-color: blue;
+  background-size: contain;
+  background-image: url('../../img/valid.png');
+}
+
+.dealInfoTextType {
+  color: #666;
+  font-size: 13px;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.dealInfoTextName{
+  color: #666;
+  font-size: 13px;
+}
