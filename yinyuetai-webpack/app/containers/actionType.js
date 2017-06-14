@@ -1,6 +1,9 @@
 //获取主页信息
 export const SAVE_HOME_DATA = `SAVE_HOME_DATA`
 
+//保存最近搜索
+export const SAVE_SEARCHES = `SAVE_SEARCHES`
+
 //dealList的deal
 export const SAVE_DEALS = `SAVE_DEALS`
 
@@ -18,6 +21,9 @@ export const LOADING_ERROR = `LOADING_ERROR`
 
 //进入用户页面之前 清空用户
 export const CLEAN_USER = `CLEAN_USER`
+
+//DealList  退出dealList
+export const DESTORY_DEAL_LIST = `DESTORY_DEAL_LIST`
 
 //detailDeal  退出清空deal详情
 export const DESTORY_DETAIL_DEAL = `DESTORY_DETAIL_DEAL`

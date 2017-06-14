@@ -18,10 +18,30 @@ function saveHomeDate (home) {
   }
 }
 
+function requestGetHotSearches () {
+  return (dispatch) => {
+    Home.getHotSearches((searches, err) => {
+      if (!!searches) {
+        let searchArray = searches[0].attributes.phrases
+        dispatch(saveSearches(searchArray))
+      }
+    })
+  }
+}
+
+function saveSearches (searches) {
+  return {
+    type: `SAVE_SEARCHES`,
+    searches: searches
+  }
+}
+
 export function fetchHomeIfNeeded(params={}) {
   return(dispatch, getState) => {
     if (params.type === `getHomePage`) {
-      return dispatch(requestGetHomePage(params))
+      return dispatch(requestGetHomePage())
+    } else if (params.type === `getHotSearches`) {
+      return dispatch(requestGetHotSearches())
     }
   }
 }

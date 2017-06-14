@@ -10,4 +10,13 @@ HomeRequest.getHomePage = (callback) => {
   })
 }
 
+HomeRequest.getHotSearches = (callback) => {
+  var query = new AV.Query('hotSearch');
+  return query.find().then((searches) =>{
+    callback(searches, null);
+  }).catch((err)=>{
+    callback(null, err);
+  });
+}
+
 module.exports = HomeRequest

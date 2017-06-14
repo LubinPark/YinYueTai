@@ -7,7 +7,7 @@ function requestGetDeals(params) {
     initParams = Object.assign({}, initParams, params.params)
     Deal.getDeals(initParams, (deals, err) => {
       if (!!deals) {
-        return dispatch(saveDeals(deals))
+        return dispatch(saveDeals(deals, params.title))
       } else {
         return dispatch(saveUsersFailed())
       }
@@ -15,10 +15,11 @@ function requestGetDeals(params) {
   }
 }
 
-function saveDeals(deals) {
+function saveDeals(deals, title) {
   return {
     type: `SAVE_DEALS`,
-    deals: deals
+    deals: deals,
+    title: title
   }
 }
 
@@ -48,6 +49,12 @@ function destoryDetailDeal() {
   }
 }
 
+function destoryDealList() {
+  return {
+    type: `DESTORY_DEAL_LIST`
+  }
+}
+
 export function fetchDealIfNeeded(params={}) {
   return(dispatch, getState) => {
     if (params.type === `getDeals`) {
@@ -58,6 +65,8 @@ export function fetchDealIfNeeded(params={}) {
       return dispatch(_saveDealDetailSuccess(params.dealDetail))
     } else if (params.type === `destoryDetailDeal`) {
       return dispatch(destoryDetailDeal())
+    } else if (params.type === `destoryDealList`) {
+      return dispatch(destoryDealList())
     }
   }
 }

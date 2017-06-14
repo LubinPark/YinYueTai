@@ -8,6 +8,7 @@ import * as actions from '../../actions/userAction'
 import styles from '../../css/user/user.css'
 
 import Loading from '../common/loading'
+import Navigator from '../common/navigator'
 import DealCell from '../dealList/dealCell'
 import DetailUser from '../detailDeal/detailUser'
 
@@ -27,6 +28,8 @@ class UserPage extends Component {
 
     let user = this.props.data.user
     let deals = this.props.data.deals
+    let color = `#fff`
+    let title = `TA的信息`
 
     if (_.isEmpty(user)) {
       return (
@@ -37,6 +40,9 @@ class UserPage extends Component {
     } else {
       return (
         <div className='userPage'>
+          <Navigator title={title} showBack={false}
+                     navBgcolor={color} backImgColor='write' titleColor='#666'/>
+          <div style={{height:44}} />
           <DetailUser user={user} />
           <div className='userPagePublishText'>TA发布的买卖</div>
           {this._userListDeal(deals)}

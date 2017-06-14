@@ -40,7 +40,14 @@ Func.isValid = (time) => {
   } else {
     return true
   }
+}
 
+Func.arrayToStringWithSymbol = (array, symbol) => {
+  let text = ` `
+  for (var i = 0; i < array.length; i++) {
+    text += array[i] + ` ` +symbol + ` `
+  }
+  return text
 }
 
 module.exports = Func

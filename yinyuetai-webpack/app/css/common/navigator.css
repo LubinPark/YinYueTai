@@ -27,11 +27,18 @@
   background-image: url('../../img/back_black.png');
 }
 
+.backImgNone {
+  width: 30px;
+  height: 30px;
+  margin-top: 7px;
+  margin-left: 5px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
 .navigatorTitle {
   display: flex;
   flex: 1;
   margin-left: -44px;
   align-items: center;
   justify-content: center;
-  color: black;
 }

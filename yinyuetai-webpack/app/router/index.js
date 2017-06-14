@@ -3,6 +3,7 @@ import { Route, HashRouter } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
 
 import App from '../containers/app'
+import SearchList from '../components/search/searchList'
 import DealList from '../components/dealList/dealList'
 import DetailDeal from '../components/detailDeal/detailDeal'
 import UserPage from '../components/user/userPage'
@@ -16,6 +17,7 @@ class Root extends Component {
       <HashRouter history={history}>
         <div>
           <Route exact path="/" component={App} />
+          <Route path="/search" component={SearchList} />
           <Route path="/dealList" component={DealList} />
           <Route path="/detailDeal" component={DetailDeal} />
           <Route path="/user" component={UserPage} />

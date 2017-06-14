@@ -44,7 +44,7 @@ class RegionItem extends Component {
     let data = this.props.data.attributes
     let url = {
       pathname: '/dealList',
-      search: '?params:',
+      search: '?title:' + data.name,
       state: { data: data }
     }
 

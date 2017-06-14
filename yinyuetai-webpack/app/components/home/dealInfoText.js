@@ -1,20 +1,29 @@
 import _ from 'underscore'
 import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
-
-import SwipeableViews from 'react-swipeable-views'
-import { autoPlay } from 'react-swipeable-views-utils'
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
+import ReactSwipe from 'react-swipe'
 
 import styles from '../../css/home/dealInfoText.css'
 import { orgionUrl, cdnUrl } from '../../containers/imgUrl'
 
+const swipeOptions = {
+  auto: parseInt(4000),
+  speed: parseInt(200),
+  disableScroll: true,
+  continuous: true,
+  callback() {
+    // console.log('slide changed')
+  },
+  transitionEnd() {
+    // console.log('ended transition')
+  }
+}
+
 class DealInfoText extends Component {
 
   render() {
-
     return (
-      <AutoPlaySwipeableViews direction='incremental' animateHeight={true}>
+      <ReactSwipe swipeOptions={swipeOptions}>
       {
         _.map(this.props.data, (item, index) => {
 
@@ -31,13 +40,11 @@ class DealInfoText extends Component {
           let product_min_quantity = newItem.product_min_quantity
           let verification = item.attributes.user.attributes.Verification > 0
           let url = `/detailDeal?dealId:` + item.id
-
           let info = ``
-          if (dealType ===`买`) {
-            info = product_brand + ` ` +  name + ` ` + product_min_quantity + `件起`
-          } else {
-            info = product_brand + ` ` +  name + ` ` + product_min_quantity + `件`
-          }
+          
+          if (dealType ===`买`) { info = product_brand + ` ` +  name + ` ` + product_min_quantity + `件起` }
+          else { info = product_brand + ` ` +  name + ` ` + product_min_quantity + `件` }
+
           return (
             <div key={item.id}>
               <Link to={url} style={{textDecoration: `blink`}}>
@@ -53,7 +60,7 @@ class DealInfoText extends Component {
           )
         })
       }
-      </AutoPlaySwipeableViews>
+      </ReactSwipe>
     )
   }
 

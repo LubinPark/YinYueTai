@@ -10,6 +10,7 @@ module.exports = {
     vendor: [ 'react', 'react-dom',
               'redux', 'redux-thunk',
               'react-redux', 'react-router-dom',
+              'react-swipe', 'swipe-js-iso', 'react-tap-event-plugin',
               'leancloud-storage', 'path', 'underscore' ]
   },
   output: {

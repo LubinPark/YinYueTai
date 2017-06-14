@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux'
 import * as actions from '../../actions/dealAction'
 
 import styles from '../../css/dealList/dealList.css'
+import Loading from '../common/loading'
 import Navigator from '../common/navigator'
 import ProductOfInfo from './productInfo'
 import DetailInfo from './detailInfo'
@@ -31,7 +32,11 @@ class DetailDeal extends Component {
     let deal = this.props.data.dealDetail
 
     if (_.isEmpty(deal)) {
-      return <div/>
+      return (
+        <div className='center' style={{height: window.innerHeight}}>
+          <Loading />
+        </div>
+      )
     } else {
 
       let color = (deal.attributes.dealType === `卖`) ? `#73e2ff` : `#ffd149`
@@ -43,7 +48,7 @@ class DetailDeal extends Component {
 
       return (
         <div className='detailInfo'>
-          <Navigator title="采购详情" showBack='false' navBgcolor={color} backImgColor='write' titleColor='#fff'/>
+          <Navigator title="采购详情" showBack={false} navBgcolor={color} backImgColor='write' titleColor='#fff'/>
           <div style={{height:54}} />
           <ProductOfInfo deal={deal} />
           <DetailInfo deal={deal} />

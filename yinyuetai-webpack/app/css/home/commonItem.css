@@ -1,6 +1,8 @@
 .commonItem {
   margin-top: 10px;
   margin-bottom: 10px;
+  padding-right: 10px;
+  background-color: #fff;
 }
 
 .commonItemTitle {
