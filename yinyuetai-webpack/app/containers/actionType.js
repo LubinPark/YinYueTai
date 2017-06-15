@@ -27,3 +27,6 @@ export const DESTORY_DEAL_LIST = `DESTORY_DEAL_LIST`
 
 //detailDeal  退出清空deal详情
 export const DESTORY_DETAIL_DEAL = `DESTORY_DETAIL_DEAL`
+
+//searchList 保存searchlist 地区的数据
+export const SAVE_LOCATIONS_DATA = `SAVE_LOCATIONS_DATA`

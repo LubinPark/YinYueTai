@@ -1,0 +1,55 @@
+.filterLocationView {
+  background-color: #fff;
+  padding-bottom: 10px;
+}
+
+.filterLocationTitle {
+  font-size: 14px;
+  padding-top: 15px;
+  padding-left: 15px;
+  color: #666;
+}
+
+.filterLocationValueSelectView {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 15px;
+  flex-direction: row;
+  background-color: #fff;
+}
+
+.filterLocationSelectValue {
+  color: #73e1fc;
+  display: flex;
+  font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
+  border:solid 1px #73e1fc;
+  align-items: center;
+  background-color: #f0faff;
+  justify-content: center;
+}
+
+.filterLocationValueView {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 15px;
+  flex-direction: row;
+  background-color: #fff;
+}
+
+.filterLocationValue {
+  color: #666;
+  display: flex;
+  font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
+  border:solid 1px #ededed;
+  align-items: center;
+  background-color: #fff;
+  justify-content: center;
+}

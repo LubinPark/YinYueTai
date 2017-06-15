@@ -19,4 +19,12 @@ HomeRequest.getHotSearches = (callback) => {
   });
 }
 
+HomeRequest.getLocations = (callback) => {
+  AV.Cloud.rpc(`getLocations`).then((locations) => {
+    callback(locations, null)
+  }, (err) => {
+    callback(null, err)
+  })
+}
+
 module.exports = HomeRequest

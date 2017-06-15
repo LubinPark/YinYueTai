@@ -1,9 +1,16 @@
 .searchTabInputView {
+  top: 0;
+  left:0;
+  right: 0;
   height:44px;
+  z-index: 10;
   display: flex;
+  position: fixed;
   flex-direction: row;
   align-items: center;
   background-color: #fff;
+  box-sizing: border-box;
+  border-bottom:solid 1px #ededed;
 }
 
 .searchTabInput {
@@ -21,12 +28,80 @@
 
 .searchTabText {
   color: #666;
+  font-size: 13px;
   margin-left: 10px;
   margin-right: 15px;
-  font-size: 13px;
+  background-color: #fff;
 }
 
-.searchTabInputViewLine {
-  height: 1px;
-  background-color: #ededed;
+.searchListSelectTabView {
+  display: flex;
+  flex-direction: row;
+  border-bottom:solid 1px #ededed;
+}
+
+.searchListTabButton {
+  display: flex;
+  flex: 1;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchListTabLocationImg {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  background-size: contain;
+  background-image: url('../../img/location.png');
+}
+
+.searchListTabTypeImg {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  background-size: contain;
+  background-image: url('../../img/type.png');
+}
+
+.searchListTabFilterImg {
+  width: 14px;
+  height: 14px;
+  background-size: contain;
+  background-image: url('../../img/filter.png');
+}
+
+.searchListTabText {
+  font-size: 13px;
+  color: #474747;
+  margin-right: 5px;
+}
+
+.searchListTypeView {
+  height: 120px;
+  background-color: red;
+}
+
+.searchListTypeViewCell {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  background-color: #fff;
+  border-bottom:solid 1px #ededed;
+}
+
+.searchListTypeViewCellText {
+  display: flex;
+  flex: 1;
+  font-size: 13px;
+  padding-left: 15px;
+}
+
+.searchListTypeViewCellValue {
+  width: 14px;
+  height: 14px;
+  margin-right: 15px;
+  background-size: contain;
+  background-image: url('../../img/location.png');
 }

@@ -2,14 +2,13 @@
   top: 0;
   left: 0;
   right: 0;
-  display: flex;
-  position:fixed;
+  z-index:10;
   height: 44px;
   display: flex;
+  position:fixed;
   flex-direction: row;
   align-items: center;
   background-color: #73e2ff;
-  z-index:10;
 }
 
 .topViewLogo {

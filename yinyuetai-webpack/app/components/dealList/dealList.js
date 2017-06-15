@@ -36,7 +36,7 @@ class DealList extends Component {
               let url = `/detailDeal?dealId:` + item.id
               return (
                 <Link to={url} key={index} style={{textDecoration: `blink`}}>
-                  <DealCell key={index} deal={item} onClick={(e)=>this._clickDeal(e, item)}/>
+                  <DealCell deal={item} onClick={(e)=>this._clickDeal(e, item)}/>
                 </Link>
               )
             })
