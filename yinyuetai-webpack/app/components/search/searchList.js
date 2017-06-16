@@ -12,6 +12,8 @@ import Loading from '../common/loading'
 import Navigator from '../common/navigator'
 import DealCell from '../dealList/dealCell'
 import FilterLocation from '../common/filterLocation'
+import FilterOfCheckBox from '../common/filterOfCheckBox'
+import FilterOfRadioBox from '../common/filterOfRadioBox'
 import styles from '../../css/search/searchList.css'
 
 const customStyles = {
@@ -28,7 +30,7 @@ const customStyles = {
     top                     : '0px',
     left                    : '0px',
     right                   : '0px',
-    bottom                  : '150px',
+    height                  : '409px',
     padding                 : '0px',
     borderRadius            : '0px',
     background              : '#fff',
@@ -48,31 +50,88 @@ class SearchList extends Component {
       select: ``,
       dealType: [`全部`,`采购`,`货源`],
       selectDealType: `全部`,
-      selectLocation: `悉尼`
+      selectLocation: `不限`,
+      prepare_time : ``,
+      product_origin: ``,
+      delivery: [],
+      searchText: ``
     }
   }
 
   componentDidMount() {
     this.props.actions.fetchSearchListIfNeeded({type: `getLocations`})
+    this.props.actions.fetchSearchListIfNeeded({type: `getDefaultFilters`})
+    this.props.actions.fetchSearchListIfNeeded({type: `getHotSearches`})
   }
 
   render() {
+
+    let searchText = this.state.searchText
     let data = this.props.data
     let locations = data.locations
+    let filters = data.filters
+    let searches = data.searches
 
-    if (locations.length > 0) {
+    if (locations.length > 0 && filters.length > 0) {
       return (
         <div className='searchListView'>
-          <SearchTab />
+          <SearchTab onChange={(value)=>this._onChange(value)} searchText={this.state.searchText}/>
           <div style={{marginTop:44}} />
-          {this._searchListSelectTabView()}
-          <Modal
-            style={customStyles}
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={()=>this.closeModal()}
-            contentLabel="Modal">
-            {this._showSelectView(this.state.select)}
-          </Modal>
+          {
+            (searchText.length == 0) &&
+            <div className='searchListViewHotSearch'>
+              <div className='searchListViewHotSearchTitle'>热门搜索</div>
+              <div className='searchListViewHotSearchView'>
+              {
+                _.map(searches, (item, index) => {
+                  return (
+                    <div className='searchListViewHotSearchItem' key={item}
+                          onClick={()=>this._selectHotSearchItem(item)}>
+                    {item}
+                    </div>
+                  )
+                })
+              }
+              </div>
+            </div>
+          }
+          {
+            (searchText.length == 0) &&
+            <div className='searchListViewHotSearch' style={{marginTop: 10}}>
+              <div className='searchListViewHotSearchTitleView'>
+                <div className='searchListViewHotSearchTitle2'>历史记录</div>
+                <div className='searchListViewHotSearchDelete'>清空</div>
+              </div>
+              <div className='searchListViewHotSearchView'>
+              {
+                _.map(searches, (item, index) => {
+                  return (
+                    <div className='searchListViewHotSearchItem' key={item}
+                         onClick={()=>this._selectHotSearchItem(item)}>
+                    {item}
+                    </div>
+                  )
+                })
+              }
+              </div>
+            </div>
+          }
+          {
+          (searchText.length > 0) &&
+            <div>
+              {this._searchListSelectTabView()}
+              <Modal
+                style={customStyles}
+                isOpen={this.state.modalIsOpen}
+                onRequestClose={()=>this.closeModal()}
+                contentLabel="Modal">
+                {this._showSelectView(this.state.select)}
+              </Modal>
+            </div>
+          }
+          { data.deals.length &&
+            this.state.searchText.length &&
+            this._showSearchList(data.deals) }
         </div>
       )
     } else {
@@ -82,6 +141,35 @@ class SearchList extends Component {
         </div>
       )
     }
+  }
+
+  _showSearchList(deals) {
+    return (
+      <div style={{backgroundColor:'#fff', paddingTop: 40}}>
+        {
+          _.map(deals, (item, index) => {
+            return (
+                <DealCell key={item.id+'searchList'} deal={item} onClick={(e)=>this._clickDeal(e, item)}/>
+              )
+          })
+        }
+      </div>
+    )
+  }
+
+  _onChange(value) {
+    this.setState({
+      searchText: value
+    })
+  }
+
+  _selectHotSearchItem(value) {
+    this.setState({
+      searchText: value
+    },() => {
+      let params = this.state
+      this.props.actions.fetchSearchListIfNeeded({type: `getSearchDeals`,params:params})
+    })
   }
 
   _openModal(select) {
@@ -97,20 +185,33 @@ class SearchList extends Component {
   }
 
   _searchListSelectTabView() {
+
+    let locationColor = (this.state.selectLocation === `不限`) ? false : true
+    let typeColor = (this.state.selectDealType === `全部`) ? false : true
+    let filterColor = (_.isEmpty(this.state.delivery)) &&
+                      (this.state.prepare_time === ``) &&
+                      (this.state.product_origin === ``) ? false : true
+
     return (
       <div className='searchListSelectTabView'>
         <div className='searchListTabButton' onClick={()=>this._openModal(`location`)}
              style={{justifyContent:'flex-start', marginLeft: 15}}>
           <div className='searchListTabLocationImg' />
-          <div className='searchListTabText'>不限</div>
+          { locationColor
+            ? <div className='searchListTabTextColor'>{this.state.selectLocation}</div>
+            : <div className='searchListTabText'>{this.state.selectLocation}</div> }
         </div>
         <div className='searchListTabButton' onClick={()=>this._openModal(`type`)}>
           <div className='searchListTabTypeImg' />
-          <div className='searchListTabText'>全部</div>
+        { typeColor
+          ? <div className='searchListTabTextColor'>{this.state.selectDealType}</div>
+          : <div className='searchListTabText'>{this.state.selectDealType}</div> }
         </div>
         <div className='searchListTabButton' onClick={()=>this._openModal(`filter`)}
              style={{justifyContent:'flex-end', marginRight:15}}>
-          <div className='searchListTabText'>筛选</div>
+         { filterColor
+           ? <div className='searchListTabTextColor'>筛选</div>
+           : <div className='searchListTabText'>筛选</div> }
           <div className='searchListTabFilterImg' />
         </div>
       </div>
@@ -118,38 +219,107 @@ class SearchList extends Component {
   }
 
   _showSelectView(select) {
-
     if (select === `location`) {
       return (
-        <FilterLocation locations={this.props.data.locations} selectLocation={this.state.selectLocation}/>
+        <FilterLocation locations={this.props.data.locations}
+                        selectLocation={this.state.selectLocation}
+                        onClick={(location)=>this._selectLocation(location)}
+        />
       )
     } else if (select === `type`) {
       return (
         <div className='searchListTypeView'>
         {
           _.map(this.state.dealType, (item, index) => {
-            return (
-              <div className='searchListTypeViewCell' key={item} onClick={()=>this._selectType(item)}>
-                <div className='searchListTypeViewCellText'>{item}</div>
-                { (item === this.state.selectDealType) &&
-                  <div className='searchListTypeViewCellValue' /> }
-              </div>
-            )
+            if(item === this.state.selectDealType) {
+              return (
+                <div className='searchListTypeViewCell' key={item} onClick={()=>this._selectType(item)}>
+                  <div className='searchListTypeViewCellSelectText'>{item}</div>
+                  <div className='searchListTypeViewCellValue' />
+                </div>
+              )
+            } else {
+              return (
+                <div className='searchListTypeViewCell' key={item} onClick={()=>this._selectType(item)}>
+                  <div className='searchListTypeViewCellText'>{item}</div>
+                </div>
+              )
+            }
           })
         }
         </div>
       )
     } else if (select === `filter`) {
+      let filters = this.props.data.filters
       return (
-        <div />
+        <div>
+          {  _.map(filters, (filterItem, index) => {
+              if (filterItem.options.length > 0) {
+                if (filterItem.isMultiple) {
+                  return (
+                    <FilterOfCheckBox title={filterItem.name}
+                                      itemArray={filterItem.options} ref={index}
+                                      selectItems={this.state[filterItem.searchField]}
+                                      key={index + filterItem.name + 'filterOfCheckBox'}
+                                      onPress={(item)=>this._selectItem(item, filterItem.searchField)}
+                    />
+                  )
+                } else {
+                  return (
+                    <FilterOfRadioBox title={filterItem.name}
+                                      itemArray={filterItem.options} ref={index}
+                                      selectItem={this.state[filterItem.searchField]}
+                                      key={index + filterItem.name + 'filterOfRadioBox'}
+                                      onPress={(item)=>this._selectItem(item, filterItem.searchField)}
+                    />
+                  )
+                }
+              }
+            })
+          }
+          <div className='searchListTabViewDown'>
+            <div className='searchListTabViewDownClean' style={{width: window.innerWidth / 3 * 2}}>清除筛选</div>
+            <div className='searchListTabViewDownFinish'
+                 style={{width: window.innerWidth / 3}}
+                 onClick={()=>this._finish()}>完成</div>
+          </div>
+        </div>
       )
     }
   }
 
+  _selectLocation(location) {
+    this.setState({
+      selectLocation: location,
+      modalIsOpen: false
+    },() => {
+      let params = this.state
+      this.props.actions.fetchSearchListIfNeeded({type: `getSearchDeals`,params:params})
+    })
+  }
+
   _selectType(type) {
     this.setState({
-      selectDealType: type
+      selectDealType: type,
+      modalIsOpen: false
+    },() => {
+      let params = this.state
+      this.props.actions.fetchSearchListIfNeeded({type: `getSearchDeals`,params:params})
     })
+
+  }
+
+  _selectItem(item, searchField) {
+    this.setState({
+      [searchField]: item
+    },() => {
+      // console.log(this.state);
+    })
+  }
+
+  _finish() {
+    let params = this.state
+    this.props.actions.fetchSearchListIfNeeded({type: `getSearchDeals`,params:params})
   }
 
 }

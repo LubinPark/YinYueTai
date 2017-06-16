@@ -30,3 +30,9 @@ export const DESTORY_DETAIL_DEAL = `DESTORY_DETAIL_DEAL`
 
 //searchList 保存searchlist 地区的数据
 export const SAVE_LOCATIONS_DATA = `SAVE_LOCATIONS_DATA`
+
+//searchList 保存初始的filter 数据
+export const SAVE_DEFAULT_FILTERS = `SAVE_DEFAULT_FILTERS`
+
+//searchList 请求的deals 数据
+export const SAVE_SEARCHE_LIST_DEALS = `SAVE_SEARCHE_LIST_DEALS`

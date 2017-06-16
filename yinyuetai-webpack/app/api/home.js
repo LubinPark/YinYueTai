@@ -27,4 +27,12 @@ HomeRequest.getLocations = (callback) => {
   })
 }
 
+HomeRequest.getDefaultFilters = (callback) => {
+  AV.Cloud.rpc(`getDefaultFilters`).then((filters) => {
+    callback(filters, null)
+  }, (err) => {
+    callback(null, err)
+  })
+}
+
 module.exports = HomeRequest

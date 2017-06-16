@@ -22,21 +22,21 @@ class FilterLocation extends Component {
       {
         _.map(locations, (items, index) => {
           return (
-            <div key={items.name}>
+            <div style={{width:window.innerWidth}} key={items.name}>
               <div className='filterLocationTitle'>{items.name}</div>
-              <div>
+              <div className='rowView'>
               {
                 _.map(items.locations, (item, index)=> {
                   if (item === selectLocation) {
                     return (
-                      <div className='filterLocationValueSelectView' key={item+index}>
-                        <div className='filterLocationSelectValue' style={{width: (window.innerWidth - 40) / 3}}>{item}</div>
+                      <div className='filterLocationValueSelectView' key={item+index} onClick={()=>this._onClick(item)}>
+                        <div className='filterLocationSelectValue' style={{width: (window.innerWidth - 60) / 3}}>{item}</div>
                       </div>
                     )
                   } else {
                     return (
-                      <div className='filterLocationValueView' key={item+index}>
-                        <div className='filterLocationValue' style={{width: (window.innerWidth - 40) / 3}}>{item}</div>
+                      <div className='filterLocationValueView' key={item+index} onClick={()=>this._onClick(item)}>
+                        <div className='filterLocationValue' style={{width: (window.innerWidth - 60) / 3}}>{item}</div>
                       </div>
                     )
                   }
@@ -49,6 +49,14 @@ class FilterLocation extends Component {
       }
       </div>
     )
+  }
+
+  _onClick(selectLocation) {
+    this.setState({
+      selectLocation: selectLocation
+    },() => {
+      this.props.onClick && this.props.onClick(selectLocation)
+    })
   }
 
 }

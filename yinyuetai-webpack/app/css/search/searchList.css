@@ -1,3 +1,66 @@
 .searchListView {
+  background-color: #ededed;
+}
+
+.searchListViewHotSearch {
+  padding-bottom: 10px;
   background-color: #fff;
+}
+
+.searchListViewHotSearchTitle {
+  color: #474747;
+  font-size: 13px;
+  padding-top: 15px;
+  margin-left: 15px;
+  padding-bottom: 10px;
+  border-bottom:solid 1px #ededed;
+}
+
+.searchListViewHotSearchTitle2 {
+  color: #474747;
+  font-size: 13px;
+  padding-top: 15px;
+  margin-left: 15px;
+  padding-bottom: 10px;
+}
+
+.searchListViewHotSearchTitleView {
+  display: flex;
+  flex-direction: row;
+  border-bottom:solid 1px #ededed;
+}
+
+
+
+.searchListViewHotSearchDelete {
+  display: flex;
+  color: #474747;
+  flex: 1;
+  padding-right: 15px;
+  font-size: 13px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  justify-content: flex-end;
+  background-color: #ff;
+}
+
+.searchListViewHotSearchView {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 15px;
+}
+
+.searchListViewHotSearchItem {
+  font-size: 13px;
+  font-weight: 300;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 4px;
+  margin-top: 15px;
+  margin-right: 15px;
+  border:solid 1px #ededed;
 }

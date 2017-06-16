@@ -35,9 +35,16 @@
 }
 
 .searchListSelectTabView {
+  top: 44;
+  left:0;
+  right: 0;
+  height:40px;
+  z-index: 10;
+  position: fixed;
   display: flex;
   flex-direction: row;
   border-bottom:solid 1px #ededed;
+  background-color: #fff;
 }
 
 .searchListTabButton {
@@ -77,9 +84,15 @@
   margin-right: 5px;
 }
 
+.searchListTabTextColor {
+  font-size: 13px;
+  color: #73e1fc;
+  margin-right: 5px;
+}
+
 .searchListTypeView {
   height: 120px;
-  background-color: red;
+  background-color: #fff;
 }
 
 .searchListTypeViewCell {
@@ -89,6 +102,14 @@
   flex-direction: row;
   background-color: #fff;
   border-bottom:solid 1px #ededed;
+}
+
+.searchListTypeViewCellSelectText {
+  display: flex;
+  flex: 1;
+  font-size: 13px;
+  padding-left: 15px;
+  color: #73e1fc;
 }
 
 .searchListTypeViewCellText {
@@ -104,4 +125,32 @@
   margin-right: 15px;
   background-size: contain;
   background-image: url('../../img/location.png');
+}
+
+.searchListTabViewDown {
+  display: flex;
+  height: 50px;
+  margin-top: 15px;
+  flex-direction: row;
+  background-color: #fff;
+  border-top:solid 1px #ededed;
+  border-bottom:solid 1px #ededed;
+}
+
+.searchListTabViewDownClean {
+  font-size: 14px;
+  color: #474747;
+  display: flex;
+  padding-left: 15px;
+  align-items: center;
+  background-color: #fff;
+}
+
+.searchListTabViewDownFinish {
+  display: flex;
+  font-size: 14px;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  background-color: #73e1fc;
 }

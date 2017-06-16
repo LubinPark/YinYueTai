@@ -1,6 +1,9 @@
 .filterLocationView {
-  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   padding-bottom: 10px;
+  background-color: #fff;
 }
 
 .filterLocationTitle {
@@ -25,7 +28,6 @@
   padding-top: 5px;
   padding-bottom: 5px;
   margin-top: 10px;
-  margin-right: 10px;
   border:solid 1px #73e1fc;
   align-items: center;
   background-color: #f0faff;
@@ -47,7 +49,6 @@
   padding-top: 5px;
   padding-bottom: 5px;
   margin-top: 10px;
-  margin-right: 10px;
   border:solid 1px #ededed;
   align-items: center;
   background-color: #fff;
