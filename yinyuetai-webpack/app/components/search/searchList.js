@@ -148,13 +148,20 @@ class SearchList extends Component {
       <div style={{backgroundColor:'#fff', paddingTop: 40}}>
         {
           _.map(deals, (item, index) => {
+            let url = `/detailDeal?dealId:` + item.id
             return (
+              <Link to={url} key={index} style={{textDecoration: `blink`}}>
                 <DealCell key={item.id+'searchList'} deal={item} onClick={(e)=>this._clickDeal(e, item)}/>
-              )
+              </Link>
+            )
           })
         }
       </div>
     )
+  }
+
+  _clickDeal() {
+  
   }
 
   _onChange(value) {
