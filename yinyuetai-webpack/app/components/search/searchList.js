@@ -161,7 +161,7 @@ class SearchList extends Component {
   }
 
   _clickDeal() {
-  
+
   }
 
   _onChange(value) {
@@ -325,8 +325,12 @@ class SearchList extends Component {
   }
 
   _finish() {
-    let params = this.state
-    this.props.actions.fetchSearchListIfNeeded({type: `getSearchDeals`,params:params})
+    this.setState({
+      modalIsOpen: false
+    },() => {
+      let params = this.state
+      this.props.actions.fetchSearchListIfNeeded({type: `getSearchDeals`,params:params})
+    })
   }
 
 }
