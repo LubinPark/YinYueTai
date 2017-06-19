@@ -1,6 +1,7 @@
 import { Deal } from '../api'
 import * as types from '../containers/actionType'
 
+//请求deals
 function requestGetDeals(params) {
   return (dispatch) => {
     let initParams = { skip: 0, limit: 10 }
@@ -15,6 +16,7 @@ function requestGetDeals(params) {
   }
 }
 
+//保存deals
 function saveDeals(deals, title) {
   return {
     type: `SAVE_DEALS`,
@@ -23,6 +25,7 @@ function saveDeals(deals, title) {
   }
 }
 
+//根据dealid 请求 deal 详情
 function getDealDetail(params) {
   return (dispatch) => {
     let dealId = { dealId: params.dealId }
@@ -36,6 +39,7 @@ function getDealDetail(params) {
   }
 }
 
+//保存deal 的详情
 function _saveDealDetailSuccess(deal) {
   return {
     type: `SAVE_DEAL_DETAIL_SUCCESS`,
@@ -43,12 +47,14 @@ function _saveDealDetailSuccess(deal) {
   }
 }
 
+//退出页面 删除详情数据
 function destoryDetailDeal() {
   return {
     type: `DESTORY_DETAIL_DEAL`
   }
 }
 
+//退出页面 删除deals
 function destoryDealList() {
   return {
     type: `DESTORY_DEAL_LIST`

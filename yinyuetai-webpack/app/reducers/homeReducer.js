@@ -7,6 +7,7 @@ var defaultState = {
 
 function dealReducer(state = defaultState, action={}) {
   switch (action.type) {
+    
     case types.SAVE_HOME_DATA:
       let home = action.home
       return Object.assign({}, state, { home: home })

@@ -8,6 +8,7 @@ var defaultState = {
 
 function dealReducer(state = defaultState, action={}) {
   switch (action.type) {
+    
     case types.SAVE_DEALS:
       let deals = action.deals
       let title = action.title

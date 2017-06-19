@@ -1,11 +1,12 @@
 import _ from 'underscore'
 import React, { Component } from 'react'
 
+import * as actions from '../../actions/dealAction'
+
 import Func from '../../unit'
 import styles from '../../css/detailDeal/productInfo.css'
 import { orgionUrl, cdnUrl } from '../../containers/imgUrl'
 
-import * as actions from '../../actions/dealAction'
 
 class ProductOfInfo extends Component {
 

@@ -73,6 +73,14 @@ class FilterOfCheckBox extends Component {
     }
   }
 
+  resetFunc() {
+    this.setState({
+      selectItems: []
+    },() => {
+      this.props.onPress && this.props.onPress(this.state.selectItems)
+    })
+  }
+
 }
 
 export default FilterOfCheckBox

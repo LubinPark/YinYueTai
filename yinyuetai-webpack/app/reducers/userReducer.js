@@ -7,6 +7,7 @@ var defaultState = {
 
 function userReducer(state = defaultState, action={}) {
   switch (action.type) {
+    
     case types.SAVE_DEALS_BY_USER_ID:
       let deals = action.deals
       return Object.assign({}, state, { deals: deals })

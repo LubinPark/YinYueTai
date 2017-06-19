@@ -1,7 +1,7 @@
 import _ from 'underscore'
+import ReactSwipe from 'react-swipe'
 import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
-import ReactSwipe from 'react-swipe'
 
 import styles from '../../css/home/dealInfoText.css'
 import { orgionUrl, cdnUrl } from '../../containers/imgUrl'
@@ -41,7 +41,7 @@ class DealInfoText extends Component {
           let verification = item.attributes.user.attributes.Verification > 0
           let url = `/detailDeal?dealId:` + item.id
           let info = ``
-          
+
           if (dealType ===`买`) { info = product_brand + ` ` +  name + ` ` + product_min_quantity + `件起` }
           else { info = product_brand + ` ` +  name + ` ` + product_min_quantity + `件` }
 

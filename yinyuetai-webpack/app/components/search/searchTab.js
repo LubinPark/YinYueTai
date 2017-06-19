@@ -1,7 +1,15 @@
+import _ from 'underscore'
 import React, { Component } from 'react'
 import styles from '../../css/search/searchTab.css'
 
-export default class SearchTab extends Component {
+class SearchTab extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      searchText: ``
+    }
+  }
 
   render() {
 
@@ -15,14 +23,29 @@ export default class SearchTab extends Component {
                placeholder='search'
                value={this.props.searchText}
                onChange={(e)=>this._onChange(e)}/>
-        <div className='searchTabText'>搜索</div>
+        <div className='searchTabText' onClick={()=>{this._onSearch()}}>搜索</div>
       </div>
     )
   }
 
+  //文本框内容变化
   _onChange(e) {
     let value = e.target.value
-    this.props.onChange && this.props.onChange(value)
+    this.setState({
+      searchText: value
+    },() => {
+      this.props.onChange && this.props.onChange(value)
+    })
+  }
+
+  //点击搜索
+  _onSearch() {
+    let searchText = this.state.searchText
+    if(!_.isEmpty(searchText)) {
+      this.props.onSearch && this.props.onSearch(searchText)
+    }
   }
 
 }
+
+export default SearchTab

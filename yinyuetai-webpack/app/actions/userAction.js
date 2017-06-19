@@ -1,6 +1,7 @@
 import { Deal, User } from '../api'
 import * as types from '../containers/actionType'
 
+//根据用户id请求 user
 function getUserByUserId (params) {
   return (dispatch) => {
     let userId = { userId : params.userId }
@@ -15,6 +16,7 @@ function getUserByUserId (params) {
   }
 }
 
+//保存用户信息
 function saveUser(user) {
   return {
     type: `SAVE_USER`,
@@ -22,6 +24,7 @@ function saveUser(user) {
   }
 }
 
+//根据用户请求 发布的deals
 function requestgetDealsByUser (user) {
   return (dispatch) => {
     Deal.getDealsByUser(user,{ limit: 10, skip:0 }, (deals, err) => {
@@ -34,6 +37,7 @@ function requestgetDealsByUser (user) {
   }
 }
 
+//保存用户发布的deals
 function saveDeals(deals) {
   return {
     type: `SAVE_DEALS_BY_USER_ID`,
@@ -41,12 +45,14 @@ function saveDeals(deals) {
   }
 }
 
+//加载失败
 function loadingError () {
   return {
     type: `LOADING_ERROR`,
   }
 }
 
+//退出删除user用户
 function cleanUser () {
   return {
     type: `CLEAN_USER`

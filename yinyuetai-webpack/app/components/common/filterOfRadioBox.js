@@ -65,6 +65,14 @@ class FilterOfRadioBox extends Component {
     }
   }
 
+  resetFunc() {
+    this.setState({
+      selectItem: ''
+    },() => {
+      this.props.onPress && this.props.onPress(this.state.selectItem)
+    })
+  }
+
 }
 
 export default FilterOfRadioBox

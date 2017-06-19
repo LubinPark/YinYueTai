@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 
 import * as actions from '../../actions/homeAction'
+
 import TopView from './topView'
 import TopBanner from './topBanner'
 import DealInfoText from './dealInfoText'

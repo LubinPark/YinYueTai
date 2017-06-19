@@ -1,6 +1,7 @@
 import { Home } from '../api'
 import * as types from '../containers/actionType'
 
+//请求主页数据
 function requestGetHomePage () {
   return (dispatch) => {
     Home.getHomePage((home, err) => {
@@ -11,6 +12,7 @@ function requestGetHomePage () {
   }
 }
 
+//保存主页数据
 function saveHomeDate (home) {
   return {
     type: `SAVE_HOME_DATA`,
@@ -18,6 +20,7 @@ function saveHomeDate (home) {
   }
 }
 
+//获取热搜数据
 function requestGetHotSearches () {
   return (dispatch) => {
     Home.getHotSearches((searches, err) => {
@@ -29,6 +32,7 @@ function requestGetHotSearches () {
   }
 }
 
+//保存热搜数据
 function saveSearches (searches) {
   return {
     type: `SAVE_SEARCHES`,
