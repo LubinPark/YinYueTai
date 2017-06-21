@@ -6,10 +6,12 @@ export const SAVE_SEARCHES = `SAVE_SEARCHES`
 
 //dealList 的deal
 export const SAVE_DEALS = `SAVE_DEALS`
-//dealList  退出dealList
+//dealList 退出dealList
 export const DESTORY_DEAL_LIST = `DESTORY_DEAL_LIST`
-
-
+//dealList 请求当deals 为空
+export const DEAL_LIST_NO_DEAL = `DEAL_LIST_NO_DEAL`
+//DealList 保存的params
+export const SAVE_PARAMS = `SAVE_PARAMS`
 //detailDeal 保存详情的数据
 export const SAVE_DEAL_DETAIL_SUCCESS = `SAVE_DEAL_DETAIL_SUCCESS`
 //detailDeal  退出清空deal详情
@@ -42,3 +44,7 @@ export const SEARCH_LIST_ERROR = `SEARCH_LIST_ERROR`
 export const SAVE_HISTORY_SEARCH_TEXT = `SAVE_HISTORY_SEARCH_TEXT`
 //searchList 删除搜索页面的历史记录
 export const SEARCH_LIST_DELETE_HISTORY = `SEARCH_LIST_DELETE_HISTORY`
+//searchList 保存searchtext
+export const SAVE_SEARCH_TEXT = `SAVE_SEARCH_TEXT`
+//searchList 点击 搜索，删除deals
+export const DESTORY_SEARCH_LIST = `DESTORY_SEARCH_LIST`

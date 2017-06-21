@@ -59,7 +59,9 @@ class UserPage extends Component {
           _.map(deals, (item, index) => {
             let url = `/detailDeal?dealId:` + item.id
             return (
-              <DealCell key={index} deal={item} onClick={()=>this._onClick()}/>
+              <Link to={url} key={index} style={{textDecoration: `blink`}}>
+                <DealCell deal={item} onClick={()=>this._onClick()}/>
+              </Link>
             )
           })
         }

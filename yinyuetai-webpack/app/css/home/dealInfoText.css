@@ -3,6 +3,8 @@
   height: 40px;
   align-items: center;
   background-color: #fff;
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
 }
 
 .dealInfoTextImg {
@@ -41,7 +43,11 @@
   margin-right: 5px;
 }
 
-.dealInfoTextName{
+.dealInfoTextName {
   color: #666;
   font-size: 13px;
+}
+
+.topBannersView {
+  background-color: #fff;
 }

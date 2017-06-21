@@ -17,7 +17,7 @@ import FilterOfCheckBox from '../common/filterOfCheckBox'
 import FilterOfRadioBox from '../common/filterOfRadioBox'
 
 // 弹出层的初始化样式
-const modalHeight = ((window.innerHeight / 5  * 3) <= 409) ? window.innerHeight / 5  * 3 : 409
+const modalHeight = ((window.innerHeight / 5  * 3) <= 410) ? window.innerHeight / 5  * 3 : 410
 const customStyles = {
   overlay : {
     position        : 'fixed',
@@ -39,7 +39,7 @@ const customStyles = {
     overflow                : 'auto',
     WebkitOverflowScrolling : 'touch',
     outline                 : 'none',
-    borderTop               : '1px solid #ededed'
+    border                  : '0px solid #fff'
   }
 }
 
@@ -56,20 +56,39 @@ class SearchList extends Component {
       prepare_time : ``,
       product_origin: ``,
       delivery: [],
-      searchText: ``
+      searchText: ``,
+      skip: 0,
+      page: ``
     }
   }
 
   componentDidMount() {
+    let page = this.props.location.state ? this.props.location.state.page : `other`
+    if (page === `home`) {
+      let searchText = ``
+      this._setSearchText(page, searchText)
+    } else {
+      let searchText = this.props.data.searchText
+      this._setSearchText(page, searchText)
+    }
     this.props.actions.fetchSearchListIfNeeded({type: `getLocations`})
     this.props.actions.fetchSearchListIfNeeded({type: `getDefaultFilters`})
     this.props.actions.fetchSearchListIfNeeded({type: `getHotSearches`})
   }
 
+  //从主页到searchListView 前清空search ，其他页面返回searchListView 使用reducer中的值
+  _setSearchText(page, searchText) {
+    this.setState({
+      page: page,
+      searchText: searchText
+    }, ()=> {
+      this.props.actions.fetchSearchListIfNeeded({type: `saveSearchText`, searchText: searchText})
+    })
+  }
+
   render() {
 
-    let searchText = this.state.searchText
-    let { searches, searchHistoryArray, locations, filters, deals, error } = this.props.data
+    let { searchText, searches, searchHistoryArray, locations, filters, deals, error, showMore } = this.props.data
 
     if(searchText.length === 0) {
       if (searches.length > 0) {
@@ -114,7 +133,7 @@ class SearchList extends Component {
             />
           <div style={{marginTop:44}} />
           {this._showModalView()}
-          {this._showSearchList(deals)}
+          {this._showSearchList(deals, showMore)}
           </div>
         )
       } else {
@@ -304,7 +323,7 @@ class SearchList extends Component {
 
 
   //deals展示list 列表
-  _showSearchList(deals) {
+  _showSearchList(deals, showMore) {
     if (!!deals && (deals.length > 0)) {
       return (
         <div style={{backgroundColor:'#fff', paddingTop: 40}}>
@@ -318,6 +337,13 @@ class SearchList extends Component {
               )
             })
           }
+          {
+            (showMore == true) &&
+            <div className='loadingMore' onClick={()=>this._loadMore(deals.length)}>
+              加载更多
+            </div>
+          }
+
         </div>
       )
     } else if (this.props.data.loading) {
@@ -339,6 +365,8 @@ class SearchList extends Component {
   _onChange(value) {
     this.setState({
       searchText: value
+    },() => {
+      this.props.actions.fetchSearchListIfNeeded({type: `saveSearchText`, searchText: value})
     })
   }
 
@@ -346,6 +374,7 @@ class SearchList extends Component {
 
   //点击 搜索 获取文本框value 请求deals
   _onSearch(value) {
+    this.props.actions.fetchSearchListIfNeeded({type: `destorySearchList`})
     this.props.actions.fetchSearchListIfNeeded({type: `saveHistorySearchText`, searchText: value})
     let params = this.state
     let newParams = Object.assign({}, params, {searchText: value})
@@ -363,6 +392,8 @@ class SearchList extends Component {
     this.setState({
       searchText: value
     },() => {
+      this.props.actions.fetchSearchListIfNeeded({type: `saveSearchText`, searchText: value})
+      this.props.actions.fetchSearchListIfNeeded({type: `destorySearchList`})
       let params = this.state
       this.props.actions.fetchSearchListIfNeeded({type: `getSearchDeals`, params:params})
     })
@@ -437,6 +468,11 @@ class SearchList extends Component {
     })
   }
 
+  _loadMore(skip) {
+    let state = this.state
+    let params = Object.assign({}, state, {skip: skip})
+    this.props.actions.fetchSearchListIfNeeded({type: `loadingMore`, params: params })
+  }
 }
 
 export default connect(state => ({

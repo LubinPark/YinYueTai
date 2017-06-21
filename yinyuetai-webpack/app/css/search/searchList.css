@@ -80,3 +80,13 @@
   align-items: center;
   justify-content: center;
 }
+
+.loadingMore {
+  display: flex;
+  height: 50px;
+  font-size: 14px;
+  font-weight: 300;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}

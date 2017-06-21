@@ -9,7 +9,10 @@ class TopView extends Component {
   render() {
 
     let searchText = this.props.searchText ? this.props.searchText : false
-    let url = `/search`
+    let url = {
+      pathname: '/search',
+      state: { page: `home` }
+    }
 
     return (
       <div className='topView'>

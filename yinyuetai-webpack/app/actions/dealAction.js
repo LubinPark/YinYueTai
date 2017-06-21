@@ -8,13 +8,42 @@ function requestGetDeals(params) {
     initParams = Object.assign({}, initParams, params.params)
     Deal.getDeals(initParams, (deals, err) => {
       if (!!deals) {
-        return dispatch(saveDeals(deals, params.title))
+        if (deals.length > 0) {
+          return dispatch(saveDeals(deals, params.title))
+        }
       } else {
         return dispatch(saveUsersFailed())
       }
     })
   }
 }
+
+//deals 为空
+function noDeals() {
+  return {
+    type: `DEAL_LIST_NO_DEAL`
+  }
+}
+
+//加载更多
+function loadingMore(params) {
+  return (dispatch) => {
+    let initParams = { skip: params.skip, limit: 10 }
+    initParams = Object.assign({}, initParams, params.params)
+    Deal.getDeals(initParams, (deals, err) => {
+      if (!!deals) {
+        if (deals.length > 0) {
+          return dispatch(saveDeals(deals, params.params.location))
+        } else {
+          return dispatch(noDeals())
+        }
+      } else {
+        return dispatch(saveUsersFailed())
+      }
+    })
+  }
+}
+
 
 //保存deals
 function saveDeals(deals, title) {
@@ -61,10 +90,20 @@ function destoryDealList() {
   }
 }
 
+//保存 主页到列表的参数
+function saveParams(params) {
+  return {
+    type: `SAVE_PARAMS`,
+    params: params.params
+  }
+}
+
 export function fetchDealIfNeeded(params={}) {
   return(dispatch, getState) => {
     if (params.type === `getDeals`) {
       return dispatch(requestGetDeals(params))
+    } else if (params.type === `saveParams`) {
+      return dispatch(saveParams(params))
     } else if (params.type === `getDealDetail`) {
       return dispatch(getDealDetail(params))
     } else if (params.type === `saveDealDetail`) {
@@ -73,6 +112,8 @@ export function fetchDealIfNeeded(params={}) {
       return dispatch(destoryDetailDeal())
     } else if (params.type === `destoryDealList`) {
       return dispatch(destoryDealList())
+    } else if (params.type === `loadingMore`) {
+      return dispatch(loadingMore(params))
     }
   }
 }

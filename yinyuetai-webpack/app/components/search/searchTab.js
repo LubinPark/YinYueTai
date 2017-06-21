@@ -4,13 +4,6 @@ import styles from '../../css/search/searchTab.css'
 
 class SearchTab extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      searchText: ``
-    }
-  }
-
   render() {
 
     let searchText = this.props.searchText ? this.props.searchText : ``
@@ -40,7 +33,7 @@ class SearchTab extends Component {
 
   //点击搜索
   _onSearch() {
-    let searchText = this.state.searchText
+    let searchText = this.props.searchText
     if(!_.isEmpty(searchText)) {
       this.props.onSearch && this.props.onSearch(searchText)
     }

@@ -16,14 +16,14 @@ class DealList extends Component {
     let state = this.props.location.state
     let params = state ? state.data.params : false
     params && this.props.actions.fetchDealIfNeeded({type: `destoryDealList`})
+    params && this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: params})
     params && this.props.actions.fetchDealIfNeeded({type: `getDeals`, params:params, title: state.data.name})
   }
 
   render() {
 
     let color = `#fff`
-    let deals = this.props.data.deals
-    let title = this.props.data.title
+    let { deals, title, showMore } = this.props.data
 
     if (deals.length > 0) {
       return (
@@ -41,6 +41,8 @@ class DealList extends Component {
               )
             })
           }
+          { (showMore == true) &&
+            <div className='loadingMore' onClick={()=>this._loadMore(deals.length)}>加载更多</div> }
         </div>
       )
     } else {
@@ -54,6 +56,13 @@ class DealList extends Component {
 
   _clickDeal(e, item) {
     this.props.actions.fetchDealIfNeeded({type: `saveDealDetail`, dealDetail: item})
+  }
+
+  _loadMore(skip) {
+    let state = this.props.location.state
+    let param = state ? state.data.params : false
+    let params = Object.assign({}, param, {skip: skip})
+    this.props.actions.fetchDealIfNeeded({type: `loadingMore`, params: params })
   }
 
 }

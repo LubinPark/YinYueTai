@@ -9,7 +9,9 @@ var defaultState = {
   searchHistoryArray: [],
   error: false,
   nodata: false,
-  loading: true
+  loading: true,
+  searchText: ``,
+  showMore: true
 }
 
 function searchReducer(state = defaultState, action={}) {
@@ -31,9 +33,14 @@ function searchReducer(state = defaultState, action={}) {
       break
 
     case types.SAVE_SEARCHE_LIST_DEALS:
-      let deals = action.deals
-      return Object.assign({}, state, { deals: deals, nodata: false, error: false, loading: false })
-      break
+      let deals = state.deals.concat(action.deals)
+      if (action.deals.length === 10) {
+        return Object.assign({}, state, { deals: deals, nodata: false, error: false, loading: false, showMore: true })
+        break
+      } else {
+        return Object.assign({}, state, { deals: deals, nodata: false, error: false, loading: false, showMore: false })
+        break
+      }
 
     case types.SAVE_HISTORY_SEARCH_TEXT:
       let searchText = action.searchText
@@ -60,8 +67,16 @@ function searchReducer(state = defaultState, action={}) {
       break
 
     case types.SEARCH_LIST_LOADING:
-    return Object.assign({}, state, { loading: action.loading })
-      break;
+      return Object.assign({}, state, { loading: action.loading })
+      break
+
+    case types.SAVE_SEARCH_TEXT:
+      return Object.assign({}, state, { searchText: action.searchText })
+      break
+
+    case types.DESTORY_SEARCH_LIST:
+      return Object.assign({}, state, { deals: [] })
+      break
 
     default:
     return state

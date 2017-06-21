@@ -72,29 +72,7 @@ function saveHotSearches (searches) {
 //根据 参数 筛选条件 请求deal
 function requestGetSearchDeals (params) {
   return (dispatch) => {
-
-    let initParams = { skip: 0, limit: 10 }
-    let data = params.params
-    let dealType = ``
-
-    if (data.selectDealType === `采购`) {
-      dealType = `买`
-    } else if (data.selectDealType === `货源`) {
-      dealType = `卖`
-    } else {
-      dealType = `全部`
-    }
-
-    let newParam = {
-      dealType: dealType,
-      location: data.selectLocation,
-      delivery: data.delivery,
-      prepare_time: data.prepare_time,
-      product_origin: data.product_origin,
-      searchText: data.searchText
-    }
-
-    initParams = Object.assign({}, initParams, newParam)
+    let initParams = dispatch(setParams(params))
     Deal.getDeals(initParams, (deals, err) => {
       if (!!deals) {
         if (deals.length === 0) {
@@ -106,6 +84,48 @@ function requestGetSearchDeals (params) {
         return dispatch(searchError())
       }
     })
+  }
+}
+
+//加载更多
+function loadingMore(params) {
+  return (dispatch) => {
+    let initParams = dispatch(setParams(params))
+    Deal.getDeals(initParams, (deals, err) => {
+      if (!!deals) {
+        return dispatch(saveSearchDeals(deals))
+      } else {
+        return dispatch(searchError())
+      }
+    })
+  }
+}
+
+//设置参数
+function setParams(params) {
+  return (dispatch) => {
+    let initParams = { limit: 10 }
+    let data = params.params
+    let dealType = ``
+    let skip = data.skip ? data.skip : 0
+    let newParam = {
+      skip: skip,
+      dealType: dealType,
+      location: data.selectLocation,
+      delivery: data.delivery,
+      prepare_time: data.prepare_time,
+      product_origin: data.product_origin,
+      searchText: data.searchText
+    }
+    if (data.selectDealType === `采购`) {
+      dealType = `买`
+    } else if (data.selectDealType === `货源`) {
+      dealType = `卖`
+    } else {
+      dealType = `全部`
+    }
+    initParams = Object.assign({}, initParams, newParam)
+    return initParams
   }
 }
 
@@ -146,6 +166,21 @@ function isLoading() {
   }
 }
 
+//保存searchText
+function saveSearchText(params) {
+  return {
+    type: `SAVE_SEARCH_TEXT`,
+    searchText: params.searchText
+  }
+}
+
+//点击搜索 清空之前的deals
+function destorySearchList() {
+  return {
+    type: `DESTORY_SEARCH_LIST`
+  }
+}
+
 export function fetchSearchListIfNeeded(params={}) {
   return(dispatch, getState) => {
     if (params.type === `getLocations`) {
@@ -161,6 +196,12 @@ export function fetchSearchListIfNeeded(params={}) {
       return dispatch(saveHistorySearchText(params.searchText))
     } else if (params.type === `deleteHistory`) {
       return dispatch(deleteHistory())
+    } else if (params.type === `saveSearchText`) {
+      return dispatch(saveSearchText(params))
+    } else if (params.type === `loadingMore`) {
+      return dispatch(loadingMore(params))
+    } else if (params.type === `destorySearchList`) {
+      return dispatch(destorySearchList())
     }
   }
 }

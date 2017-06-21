@@ -50,7 +50,7 @@ class TopBanner extends Component {
 
           if(data.type === `deal` || data.type === `user` || data.type === `deal_list`) {
             return (
-              <div key={item.id}>
+              <div key={item.id} className='topBannersView'>
                 <Link to={url} style={{textDecoration: `blink`}}>
                   <img src={img} style={imgStyle}/>
                 </Link>
