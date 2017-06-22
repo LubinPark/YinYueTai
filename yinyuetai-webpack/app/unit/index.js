@@ -50,4 +50,32 @@ Func.arrayToStringWithSymbol = (array, symbol) => {
   return text
 }
 
+Func.setParams = (params) => {
+  let initParams = { limit: 10 }
+  let data = params.params
+  let dealType = ``
+  let skip = data.skip ? data.skip : 0
+  if (data.dealType === `采购`) {
+    dealType = `买`
+  } else if (data.dealType === `货源`) {
+    dealType = `卖`
+  } else {
+    dealType = `全部`
+  }
+  let newParam = {
+    skip: skip,
+    dealType: dealType,
+    product_category: data.product_category ? data.product_category : ``,
+    product_tags: data.product_tags ? data.product_tags : [],
+    product_min_quantity: data.product_min_quantity ? data.product_min_quantity: 0,
+    location: data.location ? data.location : ``,
+    delivery: data.delivery ? data.delivery : [],
+    prepare_time: data.prepare_time ? data.prepare_time : ``,
+    product_origin: data.product_origin ? data.product_origin : ``,
+    searchText: data.searchText ? data.searchText : ``
+  }
+  initParams = Object.assign({}, initParams, newParam)
+  return initParams
+}
+
 module.exports = Func

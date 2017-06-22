@@ -6,6 +6,7 @@
 .searchListViewHotSearch {
   padding-bottom: 10px;
   background-color: #fff;
+  border-top:solid 1px #ededed;
 }
 
 .searchListViewHistory {

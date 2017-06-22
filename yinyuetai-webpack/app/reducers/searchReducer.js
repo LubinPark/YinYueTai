@@ -7,10 +7,11 @@ var defaultState = {
   searches: [],
   deals: [],
   searchHistoryArray: [],
+  params: {},
+  searchText: ``,
   error: false,
   nodata: false,
   loading: true,
-  searchText: ``,
   showMore: true
 }
 
@@ -25,7 +26,7 @@ function searchReducer(state = defaultState, action={}) {
     case types.SAVE_DEFAULT_FILTERS:
       let filters = action.filters
       return Object.assign({}, state, { filters: filters })
-      break;
+      break
 
     case types.SAVE_SEARCHES:
       let searches = action.searches
@@ -76,6 +77,10 @@ function searchReducer(state = defaultState, action={}) {
 
     case types.DESTORY_SEARCH_LIST:
       return Object.assign({}, state, { deals: [] })
+      break
+
+    case types.SEARCH_LIST_SAVE_PARAMS:
+      return Object.assign({}, state, { params: action.params })
       break
 
     default:

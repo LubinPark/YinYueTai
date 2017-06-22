@@ -1,35 +1,12 @@
-import { Deal } from '../api'
+import Func from '../unit'
+import { Deal, Home } from '../api'
 import * as types from '../containers/actionType'
 
 //请求deals
 function requestGetDeals(params) {
+  showLoading()
   return (dispatch) => {
-    let initParams = { skip: 0, limit: 10 }
-    initParams = Object.assign({}, initParams, params.params)
-    Deal.getDeals(initParams, (deals, err) => {
-      if (!!deals) {
-        if (deals.length > 0) {
-          return dispatch(saveDeals(deals, params.title))
-        }
-      } else {
-        return dispatch(saveUsersFailed())
-      }
-    })
-  }
-}
-
-//deals 为空
-function noDeals() {
-  return {
-    type: `DEAL_LIST_NO_DEAL`
-  }
-}
-
-//加载更多
-function loadingMore(params) {
-  return (dispatch) => {
-    let initParams = { skip: params.skip, limit: 10 }
-    initParams = Object.assign({}, initParams, params.params)
+    let initParams = Func.setParams(params)
     Deal.getDeals(initParams, (deals, err) => {
       if (!!deals) {
         if (deals.length > 0) {
@@ -44,6 +21,37 @@ function loadingMore(params) {
   }
 }
 
+//加载更多
+function loadingMore(params) {
+  return (dispatch) => {
+    let initParams = Func.setParams(params)
+    Deal.getDeals(initParams, (deals, err) => {
+      if (!!deals) {
+        if (deals.length > 0) {
+          return dispatch(saveDeals(deals, params.params.location))
+        } else {
+          return dispatch(noDeals())
+        }
+      } else {
+        return dispatch(saveUsersFailed())
+      }
+    })
+  }
+}
+
+function showLoading () {
+  console.log(`123`);
+  return {
+    type: `DEAL_LIST_LODING`
+  }
+}
+
+//deals 为空
+function noDeals() {
+  return {
+    type: `DEAL_LIST_NO_DEAL`
+  }
+}
 
 //保存deals
 function saveDeals(deals, title) {
@@ -92,11 +100,61 @@ function destoryDealList() {
 
 //保存 主页到列表的参数
 function saveParams(params) {
+  let initParams = Func.setParams(params)
   return {
     type: `SAVE_PARAMS`,
-    params: params.params
+    params: initParams
   }
 }
+
+//请求地区
+function getLocations() {
+  return (dispatch) => {
+    Home.getLocations((locations, err) => {
+      if (!!locations) {
+        dispatch(saveLocationsData(locations))
+      } else {
+        return dispatch(searchError())
+      }
+    })
+  }
+}
+
+//保存地区
+function saveLocationsData (locations) {
+  return {
+    type: `SAVE_LOCATIONS_DATA`,
+    locations:locations
+  }
+}
+
+//请求 筛选的fiter
+function getDefaultFilters () {
+  return (dispatch) => {
+    Home.getDefaultFilters((filters, err) => {
+      if (!!filters) {
+        return dispatch(_saveDefaultFilters(filters))
+      }
+    })
+  }
+}
+
+//保存 filter 数据
+function _saveDefaultFilters (filters) {
+  return {
+    type: `SAVE_DEFAULT_FILTERS`,
+    filters: filters
+  }
+}
+
+//标题地区变化乱码 直接保存
+function saveTitle(params) {
+  return {
+    type: `DEAL_LIST_SAVE_TITLE`,
+    title: params.title
+  }
+}
+
 
 export function fetchDealIfNeeded(params={}) {
   return(dispatch, getState) => {
@@ -114,6 +172,12 @@ export function fetchDealIfNeeded(params={}) {
       return dispatch(destoryDealList())
     } else if (params.type === `loadingMore`) {
       return dispatch(loadingMore(params))
+    } else if (params.type === `getLocations`) {
+      return dispatch(getLocations())
+    } else if (params.type === `getDefaultFilters`) {
+      return dispatch(getDefaultFilters())
+    } else if (params.type === `saveTitle`) {
+      return dispatch(saveTitle(params))
     }
   }
 }

@@ -12,6 +12,12 @@ export const DESTORY_DEAL_LIST = `DESTORY_DEAL_LIST`
 export const DEAL_LIST_NO_DEAL = `DEAL_LIST_NO_DEAL`
 //DealList 保存的params
 export const SAVE_PARAMS = `SAVE_PARAMS`
+//dealList 保存标题
+export const DEAL_LIST_SAVE_TITLE = `DEAL_LIST_SAVE_TITLE`
+//dealList 加载图
+export const DEAL_LIST_LODING = `DEAL_LIST_LODING`
+
+
 //detailDeal 保存详情的数据
 export const SAVE_DEAL_DETAIL_SUCCESS = `SAVE_DEAL_DETAIL_SUCCESS`
 //detailDeal  退出清空deal详情
@@ -48,3 +54,5 @@ export const SEARCH_LIST_DELETE_HISTORY = `SEARCH_LIST_DELETE_HISTORY`
 export const SAVE_SEARCH_TEXT = `SAVE_SEARCH_TEXT`
 //searchList 点击 搜索，删除deals
 export const DESTORY_SEARCH_LIST = `DESTORY_SEARCH_LIST`
+//searchList 保存params
+export const SEARCH_LIST_SAVE_PARAMS = `SEARCH_LIST_SAVE_PARAMS`

@@ -1,3 +1,4 @@
+import Func from '../unit'
 import { Home, Deal } from '../api'
 import * as types from '../containers/actionType'
 
@@ -72,7 +73,7 @@ function saveHotSearches (searches) {
 //根据 参数 筛选条件 请求deal
 function requestGetSearchDeals (params) {
   return (dispatch) => {
-    let initParams = dispatch(setParams(params))
+    let initParams = Func.setParams(params)
     Deal.getDeals(initParams, (deals, err) => {
       if (!!deals) {
         if (deals.length === 0) {
@@ -90,7 +91,7 @@ function requestGetSearchDeals (params) {
 //加载更多
 function loadingMore(params) {
   return (dispatch) => {
-    let initParams = dispatch(setParams(params))
+    let initParams = Func.setParams(params)
     Deal.getDeals(initParams, (deals, err) => {
       if (!!deals) {
         return dispatch(saveSearchDeals(deals))
@@ -98,34 +99,6 @@ function loadingMore(params) {
         return dispatch(searchError())
       }
     })
-  }
-}
-
-//设置参数
-function setParams(params) {
-  return (dispatch) => {
-    let initParams = { limit: 10 }
-    let data = params.params
-    let dealType = ``
-    let skip = data.skip ? data.skip : 0
-    let newParam = {
-      skip: skip,
-      dealType: dealType,
-      location: data.selectLocation,
-      delivery: data.delivery,
-      prepare_time: data.prepare_time,
-      product_origin: data.product_origin,
-      searchText: data.searchText
-    }
-    if (data.selectDealType === `采购`) {
-      dealType = `买`
-    } else if (data.selectDealType === `货源`) {
-      dealType = `卖`
-    } else {
-      dealType = `全部`
-    }
-    initParams = Object.assign({}, initParams, newParam)
-    return initParams
   }
 }
 
@@ -181,6 +154,15 @@ function destorySearchList() {
   }
 }
 
+//保存 params 到reducer
+function saveParams(params) {
+  let initParams = Func.setParams(params)
+  return {
+    type: `SEARCH_LIST_SAVE_PARAMS`,
+    params: initParams
+  }
+}
+
 export function fetchSearchListIfNeeded(params={}) {
   return(dispatch, getState) => {
     if (params.type === `getLocations`) {
@@ -202,6 +184,8 @@ export function fetchSearchListIfNeeded(params={}) {
       return dispatch(loadingMore(params))
     } else if (params.type === `destorySearchList`) {
       return dispatch(destorySearchList())
+    } else if (params.type === `saveParams`) {
+      return dispatch(saveParams(params))
     }
   }
 }

@@ -50,9 +50,10 @@ class SearchList extends Component {
     this.state = {
       modalIsOpen: false,
       select: ``,
-      dealType: [`全部`,`采购`,`货源`],
-      selectDealType: `全部`,
-      selectLocation: `不限`,
+      dealTypes: [`全部`,`采购`,`货源`],
+
+      dealType: `全部`,
+      location: `不限`,
       prepare_time : ``,
       product_origin: ``,
       delivery: [],
@@ -63,6 +64,7 @@ class SearchList extends Component {
   }
 
   componentDidMount() {
+    //根据进入的页面不同保存不同的searchText
     let page = this.props.location.state ? this.props.location.state.page : `other`
     if (page === `home`) {
       let searchText = ``
@@ -71,9 +73,26 @@ class SearchList extends Component {
       let searchText = this.props.data.searchText
       this._setSearchText(page, searchText)
     }
-    this.props.actions.fetchSearchListIfNeeded({type: `getLocations`})
-    this.props.actions.fetchSearchListIfNeeded({type: `getDefaultFilters`})
-    this.props.actions.fetchSearchListIfNeeded({type: `getHotSearches`})
+
+    //当返回到当前的页面数据reducer调用 设置params
+    let paramsNew = this.props.data.params
+    let dealType = paramsNew.dealType
+    if (dealType === `买` || dealType === `采购`) { dealType = `采购` }
+    else if (dealType === `卖` || dealType === `货源`) { dealType = `货源` }
+    else { dealType = `全部` }
+    this.setState({
+      location: paramsNew.location ? paramsNew.location : `不限`,
+      dealType: dealType ? dealType : `全部`,
+      prepare_time : paramsNew.prepare_time ? paramsNew.prepare_time : ``,
+      product_origin: paramsNew.product_origin ? paramsNew.product_origin : ``,
+      delivery: paramsNew.delivery ? paramsNew.delivery : [],
+      skip: paramsNew.skip ? paramsNew.skip : 0
+    }, () => {
+      this.props.actions.fetchSearchListIfNeeded({type: `saveParams`, params: this.state})
+      this.props.actions.fetchSearchListIfNeeded({type: `getLocations`})
+      this.props.actions.fetchSearchListIfNeeded({type: `getDefaultFilters`})
+      this.props.actions.fetchSearchListIfNeeded({type: `getHotSearches`})
+    })
   }
 
   //从主页到searchListView 前清空search ，其他页面返回searchListView 使用reducer中的值
@@ -215,11 +234,16 @@ class SearchList extends Component {
   //筛选的固定条 根据数据显示不用的颜色
   _searchListSelectTabView() {
 
-    let locationColor = (this.state.selectLocation === `不限`) ? false : true
-    let typeColor = (this.state.selectDealType === `全部`) ? false : true
+    let locationColor = (this.state.location === `不限`) ? false : true
+    let typeColor = (this.state.dealType === `全部`) ? false : true
     let filterColor = (_.isEmpty(this.state.delivery)) &&
                       (this.state.prepare_time === ``) &&
                       (this.state.product_origin === ``) ? false : true
+    let item = this.state.dealType
+
+    if (item === `买` || item === `采购`) { item = `采购` }
+    else if (item === `卖` || item === `货源`) { item = `货源` }
+    else { item = `全部` }
 
     return (
       <div className='searchListSelectTabView'>
@@ -227,14 +251,14 @@ class SearchList extends Component {
              style={{justifyContent:'flex-start', marginLeft: 15}}>
           <div className='searchListTabLocationImg' />
           { locationColor
-            ? <div className='searchListTabTextColor'>{this.state.selectLocation}</div>
-            : <div className='searchListTabText'>{this.state.selectLocation}</div> }
+            ? <div className='searchListTabTextColor'>{this.state.location}</div>
+            : <div className='searchListTabText'>{this.state.location}</div> }
         </div>
         <div className='searchListTabButton' onClick={()=>this._openModal(`type`)}>
           <div className='searchListTabTypeImg' />
         { typeColor
-          ? <div className='searchListTabTextColor'>{this.state.selectDealType}</div>
-          : <div className='searchListTabText'>{this.state.selectDealType}</div> }
+          ? <div className='searchListTabTextColor'>{item}</div>
+          : <div className='searchListTabText'>{item}</div> }
         </div>
         <div className='searchListTabButton' onClick={()=>this._openModal(`filter`)}
              style={{justifyContent:'flex-end', marginRight:15}}>
@@ -252,7 +276,7 @@ class SearchList extends Component {
     if (select === `location`) {
       return (
         <FilterLocation locations={this.props.data.locations}
-                        selectLocation={this.state.selectLocation}
+                        selectLocation={this.state.location}
                         onClick={(location)=>this._selectLocation(location)}
         />
       )
@@ -260,17 +284,17 @@ class SearchList extends Component {
       return (
         <div className='searchListTypeView'>
         {
-          _.map(this.state.dealType, (item, index) => {
-            if(item === this.state.selectDealType) {
+          _.map(this.state.dealTypes, (item, index) => {
+            if(this.state.dealType === item) {
               return (
-                <div className='searchListTypeViewCell' key={item} onClick={()=>this._selectType(item)}>
+                <div className='searchListTypeViewCell' key={item+`select`} onClick={()=>this._selectType(item)}>
                   <div className='searchListTypeViewCellSelectText'>{item}</div>
                   <div className='searchListTypeViewCellValue' />
                 </div>
               )
             } else {
               return (
-                <div className='searchListTypeViewCell' key={item} onClick={()=>this._selectType(item)}>
+                <div className='searchListTypeViewCell' key={item+`noSelect`} onClick={()=>this._selectType(item)}>
                   <div className='searchListTypeViewCellText'>{item}</div>
                 </div>
               )
@@ -418,10 +442,12 @@ class SearchList extends Component {
   //地区筛选
   _selectLocation(location) {
     this.setState({
-      selectLocation: location,
+      location: location,
       modalIsOpen: false
     },() => {
       let params = this.state
+      this.props.actions.fetchSearchListIfNeeded({type: `destorySearchList`})
+      this.props.actions.fetchSearchListIfNeeded({type: `saveParams`, params: params})
       this.props.actions.fetchSearchListIfNeeded({type: `getSearchDeals`, params:params})
     })
   }
@@ -429,10 +455,12 @@ class SearchList extends Component {
   //种类筛选
   _selectType(type) {
     this.setState({
-      selectDealType: type,
+      dealType: type,
       modalIsOpen: false
     },() => {
       let params = this.state
+      this.props.actions.fetchSearchListIfNeeded({type: `destorySearchList`})
+      this.props.actions.fetchSearchListIfNeeded({type: `saveParams`, params, params})
       this.props.actions.fetchSearchListIfNeeded({type: `getSearchDeals`, params:params})
     })
   }
@@ -464,6 +492,8 @@ class SearchList extends Component {
       modalIsOpen: false
     },() => {
       let params = this.state
+      this.props.actions.fetchSearchListIfNeeded({type: `destorySearchList`})
+      this.props.actions.fetchSearchListIfNeeded({type: `saveParams`, params: params})
       this.props.actions.fetchSearchListIfNeeded({type: `getSearchDeals`, params:params})
     })
   }
@@ -476,7 +506,7 @@ class SearchList extends Component {
 }
 
 export default connect(state => ({
-  data: state.SearchReducer,
+  data: state.SearchReducer
   }),
   (dispatch) => ({
     actions: bindActionCreators(actions, dispatch)

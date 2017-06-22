@@ -19,7 +19,7 @@ class Navigator extends Component {
           <div className='backImgBlack' /> }
         {!showBack &&
           <div className='backImgNone' /> }
-        <div className='navigatorTitle' style={{color: titleColor}}>{this.props.title}</div>
+        <div className='navigatorTitle' style={{color: titleColor}}>{(!!this.props.title) && this.props.title.toString()}</div>
       </div>
     )
   }
