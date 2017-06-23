@@ -55,13 +55,14 @@ Func.setParams = (params) => {
   let data = params.params
   let dealType = ``
   let skip = data.skip ? data.skip : 0
-  if (data.dealType === `采购`) {
+  if (data.dealType === `采购` || data.dealType === `买`) {
     dealType = `买`
-  } else if (data.dealType === `货源`) {
+  } else if (data.dealType === `货源` || data.dealType === `卖`) {
     dealType = `卖`
   } else {
     dealType = `全部`
   }
+
   let newParam = {
     skip: skip,
     dealType: dealType,

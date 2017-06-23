@@ -2,11 +2,11 @@ import * as types from '../containers/actionType'
 
 var defaultState = {
   title: '',
+  locations: [],
   params: {},
+  filters: [],
   deals: [],
   dealDetail: {},
-  locations: [],
-  filters: [],
   showMore: true,
   nodeal: false,
   loading: true
@@ -16,13 +16,12 @@ function dealReducer(state = defaultState, action={}) {
   switch (action.type) {
 
     case types.SAVE_DEALS:
-      let title = action.title
       let deals = state.deals.concat(action.deals)
       if (action.deals.length === 10) {
-        return Object.assign({}, state, { deals: deals ,title: title, showMore: true, loading: false})
+        return Object.assign({}, state, { deals: deals, showMore: true, loading: false})
         break
       } else {
-        return Object.assign({}, state, { deals: deals ,title: title, showMore: false, loading: false})
+        return Object.assign({}, state, { deals: deals, showMore: false, loading: false})
         break
       }
 
@@ -39,11 +38,15 @@ function dealReducer(state = defaultState, action={}) {
       break
 
     case types.DEAL_LIST_NO_DEAL:
-       return Object.assign({}, state, {showMore: false, nodeal: true, loading: false})
+       return Object.assign({}, state, { showMore: false, nodeal: true, loading: false })
       break
 
-    case types.SAVE_PARAMS:
-      return Object.assign({}, state, {params: action.params })
+    case types.SAVE_PARAMS_FILTERS:
+      return Object.assign({}, state, { params: action.params, filters:action.filters })
+      break
+
+    case types.DEAL_LIST_SAVE_PARAMS:
+      return Object.assign({}, state, { params: action.params })
       break
 
     case types.SAVE_LOCATIONS_DATA:
@@ -62,6 +65,10 @@ function dealReducer(state = defaultState, action={}) {
 
     case types.DEAL_LIST_LODING:
       return Object.assign({}, state, { loading: true, nodeal: false})
+      break
+
+    case types.DEAL_LIST_DELETE_PARAMS:
+      return Object.assign({}, state, {params: {}})
       break
 
     default:

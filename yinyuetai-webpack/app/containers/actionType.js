@@ -6,17 +6,20 @@ export const SAVE_SEARCHES = `SAVE_SEARCHES`
 
 //dealList 的deal
 export const SAVE_DEALS = `SAVE_DEALS`
+//dealList 保存params 参数
+export const DEAL_LIST_SAVE_PARAMS = `DEAL_LIST_SAVE_PARAMS`
 //dealList 退出dealList
 export const DESTORY_DEAL_LIST = `DESTORY_DEAL_LIST`
 //dealList 请求当deals 为空
 export const DEAL_LIST_NO_DEAL = `DEAL_LIST_NO_DEAL`
-//DealList 保存的params
-export const SAVE_PARAMS = `SAVE_PARAMS`
+//DealList 保存的params 和 filter
+export const SAVE_PARAMS_FILTERS = `SAVE_PARAMS_FILTERS`
 //dealList 保存标题
 export const DEAL_LIST_SAVE_TITLE = `DEAL_LIST_SAVE_TITLE`
 //dealList 加载图
 export const DEAL_LIST_LODING = `DEAL_LIST_LODING`
-
+//dealList 删除params
+export const DEAL_LIST_DELETE_PARAMS = `DEAL_LIST_DELETE_PARAMS`
 
 //detailDeal 保存详情的数据
 export const SAVE_DEAL_DETAIL_SUCCESS = `SAVE_DEAL_DETAIL_SUCCESS`

@@ -39,8 +39,8 @@ function loadingMore(params) {
   }
 }
 
+//显示loading图
 function showLoading () {
-  console.log(`123`);
   return {
     type: `DEAL_LIST_LODING`
   }
@@ -102,7 +102,7 @@ function destoryDealList() {
 function saveParams(params) {
   let initParams = Func.setParams(params)
   return {
-    type: `SAVE_PARAMS`,
+    type: `DEAL_LIST_SAVE_PARAMS`,
     params: initParams
   }
 }
@@ -155,6 +155,22 @@ function saveTitle(params) {
   }
 }
 
+//保存params和filter
+function getParamsAndFilters(params) {
+  return {
+    type: `SAVE_PARAMS_FILTERS`,
+    params: params.params,
+    filters: params.filters
+  }
+}
+
+//deleteParams
+function deleteParams() {
+  return {
+    type: `DEAL_LIST_DELETE_PARAMS`
+  }
+}
+
 
 export function fetchDealIfNeeded(params={}) {
   return(dispatch, getState) => {
@@ -178,6 +194,10 @@ export function fetchDealIfNeeded(params={}) {
       return dispatch(getDefaultFilters())
     } else if (params.type === `saveTitle`) {
       return dispatch(saveTitle(params))
+    } else if (params.type === `getParamsAndFilters`) {
+      return dispatch(getParamsAndFilters(params))
+    } else if (params.type === `deleteParams`) {
+      return dispatch(deleteParams())
     }
   }
 }

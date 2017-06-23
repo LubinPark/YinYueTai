@@ -53,79 +53,66 @@ class DealList extends Component {
 
       dealType: `全部`,
       location: `不限`,
-      prepare_time : ``,
-      product_origin: ``,
       delivery: [],
-      skip: 0,
-      product_category: ``,
-      product_tags: [],
-      product_min_quantity: 0
+      prepare_time: ``,
+      product_origin: ``
     }
   }
 
   componentWillMount() {
-    this.props.actions.fetchDealIfNeeded({type: `getLocations`})
-    this.props.actions.fetchDealIfNeeded({type: `getDefaultFilters`})
+    // this.props.actions.fetchDealIfNeeded({type: `deleteParams`})
   }
 
   componentDidMount() {
-    let string = this.props.location.search
-    let type = string.substring(string.indexOf('?') + 1, string.indexOf(':'))
-    let title = string.substring(string.indexOf(':') + 1, string.length)
-    this._choiceType(title, type)
-  }
+    let state = this.props.location.state ? this.props.location.state : false
+    let param = this.props.data.params
+    let showLocation
+    let dealType = ((param.dealType === `采购`) || (param.dealType === `买`)) ? `采购` : ((param.dealType === `货源`) || (param.dealType === `卖`)) ? `货源` : `全部`
 
-  //进入页面判断当前的类型
-  _choiceType(title, type) {
-    if (type === `location`) {
-      this.setState({
-        title: title,
-        location: title
-      },()=>{
-        this._loadingFunc()
-      })
-    } else if(type === `common`) {
-      this.setState({
-        title: title,
-      },() => {
-        this._loadingFunc()
-      })
+    state && this.props.actions.fetchDealIfNeeded({type: `getLocations`})
+    state && this.props.actions.fetchDealIfNeeded({type: `saveTitle`, title: state.data.name})
+    state && this.props.actions.fetchDealIfNeeded({type: `getParamsAndFilters`, filters: state.data.filters, params: state.data.params})
+    state && this._loading(state)
+
+    if (state.type === `location`) {
+      showLocation = state.data.name
+    } else {
+      showLocation = this.props.data.params.location ? this.props.data.params.location: `不限`
     }
-  }
-
-  //请求加载
-  _loadingFunc() {
-    let state = this.props.location.state
-    let params = state ? state.data.params : false
-    let paramsNew = Object.assign({}, this.state, params, this.props.data.params)
-    let dealType = paramsNew.dealType
-
-    if (dealType === `买` || dealType === `采购`) { dealType = `采购` }
-    else if (dealType === `卖` || dealType === `货源`) { dealType = `货源` }
-    else { dealType = `全部` }
 
     this.setState({
-      location: paramsNew.location ? paramsNew.location : `不限`,
-      dealType: dealType ? dealType : `全部`,
-      prepare_time : paramsNew.prepare_time ? paramsNew.prepare_time : ``,
-      product_origin: paramsNew.product_origin ? paramsNew.product_origin : ``,
-      delivery: paramsNew.delivery ? paramsNew.delivery : [],
-      skip: paramsNew.skip ? paramsNew.skip : 0,
-      product_category: paramsNew.product_category ? paramsNew.product_category : ``,
-      product_tags: paramsNew.product_tags ? paramsNew.product_tags : ``,
-      product_min_quantity: paramsNew.product_min_quantity ? paramsNew.product_min_quantity : 0,
-    }, () => {
-      params && this.props.actions.fetchDealIfNeeded({type: `destoryDealList`})
-      params && this.props.actions.fetchDealIfNeeded({type: `getDeals`, params:paramsNew})
+      location: showLocation,
+      dealType: dealType,
+      prepare_time : param.prepare_time ? param.prepare_time : ``,
+      product_origin: param.product_origin ? param.product_origin : ``,
+      delivery: param.delivery ? param.delivery : [],
+      skip: param.skip ? param.skip : 0,
+      product_category: param.product_category ? param.product_category : ``,
+      product_tags: param.product_tags ? param.product_tags : [],
+      product_min_quantity: param.product_min_quantity ? param.product_min_quantity: 0,
+    },() => {
+      let dealType = ((param.dealType === `采购`) || (param.dealType === `买`)) ? `买` : ((param.dealType === `货源`) || (param.dealType === `卖`)) ? `卖` : `全部`
+      //不在筛选中的无法删除，修改bug
+      let paramsNew = Object.assign({}, this.state, {dealType:dealType})
+      // let paramsNew = Object.assign({}, this.state, state.data.params, {dealType:dealType})
+      state && this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: paramsNew })
+      state && this.props.actions.fetchDealIfNeeded({type: `getDeals`, params: paramsNew})
     })
   }
 
+  //请求加载
+  _loading(state) {
+    let { type, data } = state
+    this.setState({title: data.name})
+    this.props.actions.fetchDealIfNeeded({type: `destoryDealList`})
+  }
+
   render() {
-    let { deals, showMore } = this.props.data
+    let { deals, showMore, title } = this.props.data
     return (
       <div>
         <div style={{height:44}} />
-        <Navigator title={this.props.data.title} showBack={false}
+        <Navigator title={title} showBack={false}
                    navBgcolor={`#fff`} backImgColor='write' titleColor='#666'/>
          {this._showModalView()}
          <div style={{height:40}} />
@@ -137,16 +124,17 @@ class DealList extends Component {
   //筛选的固定条 根据数据显示不用的颜色
   _searchListSelectTabView() {
 
+    let showDealType
+    let dealType = this.state.dealType
     let locationColor = (this.state.location === `不限`) ? false : true
     let typeColor = (this.state.dealType === `全部`) ? false : true
     let filterColor = (_.isEmpty(this.state.delivery)) &&
                       (this.state.prepare_time === ``) &&
                       (this.state.product_origin === ``) ? false : true
-    let item = this.state.dealType
 
-    if (item === `买` || item === `采购`) { item = `采购` }
-    else if (item === `卖` || item === `货源`) { item = `货源` }
-    else { item = `全部` }
+    if (dealType === `买` || dealType === `采购`) { showDealType = `采购` }
+    else if (dealType === `卖` || dealType === `货源`) { showDealType = `货源` }
+    else { showDealType = `全部` }
 
     return (
       <div className='searchListSelectTabView'>
@@ -154,14 +142,14 @@ class DealList extends Component {
              style={{justifyContent:'flex-start', marginLeft: 15}}>
           <div className='searchListTabLocationImg' />
           { locationColor
-            ? <div className='searchListTabTextColor'>{this.state.location.toString()}</div>
-            : <div className='searchListTabText'>{this.state.location.toString()}</div> }
+            ? <div className='searchListTabTextColor'>{this.state.location}</div>
+            : <div className='searchListTabText'>{this.state.location}</div> }
         </div>
         <div className='searchListTabButton' onClick={()=>this._openModal(`type`)}>
           <div className='searchListTabTypeImg' />
         { typeColor
-          ? <div className='searchListTabTextColor'>{item}</div>
-          : <div className='searchListTabText'>{item}</div> }
+          ? <div className='searchListTabTextColor'>{showDealType}</div>
+          : <div className='searchListTabText'>{showDealType}</div> }
         </div>
         <div className='searchListTabButton' onClick={()=>this._openModal(`filter`)}
              style={{justifyContent:'flex-end', marginRight:15}}>
@@ -190,14 +178,14 @@ class DealList extends Component {
           _.map(this.state.dealTypes, (item, index) => {
             if(item === this.state.dealType) {
               return (
-                <div className='searchListTypeViewCell' key={item} onClick={()=>this._selectType(item)}>
+                <div className='searchListTypeViewCell' key={item+`select`} onClick={()=>this._selectType(item)}>
                   <div className='searchListTypeViewCellSelectText'>{item}</div>
                   <div className='searchListTypeViewCellValue' />
                 </div>
               )
             } else {
               return (
-                <div className='searchListTypeViewCell' key={item} onClick={()=>this._selectType(item)}>
+                <div className='searchListTypeViewCell' key={item+`noSelect`} onClick={()=>this._selectType(item)}>
                   <div className='searchListTypeViewCellText'>{item}</div>
                 </div>
               )
@@ -218,7 +206,7 @@ class DealList extends Component {
                                       itemArray={filterItem.options} ref={index}
                                       selectItems={this.state[filterItem.searchField]}
                                       key={index + filterItem.name + 'filterOfCheckBox'}
-                                      onPress={(item)=>this._selectItem(item, filterItem.searchField)}
+                                      onPress={(item)=>this._selectItem(item,filterItem.searchField)}
                     />
                   )
                 } else {
@@ -323,11 +311,9 @@ class DealList extends Component {
 
   //加载更多func
   _loadMore(skip) {
-    let state = this.props.location.state
-    let param = state ? state.data.params : false
-    let title =this.props.data.title
-    let params = Object.assign({}, param, this.state, {skip: skip, title: title})
-    this.props.actions.fetchDealIfNeeded({type: `loadingMore`, params: params})
+    let params = Object.assign({}, this.props.data.params, {skip: skip, dealType: this.state.dealType})
+    this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: params})
+    this.props.actions.fetchDealIfNeeded({type: `getDeals`, params: params})
   }
 
   //地区筛选
@@ -341,10 +327,11 @@ class DealList extends Component {
         modalIsOpen: false
       },() => {
         let params = this.state
-        this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: params})
-        this.props.actions.fetchDealIfNeeded({type: `destoryDealList`})
-        this.props.actions.fetchDealIfNeeded({type: `getDeals`, params:params})
+        let paramsNew = Object.assign({}, this.props.data.params, params)
+        this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: paramsNew})
         this.props.actions.fetchDealIfNeeded({type: `saveTitle`, title: location})
+        this.props.actions.fetchDealIfNeeded({type: `destoryDealList`})
+        this.props.actions.fetchDealIfNeeded({type: `getDeals`, params: paramsNew})
       })
     } else {
       this.setState({
@@ -352,9 +339,10 @@ class DealList extends Component {
         modalIsOpen: false
       },() => {
         let params = this.state
-        this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: params})
+        let paramsNew = Object.assign({}, this.props.data.params, params)
+        this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: paramsNew})
         this.props.actions.fetchDealIfNeeded({type: `destoryDealList`})
-        this.props.actions.fetchDealIfNeeded({type: `getDeals`, params:params})
+        this.props.actions.fetchDealIfNeeded({type: `getDeals`, params: paramsNew})
       })
     }
   }
@@ -366,9 +354,10 @@ class DealList extends Component {
       modalIsOpen: false
     },() => {
       let params = this.state
-      this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: params})
+      let paramsNew = Object.assign({}, this.props.data.params, params)
+      this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: paramsNew})
       this.props.actions.fetchDealIfNeeded({type: `destoryDealList`})
-      this.props.actions.fetchDealIfNeeded({type: `getDeals`, params:params})
+      this.props.actions.fetchDealIfNeeded({type: `getDeals`, params:paramsNew})
     })
   }
 
@@ -376,17 +365,19 @@ class DealList extends Component {
   _selectItem(item, searchField) {
     this.setState({
       [searchField]: item
-    },() => {
-      // console.log(this.state);
     })
   }
 
   //基本筛选中清空
   _resetFilter(filters) {
-    this.setState({
-      delivery: [],
-      prepare_time: '',
-      product_origin: ''
+    _.map(filters, (item, index) => {
+      if (item.searchField === `prepare_time`) {
+        this.setState({ prepare_time: `` })
+      } else if (item.searchField === `product_origin`) {
+        this.setState({ product_origin: `` })
+      } else if (item.searchField === `delivery`) {
+        this.setState({ delivery: [] })
+      }
     })
     for (var i = 0; i < filters.length; i++) {
       this.refs[i].resetFunc()
@@ -399,9 +390,10 @@ class DealList extends Component {
       modalIsOpen: false
     },() => {
       let params = this.state
-      this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: params})
+      let paramsNew = Object.assign({}, this.props.data.params, params)
+      this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: paramsNew})
       this.props.actions.fetchDealIfNeeded({type: `destoryDealList`})
-      this.props.actions.fetchDealIfNeeded({type: `getDeals`, params:params})
+      this.props.actions.fetchDealIfNeeded({type: `getDeals`, params: paramsNew})
     })
   }
 

@@ -387,11 +387,25 @@ class SearchList extends Component {
 
   //文本框变化保存state
   _onChange(value) {
-    this.setState({
-      searchText: value
-    },() => {
-      this.props.actions.fetchSearchListIfNeeded({type: `saveSearchText`, searchText: value})
-    })
+    if (_.isEmpty(value)) {
+      this.setState({
+        searchText: ``,
+        location: `不限`,
+        dealType: `全部`,
+        delivery: [],
+        prepare_time: '',
+        product_origin: ''
+      },() => {
+        this.props.actions.fetchSearchListIfNeeded({type: `saveSearchText`, searchText: value})
+        this.props.actions.fetchSearchListIfNeeded({type: `saveParams`, params: this.state})
+      })
+    } else {
+      this.setState({
+        searchText: value
+      },() => {
+        this.props.actions.fetchSearchListIfNeeded({type: `saveSearchText`, searchText: value})
+      })
+    }
   }
 
   _clickDeal() {}
@@ -414,7 +428,12 @@ class SearchList extends Component {
   _selectHotSearchItem(value) {
     this.props.actions.fetchSearchListIfNeeded({type: `saveHistorySearchText`, searchText: value})
     this.setState({
-      searchText: value
+      searchText: value,
+      location: `不限`,
+      dealType: `全部`,
+      delivery: [],
+      prepare_time: '',
+      product_origin: ''
     },() => {
       this.props.actions.fetchSearchListIfNeeded({type: `saveSearchText`, searchText: value})
       this.props.actions.fetchSearchListIfNeeded({type: `destorySearchList`})
@@ -460,7 +479,7 @@ class SearchList extends Component {
     },() => {
       let params = this.state
       this.props.actions.fetchSearchListIfNeeded({type: `destorySearchList`})
-      this.props.actions.fetchSearchListIfNeeded({type: `saveParams`, params, params})
+      this.props.actions.fetchSearchListIfNeeded({type: `saveParams`, params: params})
       this.props.actions.fetchSearchListIfNeeded({type: `getSearchDeals`, params:params})
     })
   }

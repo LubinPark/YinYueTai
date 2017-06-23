@@ -127,6 +127,8 @@
 }
 
 .searchListTabViewDown {
+  position: absolute;
+  bottom: 3px;
   display: flex;
   height: 50px;
   margin-top: 15px;

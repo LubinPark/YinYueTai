@@ -5,6 +5,7 @@ var Deal = AV.Object.extend('deal')
 
 //请求deals
 DealRequest.getDeals = (params, callback) => {
+  console.log(params);
   AV.Cloud.rpc(`getDeals`, params).then((deals) => {
     callback(deals, null)
   },(err) => {

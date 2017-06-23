@@ -45,7 +45,7 @@ class RegionItem extends Component {
     let url = {
       pathname: '/dealList',
       search: '?location:' + data.name,
-      state: { data: data }
+      state: { data: data ,type: `location` }
     }
 
     return (
