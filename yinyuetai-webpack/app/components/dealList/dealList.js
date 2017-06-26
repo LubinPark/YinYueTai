@@ -70,14 +70,13 @@ class DealList extends Component {
     state && this.props.actions.fetchDealIfNeeded({type: `getLocations`})
     state && this.props.actions.fetchDealIfNeeded({type: `saveTitle`, title: state.data.name})
     state && this.props.actions.fetchDealIfNeeded({type: `saveFilters`, filters: state.data.filters})
-    state && this._loading(state)
+    state && this._beforeLoading(state)
 
     if (state.type === `location`) {
       showLocation = state.data.name
     } else {
       showLocation = state.data ? state.data.params.location: `不限`
     }
-
 
     //state 不存在使用reducer里的params
     !state && this.setState({
@@ -107,21 +106,21 @@ class DealList extends Component {
 
   }
 
-  //请求加载
-  _loading(state) {
+  //请求加载之前操作，删除list 的数据
+  _beforeLoading(state) {
     let { type, data } = state
     this.setState({title: data.name})
     this.props.actions.fetchDealIfNeeded({type: `destoryDealList`})
   }
 
   render() {
-    let { deals, showMore, title } = this.props.data
+    let { deals, showMore, title, filters } = this.props.data
     return (
       <div>
         <div style={{height:44}} />
         <Navigator title={title} showBack={false}
                    navBgcolor={`#fff`} backImgColor='write' titleColor='#666'/>
-         {this._showModalView()}
+         {this._showModalView(filters)}
          <div style={{height:40}} />
          {this._showDealListView(deals, showMore)}
       </div>
@@ -129,15 +128,22 @@ class DealList extends Component {
   }
 
   //筛选的固定条 根据数据显示不用的颜色
-  _searchListSelectTabView() {
+  _searchListSelectTabView(filters) {
 
     let showDealType
     let dealType = this.state.dealType
     let locationColor = (this.state.location === `不限`) ? false : true
     let typeColor = (this.state.dealType === `全部`) ? false : true
-    let filterColor = (_.isEmpty(this.state.delivery)) &&
-                      (this.state.prepare_time === ``) &&
-                      (this.state.product_origin === ``) ? false : true
+    let filterColor = false
+
+    if (!_.isEmpty(filters)) {
+      for (var i = 0; i < filters.length; i++) {
+        let searchField = filters[i].searchField
+        if (!_.isEmpty(this.state[searchField])) {
+          filterColor = true
+        }
+      }
+    }
 
     if (dealType === `买` || dealType === `采购`) { showDealType = `采购` }
     else if (dealType === `卖` || dealType === `货源`) { showDealType = `货源` }
@@ -280,10 +286,10 @@ class DealList extends Component {
   }
 
   //调用显示弹出层
-  _showModalView() {
+  _showModalView(filters) {
     return (
       <div>
-        {this._searchListSelectTabView()}
+        {this._searchListSelectTabView(filters)}
         <Modal
           style={customStyles}
           contentLabel='modal'

@@ -16,7 +16,7 @@ class ProductOfInfo extends Component {
     let product = deal.products[0].attributes
     let createdAt = this.props.deal.createdAt
     let productQuantity = deal.product_quantity ? deal.product_quantity : `未填写`
-    let pic = product.thumbnail ? product.thumbnail.attributes.url.replace(orgionUrl, cdnUrl) : `../../img/userhead.png`
+    let pic = product.thumbnail ? product.thumbnail.attributes.url.replace(orgionUrl, cdnUrl) : `../../img/product.png`
     let dealType = deal.dealType
     let title = `产品信息`
     let color = (dealType === `卖`) ? `#51acf2` : `#f8c027`
