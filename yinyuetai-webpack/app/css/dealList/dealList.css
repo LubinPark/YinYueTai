@@ -6,3 +6,21 @@
 .detailInfo {
   background-color: #ededed;
 }
+
+.downLoadApp {
+  display: flex;
+  position:fixed;
+  width: 170px;
+  bottom: 20px;
+  color: #fff;
+  font-size: 13px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #ededed;
+  border-radius: 6px;
+  background-color: #73e2ff;
+}

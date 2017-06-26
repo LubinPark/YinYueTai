@@ -43,6 +43,7 @@ class DetailDeal extends Component {
       let user = deal.attributes.user
       let userId = user.id
       let url = `/user?userId:` + userId
+      let downLoadApp = `http://a.app.qq.com/o/simple.jsp?pkgname=com.miko`
       let valid = Func.isValid(deal.attributes.validDate)
       color = deal.attributes.deleted ? '#ae3428' : (!valid ? '#ccc' : color)
 
@@ -56,6 +57,9 @@ class DetailDeal extends Component {
           <Link to={url} style={{textDecoration: `blink`}}>
             <DetailUser user={user} />
           </Link>
+          <a href={downLoadApp}>
+            <div className='downLoadApp' style={{left: (window.innerWidth -170) / 2}} onClick>下载买卖派App 了解等多</div>
+          </a>
         </div>
       )
     }
