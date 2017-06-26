@@ -155,12 +155,11 @@ function saveTitle(params) {
   }
 }
 
-//保存params和filter
-function getParamsAndFilters(params) {
+//保存filter
+function saveFilters(params) {
   return {
-    type: `SAVE_PARAMS_FILTERS`,
-    params: params.params,
-    filters: params.filters
+    type: `DEAL_LIST_SAVE_FILTERS`,
+    filters: params.filters,
   }
 }
 
@@ -194,8 +193,8 @@ export function fetchDealIfNeeded(params={}) {
       return dispatch(getDefaultFilters())
     } else if (params.type === `saveTitle`) {
       return dispatch(saveTitle(params))
-    } else if (params.type === `getParamsAndFilters`) {
-      return dispatch(getParamsAndFilters(params))
+    } else if (params.type === `saveFilters`) {
+      return dispatch(saveFilters(params))
     } else if (params.type === `deleteParams`) {
       return dispatch(deleteParams())
     }

@@ -41,8 +41,8 @@ function dealReducer(state = defaultState, action={}) {
        return Object.assign({}, state, { showMore: false, nodeal: true, loading: false })
       break
 
-    case types.SAVE_PARAMS_FILTERS:
-      return Object.assign({}, state, { params: action.params, filters:action.filters })
+    case types.DEAL_LIST_SAVE_FILTERS:
+      return Object.assign({}, state, { filters:action.filters })
       break
 
     case types.DEAL_LIST_SAVE_PARAMS:
@@ -64,11 +64,11 @@ function dealReducer(state = defaultState, action={}) {
       break
 
     case types.DEAL_LIST_LODING:
-      return Object.assign({}, state, { loading: true, nodeal: false})
+      return Object.assign({}, state, { loading: true, nodeal: false })
       break
 
     case types.DEAL_LIST_DELETE_PARAMS:
-      return Object.assign({}, state, {params: {}})
+      return Object.assign({}, state, { params: {} })
       break
 
     default:

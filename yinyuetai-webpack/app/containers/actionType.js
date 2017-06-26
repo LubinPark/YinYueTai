@@ -12,8 +12,8 @@ export const DEAL_LIST_SAVE_PARAMS = `DEAL_LIST_SAVE_PARAMS`
 export const DESTORY_DEAL_LIST = `DESTORY_DEAL_LIST`
 //dealList 请求当deals 为空
 export const DEAL_LIST_NO_DEAL = `DEAL_LIST_NO_DEAL`
-//DealList 保存的params 和 filter
-export const SAVE_PARAMS_FILTERS = `SAVE_PARAMS_FILTERS`
+//DealList 保存filter
+export const DEAL_LIST_SAVE_FILTERS = `DEAL_LIST_SAVE_FILTERS`
 //dealList 保存标题
 export const DEAL_LIST_SAVE_TITLE = `DEAL_LIST_SAVE_TITLE`
 //dealList 加载图

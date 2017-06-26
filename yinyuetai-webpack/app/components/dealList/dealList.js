@@ -59,28 +59,28 @@ class DealList extends Component {
     }
   }
 
-  componentWillMount() {
-    // this.props.actions.fetchDealIfNeeded({type: `deleteParams`})
-  }
-
   componentDidMount() {
     let state = this.props.location.state ? this.props.location.state : false
+    state && this.props.actions.fetchDealIfNeeded({type: `deleteParams`})
+
     let param = this.props.data.params
     let showLocation
     let dealType = ((param.dealType === `采购`) || (param.dealType === `买`)) ? `采购` : ((param.dealType === `货源`) || (param.dealType === `卖`)) ? `货源` : `全部`
 
     state && this.props.actions.fetchDealIfNeeded({type: `getLocations`})
     state && this.props.actions.fetchDealIfNeeded({type: `saveTitle`, title: state.data.name})
-    state && this.props.actions.fetchDealIfNeeded({type: `getParamsAndFilters`, filters: state.data.filters, params: state.data.params})
+    state && this.props.actions.fetchDealIfNeeded({type: `saveFilters`, filters: state.data.filters})
     state && this._loading(state)
 
     if (state.type === `location`) {
       showLocation = state.data.name
     } else {
-      showLocation = this.props.data.params.location ? this.props.data.params.location: `不限`
+      showLocation = state.data ? state.data.params.location: `不限`
     }
 
-    this.setState({
+
+    //state 不存在使用reducer里的params
+    !state && this.setState({
       location: showLocation,
       dealType: dealType,
       prepare_time : param.prepare_time ? param.prepare_time : ``,
@@ -92,12 +92,19 @@ class DealList extends Component {
       product_min_quantity: param.product_min_quantity ? param.product_min_quantity: 0,
     },() => {
       let dealType = ((param.dealType === `采购`) || (param.dealType === `买`)) ? `买` : ((param.dealType === `货源`) || (param.dealType === `卖`)) ? `卖` : `全部`
-      //不在筛选中的无法删除，修改bug
-      let paramsNew = Object.assign({}, this.state, {dealType:dealType})
-      // let paramsNew = Object.assign({}, this.state, state.data.params, {dealType:dealType})
+      let paramsNew = Object.assign({}, this.state, state.data ? state.data.params : {}, {dealType:dealType})
       state && this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: paramsNew })
       state && this.props.actions.fetchDealIfNeeded({type: `getDeals`, params: paramsNew})
     })
+    //state存在直接使用
+    this.setState({
+      location: showLocation
+    }, () => {
+      let paramsNew = Object.assign({}, this.state, state.data ? state.data.params : {}, {dealType:`全部`})
+      state && this.props.actions.fetchDealIfNeeded({type: `saveParams`, params: paramsNew })
+      state && this.props.actions.fetchDealIfNeeded({type: `getDeals`, params: paramsNew})
+    })
+
   }
 
   //请求加载
