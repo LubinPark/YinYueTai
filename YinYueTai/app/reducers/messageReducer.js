@@ -14,7 +14,7 @@ let Message = (state = initialState, action={}) => {
       let currentUser = action.currentUser
       let item = {
         position: 'right',
-        uri: currentUser.get('userPic') ? currentUser.get('userPic').get('url') : '',
+        uri: !!currentUser.get('userPic') ? currentUser.get('userPic') : '',
         text: message
       }
       let newMessage = []
@@ -33,8 +33,8 @@ let Message = (state = initialState, action={}) => {
       //根据对话，请求的消息数据
       let messages = []
       for (var i = action.messages.length - 1; i >= 0; i--) {
-        let currentUrl = action.currentUser.get('userPic') ? action.currentUser.get('userPic').get('url') : ''
-        let senderUrl = action.senderUser.get('userPic') ? action.senderUser.get('userPic').get('url') : ''
+        let currentUrl = !!action.currentUser.get('userPic') ? action.currentUser.get('userPic') : ''
+        let senderUrl = !!action.senderUser.get('userPic') ? action.senderUser.get('userPic') : ''
         let item = {
           position: (action.messages[i].from === action.currentUser.id) ? 'right' : 'left',
           text: action.messages[i]._lctext ? action.messages[i]._lctext : '',

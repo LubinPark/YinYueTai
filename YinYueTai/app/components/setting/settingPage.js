@@ -53,7 +53,7 @@ class SettingPage extends Component {
     if (!_.isEmpty(userInfo)) {
 
       let { username, email } = userInfo.attributes
-      let img = userInfo.get('userPic') ? {uri:userInfo.get('userPic').get('url')} : require('../../img/userhead.png')
+      let img = !!userInfo.get('userPic') ? userInfo.get('userPic') : require('../../img/userhead.png')
 
       return (
         <View style={[styles.userInfoView,styles.center]}>

@@ -20,14 +20,14 @@ export default class MessageItem extends Component {
   render() {
 
     let data = this.props.data
-    let uri = (data.uri !=='') ? {uri: data.uri} : require('../../img/userhead.png')
     let messages = data.text
+    let uri = !!(data.uri !=='') ? !!(data.position == `right`) ? data.uri.url : data.uri.get('url') : require('../../img/userhead.png')
 
     if (data.position == 'left') {
       return (
         <View style={[styles.container,{flexDirection:'row'}]}>
           <Image style={styles.headerImg}
-                 source={uri} />
+                 source={{uri: uri}} />
           <Image style={styles.messageSendView}
                  source={require('../../img/messageleft.png')} />
           <View style={styles.infoView}>
@@ -45,7 +45,7 @@ export default class MessageItem extends Component {
       return (
         <View style={[styles.container,{flexDirection:'row-reverse'}]}>
           <Image style={styles.headerImg}
-                 source={uri} />
+                 source={{uri: uri}} />
           <Image style={[styles.messageSendView,{tintColor:fadeGreen}]}
                  source={require('../../img/messageright.png')} />
           <View style={[styles.infoView,{justifyContent:'flex-end'}]}>
