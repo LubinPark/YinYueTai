@@ -6,7 +6,7 @@ import {
   StyleSheet
 } from 'react-native'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
 const { width, height, gray, black } = Device
 
 export default class MVItemTop extends Component {
@@ -19,11 +19,23 @@ export default class MVItemTop extends Component {
     return (
       <View style={styles.view}>
         <View style={styles.titleView}>
-          <View><Text style={styles.title} allowFontScaling={false} numberOfLines={1}>{title}</Text></View>
-          <View><Text style={styles.desc} allowFontScaling={false} numberOfLines={1}>{enTitle}</Text></View>
+          <View>
+            <Text style={styles.title}
+                  allowFontScaling={false}
+                  numberOfLines={1}>{title}</Text>
+          </View>
+          <View>
+            <Text style={styles.desc}
+                  allowFontScaling={false}
+                  numberOfLines={1}>{enTitle}</Text>
+          </View>
         </View>
         <View style={styles.moreView}>
-          <View><Text style={styles.more} allowFontScaling={false} numberOfLines={1}>MORE ></Text></View>
+          <View>
+            <Text style={styles.more}
+                  allowFontScaling={false}
+                  numberOfLines={1}>MORE ></Text>
+          </View>
         </View>
       </View>
     )

@@ -7,6 +7,7 @@ const initialState = {
 
 let Message = (state = initialState, action={}) => {
   switch (action.type) {
+    
     case types.MESSSAGE_SAVE:
       //保存发送的消息后，更新列表
       let message = action.message

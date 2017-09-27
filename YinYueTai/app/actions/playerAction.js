@@ -13,7 +13,7 @@ function fetchAuthorInfo(params) {
       }
     })
     .catch(reason => {
-    console.log(`链接错误------> ${reason}`)
+      console.log(`链接错误------> ${reason}`)
     })
   }
 }
@@ -36,7 +36,7 @@ function fetchMostWatch(params) {
       }
     })
     .catch(reason => {
-    console.log(`链接错误------> ${reason}`)
+      console.log(`链接错误------> ${reason}`)
     })
   }
 }

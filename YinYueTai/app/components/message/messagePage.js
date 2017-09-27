@@ -23,8 +23,9 @@ import {
   TouchableWithoutFeedback
 } from 'react-native'
 
-var Device = require('../../utils/device')
-var ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
+let Device = require('../../utils/device')
+let ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
+
 const { width, height, backView, fadeGray, gray, border, isAndroid } = Device
 
 class MessagePage extends Component {
@@ -74,7 +75,8 @@ class MessagePage extends Component {
 
     let titleConfig = { title: senderUser.get('username'), tintColor: '#fff' }
     let leftButtonConfig = <TouchableWithoutFeedback onPress={()=>this._back()}>
-                            <Image source={require('../../img/back.png')} style={backView}/>
+                            <Image source={require('../../img/back.png')}
+                                   style={backView}/>
                            </TouchableWithoutFeedback>
 
     return (
@@ -84,7 +86,8 @@ class MessagePage extends Component {
           tintColor={'black'}
           leftButton={leftButtonConfig}
           statusBar={{style: 'light-content'}} />
-        <Image style={styles.backgroundImg} source={require('../../img/background/background_0.png')}>
+        <Image style={styles.backgroundImg}
+               source={require('../../img/background/background_0.png')}>
           <ScrollView
             bounces={false}
             ref='scrollView'
@@ -142,7 +145,9 @@ class MessagePage extends Component {
         />
         <View style={[styles.otherView,border]}>
           <TouchableOpacity onPress={()=>this._sendMessage(currentUser, senderUser, conversation)}>
-            <Text style={styles.sendView} allowFontScaling={false} numberOfLines={1}>发送</Text>
+            <Text style={styles.sendView}
+                  allowFontScaling={false}
+                  numberOfLines={1}>发送</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -239,8 +244,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(state => ({
-  data: state.MessageReducer
+export default connect(
+  state => ({
+    data: state.MessageReducer
   }),
   (dispatch) => ({
     actions: bindActionCreators(MessageAction, dispatch)

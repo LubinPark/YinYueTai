@@ -20,7 +20,8 @@ export default class ContextWrapper extends Component {
   componentDidMount() {
     if (isAndroid) {
       BackAndroid.addEventListener('hardwareBackPress', () => {
-        if (this.props.context.navigator && this.props.context.navigator.getCurrentRoutes().length > 1) {
+        if (this.props.context.navigator &&
+            this.props.context.navigator.getCurrentRoutes().length > 1) {
           this.props.context.navigator.pop()
           return true
         }

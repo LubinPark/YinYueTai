@@ -10,7 +10,8 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
+
 const { width, height, gray, lightGray, alpha0 } = Device
 
 export default class AuthorInfo extends Component {
@@ -32,8 +33,7 @@ export default class AuthorInfo extends Component {
 
     if (_.isEmpty(data)) {
       return (
-        <View>
-        </View>
+        <View/>
       )
     } else {
 
@@ -43,14 +43,20 @@ export default class AuthorInfo extends Component {
       return (
         <View style={styles.view}>
           {/* 顶部照片和名字*/}
-          <View style={[styles.center,styles.marginBottom]}>
-            <Image style={styles.authorImg} source={{uri: artist.artistAvatar}} />
-            <Text style={styles.authorNmme} allowFontScaling={false} numberOfLines={1}>{data.artistName}</Text>
+          <View style={[styles.center, styles.marginBottom]}>
+            <Image style={styles.authorImg}
+                   source={{uri: artist.artistAvatar}} />
+            <Text style={styles.authorNmme}
+                  allowFontScaling={false}
+                  numberOfLines={1}>{data.artistName}</Text>
           </View>
           {/* 播放次数和5张图片*/}
-          <View style={[styles.center,styles.marginBottom]}>
+          <View style={[styles.center, styles.marginBottom]}>
             <View style={styles.numView}>
-              <Text style={[styles.center,styles.number]} allowFontScaling={false} numberOfLines={1}>播放次数:{data.totalView}</Text>
+              <Text style={[styles.center,styles.number]}
+                    allowFontScaling={false} numberOfLines={1}>
+                播放次数:{data.totalView}
+              </Text>
             </View>
             <Image style={styles.button} source={require('../../img/message.png')} />
             <Image style={styles.button} source={require('../../img/collection.png')} />
@@ -60,7 +66,10 @@ export default class AuthorInfo extends Component {
           </View>
           {/* 描述*/}
           <View style={styles.descTextView}>
-            <Text style={styles.desc} numberOfLines={this.state.numberOfLines} allowFontScaling={false}>{data.desc}</Text>
+            <Text style={styles.desc}
+                  numberOfLines={this.state.numberOfLines}
+                  allowFontScaling={false}>{data.desc}
+            </Text>
           </View>
           {/* 点击按钮*/}
           <TouchableOpacity onPress={() => this._showMoreDesc()}>
@@ -69,16 +78,25 @@ export default class AuthorInfo extends Component {
             </View>
           </TouchableOpacity>
           {/* 最下面的一行上传的信息*/}
-          <View style={[styles.center,{marginBottom: 10}]}>
+          <View style={[styles.center, {marginBottom: 10}]}>
             <View style={styles.bottomLeft}>
-              <Image style={styles.loading} source={{uri: creator.smallAvatar}} />
-              <Text style={styles.loading_and_time} allowFontScaling={false} numberOfLines={1}>上传者:</Text>
-              <Text style={styles.vipName} allowFontScaling={false} numberOfLines={1}>{creator.nickName}</Text>
-              <Image style={styles.level} source={{uri: creator.vipImg}} />
+              <Image style={styles.loading} s
+                    ource={{uri: creator.smallAvatar}} />
+              <Text style={styles.loading_and_time}
+                    allowFontScaling={false}
+                    numberOfLines={1}>上传者:</Text>
+              <Text style={styles.vipName}
+                    allowFontScaling={false}
+                    numberOfLines={1}>{creator.nickName}</Text>
+              <Image style={styles.level}
+                     source={{uri: creator.vipImg}} />
             </View>
             <View style={styles.bottomRight}>
-              <Image style={styles.timeImg} source={require('../../img/time.png')} />
-              <Text style={styles.loading_and_time} allowFontScaling={false} numberOfLines={1}>{data.regdate}</Text>
+              <Image style={styles.timeImg}
+                     source={require('../../img/time.png')} />
+              <Text style={styles.loading_and_time}
+                    allowFontScaling={false}
+                    numberOfLines={1}>{data.regdate}</Text>
             </View>
           </View>
         </View>
@@ -101,11 +119,13 @@ export default class AuthorInfo extends Component {
   _showMoreBtn() {
     if (!this.state.numberOfLines == 2) {
       return (
-        <Image style={styles.moreInfoBtn} source={require('../../img/moreInfo_left.png')} />
+        <Image style={styles.moreInfoBtn}
+               source={require('../../img/moreInfo_left.png')} />
       )
     } else {
       return (
-        <Image style={styles.moreInfoBtn} source={require('../../img/moreInfo_down.png')} />
+        <Image style={styles.moreInfoBtn}
+               source={require('../../img/moreInfo_down.png')} />
       )
     }
   }

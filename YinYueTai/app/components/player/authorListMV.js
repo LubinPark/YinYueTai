@@ -14,7 +14,8 @@ import * as PlayerAction from '../../actions/playerAction'
 import CommonTitle from '../commonfile/commonTitle'
 import CommonItem from '../commonfile/commonItem'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
+
 const { itemHeight, width, height, gray } = Device
 
 export default class AuthorListMV extends Component {
@@ -29,11 +30,12 @@ export default class AuthorListMV extends Component {
 
     if (_.isEmpty(data)) {
       return (
-        <View>
-        </View>
+        <View/>
       )
     } else {
+
       let title='同艺人其他MV:'
+
       return (
         <View style={styles.view}>
           <CommonTitle title={title} />
@@ -41,7 +43,9 @@ export default class AuthorListMV extends Component {
           {
             _.map(data, (item, index) => {
               return (
-                <CommonItem data={item} key={item.videoId+item.title} mostWatch={1}/>
+                <CommonItem data={item}
+                            mostWatch={1}
+                            key={item.videoId+item.title}/>
               )
             })
           }

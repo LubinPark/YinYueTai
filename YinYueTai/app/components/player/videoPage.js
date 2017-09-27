@@ -11,7 +11,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
 const { width, height, alpha0, green } = Device
 
 export default class VideoPage extends Component {
@@ -63,11 +63,15 @@ export default class VideoPage extends Component {
                style={full_screen} />
         {/* 播放器上部的按钮*/}
         <View style={styles.buttonUpView}>
-          <TouchableOpacity style={{justifyContent:'center'}} onPress={()=>this._backToHome()}>
-            <Image style={styles.back} source={require('../../img/back.png')} />
+          <TouchableOpacity style={{justifyContent:'center'}}
+                            onPress={()=>this._backToHome()}>
+            <Image style={styles.back}
+                   source={require('../../img/back.png')} />
           </TouchableOpacity>
           <View style={styles.titleView}>
-            <Text style={styles.title} allowFontScaling={false} numberOfLines={1}>{title}</Text>
+            <Text style={styles.title}
+                  allowFontScaling={false}
+                  numberOfLines={1}>{title}</Text>
           </View>
         </View>
         {/* 播放器底部的按钮*/}
@@ -82,12 +86,15 @@ export default class VideoPage extends Component {
                     maximumValue={this.state.duration}
              />
             <View style={styles.timeView}>
-              <Text style={styles.time} allowFontScaling={false} numberOfLines={1}>{this.state.currentTime} / {this.state.durationTime}</Text>
+              <Text style={styles.time}
+                    allowFontScaling={false}
+                    numberOfLines={1}>{this.state.currentTime} / {this.state.durationTime}</Text>
             </View>
           </View>
           <TouchableOpacity onPress={()=>this._orientationDidChange()}>
             <View style={styles.bottomRigtView}>
-              <Image style={styles.playbutton} source={require('../../img/full_screen.png')} />
+              <Image style={styles.playbutton}
+                     source={require('../../img/full_screen.png')} />
             </View>
           </TouchableOpacity>
         </View>
@@ -105,13 +112,15 @@ export default class VideoPage extends Component {
     if (status == false) {
       return (
         <TouchableOpacity onPress={()=>this._playerButton(this.state.paused)} >
-          <Image style={styles.playbutton} source={require('../../img/play_pause.png')} />
+          <Image style={styles.playbutton}
+                 source={require('../../img/play_pause.png')} />
         </TouchableOpacity>
       )
     } else {
       return (
         <TouchableOpacity onPress={()=>this._playerButton(this.state.paused)} >
-          <Image style={styles.playbutton} source={require('../../img/play_play.png')} />
+          <Image style={styles.playbutton}
+                 source={require('../../img/play_play.png')} />
         </TouchableOpacity>
       )
     }
@@ -124,7 +133,7 @@ export default class VideoPage extends Component {
   }
 
   _orientationDidChange() {
-    
+
   }
 
   _showDuration(time) {

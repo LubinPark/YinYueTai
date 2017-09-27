@@ -1,7 +1,7 @@
 import AV from '../actions/AV'
 import { realtime, TextMessage } from '../actions/realTime'
 
-var MessageRequest = {}
+let MessageRequest = {}
 
 MessageRequest.requestConversation = (currentUser, callback) => {
   let listID = []

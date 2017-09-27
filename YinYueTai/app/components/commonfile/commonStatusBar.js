@@ -5,7 +5,8 @@ export default class CommonStatusBar extends Component {
 
   render() {
     return (
-      <StatusBar barStyle="light-content" animated={false}/>
+      <StatusBar barStyle="light-content"
+                 animated={false}/>
     )
   }
 }

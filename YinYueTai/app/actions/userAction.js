@@ -35,12 +35,16 @@ function failedRegister(responseData) {
 
 function userLogin(params) {
   return (dispatch) => {
+    dispatch(changeState({ loginState: 'LOADING' }))
     AV.User.logIn(params.account, params.password).then((loginedUser) => {
       if (!!loginedUser) {
-        params.navigator.replace({
-          id: 'TabBarApp'
-        })
-        return dispatch(saveUserInfo(loginedUser, 'login'))
+        dispatch(saveUserInfo(loginedUser, 'login'))
+        dispatch(changeState({ loginState: 'SUCCESS' }))
+        setTimeout(() => {
+          params.navigator.replace({
+            id: 'TabBarApp'
+          })
+        }, 1000)
       }
     }, (error) => {
       return dispatch(loginFailed(error.message))
@@ -48,8 +52,23 @@ function userLogin(params) {
   }
 }
 
+function changeState(state) {
+  return  {
+    type: 'CHANGE_LOGIN_STATE',
+    loginState: state.loginState
+  };
+}
+
+function loginFailed(info) {
+  return  {
+    type: 'LOGIN_FAILED',
+    loginErrorInfo: info
+  }
+}
+
 function userlogOut(params) {
   return (dispatch) => {
+    dispatch(changeState({ loginState: 'NONE' }))
     AV.User.logOut()
     params.app.replace({
       id:'LoginPage'

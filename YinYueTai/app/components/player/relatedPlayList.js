@@ -14,7 +14,8 @@ import * as PlayerAction from '../../actions/playerAction'
 import CommonTitle from '../commonfile/commonTitle'
 import PlayerMVCllectionItem from '../commonfile/playerMVCllectionItem'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
+
 const { width, height, gray } = Device
 
 export default class RelatedPlayList extends Component {
@@ -29,11 +30,12 @@ export default class RelatedPlayList extends Component {
 
     if (_.isEmpty(data)) {
       return (
-        <View>
-        </View>
+        <View/>
       )
     } else {
+
       let title='收录该MV的悦单:'
+
       return (
         <View style={styles.view}>
           <CommonTitle title={title} />
@@ -41,7 +43,8 @@ export default class RelatedPlayList extends Component {
           {
             _.map(data, (item, index) => {
               return (
-                <PlayerMVCllectionItem data={item} key={item.playListId+item.title+index} />
+                <PlayerMVCllectionItem data={item}
+                                       key={item.playListId+item.title+index} />
               )
             })
           }

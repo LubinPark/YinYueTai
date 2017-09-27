@@ -23,9 +23,9 @@ export default class Routes {
       return route.component
     }
 
-    var newContext = Object.assign({}, context, {navigator})
-    var contextProps = {context: newContext}
-    var viewProps = props
+    let newContext = Object.assign({}, context, {navigator})
+    let contextProps = {context: newContext}
+    let viewProps = props
 
     if (route.data) {
       viewProps = Object.assign({}, viewProps, route.data)

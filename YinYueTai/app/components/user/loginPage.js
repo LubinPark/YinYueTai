@@ -15,7 +15,7 @@ import {
 
 import * as UserAction from '../../actions/userAction'
 
-var Device = require('../../utils/device')
+const Device = require('../../utils/device')
 const { width, height, lightGray, isAndroid } = Device
 
 class LoginPage extends Component {
@@ -54,19 +54,27 @@ class LoginPage extends Component {
                      underlineColorAndroid="transparent"
                      onChange={(value) => this._password(value)}/>
         </KeyboardAwareScrollView>
-        <View style={[styles.center,{height: isAndroid ? 90 : 70}]}>
-          <TouchableOpacity style={styles.button} onPress={() => this._submit()}>
-            <Text style={[styles.text,styles.login]} allowFontScaling={false} numberOfLines={1}>登录</Text>
+        <View style={[styles.center, {height: isAndroid ? 90 : 70}]}>
+          <TouchableOpacity style={styles.button}
+                            onPress={() => this._submit()}>
+            <Text style={[styles.text,styles.login]}
+                  allowFontScaling={false}
+                  numberOfLines={1}>登录</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => this._register()}>
-            <Text style={[styles.text,styles.register]} allowFontScaling={false} numberOfLines={1}>注册</Text>
+          <TouchableOpacity style={styles.button}
+                            onPress={() => this._register()}>
+            <Text style={[styles.text, styles.register]}
+                  allowFontScaling={false} numberOfLines={1}>注册</Text>
           </TouchableOpacity>
         </View>
-        { (this.props.data.loginState === 'FAILED') ?
-          <View style={styles.errorView}>
-            <Text style={styles.info} allowFontScaling={false} numberOfLines={1}>{this.props.data.loginErrorInfo}</Text>
+        { !!(this.props.data.loginState !== 'NONE' || this.props.data.loginState !== 'LOGOUT')
+          ? <View style={styles.errorView}>
+            <Text style={styles.info}
+                  allowFontScaling={false}
+                  numberOfLines={1}>{this.props.data.loginState}
+            </Text>
           </View>
-          : <Text/>
+          : null
         }
       </View>
     )
@@ -124,9 +132,9 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff'
   },
   center: {
-    justifyContent: 'space-around',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   login: {
     color: lightGray
@@ -144,11 +152,11 @@ const styles = StyleSheet.create({
   },
   errorView: {
     position: 'absolute',
-    bottom: 30,
+    bottom: 100,
     width: width,
     height: 50,
-    justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+    justifyContent:'center'
   },
   info: {
     height: 50,
@@ -156,8 +164,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(state => ({
-  data: state.UserReducer
+export default connect(
+  state => ({
+    data: state.UserReducer
   }),
   (dispatch) => ({
     actions: bindActionCreators(UserAction, dispatch)

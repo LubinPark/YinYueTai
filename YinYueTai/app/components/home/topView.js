@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
 const { itemHeight, width, height, black, isAndroid } = Device
 
 export default class TopView extends Component {
@@ -24,7 +24,8 @@ export default class TopView extends Component {
     return (
       <View style={styles.topView}>
         <View style={styles.searchButton}>
-          <Image source={require('../../img/search.png')} style={styles.search_icon} />
+          <Image style={styles.search_icon}
+                 source={require('../../img/search.png')}  />
           <TextInput style={styles.search_text}
                      numberOfLines={1}
                      multiline={false}
@@ -35,7 +36,8 @@ export default class TopView extends Component {
         </View>
         <View style={styles.historyView}>
           <TouchableOpacity>
-            <Image source={require('../../img/history.png')} style={styles.history} />
+            <Image style={styles.history}
+                   source={require('../../img/history.png')} />
           </TouchableOpacity>
         </View>
       </View>

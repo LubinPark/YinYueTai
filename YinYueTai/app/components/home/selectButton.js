@@ -9,17 +9,18 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
 const { itemHeight, width, height, lightGray, alpha0 } = Device
 
 export default class SelectButton extends Component {
 
   render() {
+
     var data = this.props.data
+
     if (_.isEmpty(data)) {
       return (
-        <View>
-        </View>
+        <View/>
       )
     } else {
       return (
@@ -29,8 +30,11 @@ export default class SelectButton extends Component {
             return (
               <TouchableOpacity  key={item.icon}>
                 <View style={styles.item}>
-                  <Image source={{uri:item.icon}} style={styles.button} />
-                  <Text style={styles.title} allowFontScaling={false} numberOfLines={1}>{item.title}</Text>
+                  <Image source={{uri:item.icon}}
+                         style={styles.button} />
+                  <Text style={styles.title}
+                        allowFontScaling={false}
+                        numberOfLines={1}>{item.title}</Text>
                 </View>
               </TouchableOpacity>
             )

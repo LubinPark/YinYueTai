@@ -1,7 +1,12 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import React, { Component, PropTypes } from 'react'
-import { View, StatusBar, Navigator } from 'react-native'
+
+import {
+  View,
+  StatusBar,
+  Navigator
+} from 'react-native'
 
 import Routes from '../components/navigation/routes'
 import * as TabBarAction from '../actions/tabBarAction'
@@ -17,10 +22,14 @@ class AppIndex extends Component {
   }
 
   render() {
+
     let route = this.props.data.route
+
     if (route !== '') {
-      let pageContext  = {rootNavigator: this.props.rootNavigator}
+
       let initialRoute = {id: route}
+      let pageContext = {rootNavigator: this.props.rootNavigator}
+
       return (
         <View style={{flex: 1}}>
           <StatusBar barStyle="light-content" animated={true}/>
@@ -39,8 +48,9 @@ class AppIndex extends Component {
 
 }
 
-export default connect(state => ({
-  data: state.TabBarReducer
+export default connect(
+  state => ({
+    data: state.TabBarReducer
   }),
   (dispatch) => ({
     actions: bindActionCreators(TabBarAction, dispatch)

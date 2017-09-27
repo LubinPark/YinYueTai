@@ -20,7 +20,8 @@ import Loop from './loop'
 import SelectButton from './selectButton'
 import CommonSection from '../commonfile/commonSection'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
+
 const { width, height, fadeGray } = Device
 
 class HomePage extends Component {
@@ -33,7 +34,7 @@ class HomePage extends Component {
 
   render() {
 
-    var num = _.random(0, 2)
+    let num = _.random(0, 2)
     let data = this.props.data
     let isEmptyData = data.loop&&data.button&&data.data
 
@@ -84,8 +85,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(state => ({
-  data: state.HomeReducer
+export default connect(
+  state => ({
+    data: state.HomeReducer
   }),
   (dispatch) => ({
     actions: bindActionCreators(HomeAction, dispatch)

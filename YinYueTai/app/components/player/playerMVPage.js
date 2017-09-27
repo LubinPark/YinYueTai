@@ -22,7 +22,8 @@ import AuthorListMV from './authorListMV'
 import RelatedPlayList from './relatedPlayList'
 import GuestLike from './guestLike'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
+
 const { width, height, purpure, isAndroid } = Device
 
 class PlayerMVPage extends Component {
@@ -40,7 +41,7 @@ class PlayerMVPage extends Component {
 
   render () {
 
-    var num = _.random(0, 2)
+    let num = _.random(0, 2)
     let videoId = this.props.videoId
     let data = this.props.data
 
@@ -59,8 +60,12 @@ class PlayerMVPage extends Component {
         return (
           <View style={styles.view}>
             <StatusBar hidden={true} />
-            <VideoPage url={authorInfo.url} title={authorInfo.title} cleanPLayData={()=>this.cleanPLayData()}/>
-            <Image style={styles.scrollView} source={require('../../img/background/background_0.png')} resizeMode='stretch' >
+            <VideoPage url={authorInfo.url}
+                       title={authorInfo.title}
+                      cleanPLayData={()=>this.cleanPLayData()}/>
+            <Image style={styles.scrollView}
+                   source={require('../../img/background/background_0.png')}
+                   resizeMode='stretch' >
               <ScrollView style={styles.scrollView}>
                 <AuthorInfo data={authorInfo}/>
                 <MostWatch videoId={videoId}/>
@@ -75,9 +80,15 @@ class PlayerMVPage extends Component {
         return (
           <View style={styles.view}>
             <StatusBar hidden={true} />
-            <VideoPage url={authorInfo.url} title={authorInfo.title} cleanPLayData={()=>this.cleanPLayData()}/>
-            <Image style={styles.scrollView} source={{uri:this.props.posterPic}} resizeMode='stretch' >
-              <BlurView blurType='dark' style={styles.scrollView} blurAmount={15}>
+            <VideoPage url={authorInfo.url}
+                       title={authorInfo.title}
+                       cleanPLayData={()=>this.cleanPLayData()}/>
+            <Image style={styles.scrollView}
+                   source={{uri:this.props.posterPic}}
+                   resizeMode='stretch' >
+              <BlurView blurType='dark'
+                        style={styles.scrollView}
+                        blurAmount={15}>
                 <ScrollView style={styles.scrollView}>
                   <AuthorInfo data={authorInfo}/>
                   <MostWatch videoId={videoId}/>
@@ -111,8 +122,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(state => ({
-  data: state.PlayerReducer.authorInfo
+export default connect(
+  state => ({
+    data: state.PlayerReducer.authorInfo
   }),
   (dispatch) => ({
     actions: bindActionCreators(PlayerAction, dispatch)

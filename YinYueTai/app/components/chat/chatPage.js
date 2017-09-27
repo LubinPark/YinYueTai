@@ -18,8 +18,8 @@ import {
   InteractionManager
 } from 'react-native'
 
-var Device = require('../../utils/device')
-var ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
+let Device = require('../../utils/device')
+let ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 const { width, height, fadeGray } = Device
 
 class ChatPage extends Component {
@@ -53,11 +53,13 @@ class ChatPage extends Component {
   }
 
   _chatList(chatList) {
+
     let num = _.random(0, 2)
+
     if (!_.isEmpty(chatList)) {
       return (
         <ListView
-          style={styles.listView}
+          contentContainerStyle={styles.listView}
           initialListSize={10}
           enableEmptySections={true}
           dataSource={ds.cloneWithRows(chatList)}
@@ -74,13 +76,13 @@ class ChatPage extends Component {
     } else {
       if (this.props.data.noData === true) {
         return (
-          <View style={styles.listView}>
+          <View style={styles.center}>
             <Text>没有消息</Text>
           </View>
         )
       } else {
         return (
-          <View style={styles.listView}>
+          <View style={styles.center}>
             <Loading num={num}/>
           </View>
         )
@@ -98,8 +100,10 @@ class ChatPage extends Component {
 
   _renderRow(rowData) {
     return (
-      <TouchableOpacity style={styles.rowDataView} onPress={() => {this._toMessage(rowData)}}>
-        <ChatItem data={rowData.user} lastMessage={rowData.lastMessage}/>
+      <TouchableOpacity style={styles.rowDataView}
+                        onPress={() => {this._toMessage(rowData)}}>
+        <ChatItem data={rowData.user}
+                  lastMessage={rowData.lastMessage}/>
       </TouchableOpacity>
     )
   }
@@ -126,6 +130,12 @@ const styles = StyleSheet.create({
     width: width,
     height: height - 64 - 49
   },
+  center: {
+    width: width,
+    height: height - 64 - 49,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   rowDataView: {
     width: width,
     height: 60,
@@ -136,9 +146,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(state => ({
-  data: state.ChatReducer,
-  user: state.UserReducer
+export default connect(
+  state => ({
+    data: state.ChatReducer,
+    user: state.UserReducer
   }),
   (dispatch) => ({
     actions: bindActionCreators(ChatAction, dispatch)

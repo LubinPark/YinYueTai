@@ -1,6 +1,6 @@
 import AV from '../actions/AV'
 
-var NotificationRequest = {}
+let NotificationRequest = {}
 
 NotificationRequest.sendNotification = (message, currentUser, callback) => {
   // let content = {

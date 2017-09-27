@@ -16,7 +16,7 @@ import {
 
 import * as UserAction from '../../actions/userAction'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
 const { width, height, lightGray, isAndroid } = Device
 
 class RegisterPage extends Component {
@@ -42,7 +42,7 @@ class RegisterPage extends Component {
       <View style={styles.container}>
         <NavigationBar title ={titleConfig} />
         <KeyboardAwareScrollView>
-          <TextInput style={[styles.TextInputSty,{marginTop: height / 3}]}
+          <TextInput style={[styles.TextInputSty, {marginTop: height / 3}]}
                      ref='account'
                      placeholder='账号'
                      numberOfLines={1}
@@ -62,12 +62,17 @@ class RegisterPage extends Component {
                      underlineColorAndroid="transparent"
                      onChange={(value) => this._password(value)}/>
         </KeyboardAwareScrollView>
-        <TouchableOpacity style={styles.button} onPress={() => this._register()}>
-          <Text style={[styles.text,styles.login]} allowFontScaling={false} numberOfLines={1}>确定</Text>
+        <TouchableOpacity style={styles.button}
+                          onPress={() => this._register()}>
+          <Text style={[styles.text, styles.login]}
+                allowFontScaling={false}
+                numberOfLines={1}>确定</Text>
         </TouchableOpacity>
         { (this.props.data.registerState === 'FAILED') ?
           <View style={styles.errorView}>
-            <Text style={styles.info} allowFontScaling={false} numberOfLines={1}>{this.props.data.registerErrorInfo}</Text>
+            <Text style={styles.info}
+                  allowFontScaling={false}
+                  numberOfLines={1}>{this.props.data.registerErrorInfo}</Text>
           </View>
           : <Text/>
         }
@@ -123,9 +128,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: lightGray,
     borderRadius: 5,
-    borderWidth: StyleSheet.hairlineWidth,
     borderColor: '#ccc',
-    backgroundColor:'#fff'
+    backgroundColor:'#fff',
+    borderWidth: StyleSheet.hairlineWidth
   },
   center: {
     justifyContent: 'space-around',
@@ -149,8 +154,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(state => ({
-  data: state.UserReducer
+export default connect(
+  state => ({
+    data: state.UserReducer
   }),
   (dispatch) => ({
     actions: bindActionCreators(UserAction, dispatch)

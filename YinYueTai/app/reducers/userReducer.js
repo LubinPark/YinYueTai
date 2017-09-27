@@ -34,6 +34,11 @@ let User = (state = initialState, action={}) => {
       return Object.assign({}, state, {loginErrorInfo: loginErrorInfo, loginState: 'FAILED'})
       break
 
+    case types.CHANGE_LOGIN_STATE:
+    console.log(action.loginState);
+      return Object.assign({}, state, {loginState: action.loginState})
+      break
+
     case types.USER_LOGOUT:
       //用户退出
       return Object.assign({}, initialState, {loginState: 'LOGOUT'})

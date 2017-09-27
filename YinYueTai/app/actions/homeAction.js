@@ -13,7 +13,7 @@ function fetchHome(params) {
       }
     })
     .catch(reason => {
-    console.log(`链接错误------> ${reason}`)
+      console.log(`链接错误------> ${reason}`)
     })
   }
 }

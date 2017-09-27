@@ -1,6 +1,6 @@
 import AV from '../actions/AV'
 
-var UserRequest = {}
+let UserRequest = {}
 
 UserRequest.searchUsersByIds = (ids, callback) => {
   var query = new AV.Query('_User')
@@ -8,7 +8,6 @@ UserRequest.searchUsersByIds = (ids, callback) => {
   query.find().then((users) => {
     callback(users, null)
   }).catch((err) => {
-    console.log(err);
     callback(null, err)
   })
 }

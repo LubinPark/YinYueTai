@@ -9,37 +9,42 @@ import {
   StyleSheet
 } from 'react-native'
 
-var Device = require('../../utils/device')
-var { width, height, alpha0 } = Device
+let Device = require('../../utils/device')
+const { width, height, alpha0 } = Device
 
  export default class Loop extends Component {
 
   render() {
     if (_.isEmpty(this.props.data)) {
       return (
-        <View>
-        </View>
+        <View/>
       )
     } else {
       return (
         <Swiper autoplay={true}
-                autoplayTimeout = {2}
+                autoplayTimeout={2}
                 height={viewHeight}
-                showsPagination = {false}
+                showsPagination={false}
         >
         {
           _.map(this.props.data,(item,index) => {
             return (
-              <Image source={{uri:item.posterPic}} key={index} style={[styles.image,styles.container]}>
+              <Image source={{uri:item.posterPic}}
+                     key={index}
+                     style={[styles.image, styles.container]}>
                 <View style={styles.bottom}>
                   <View style={styles.left}>
-                    <Text style={styles.title} allowFontScaling={false} numberOfLines={1}>{item.title}</Text>
+                    <Text style={styles.title}
+                          allowFontScaling={false}
+                          numberOfLines={1}>{item.title}</Text>
                     <View style={styles.artistNameView}>
                     {
                       _.map(item.artists, (i ,index) => {
                         return (
-                          <Text key={i.artistId} style={styles.artistName}
-                            allowFontScaling={false} numberOfLines={1}>
+                          <Text key={i.artistId}
+                                style={styles.artistName}
+                                allowFontScaling={false}
+                                numberOfLines={1}>
                             {i.artistName}
                           </Text>
                         )
@@ -48,7 +53,9 @@ var { width, height, alpha0 } = Device
                     </View>
                   </View>
                   <View style={styles.loopView}>
-                    <Text style={styles.pageTotal} allowFontScaling={false} numberOfLines={1}>{index + 1}/10</Text>
+                    <Text style={styles.pageTotal}
+                          allowFontScaling={false}
+                          numberOfLines={1}>{index + 1}/10</Text>
                   </View>
                 </View>
               </Image>

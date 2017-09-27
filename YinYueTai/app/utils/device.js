@@ -5,11 +5,11 @@ const { width, height } = Dimensions.get('window')
 const isAndroid = (Platform.OS === 'android')
 
 const backView = {
+  width: 30,
+  height: 30,
   marginTop: 5,
   marginLeft: 5,
-  tintColor: '#fff',
-  width: 30,
-  height: 30
+  tintColor: '#fff'
 }
 
 const borderTop = {
@@ -48,8 +48,8 @@ module.exports = {
   lightGray: '#666',
   fadeGray: 'rgb(248,248,248)',
 
+  border: border,
   backView: backView,
   borderTop: borderTop,
-  borderBottom: borderBottom,
-  border: border
+  borderBottom: borderBottom
 }

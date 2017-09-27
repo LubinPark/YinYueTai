@@ -9,7 +9,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
 const { itemWidth, width, height, black, gray, green, alpha0 } = Device
 
 export default class CommonItem extends Component {
@@ -29,21 +29,20 @@ export default class CommonItem extends Component {
 
   render () {
 
-    var data = this.state.data
+    let data = this.state.data
 
     if (_.isEmpty(data)) {
       return (
-        <View>
-        </View>
+        <View/>
       )
     } else {
 
       let mostWatch = this.state.mostWatch
       let mostWatch_item = this.state.mostWatch_item
 
-      var titleWhitestyle
-      var backgroundColor
-      var items = { width:itemWidth }
+      let titleWhitestyle
+      let backgroundColor
+      let items = { width:itemWidth }
 
       //判断，改变背景和标题颜色
       if (mostWatch === 1) {
@@ -61,11 +60,16 @@ export default class CommonItem extends Component {
       return (
         <View style={[styles.items,backgroundColor,items]}>
           <TouchableOpacity onPress={()=>this._goToPlayer(data.videoId, data.posterPic)}>
-            <Image source={{uri: data.posterPic}} style={[styles.img,items]} />
+            <Image style={[styles.img,items]}
+                   source={{uri: data.posterPic}}/>
             <View>
-              <Text style={[styles.title,titleWhitestyle]} allowFontScaling={false} numberOfLines={1}>{data.title}</Text>
+              <Text style={[styles.title,titleWhitestyle]}
+                    allowFontScaling={false}
+                    numberOfLines={1}>{data.title}</Text>
               {this._showName(data)}
-              <Text style={styles.num} allowFontScaling={false} numberOfLines={1}>播放数量:{data.totalView}</Text>
+              <Text style={styles.num}
+                    allowFontScaling={false}
+                    numberOfLines={1}>播放数量:{data.totalView}</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -74,7 +78,9 @@ export default class CommonItem extends Component {
   }
 
   _showName(data) {
+
     let name = ''
+
     _.map(data.artists,(item, index) => {
       var tempName = item.artistName
       name = name + tempName
@@ -82,7 +88,9 @@ export default class CommonItem extends Component {
 
     return(
       <View style={{flexDirection:'row'}}>
-        <Text style={styles.name} allowFontScaling={false} numberOfLines={1}>{name}</Text>
+        <Text style={styles.name}
+              allowFontScaling={false}
+              numberOfLines={1}>{name}</Text>
       </View>
     )
   }

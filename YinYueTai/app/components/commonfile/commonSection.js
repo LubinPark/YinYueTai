@@ -9,17 +9,18 @@ import {
 import CommonItem from '../commonfile/commonItem'
 import MVItemTop from '../commonfile/mvItemTop'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
 const { itemWidth, width, height, gray } = Device
 
 export default class Pop extends Component {
 
   render () {
-    var data = this.props.data
+
+    let data = this.props.data
+
     if (_.isEmpty(data)) {
       return (
-        <View>
-        </View>
+        <View/>
       )
     } else {
       return (

@@ -18,8 +18,9 @@ import {
   InteractionManager
 } from 'react-native'
 
-var Device = require('../../utils/device')
-var ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
+let Device = require('../../utils/device')
+let ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
+
 const { width, height, fadeGray } = Device
 
 class ChatPage extends Component {
@@ -53,11 +54,13 @@ class ChatPage extends Component {
   }
 
   _adressBook(adressBook) {
+
     let num = _.random(0, 2)
+
     if (!_.isEmpty(adressBook)) {
       return (
         <ListView
-          style={styles.listView}
+          contentContainerStyle={styles.listView}
           initialListSize={10}
           enableEmptySections={true}
           dataSource={ds.cloneWithRows(adressBook)}
@@ -74,13 +77,13 @@ class ChatPage extends Component {
     } else {
       if (this.props.data.noData === true) {
         return (
-          <View style={styles.listView}>
+          <View style={styles.center}>
             <Text>没有联系人</Text>
           </View>
         )
       } else {
         return (
-          <View style={styles.listView}>
+          <View style={styles.center}>
             <Loading num={num}/>
           </View>
         )
@@ -94,7 +97,8 @@ class ChatPage extends Component {
 
   _renderRow(rowData) {
     return (
-      <TouchableOpacity style={styles.rowDataView} onPress={() => {this._toMessage(rowData)}}>
+      <TouchableOpacity style={styles.rowDataView}
+                        onPress={() => {this._toMessage(rowData)}}>
         <AdressBookItem data={rowData}/>
       </TouchableOpacity>
     )
@@ -120,7 +124,13 @@ const styles = StyleSheet.create({
   },
   listView: {
     width: width,
-    height: height - 64 - 49
+    height: height - 64 - 49,
+  },
+  center: {
+    width: width,
+    height: height - 64 - 49,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   rowDataView: {
     width: width,
@@ -132,8 +142,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(state => ({
-  data: state.AdressBookReducer,
+export default connect(
+  state => ({
+    data: state.AdressBookReducer
   }),
   (dispatch) => ({
     actions: bindActionCreators(AdressBookAction, dispatch)

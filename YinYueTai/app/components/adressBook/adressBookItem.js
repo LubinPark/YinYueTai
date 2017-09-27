@@ -7,7 +7,8 @@ import {
   StyleSheet
 } from 'react-native'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
+
 const { width, height } = Device
 
 export default class ChatItem extends Component {
@@ -15,13 +16,16 @@ export default class ChatItem extends Component {
   render() {
 
     let data = this.props.data
-    let img = data.get('userPic') ? {uri:data.get('userPic').get('url')} : require('../../img/userhead.png')
+    let img = !!data.get('userPic') ? {uri:data.get('userPic').get('url')} : ''
 
     return (
       <View style={styles.userView}>
         <Image style={styles.userHeaderImg}
+               defaultSource={ require('../../img/userhead.png')}
                source={img}/>
-        <Text allowFontScaling={false} numberOfLines={1} style={styles.name}>
+        <Text allowFontScaling={false}
+              numberOfLines={1}
+              style={styles.name}>
           {data.get('username')}
         </Text>
       </View>

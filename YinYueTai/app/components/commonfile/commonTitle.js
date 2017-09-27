@@ -6,20 +6,30 @@ import {
   StyleSheet
 } from 'react-native'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
 const { width, height, gray, alpha0 } = Device
 
 export default class CommomTitle extends Component {
 
   render () {
-    var title = this.props.title
+
+    let title = this.props.title
+
     return (
       <View style={styles.view}>
         <View style={styles.titleView}>
-          <View><Text style={styles.title} allowFontScaling={false} numberOfLines={1}>{title}</Text></View>
+          <View>
+            <Text style={styles.title}
+                  allowFontScaling={false}
+                  numberOfLines={1}>{title}</Text>
+          </View>
         </View>
         <View style={styles.moreView}>
-          <View><Text style={styles.more} allowFontScaling={false} numberOfLines={1}>更多 》</Text></View>
+          <View>
+            <Text style={styles.more}
+                  allowFontScaling={false}
+                  numberOfLines={1}>更多 》</Text>
+          </View>
         </View>
       </View>
     )

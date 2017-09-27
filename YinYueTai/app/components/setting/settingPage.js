@@ -15,7 +15,8 @@ import {
 
 import * as UserAction from '../../actions/userAction'
 
-var Device = require('../../utils/device')
+let Device = require('../../utils/device')
+
 const { width, height, gray, isAndroid } = Device
 
 class SettingPage extends Component {
@@ -53,27 +54,37 @@ class SettingPage extends Component {
     if (!_.isEmpty(userInfo)) {
 
       let { username, email } = userInfo.attributes
-      let img = !!userInfo.get('userPic') ? userInfo.get('userPic') : require('../../img/userhead.png')
+      let img = !!userInfo.get('userPic') ? userInfo.get('userPic') : ''
 
       return (
         <View style={[styles.userInfoView,styles.center]}>
-          <Image source={img} style={styles.userPic}/>
+          <Image source={img}
+                 style={styles.userPic}
+                 defaultSource={ require('../../img/userhead.png')}/>
           <View style={styles.rightView}>
-            <Text style={styles.nameText} allowFontScaling={false} numberOfLines={1}>
+            <Text style={styles.nameText}
+                  allowFontScaling={false}
+                  numberOfLines={1}>
               {username}
             </Text>
-            <Text allowFontScaling={false} numberOfLines={1}>
+            <Text allowFontScaling={false}
+                  numberOfLines={1}>
               {email}
             </Text>
           </View>
-          <TouchableOpacity style={styles.logOutView} onPress={() => this._logOut()}>
-            <View><Text allowFontScaling={false} numberOfLines={1}>退出</Text></View>
+          <TouchableOpacity style={styles.logOutView}
+                            onPress={() => this._logOut()}>
+            <View>
+              <Text allowFontScaling={false}
+                    numberOfLines={1}>退出
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       )
     } else {
       return (
-        <View style={[styles.userInfoView,styles.center,{justifyContent:'center'}]}>
+        <View style={[styles.userInfoView,styles.center, {justifyContent:'center'}]}>
           <TouchableOpacity onPress={() => this._login()}>
             <Text>登录</Text>
           </TouchableOpacity>
@@ -145,8 +156,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(state => ({
-  data: state.UserReducer
+export default connect(
+  state => ({
+    data: state.UserReducer
   }),
   (dispatch) => ({
     actions: bindActionCreators(UserAction, dispatch)
