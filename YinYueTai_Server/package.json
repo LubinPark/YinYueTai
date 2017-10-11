@@ -9,10 +9,10 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
-    "body-parser": "^1.18.1",
+    "body-parser": "^1.18.2",
     "connect-timeout": "^1.9.0",
     "cookie-parser": "^1.4.3",
-    "express": "^4.15.4",
+    "express": "^4.16.2",
     "leanengine": "^3.0.2",
     "wechat": "^2.1.0",
     "wechat-api": "^1.35.1"
